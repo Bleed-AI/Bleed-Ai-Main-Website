@@ -143,10 +143,20 @@ export default function Navigation() {
 
             <a
               href="/book-call/"
+              className="flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
+            >
+              <span className="text-base leading-none">🚀</span>
+              <span>Launch My Free Campaign</span>
+            </a>
+
+            <a
+              href="https://calculator.bleedai.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative px-5 py-2.5 bg-[#B1130F] text-white rounded-full text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow"
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span>Launch My Free Campaign</span>
+                <span>Cost Calculator</span>
                 <svg
                   className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
@@ -163,10 +173,12 @@ export default function Navigation() {
           {/* Mobile Actions */}
           <div className="flex lg:hidden items-center gap-2 sm:gap-3">
             <a
-              href="/book-call/"
+              href="https://calculator.bleedai.com/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative px-3 sm:px-4 py-1.5 sm:py-2 bg-[#B1130F] text-white rounded-full text-xs sm:text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow whitespace-nowrap"
             >
-              <span className="relative z-10">Get Started</span>
+              <span className="relative z-10">Cost Calculator</span>
             </a>
 
             {/* Hamburger Menu */}
@@ -281,11 +293,13 @@ export default function Navigation() {
 
                   {/* CTA Button */}
                   <a
-                    href="/book-call/"
+                    href="https://calculator.bleedai.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     onClick={() => setMobileMenuOpen(false)}
                     className="group flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#B1130F] text-white text-center rounded-full font-bold text-base hover:shadow-lg hover:shadow-[#B1130F]/30 transition-all duration-300 active:scale-[0.98] btn-glow mt-4"
                   >
-                    <span>Launch My Free Campaign</span>
+                    <span>Cost Calculator</span>
                     <svg
                       className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
                       fill="none"
