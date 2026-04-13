@@ -7,6 +7,54 @@ export default function CampaignSnapshots() {
 
   const campaigns = [
     {
+      title: "Marketing Agency (Active)",
+      subtitle: "9 warm opportunities in early ramp — campaign still running",
+      icon: "📊",
+      stats: [
+        { value: "2,156", label: "SEQUENCES STARTED" },
+        { value: "1.35%", label: "REPLY RATE" },
+        { value: "31.03%", label: "POSITIVE REPLY RATE" },
+        { value: "9", label: "OPPORTUNITIES" },
+      ],
+      image: "https://calculator.bleedai.com/campaign-results/marketing-agency.png",
+    },
+    {
+      title: "Coaching Offer",
+      subtitle: "241 opportunities from 14,687 sequences — 32% positive reply rate",
+      icon: "🎯",
+      stats: [
+        { value: "14,687", label: "SEQUENCES STARTED" },
+        { value: "5.11%", label: "REPLY RATE" },
+        { value: "32.13%", label: "POSITIVE REPLY RATE" },
+        { value: "241", label: "OPPORTUNITIES" },
+      ],
+      image: "https://calculator.bleedai.com/campaign-results/coaching-offer.png",
+    },
+    {
+      title: "Paid Events Tickets Offer",
+      subtitle: "102 opportunities at $107K pipeline — 65.8% positive reply rate",
+      icon: "🎟️",
+      stats: [
+        { value: "17,181", label: "SEQUENCES STARTED" },
+        { value: "2%", label: "REPLY RATE" },
+        { value: "65.8%", label: "POSITIVE REPLY RATE" },
+        { value: "102", label: "OPPORTUNITIES" },
+      ],
+      image: "/images/onezerotwo-oppurtunity-snaps.png",
+    },
+    {
+      title: "SaaS Signup Trial Offer",
+      subtitle: "42 opportunities at $42K pipeline — 12% reply rate in 10 days",
+      icon: "💻",
+      stats: [
+        { value: "896", label: "SEQUENCES STARTED" },
+        { value: "12.05%", label: "REPLY RATE" },
+        { value: "38.89%", label: "POSITIVE REPLY RATE" },
+        { value: "42", label: "OPPORTUNITIES" },
+      ],
+      image: "https://calculator.bleedai.com/campaign-results/saas-signup-trial-offer.png",
+    },
+    {
       title: "Marketing Agency",
       subtitle: "Generated 18 Sales Opportunity in 1 month",
       icon: "📊",
@@ -19,28 +67,28 @@ export default function CampaignSnapshots() {
       image: "/images/sixteen-oppurtunity-snapshot.png",
     },
     {
-      title: "Coaching Offer",
-      subtitle: "100+ Positive Responses in 2 Weeks of December 2025",
-      icon: "🎯",
+      title: "Recruitment Industry Offer",
+      subtitle: "7 qualified opportunities from 2,525 sequences in 3 months",
+      icon: "👥",
       stats: [
-        { value: "17,181", label: "SEQUENCES STARTED" },
-        { value: "2%", label: "REPLY RATE" },
-        { value: "65.8%", label: "POSITIVE REPLY RATE" },
-        { value: "102", label: "OPPORTUNITIES" },
+        { value: "2,525", label: "SEQUENCES STARTED" },
+        { value: "1.43%", label: "REPLY RATE" },
+        { value: "19.44%", label: "POSITIVE REPLY RATE" },
+        { value: "7", label: "OPPORTUNITIES" },
       ],
-      image: "/images/onezerotwo-oppurtunity-snaps.png",
+      image: "https://calculator.bleedai.com/campaign-results/offer-for-recruitment-industry.png",
     },
     {
-      title: "January 2026 Results",
-      subtitle: "Combined Client Campaign Performance",
-      icon: "🚀",
+      title: "Tech Setup Offer for Startups",
+      subtitle: "55% of replies were positive — 5 opportunities from 870 sequences",
+      icon: "⚙️",
       stats: [
-        { value: "31.1K", label: "TOTAL SENT" },
-        { value: "5.38%", label: "REPLY RATE" },
-        { value: "279", label: "OPPORTUNITIES" },
-        { value: "1:111", label: "LEAD RATIO" },
+        { value: "870", label: "SEQUENCES STARTED" },
+        { value: "1.03%", label: "REPLY RATE" },
+        { value: "55.56%", label: "POSITIVE REPLY RATE" },
+        { value: "5", label: "OPPORTUNITIES" },
       ],
-      image: "/images/jancampresults.png",
+      image: "https://calculator.bleedai.com/campaign-results/tech-setup-offer-for-startups.png",
     },
   ];
 
@@ -129,15 +177,6 @@ export default function CampaignSnapshots() {
           ))}
         </div>
 
-        {/* Bottom Text */}
-        <div className="text-center">
-          <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-[var(--bg-primary)] border border-[var(--border-color)]">
-            <div className="w-3 h-3 rounded-full bg-[#22c55e] animate-pulse" />
-            <p className="text-[var(--text-secondary)] text-sm md:text-base">
-              We averaged around <span className="text-[var(--text-primary)] font-semibold">1 positive lead per 111 contacts</span> for our clients in Jan 2026, which is <span className="text-[#B1130F] font-semibold">extraordinary</span> for any lead gen agency.
-            </p>
-          </div>
-        </div>
       </div>
 
       {/* Lightbox */}

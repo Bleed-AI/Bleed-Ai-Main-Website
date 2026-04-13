@@ -35,63 +35,20 @@ import Footer from '@/components/Footer';
 
 const packages: Package[] = [
   {
-    id: 'starter',
-    title: 'Starter Infrastructure',
-    price: '$2,500',
-    description: 'Essential infrastructure for businesses starting their outbound journey.',
+    id: 'full-dfy-infrastructure',
+    title: 'Full DFY Infrastructure Setup',
+    price: '$400',
+    description: 'Build in Instantly.ai with Zapmail Domains & Inboxes',
     features: [
-      '5 email domains setup',
-      '15 email accounts configured',
-      'DNS & deliverability optimization',
-      'Basic CRM integration',
-      'Email warming protocol',
-      'Campaign monitoring dashboard',
-      '30-day technical support',
-      '48-hour deployment'
+      'Complete Instantly.ai setup',
+      'Branded domains and inboxes',
+      'DKIM/SPF/DMARC configuration',
+      'Profile names, photos & signatures',
+      'Account warm-up',
+      'SOPs for running the system',
+      'Bonus: 10 Million Free tech leads'
     ],
-    ctaText: 'Get Starter Setup',
-    ctaLink: '#book-call'
-  },
-  {
-    id: 'premium',
-    title: 'Premium Infrastructure',
-    price: '$5,000',
-    description: 'Advanced setup for scaling teams with multi-channel capabilities.',
-    features: [
-      '10 email domains setup',
-      '30 email accounts configured',
-      'Advanced deliverability suite',
-      'Multi-tool CRM integration',
-      'LinkedIn automation setup',
-      'Custom tracking & attribution',
-      'A/B testing framework',
-      'Dedicated onboarding specialist',
-      '90-day priority support',
-      '24-hour deployment'
-    ],
-    ctaText: 'Get Premium Setup',
-    ctaLink: '#book-call',
-    popular: true
-  },
-  {
-    id: 'enterprise',
-    title: 'Enterprise Infrastructure',
-    price: 'Custom',
-    priceSubtext: 'starting at $10,000',
-    description: 'White-glove deployment for large teams with complex requirements.',
-    features: [
-      'Unlimited domains & accounts',
-      'Custom infrastructure design',
-      'Enterprise security & compliance',
-      'Multi-region deployment',
-      'Custom integrations & APIs',
-      'Dedicated infrastructure team',
-      'White-label options',
-      'SLA guarantees',
-      'Unlimited support',
-      'Same-day deployment available'
-    ],
-    ctaText: 'Contact Sales',
+    ctaText: 'Get Started',
     ctaLink: '#book-call'
   }
 ];
@@ -133,10 +90,7 @@ export default function InfrastructureSetupPage() {
         benefits={[
           "Assess your current infrastructure needs",
           "Discuss domain and email account requirements",
-          "Review integration needs (CRM, tools, etc.)",
-          "Understand deployment timeline and process",
-          "Get clarity on pricing and package options",
-          "Plan for scalability and future growth"
+          "Understand your timelines"
         ]}
       />
 

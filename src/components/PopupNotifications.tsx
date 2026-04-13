@@ -31,9 +31,18 @@ const testimonials = [
     hasVideo: true,
     image: "/ahmedprofile.jpg",
   },
+  {
+    initials: "HO",
+    name: "Hunter Owens",
+    role: "Umbrella Digital",
+    quote: "When working with Taha, listen to his guidance. He has a strong understanding of cold email infrastructure, copy rotation, and industry best practices. He provides an excellent service, responds quickly, and stays highly knowledgeable about current trends in the industry.",
+    videoId: "",
+    hasVideo: false,
+    image: "/hunter-owens.jpg",
+  },
 ];
 
-type PopupState = "idle" | "cta" | "testimonial-1" | "testimonial-2" | "testimonial-3" | "done";
+type PopupState = "idle" | "cta" | "testimonial-1" | "testimonial-2" | "testimonial-3" | "testimonial-4" | "done";
 
 export default function PopupNotifications() {
   const [popupState, setPopupState] = useState<PopupState>("idle");
@@ -85,14 +94,25 @@ export default function PopupNotifications() {
       }, 33600) // 29300 + 4300
     );
 
-    // Testimonial 3: show for 4 seconds, then done
+    // Testimonial 3: show for 4 seconds, then transition
+    timeouts.push(
+      setTimeout(() => {
+        setIsVisible(false);
+        setTimeout(() => {
+          setPopupState("testimonial-4");
+          setIsVisible(true);
+        }, 300);
+      }, 37900) // 33600 + 4300
+    );
+
+    // Testimonial 4: show for 4 seconds, then done
     timeouts.push(
       setTimeout(() => {
         setIsVisible(false);
         setTimeout(() => {
           setPopupState("done");
         }, 300);
-      }, 37900) // 33600 + 4300
+      }, 42200) // 37900 + 4300
     );
 
     return () => {
@@ -116,7 +136,7 @@ export default function PopupNotifications() {
   };
 
   const showCTA = popupState === "cta";
-  const showTestimonial = ["testimonial-1", "testimonial-2", "testimonial-3"].includes(popupState);
+  const showTestimonial = ["testimonial-1", "testimonial-2", "testimonial-3", "testimonial-4"].includes(popupState);
   const testimonialIndex = parseInt(popupState.split("-")[1] || "0") - 1;
   const currentTestimonial = testimonials[testimonialIndex] || testimonials[0];
 

@@ -54,7 +54,7 @@ const packages: Package[] = [
   {
     id: 'pro-setup',
     title: 'Pro Setup (Single Signal)',
-    price: '$2,450',
+    price: '$950',
     description: 'Advanced single signal setup with AI agents, qualification workflows, and ongoing support.',
     features: [
       'Capture data using multiple criteria definitions',

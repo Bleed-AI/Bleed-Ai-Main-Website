@@ -3,7 +3,7 @@ import { generateMetadata, generateServiceSchema } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata({
   title: "Consultation & System Audit | Expert Outbound Analysis",
-  description: "Expert outbound system analysis. $150 consultation or $750 full audit. Identify gaps, optimize deliverability, get actionable recommendations.",
+  description: "Expert outbound system analysis. $79 consultation or $400 full audit. Identify gaps, optimize deliverability, get actionable recommendations.",
   path: "/services/consultation",
   keywords: [
     "outbound consultation",
@@ -36,7 +36,7 @@ const packages: Package[] = [
   {
     id: 'consultation-call',
     title: 'Consultation Call',
-    price: '$150',
+    price: '$79',
     priceSubtext: '30 minutes',
     description: 'Quick consultation to discuss your outbound strategy and get expert advice.',
     features: [
@@ -53,7 +53,7 @@ const packages: Package[] = [
   {
     id: 'call-system-audit',
     title: 'Call + System Audit',
-    price: '$750',
+    price: '$400',
     description: 'Comprehensive review of your entire outbound system with detailed recommendations.',
     features: [
       '1-hour consultation call',

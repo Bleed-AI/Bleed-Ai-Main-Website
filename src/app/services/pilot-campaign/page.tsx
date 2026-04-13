@@ -53,19 +53,21 @@ const packages: Package[] = [
   },
   {
     id: 'standard-pilot',
-    title: 'Standard Pilot',
-    price: '$800',
-    description: 'Start in 1 week. Reach 4-5k prospects with 2-3 campaign launches and offer angles.',
+    title: 'Discounted Pilot',
+    price: '$565',
+    description: 'Start in 1 week. Reach 2K Leads with 2-3 campaign launches and offer angles.',
     features: [
       'Start in 1 week',
-      'Reach 4,000-5,000 of your ICP',
+      'Reach 2000 of your ICP',
       '2-3 Campaign launches',
       '2-3 Offer angles testing',
-      'Our proven system and tactics',
-      'Test market interest at fraction of cost',
-      'Expert strategy & execution'
+      "BleedAI's Warm Infrastructure (DFY)",
+      'Full DFY — BleedAI Sources, Scrapes & Validates',
+      'Strategy from scratch + A/B test variants',
+      'Client Handles Replies',
+      'Light Email / Upwork Support'
     ],
-    ctaText: 'Launch Standard Pilot',
+    ctaText: 'Get Discounted Pilot',
     ctaLink: '#book-call',
     popular: true
   },
@@ -85,8 +87,8 @@ const packages: Package[] = [
       'Automated LinkedIn connections with MQLs',
       'Dedicated account management'
     ],
-    ctaText: 'Scale with Us',
-    ctaLink: '#book-call'
+    ctaText: 'Calculate Cost',
+    ctaLink: 'https://calculator.bleedai.com/'
   }
 ];
 
