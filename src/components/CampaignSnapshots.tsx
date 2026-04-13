@@ -79,7 +79,7 @@ export default function CampaignSnapshots() {
       image: "https://calculator.bleedai.com/campaign-results/offer-for-recruitment-industry.png",
     },
     {
-      title: "Tech Setup Offer for Startups",
+      title: "Tech Setup Offer for Startup",
       subtitle: "55% of replies were positive — 5 opportunities from 870 sequences",
       icon: "⚙️",
       stats: [
