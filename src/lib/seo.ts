@@ -17,7 +17,9 @@ export function generateMetadata({
 }: SEOProps): Metadata {
   const siteName = 'BleedAI';
   const baseUrl = 'https://bleedai.com'; // Update with your actual domain
-  const fullUrl = `${baseUrl}${path}`;
+  // Match next.config.ts trailingSlash: true so canonical aligns with served URL
+  const normalizedPath = path.endsWith('/') ? path : `${path}/`;
+  const fullUrl = `${baseUrl}${normalizedPath}`;
   const fullTitle = path === '/' ? title : `${title} | ${siteName}`;
 
   return {
