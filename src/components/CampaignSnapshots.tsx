@@ -44,15 +44,15 @@ export default function CampaignSnapshots() {
     },
     {
       title: "SaaS Signup Trial Offer",
-      subtitle: "42 opportunities at $42K pipeline — 12% reply rate in 10 days",
+      subtitle: "529 opportunities at $942K pipeline — 55.57% positive reply rate",
       icon: "💻",
       stats: [
-        { value: "896", label: "SEQUENCES STARTED" },
-        { value: "12.05%", label: "REPLY RATE" },
-        { value: "38.89%", label: "POSITIVE REPLY RATE" },
-        { value: "42", label: "OPPORTUNITIES" },
+        { value: "11,436", label: "SEQUENCES STARTED" },
+        { value: "8.32%", label: "REPLY RATE" },
+        { value: "55.57%", label: "POSITIVE REPLY RATE" },
+        { value: "529", label: "OPPORTUNITIES" },
       ],
-      image: "https://calculator.bleedai.com/campaign-results/saas-signup-trial-offer.png",
+      image: "/images/saas-signup-trial-offer.png",
     },
     {
       title: "Marketing Agency",
