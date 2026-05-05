@@ -90,6 +90,18 @@ export default function CampaignSnapshots() {
       ],
       image: "https://calculator.bleedai.com/campaign-results/tech-setup-offer-for-startups.png",
     },
+    {
+      title: "Video Production SaaS / Tech",
+      subtitle: "45 qualified leads from 423 sequences — 46% positive reply rate",
+      icon: "🎥",
+      stats: [
+        { value: "423", label: "SEQUENCES STARTED" },
+        { value: "10.17%", label: "REPLY RATE" },
+        { value: "46%", label: "POSITIVE REPLY RATE" },
+        { value: "45", label: "OPPORTUNITIES" },
+      ],
+      image: "/images/video-production-camp.png",
+    },
   ];
 
   return (
