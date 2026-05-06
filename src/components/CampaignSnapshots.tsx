@@ -7,16 +7,28 @@ export default function CampaignSnapshots() {
 
   const campaigns = [
     {
-      title: "Marketing Agency (Active)",
-      subtitle: "9 warm opportunities in early ramp — campaign still running",
-      icon: "📊",
+      title: "SaaS Signup Trial Offer",
+      subtitle: "529 opportunities at $942K pipeline — 55.57% positive reply rate",
+      icon: "💻",
       stats: [
-        { value: "2,156", label: "SEQUENCES STARTED" },
-        { value: "1.35%", label: "REPLY RATE" },
-        { value: "31.03%", label: "POSITIVE REPLY RATE" },
-        { value: "9", label: "OPPORTUNITIES" },
+        { value: "11,436", label: "SEQUENCES STARTED" },
+        { value: "8.32%", label: "REPLY RATE" },
+        { value: "55.57%", label: "POSITIVE REPLY RATE" },
+        { value: "529", label: "OPPORTUNITIES" },
       ],
-      image: "https://calculator.bleedai.com/campaign-results/marketing-agency.png",
+      image: "/images/saas-signup-trial-offer.png",
+    },
+    {
+      title: "SaaS / Tech (Video Production)",
+      subtitle: "45 qualified leads from 423 sequences — 46% positive reply rate",
+      icon: "🎥",
+      stats: [
+        { value: "423", label: "SEQUENCES STARTED" },
+        { value: "10.17%", label: "REPLY RATE" },
+        { value: "46%", label: "POSITIVE REPLY RATE" },
+        { value: "45", label: "OPPORTUNITIES" },
+      ],
+      image: "/images/video-production-camp.png",
     },
     {
       title: "Coaching Offer",
@@ -43,16 +55,16 @@ export default function CampaignSnapshots() {
       image: "/images/onezerotwo-oppurtunity-snaps.png",
     },
     {
-      title: "SaaS Signup Trial Offer",
-      subtitle: "529 opportunities at $942K pipeline — 55.57% positive reply rate",
-      icon: "💻",
+      title: "Marketing Agency",
+      subtitle: "9 warm opportunities in early ramp — campaign still running",
+      icon: "📊",
       stats: [
-        { value: "11,436", label: "SEQUENCES STARTED" },
-        { value: "8.32%", label: "REPLY RATE" },
-        { value: "55.57%", label: "POSITIVE REPLY RATE" },
-        { value: "529", label: "OPPORTUNITIES" },
+        { value: "2,156", label: "SEQUENCES STARTED" },
+        { value: "1.35%", label: "REPLY RATE" },
+        { value: "31.03%", label: "POSITIVE REPLY RATE" },
+        { value: "9", label: "OPPORTUNITIES" },
       ],
-      image: "/images/saas-signup-trial-offer.png",
+      image: "https://calculator.bleedai.com/campaign-results/marketing-agency.png",
     },
     {
       title: "Marketing Agency",
@@ -89,18 +101,6 @@ export default function CampaignSnapshots() {
         { value: "5", label: "OPPORTUNITIES" },
       ],
       image: "https://calculator.bleedai.com/campaign-results/tech-setup-offer-for-startups.png",
-    },
-    {
-      title: "Video Production SaaS / Tech",
-      subtitle: "45 qualified leads from 423 sequences — 46% positive reply rate",
-      icon: "🎥",
-      stats: [
-        { value: "423", label: "SEQUENCES STARTED" },
-        { value: "10.17%", label: "REPLY RATE" },
-        { value: "46%", label: "POSITIVE REPLY RATE" },
-        { value: "45", label: "OPPORTUNITIES" },
-      ],
-      image: "/images/video-production-camp.png",
     },
   ];
 
