@@ -3,199 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cold Email Spam Checker — Free 100-Point Audit | Bleed AI</title>
-  <meta name="description" content="Paste your cold email and get a 100-point spam score instantly. Find every spam trigger, AI detection flag, and copy weakness — with exact fixes. Free tool by Bleed AI.">
+  <title>Cold Email Spam Checker | Free 100-Point Audit | Bleed AI</title>
+  <meta name="description" content="Paste your cold email and get a 100-point spam score instantly. Find every spam trigger, AI detection flag, and copy weakness with exact fixes. Free tool by Bleed AI.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://bleedai.com/free-tools/cold-email-spam-checker">
-  <meta property="og:title" content="Cold Email Spam Checker — Free 100-Point Audit | Bleed AI">
+  <meta property="og:title" content="Cold Email Spam Checker | Free 100-Point Audit | Bleed AI">
   <meta property="og:description" content="Paste your cold email and get a 100-point spam score. Find every spam trigger, AI flag, and copy weakness with exact fixes.">
   <meta property="og:url" content="https://bleedai.com/free-tools/cold-email-spam-checker">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why is my cold email going to spam?","acceptedAnswer":{"@type":"Answer","text":"Cold emails go to spam due to spam trigger words, missing SPF/DKIM/DMARC records, AI-generated content signals, too many links, and sending from unwarmed domains. This tool audits all of these and gives exact fixes."}},{"@type":"Question","name":"What does the 100-point spam score measure?","acceptedAnswer":{"@type":"Answer","text":"The score covers spam trigger words, AI-writing detection, personalization quality, copy effectiveness, and deliverability setup. Every deduction comes with a specific reason and fix."}},{"@type":"Question","name":"Is this tool free?","acceptedAnswer":{"@type":"Answer","text":"Yes, completely free. Enter your name, work email, company, paste your subject line and body, and get your full audit instantly."}}]}</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#080808;--surface:#111;--surface-2:#1a1a1a;--border:rgba(255,255,255,0.08);--red:#B1130F;--red-light:rgba(177,19,15,0.15);--text:#f0f0f0;--text-muted:#888;--text-dim:#444;--green:#22c55e; }
+    :root { --bg:#080808;--surface:#111;--border:rgba(255,255,255,0.08);--red:#B1130F;--text:#f0f0f0;--text-muted:#888;--text-dim:#444;--green:#22c55e; }
     body { font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6; }
     a { color:inherit;text-decoration:none; }
-    .nav { display:flex;justify-content:space-between;align-items:center;padding:18px 32px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(8,8,8,0.95);backdrop-filter:blur(12px);z-index:100; }
-    .nav-logo { font-size:18px;font-weight:800; }
-    .nav-logo span { color:var(--red); }
-    .nav-cta { background:var(--red);color:#fff;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;transition:opacity 0.2s; }
+
+    /* Nav matches bleedai.com floating style */
+    .nav-wrap { position:sticky;top:0;z-index:100;padding:10px 16px 0; }
+    .nav { display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-radius:16px;border:1px solid var(--border);background:rgba(8,8,8,0.92);backdrop-filter:blur(16px); }
+    .nav-logo { height:36px;width:auto; }
+    .nav-cta { background:var(--red);color:#fff;padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;transition:opacity 0.2s; }
     .nav-cta:hover { opacity:0.85; }
-    .hero { max-width:760px;margin:0 auto;padding:72px 24px 56px;text-align:center; }
-    .free-badge { display:inline-flex;align-items:center;gap:10px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:100px;padding:6px 18px;margin-bottom:28px; }
-    .old-price { font-size:13px;color:var(--text-muted);text-decoration:line-through; }
-    .new-price { font-size:14px;font-weight:800;color:var(--green);letter-spacing:0.04em; }
-    .badge-dot { width:4px;height:4px;background:var(--text-dim);border-radius:50%; }
-    .hero-tag { display:inline-block;background:var(--red-light);color:var(--red);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:4px 12px;border-radius:4px;margin-bottom:20px; }
-    h1 { font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px;letter-spacing:-0.02em; }
+
+    .hero { max-width:680px;margin:0 auto;padding:48px 24px 28px;text-align:center; }
+    .badge { display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:100px;padding:5px 14px;margin-bottom:20px;font-size:12px; }
+    .badge-old { color:var(--text-muted);text-decoration:line-through; }
+    .badge-new { font-weight:800;color:var(--green); }
+    h1 { font-size:clamp(24px,4vw,40px);font-weight:900;line-height:1.2;margin-bottom:12px;letter-spacing:-0.02em; }
     h1 span { color:var(--red); }
-    .hero-sub { font-size:17px;color:var(--text-muted);max-width:580px;margin:0 auto 32px;line-height:1.7; }
-    .hero-sub strong { color:var(--text); }
-    .trust-row { display:flex;justify-content:center;flex-wrap:wrap;gap:24px;margin-bottom:40px; }
-    .trust-item { display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted); }
-    .check { width:15px;height:15px;color:var(--green);flex-shrink:0; }
-    .stats-row { display:flex;justify-content:center;border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:540px;margin:0 auto; }
-    .stat { padding:16px 28px;text-align:center;flex:1;border-right:1px solid var(--border); }
-    .stat:last-child { border-right:none; }
-    .stat-num { font-size:22px;font-weight:800;display:block; }
-    .stat-label { font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;display:block; }
-    .section { max-width:680px;margin:0 auto;padding:56px 24px; }
-    .section-label { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--red);margin-bottom:14px; }
-    h2 { font-size:26px;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em; }
-    .section-sub { font-size:15px;color:var(--text-muted);margin-bottom:32px;line-height:1.7; }
-    .value-items { border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px; }
-    .value-item { display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);background:var(--surface);gap:16px; }
-    .value-item:last-child { border-bottom:none; }
-    .vi-left { display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500; }
-    .vi-check { color:var(--green);flex-shrink:0;width:16px;height:16px; }
-    .vi-price { font-size:13px;color:var(--text-muted);font-weight:600;white-space:nowrap; }
-    .value-total { display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px; }
-    .vt-label { font-size:14px;color:var(--text-muted); }
-    .vt-right { text-align:right; }
-    .vt-old { font-size:14px;color:var(--text-dim);text-decoration:line-through;display:block; }
-    .vt-free { font-size:22px;font-weight:900;color:var(--green); }
-    .taha-card { background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:12px;padding:28px;margin-bottom:0; }
-    .taha-header { display:flex;align-items:center;gap:14px;margin-bottom:16px; }
-    .taha-pfp { width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0; }
-    .taha-name { font-size:15px;font-weight:700; }
-    .taha-title { font-size:12px;color:var(--text-muted);margin-top:2px; }
-    .taha-quote { font-size:15px;color:var(--text-muted);line-height:1.75;font-style:italic; }
+    .sub { font-size:15px;color:var(--text-muted);max-width:500px;margin:0 auto 28px; }
+
+    .taha-card { max-width:680px;margin:0 auto;padding:0 24px 36px; }
+    .taha-inner { background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:12px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start; }
+    .taha-pfp { width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0; }
+    .taha-text { flex:1; }
+    .taha-name { font-size:13px;font-weight:700; }
+    .taha-role { font-size:11px;color:var(--text-muted);margin-bottom:6px; }
+    .taha-quote { font-size:13px;color:var(--text-muted);line-height:1.65;font-style:italic; }
     .taha-quote strong { color:var(--text);font-style:normal; }
-    .tool-label { max-width:680px;margin:0 auto 24px;padding:0 24px; }
-    .tool-label h2 { font-size:22px;font-weight:800;margin-bottom:6px; }
-    .tool-label p { font-size:14px;color:var(--text-muted); }
+
     .tool-frame { width:100%;border:none;display:block;min-height:860px; }
-    .for-grid { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
-    .for-card { background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px; }
-    .for-card h3 { font-size:14px;font-weight:700;margin-bottom:16px; }
-    .for-card ul { list-style:none;display:flex;flex-direction:column;gap:10px; }
-    .for-card ul li { font-size:13px;color:var(--text-muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5; }
-    .for-yes li::before { content:'✓';color:var(--green);font-weight:700; }
-    .for-no li::before { content:'✗';color:#555; }
-    .faq-item { border-top:1px solid var(--border);padding:20px 0; }
-    .faq-item:last-child { border-bottom:1px solid var(--border); }
-    .faq-item h3 { font-size:15px;font-weight:600;margin-bottom:10px; }
-    .faq-item p { font-size:14px;color:var(--text-muted);line-height:1.7; }
-    .promo-section { background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 24px;text-align:center; }
-    .promo-inner { max-width:560px;margin:0 auto; }
-    .promo-eyebrow { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--red);margin-bottom:16px; }
-    .promo-heading { font-size:28px;font-weight:900;margin-bottom:14px;letter-spacing:-0.02em;line-height:1.2; }
-    .promo-sub { font-size:15px;color:var(--text-muted);margin-bottom:32px;line-height:1.7; }
-    .promo-btn { display:inline-block;background:var(--red);color:#fff;padding:15px 36px;border-radius:10px;font-size:15px;font-weight:700;transition:opacity 0.2s;box-shadow:0 0 32px rgba(177,19,15,0.4); }
-    .promo-btn:hover { opacity:0.85; }
-    .promo-note { font-size:12px;color:var(--text-dim);margin-top:14px; }
-    footer { text-align:center;padding:28px 24px;font-size:12px;color:var(--text-dim); }
+
+    .bottom-cta { text-align:center;padding:24px 24px;border-top:1px solid var(--border); }
+    .bottom-cta p { font-size:13px;color:var(--text-muted);margin-bottom:12px; }
+    .bottom-btn { display:inline-block;background:var(--red);color:#fff;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;transition:opacity 0.2s;box-shadow:0 0 20px rgba(177,19,15,0.3); }
+    .bottom-btn:hover { opacity:0.85; }
+    footer { text-align:center;padding:16px 24px;font-size:12px;color:var(--text-dim); }
     footer a { color:var(--text-muted); }
-    @media(max-width:600px) { .nav{padding:14px 16px;} .stats-row{flex-direction:column;} .stat{border-right:none;border-bottom:1px solid var(--border);} .stat:last-child{border-bottom:none;} .for-grid{grid-template-columns:1fr;} }
+    @media(max-width:600px) { .nav-wrap{padding:8px 10px 0;} }
   </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo">Bleed<span>AI</span></div>
-  <a href="https://bleedai.com/book-call/" class="nav-cta">Book a Free Call →</a>
-</nav>
+<div class="nav-wrap">
+  <nav class="nav">
+    <a href="https://bleedai.com">
+      <img src="/images/bleed-ai-logo.svg" alt="Bleed AI" class="nav-logo">
+    </a>
+    <a href="https://bleedai.com/book-call/" class="nav-cta">Book a Free Call</a>
+  </nav>
+</div>
 
 <section class="hero">
-  <span class="hero-tag">Free Tool</span>
-  <div style="height:12px"></div>
-  <div class="free-badge">
-    <span class="old-price">$97 audit</span>
-    <span class="badge-dot"></span>
-    <span class="new-price">FREE TODAY</span>
+  <div class="badge">
+    <span class="badge-old">$97 audit</span>
+    <span>·</span>
+    <span class="badge-new">FREE TODAY</span>
   </div>
   <h1>Your Cold Email Is Going to Spam.<br><span>Here's Exactly Why.</span></h1>
-  <p class="hero-sub">Paste your email. Get a <strong>100-point audit</strong> across spam triggers, AI detection, personalization, copy quality, and deliverability — with exact reasons for every deduction and a fix for each one.</p>
-  <div class="trust-row">
-    <div class="trust-item"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No credit card</div>
-    <div class="trust-item"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Results in 30 seconds</div>
-    <div class="trust-item"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>9 years of mistakes baked in</div>
-  </div>
-  <div class="stats-row">
-    <div class="stat"><span class="stat-num">400+</span><span class="stat-label">Campaigns audited</span></div>
-    <div class="stat"><span class="stat-num">$796K+</span><span class="stat-label">Pipeline tracked</span></div>
-    <div class="stat"><span class="stat-num">9 yrs</span><span class="stat-label">Cold email</span></div>
-  </div>
+  <p class="sub">Paste your email. Get a 100-point audit across spam triggers, AI detection, copy quality, and deliverability. Exact fix for every deduction.</p>
 </section>
 
-<div class="section" style="padding-bottom:0">
-  <div class="section-label">What you're getting</div>
-  <h2>What a deliverability consultant charges $97/hr to tell you — free.</h2>
-  <p class="section-sub">I've reviewed over 400 cold email campaigns. The same 6 problems keep killing deliverability. I put every single one in this checker so you don't have to learn the hard way.</p>
-  <div class="value-items">
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Spam trigger word scan (subject + body)</div><span class="vi-price">$47 value</span></div>
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>AI-writing detection analysis</div><span class="vi-price">$37 value</span></div>
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Deliverability setup check (SPF / DKIM / DMARC)</div><span class="vi-price">$57 value</span></div>
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Copy quality + personalization score</div><span class="vi-price">$47 value</span></div>
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Exact written fix for every deduction</div><span class="vi-price">$37 value</span></div>
-  </div>
-  <div class="value-total"><span class="vt-label">Total value</span><div class="vt-right"><span class="vt-old">$225</span><span class="vt-free">FREE</span></div></div>
-</div>
-
-<div class="section">
-  <div class="taha-card">
-    <div class="taha-header">
-      <img src="/images/taha-anwar.jfif" alt="Taha Anwar" class="taha-pfp">
-      <div><div class="taha-name">Taha Anwar</div><div class="taha-title">Founder, Bleed AI · 9 years in cold email</div></div>
-    </div>
-    <p class="taha-quote">"The first thing I check when a client says their emails aren't landing is their spam score. <strong>Most of the time it's under 60 on the first try and they have no idea.</strong> A single trigger word in your subject line can cut your open rate in half. This tool catches everything before you send a single email to a real prospect."</p>
-  </div>
-</div>
-
-<div style="padding-bottom:64px">
-  <div class="tool-label">
-    <h2>Run your audit — takes 30 seconds</h2>
-    <p>Enter your details, paste your email, and get your full breakdown instantly.</p>
-  </div>
-  <iframe class="tool-frame" src="https://bleedai-tools.vercel.app/cold-email-spam-checker" title="Cold Email Spam Checker" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
-
-<div class="section">
-  <div class="for-grid">
-    <div class="for-card">
-      <h3>✅ This is for you if...</h3>
-      <ul class="for-yes">
-        <li>You're running cold email campaigns</li>
-        <li>Your open rates have dropped recently</li>
-        <li>You're using a template you didn't write from scratch</li>
-        <li>You suspect your emails are hitting spam</li>
-        <li>You're using AI to help write emails</li>
-      </ul>
-    </div>
-    <div class="for-card">
-      <h3>❌ Skip this if...</h3>
-      <ul class="for-no">
-        <li>You only reply to warm inbound leads</li>
-        <li>You don't do any cold outbound</li>
-        <li>You already have a 15%+ positive reply rate</li>
-      </ul>
+<div class="taha-card">
+  <div class="taha-inner">
+    <img src="/images/taha-anwar.jfif" alt="Taha Anwar" class="taha-pfp">
+    <div class="taha-text">
+      <div class="taha-name">Taha Anwar</div>
+      <div class="taha-role">Founder, Bleed AI · 9 years in cold email</div>
+      <p class="taha-quote">"<strong>Most first-time audits come back under 60 and the sender has no idea.</strong> A single trigger word in your subject line can cut your open rate in half. This catches everything before you send to a real prospect."</p>
     </div>
   </div>
 </div>
 
-<div class="section" style="padding-top:0">
-  <h2 style="margin-bottom:28px">Frequently asked questions</h2>
-  <div class="faq-item"><h3>Why is my cold email going to spam?</h3><p>The most common causes: spam trigger words in the subject or body, emails that look AI-generated, missing DNS records (SPF/DKIM/DMARC), sending from an unwarmed domain, and copy that reads like a mass blast. This tool checks all of these.</p></div>
-  <div class="faq-item"><h3>What's a good spam score?</h3><p>80+ is solid. 90+ is excellent. Most first-time audits come back between 45 and 65 — meaning emails are landing in spam and the sender has no idea. Every point above 80 measurably improves inbox placement.</p></div>
-  <div class="faq-item"><h3>Does this check my actual domain reputation?</h3><p>This tool audits your email content and setup checklist. For live domain reputation, use Google Postmaster Tools or MXToolbox after running this audit.</p></div>
-  <div class="faq-item"><h3>Is this tool free?</h3><p>Yes, completely free. No credit card, no trial, no catch. Enter your details, paste your email, get your audit instantly.</p></div>
+<iframe class="tool-frame" src="https://bleedai-tools.vercel.app/cold-email-spam-checker" title="Cold Email Spam Checker" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<div class="bottom-cta">
+  <p>Want us to fix your entire cold email system: list, copy, domains, and sending?</p>
+  <a href="https://bleedai.com/book-call/" class="bottom-btn">Book a Free Strategy Call</a>
 </div>
 
-<section class="promo-section">
-  <div class="promo-inner">
-    <div class="promo-eyebrow">Want us to do it for you?</div>
-    <h2 class="promo-heading">We build cold email systems that book meetings on autopilot.</h2>
-    <p class="promo-sub">Bleed AI has tracked $796K+ in client pipeline. We handle everything — list building, copy, domains, sending, and optimization — so you don't have to figure any of this out.</p>
-    <a href="https://bleedai.com/book-call/" class="promo-btn">Book a Free Strategy Call →</a>
-    <p class="promo-note">No obligation. 30 minutes. We'll tell you exactly what's broken in your outbound.</p>
-  </div>
-</section>
-
-<footer><p>Built by <a href="https://bleedai.com">Bleed AI</a> · © 2026 · <a href="https://bleedai.com">bleedai.com</a></p></footer>
+<footer><p>Built by <a href="https://bleedai.com">Bleed AI</a> · 2026</p></footer>
 
 </body>
 </html>

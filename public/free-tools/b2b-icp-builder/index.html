@@ -3,199 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>B2B ICP Builder for Apollo &amp; Prospeo — Free Tool | Bleed AI</title>
-  <meta name="description" content="Enter your website and target customer. Get a fully built ICP criteria document — industries, headcount, technographics, buying signals, and decision-maker titles — ready to paste into Apollo or Prospeo.">
+  <title>B2B ICP Builder for Apollo and Prospeo | Free Tool | Bleed AI</title>
+  <meta name="description" content="Enter your website and target customer. Get a fully built ICP criteria document with industries, headcount, technographics, buying signals, and decision-maker titles ready to paste into Apollo or Prospeo.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://bleedai.com/free-tools/b2b-icp-builder">
-  <meta property="og:title" content="B2B ICP Builder for Apollo &amp; Prospeo — Free Tool | Bleed AI">
+  <meta property="og:title" content="B2B ICP Builder for Apollo and Prospeo | Free Tool | Bleed AI">
   <meta property="og:description" content="Get a fully built ICP criteria document ready to paste into Apollo or Prospeo. Firmographics, technographics, and buying signals included.">
   <meta property="og:url" content="https://bleedai.com/free-tools/b2b-icp-builder">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is an ICP in B2B sales?","acceptedAnswer":{"@type":"Answer","text":"ICP stands for Ideal Customer Profile — a precise description of the companies most likely to buy from you, including industry, size, revenue, tech stack, and decision-maker titles. A tight ICP is the difference between a 1% and 15% reply rate."}},{"@type":"Question","name":"How do I build an ICP for Apollo.io?","acceptedAnswer":{"@type":"Answer","text":"Apollo uses specific filter categories: exact industry names, headcount ranges, job titles, seniority, geography, and technographics. This tool generates criteria using Apollo's exact naming conventions so you can paste them directly."}},{"@type":"Question","name":"What are buying signals?","acceptedAnswer":{"@type":"Answer","text":"Buying signals are real events that indicate a company needs your solution now — a new hire, a funding round, a job posting for a tool you replace. This tool identifies the top 5 signals for your specific ICP."}}]}</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#080808;--surface:#111;--surface-2:#1a1a1a;--border:rgba(255,255,255,0.08);--red:#B1130F;--red-light:rgba(177,19,15,0.15);--blue:#2563eb;--blue-light:rgba(37,99,235,0.15);--text:#f0f0f0;--text-muted:#888;--text-dim:#444;--green:#22c55e; }
+    :root { --bg:#080808;--surface:#111;--border:rgba(255,255,255,0.08);--red:#B1130F;--blue:#2563eb;--text:#f0f0f0;--text-muted:#888;--text-dim:#444;--green:#22c55e; }
     body { font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6; }
     a { color:inherit;text-decoration:none; }
-    .nav { display:flex;justify-content:space-between;align-items:center;padding:18px 32px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(8,8,8,0.95);backdrop-filter:blur(12px);z-index:100; }
-    .nav-logo { font-size:18px;font-weight:800; }
-    .nav-logo span { color:var(--red); }
-    .nav-cta { background:var(--red);color:#fff;padding:8px 20px;border-radius:8px;font-size:13px;font-weight:600;transition:opacity 0.2s; }
+    .nav-wrap { position:sticky;top:0;z-index:100;padding:10px 16px 0; }
+    .nav { display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-radius:16px;border:1px solid var(--border);background:rgba(8,8,8,0.92);backdrop-filter:blur(16px); }
+    .nav-logo { height:36px;width:auto; }
+    .nav-cta { background:var(--red);color:#fff;padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;transition:opacity 0.2s; }
     .nav-cta:hover { opacity:0.85; }
-    .hero { max-width:760px;margin:0 auto;padding:72px 24px 56px;text-align:center; }
-    .free-badge { display:inline-flex;align-items:center;gap:10px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);border-radius:100px;padding:6px 18px;margin-bottom:28px; }
-    .old-price { font-size:13px;color:var(--text-muted);text-decoration:line-through; }
-    .new-price { font-size:14px;font-weight:800;color:var(--green);letter-spacing:0.04em; }
-    .badge-dot { width:4px;height:4px;background:var(--text-dim);border-radius:50%; }
-    .hero-tag { display:inline-block;background:var(--blue-light);color:var(--blue);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:4px 12px;border-radius:4px;margin-bottom:20px; }
-    h1 { font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:20px;letter-spacing:-0.02em; }
+    .hero { max-width:680px;margin:0 auto;padding:48px 24px 28px;text-align:center; }
+    .badge { display:inline-flex;align-items:center;gap:8px;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);border-radius:100px;padding:5px 14px;margin-bottom:20px;font-size:12px; }
+    .badge-old { color:var(--text-muted);text-decoration:line-through; }
+    .badge-new { font-weight:800;color:var(--green); }
+    h1 { font-size:clamp(24px,4vw,40px);font-weight:900;line-height:1.2;margin-bottom:12px;letter-spacing:-0.02em; }
     h1 span { color:var(--blue); }
-    .hero-sub { font-size:17px;color:var(--text-muted);max-width:580px;margin:0 auto 32px;line-height:1.7; }
-    .hero-sub strong { color:var(--text); }
-    .trust-row { display:flex;justify-content:center;flex-wrap:wrap;gap:24px;margin-bottom:40px; }
-    .trust-item { display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted); }
-    .check { width:15px;height:15px;color:var(--green);flex-shrink:0; }
-    .stats-row { display:flex;justify-content:center;border:1px solid var(--border);border-radius:12px;overflow:hidden;max-width:540px;margin:0 auto; }
-    .stat { padding:16px 28px;text-align:center;flex:1;border-right:1px solid var(--border); }
-    .stat:last-child { border-right:none; }
-    .stat-num { font-size:22px;font-weight:800;display:block; }
-    .stat-label { font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:2px;display:block; }
-    .section { max-width:680px;margin:0 auto;padding:56px 24px; }
-    .section-label { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--blue);margin-bottom:14px; }
-    h2 { font-size:26px;font-weight:800;margin-bottom:10px;letter-spacing:-0.02em; }
-    .section-sub { font-size:15px;color:var(--text-muted);margin-bottom:32px;line-height:1.7; }
-    .value-items { border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px; }
-    .value-item { display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--border);background:var(--surface);gap:16px; }
-    .value-item:last-child { border-bottom:none; }
-    .vi-left { display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500; }
-    .vi-check { color:var(--green);flex-shrink:0;width:16px;height:16px; }
-    .vi-price { font-size:13px;color:var(--text-muted);font-weight:600;white-space:nowrap; }
-    .value-total { display:flex;justify-content:space-between;align-items:center;padding:18px 20px;background:var(--surface-2);border:1px solid var(--border);border-radius:10px; }
-    .vt-label { font-size:14px;color:var(--text-muted); }
-    .vt-right { text-align:right; }
-    .vt-old { font-size:14px;color:var(--text-dim);text-decoration:line-through;display:block; }
-    .vt-free { font-size:22px;font-weight:900;color:var(--green); }
-    .taha-card { background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:12px;padding:28px; }
-    .taha-header { display:flex;align-items:center;gap:14px;margin-bottom:16px; }
-    .taha-pfp { width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0; }
-    .taha-name { font-size:15px;font-weight:700; }
-    .taha-title { font-size:12px;color:var(--text-muted);margin-top:2px; }
-    .taha-quote { font-size:15px;color:var(--text-muted);line-height:1.75;font-style:italic; }
+    .sub { font-size:15px;color:var(--text-muted);max-width:500px;margin:0 auto 28px; }
+    .taha-card { max-width:680px;margin:0 auto;padding:0 24px 36px; }
+    .taha-inner { background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);border-radius:12px;padding:18px 20px;display:flex;gap:12px;align-items:flex-start; }
+    .taha-pfp { width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--border);flex-shrink:0; }
+    .taha-text { flex:1; }
+    .taha-name { font-size:13px;font-weight:700; }
+    .taha-role { font-size:11px;color:var(--text-muted);margin-bottom:6px; }
+    .taha-quote { font-size:13px;color:var(--text-muted);line-height:1.65;font-style:italic; }
     .taha-quote strong { color:var(--text);font-style:normal; }
-    .tool-label { max-width:680px;margin:0 auto 24px;padding:0 24px; }
-    .tool-label h2 { font-size:22px;font-weight:800;margin-bottom:6px; }
-    .tool-label p { font-size:14px;color:var(--text-muted); }
     .tool-frame { width:100%;border:none;display:block;min-height:860px; }
-    .for-grid { display:grid;grid-template-columns:1fr 1fr;gap:20px; }
-    .for-card { background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px; }
-    .for-card h3 { font-size:14px;font-weight:700;margin-bottom:16px; }
-    .for-card ul { list-style:none;display:flex;flex-direction:column;gap:10px; }
-    .for-card ul li { font-size:13px;color:var(--text-muted);display:flex;align-items:flex-start;gap:8px;line-height:1.5; }
-    .for-yes li::before { content:'✓';color:var(--green);font-weight:700; }
-    .for-no li::before { content:'✗';color:#555; }
-    .faq-item { border-top:1px solid var(--border);padding:20px 0; }
-    .faq-item:last-child { border-bottom:1px solid var(--border); }
-    .faq-item h3 { font-size:15px;font-weight:600;margin-bottom:10px; }
-    .faq-item p { font-size:14px;color:var(--text-muted);line-height:1.7; }
-    .promo-section { background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 24px;text-align:center; }
-    .promo-inner { max-width:560px;margin:0 auto; }
-    .promo-eyebrow { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--red);margin-bottom:16px; }
-    .promo-heading { font-size:28px;font-weight:900;margin-bottom:14px;letter-spacing:-0.02em;line-height:1.2; }
-    .promo-sub { font-size:15px;color:var(--text-muted);margin-bottom:32px;line-height:1.7; }
-    .promo-btn { display:inline-block;background:var(--red);color:#fff;padding:15px 36px;border-radius:10px;font-size:15px;font-weight:700;transition:opacity 0.2s;box-shadow:0 0 32px rgba(177,19,15,0.4); }
-    .promo-btn:hover { opacity:0.85; }
-    .promo-note { font-size:12px;color:var(--text-dim);margin-top:14px; }
-    footer { text-align:center;padding:28px 24px;font-size:12px;color:var(--text-dim); }
+    .bottom-cta { text-align:center;padding:24px 24px;border-top:1px solid var(--border); }
+    .bottom-cta p { font-size:13px;color:var(--text-muted);margin-bottom:12px; }
+    .bottom-btn { display:inline-block;background:var(--red);color:#fff;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;transition:opacity 0.2s;box-shadow:0 0 20px rgba(177,19,15,0.3); }
+    .bottom-btn:hover { opacity:0.85; }
+    footer { text-align:center;padding:16px 24px;font-size:12px;color:var(--text-dim); }
     footer a { color:var(--text-muted); }
-    @media(max-width:600px) { .nav{padding:14px 16px;} .stats-row{flex-direction:column;} .stat{border-right:none;border-bottom:1px solid var(--border);} .stat:last-child{border-bottom:none;} .for-grid{grid-template-columns:1fr;} }
+    @media(max-width:600px) { .nav-wrap{padding:8px 10px 0;} }
   </style>
 </head>
 <body>
 
-<nav class="nav">
-  <div class="nav-logo">Bleed<span>AI</span></div>
-  <a href="https://bleedai.com/book-call/" class="nav-cta">Book a Free Call →</a>
-</nav>
+<div class="nav-wrap">
+  <nav class="nav">
+    <a href="https://bleedai.com">
+      <img src="/images/bleed-ai-logo.svg" alt="Bleed AI" class="nav-logo">
+    </a>
+    <a href="https://bleedai.com/book-call/" class="nav-cta">Book a Free Call</a>
+  </nav>
+</div>
 
 <section class="hero">
-  <span class="hero-tag">Free Tool</span>
-  <div style="height:12px"></div>
-  <div class="free-badge">
-    <span class="old-price">$297 strategy session</span>
-    <span class="badge-dot"></span>
-    <span class="new-price">FREE TODAY</span>
+  <div class="badge">
+    <span class="badge-old">$297 strategy session</span>
+    <span>·</span>
+    <span class="badge-new">FREE TODAY</span>
   </div>
   <h1>Stop Guessing Who to Email.<br><span>Build Your Exact Buyer List in 60 Seconds.</span></h1>
-  <p class="hero-sub">Enter your website. Get a <strong>copy-paste ICP document</strong> built for Apollo and Prospeo — firmographics, technographics, buying signals, decision-maker titles, and suppression rules. Everything you need to build a list that actually converts.</p>
-  <div class="trust-row">
-    <div class="trust-item"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>No credit card</div>
-    <div class="trust-item"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Ready in 60 seconds</div>
-    <div class="trust-item"><svg class="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>3 years of list-building experience</div>
-  </div>
-  <div class="stats-row">
-    <div class="stat"><span class="stat-num">400+</span><span class="stat-label">Lists built</span></div>
-    <div class="stat"><span class="stat-num">1 in 10</span><span class="stat-label">Leads books a call</span></div>
-    <div class="stat"><span class="stat-num">$796K+</span><span class="stat-label">Pipeline tracked</span></div>
-  </div>
+  <p class="sub">Enter your website. Get a copy-paste ICP document for Apollo and Prospeo: firmographics, technographics, buying signals, and decision-maker titles.</p>
 </section>
 
-<div class="section" style="padding-bottom:0">
-  <div class="section-label">What you're getting</div>
-  <h2>3 years of list-building experience. Yours in 60 seconds.</h2>
-  <p class="section-sub">Most founders spend weeks building a list and still get it wrong. The wrong ICP means you're emailing people who will never buy — no matter how good your copy is. This tool builds the right list criteria from day one.</p>
-  <div class="value-items">
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Apollo-ready firmographic filters (exact industry names)</div><span class="vi-price">$97 value</span></div>
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Technographic targeting (tools they use = buying signals)</div><span class="vi-price">$77 value</span></div>
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>5 ranked buying signals with where to find them</div><span class="vi-price">$97 value</span></div>
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Decision-maker titles + seniority filters</div><span class="vi-price">$47 value</span></div>
-    <div class="value-item"><div class="vi-left"><svg class="vi-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Suppression rules to avoid wasted contacts</div><span class="vi-price">$37 value</span></div>
-  </div>
-  <div class="value-total"><span class="vt-label">Total value</span><div class="vt-right"><span class="vt-old">$355</span><span class="vt-free">FREE</span></div></div>
-</div>
-
-<div class="section">
-  <div class="taha-card">
-    <div class="taha-header">
-      <img src="/images/taha-anwar.jfif" alt="Taha Anwar" class="taha-pfp">
-      <div><div class="taha-name">Taha Anwar</div><div class="taha-title">Founder, Bleed AI · 9 years in cold email</div></div>
-    </div>
-    <p class="taha-quote">"I spent 3 years getting the ICP wrong before I figured out the right formula. <strong>The difference between a 1% and 15% positive reply rate is almost always the list, not the copy.</strong> You can write the best email in the world, but if you're sending it to the wrong person, it doesn't matter. This tool builds the right targeting criteria in 60 seconds — something that used to take me 3 hours with a new client."</p>
-  </div>
-</div>
-
-<div style="padding-bottom:64px">
-  <div class="tool-label">
-    <h2>Build your ICP — takes 60 seconds</h2>
-    <p>Enter your website and target customer type. We'll do the rest.</p>
-  </div>
-  <iframe class="tool-frame" src="https://bleedai-tools.vercel.app/icp-list-builder" title="B2B ICP Builder" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-</div>
-
-<div class="section">
-  <div class="for-grid">
-    <div class="for-card">
-      <h3>✅ This is for you if...</h3>
-      <ul class="for-yes">
-        <li>You're building a cold outreach list</li>
-        <li>You're not sure which companies to target</li>
-        <li>Your reply rate is under 5%</li>
-        <li>You want Apollo filters that actually convert</li>
-        <li>You're launching a new outbound campaign</li>
-      </ul>
-    </div>
-    <div class="for-card">
-      <h3>❌ Skip this if...</h3>
-      <ul class="for-no">
-        <li>You only do inbound marketing</li>
-        <li>You already have a validated, converting ICP</li>
-        <li>You're a B2C business</li>
-      </ul>
+<div class="taha-card">
+  <div class="taha-inner">
+    <img src="/images/taha-anwar.jfif" alt="Taha Anwar" class="taha-pfp">
+    <div class="taha-text">
+      <div class="taha-name">Taha Anwar</div>
+      <div class="taha-role">Founder, Bleed AI · 9 years in cold email</div>
+      <p class="taha-quote">"<strong>The difference between a 1% and 15% positive reply rate is almost always the list, not the copy.</strong> You can write the best email in the world, but if you're sending it to the wrong person, it doesn't matter."</p>
     </div>
   </div>
 </div>
 
-<div class="section" style="padding-top:0">
-  <h2 style="margin-bottom:28px">Frequently asked questions</h2>
-  <div class="faq-item"><h3>What is an ICP in B2B sales?</h3><p>ICP stands for Ideal Customer Profile — a precise description of the companies most likely to buy from you. It includes industry, company size, revenue range, geography, tech stack, and decision-maker titles. A tight ICP is the single biggest lever in cold outbound.</p></div>
-  <div class="faq-item"><h3>How do I use this in Apollo?</h3><p>The tool outputs exact Apollo filter values — industry names match Apollo's dropdown options, headcount ranges match Apollo's sliders, and job titles are formatted for Apollo's search. Copy and paste directly into your Apollo filter panel.</p></div>
-  <div class="faq-item"><h3>What are buying signals?</h3><p>Buying signals are real-world events that suggest a company needs your solution right now — a new hire, a funding round, a job posting for a tool you replace. Emails sent around signals get 3-5x higher reply rates than generic outreach.</p></div>
-  <div class="faq-item"><h3>Is this tool free?</h3><p>Yes, completely free. No credit card, no trial. Enter your website, get your ICP document instantly.</p></div>
+<iframe class="tool-frame" src="https://bleedai-tools.vercel.app/icp-list-builder" title="B2B ICP Builder" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+<div class="bottom-cta">
+  <p>Want us to build the list, write the emails, and book the meetings for you?</p>
+  <a href="https://bleedai.com/book-call/" class="bottom-btn">Book a Free Strategy Call</a>
 </div>
 
-<section class="promo-section">
-  <div class="promo-inner">
-    <div class="promo-eyebrow">Want us to build and run it for you?</div>
-    <h2 class="promo-heading">We build the list, write the emails, and book the meetings.</h2>
-    <p class="promo-sub">Bleed AI runs done-for-you cold email systems for B2B founders and agencies. We handle the ICP, the list, the copy, the domains, and the optimization — you just take the calls.</p>
-    <a href="https://bleedai.com/book-call/" class="promo-btn">Book a Free Strategy Call →</a>
-    <p class="promo-note">No obligation. 30 minutes. We'll map out your outbound system from scratch.</p>
-  </div>
-</section>
-
-<footer><p>Built by <a href="https://bleedai.com">Bleed AI</a> · © 2026 · <a href="https://bleedai.com">bleedai.com</a></p></footer>
+<footer><p>Built by <a href="https://bleedai.com">Bleed AI</a> · 2026</p></footer>
 
 </body>
 </html>
