@@ -13,9 +13,12 @@ export default function Navigation() {
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [freeToolsOpen, setFreeToolsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(true); // Default to open
+  const [mobileFreeToolsOpen, setMobileFreeToolsOpen] = useState(false);
   const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [freeToolsCloseTimeout, setFreeToolsCloseTimeout] = useState<NodeJS.Timeout | null>(null);
 
   // Check if we're on a services page
   const isServicesPage = pathname?.startsWith('/services');
@@ -51,6 +54,22 @@ export default function Navigation() {
       document.body.style.overflow = '';
     };
   }, [mobileMenuOpen]);
+
+  // Handle free tools dropdown
+  const handleFreeToolsEnter = () => {
+    if (freeToolsCloseTimeout) {
+      clearTimeout(freeToolsCloseTimeout);
+      setFreeToolsCloseTimeout(null);
+    }
+    setFreeToolsOpen(true);
+  };
+
+  const handleFreeToolsLeave = () => {
+    const timeout = setTimeout(() => {
+      setFreeToolsOpen(false);
+    }, 150);
+    setFreeToolsCloseTimeout(timeout);
+  };
 
   // Handle dropdown open/close with delay
   const handleServicesEnter = () => {
@@ -105,6 +124,56 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-6">
+            {/* Free Tools Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={handleFreeToolsEnter}
+              onMouseLeave={handleFreeToolsLeave}
+            >
+              <button
+                className="flex items-center gap-1 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
+                aria-expanded={freeToolsOpen}
+                aria-haspopup="true"
+              >
+                Free Tools
+                <svg
+                  className={`w-4 h-4 transition-transform duration-200 ${freeToolsOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {freeToolsOpen && (
+                <div
+                  className="absolute top-full left-0 mt-2 w-72 bg-[var(--surface-elevated)] border border-[var(--border-color)] rounded-xl shadow-xl overflow-hidden z-50"
+                  onMouseEnter={handleFreeToolsEnter}
+                  onMouseLeave={handleFreeToolsLeave}
+                >
+                  {[
+                    { href: '/free-tools/cold-email-spam-checker', icon: '🛡️', title: 'Spam Checker', desc: '100-point cold email audit' },
+                    { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
+                    { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
+                    { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
+                  ].map((tool) => (
+                    <a
+                      key={tool.href}
+                      href={tool.href}
+                      className="flex items-start gap-3 px-4 py-3 hover:bg-[rgba(177,19,15,0.08)] border-b border-[var(--border-color)] last:border-0 transition-colors duration-150"
+                    >
+                      <span className="text-xl flex-shrink-0 mt-0.5">{tool.icon}</span>
+                      <div>
+                        <div className="text-sm font-semibold text-[var(--text-primary)]">{tool.title}</div>
+                        <div className="text-xs text-[var(--text-secondary)] mt-0.5">{tool.desc}</div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {/* Services Dropdown */}
             <div
               className="relative"
@@ -230,6 +299,50 @@ export default function Navigation() {
                 </button>
 
                 <nav className="mt-16 space-y-8">
+                  {/* Free Tools Section */}
+                  <div className="border-b border-[var(--border-color)] pb-6">
+                    <button
+                      onClick={() => setMobileFreeToolsOpen(!mobileFreeToolsOpen)}
+                      className="flex items-center justify-between w-full text-left text-lg font-bold text-[var(--text-primary)] mb-4 hover:text-[#B1130F] transition-colors"
+                    >
+                      <span className="flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                        </svg>
+                        Free Tools
+                      </span>
+                      <svg
+                        className={`w-5 h-5 transition-transform duration-300 ${mobileFreeToolsOpen ? 'rotate-180' : ''}`}
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    {mobileFreeToolsOpen && (
+                      <div className="space-y-2">
+                        {[
+                          { href: '/free-tools/cold-email-spam-checker', icon: '🛡️', title: 'Spam Checker', desc: '100-point cold email audit' },
+                          { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
+                          { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
+                          { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
+                        ].map((tool) => (
+                          <a
+                            key={tool.href}
+                            href={tool.href}
+                            onClick={() => setMobileMenuOpen(false)}
+                            className="flex items-start gap-3 p-4 rounded-xl hover:bg-[rgba(177,19,15,0.1)] border border-transparent hover:border-[#B1130F]/30 transition-all duration-200 active:scale-[0.98]"
+                          >
+                            <span className="text-2xl flex-shrink-0 mt-0.5">{tool.icon}</span>
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-[var(--text-primary)] text-base mb-1">{tool.title}</h4>
+                              <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{tool.desc}</p>
+                            </div>
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
                   {/* Services Section */}
                   <div className="border-b border-[var(--border-color)] pb-6">
                     <button
