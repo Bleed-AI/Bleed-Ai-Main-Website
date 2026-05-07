@@ -40,7 +40,7 @@
     .taha-role { font-size:11px;color:var(--text-muted);margin-bottom:6px; }
     .taha-quote { font-size:13px;color:var(--text-muted);line-height:1.65;font-style:italic; }
     .taha-quote strong { color:var(--text);font-style:normal; }
-    .tool-frame { width:100%;border:none;display:block;min-height:860px; }
+    .tool-frame { width:100%;border:none;display:block;min-height:200px; }
     .bottom-cta { text-align:center;padding:24px 24px;border-top:1px solid var(--border); }
     .bottom-cta p { font-size:13px;color:var(--text-muted);margin-bottom:12px; }
     .bottom-btn { display:inline-block;background:var(--red);color:#fff;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:600;transition:opacity 0.2s;box-shadow:0 0 20px rgba(177,19,15,0.3); }
@@ -91,5 +91,13 @@
 
 <footer><p>Built by <a href="https://bleedai.com">Bleed AI</a> · 2026</p></footer>
 
+<script>
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'iframeResize') {
+      var f = document.querySelector('.tool-frame');
+      if (f) f.style.height = e.data.height + 'px';
+    }
+  });
+</script>
 </body>
 </html>
