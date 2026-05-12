@@ -54,7 +54,7 @@ const packages: Package[] = [
   {
     id: 'standard-pilot',
     title: 'Discounted Pilot',
-    price: '$565',
+    price: '$683',
     description: 'Start in 1 week. Reach 2K Leads with 2-3 campaign launches and offer angles.',
     features: [
       'Start in 1 week',
