@@ -74,12 +74,7 @@ export default function Hero() {
           }`}
         >
           {/* Upwork */}
-          <a
-            href="https://www.upwork.com/agencies/bleedaisolutions/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-3 hover:opacity-80 hover:scale-105 transition-all duration-300"
-          >
+          <div className="flex items-center gap-3">
             <img src="/images/upwork-icon.svg" alt="Upwork" className="h-10 w-10" />
             <div className="text-left">
               <div className="text-[var(--text-primary)] font-medium">
@@ -87,7 +82,7 @@ export default function Hero() {
               </div>
               <div className="text-sm text-[var(--text-muted)]">85+ Reviews</div>
             </div>
-          </a>
+          </div>
 
           {/* Clutch */}
           <a

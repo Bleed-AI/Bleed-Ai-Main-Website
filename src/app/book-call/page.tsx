@@ -209,7 +209,7 @@ export default function BookCall() {
           {/* Social Proof */}
           <div className="mt-16 pt-12 border-t border-[var(--border-color)]">
             <div className="flex justify-center items-center gap-10 flex-wrap">
-              <a href="https://www.upwork.com/agencies/bleedaisolutions/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 transition-all duration-300 hover:opacity-80 hover:scale-105">
+              <div className="flex items-center gap-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/images/upwork-icon.svg" alt="Upwork" className="w-10 h-10 object-contain" />
                 <div className="text-left">
@@ -221,7 +221,7 @@ export default function BookCall() {
                   </div>
                   <div className="text-sm text-[var(--text-muted)]">85+ Reviews</div>
                 </div>
-              </a>
+              </div>
 
               <a href="https://clutch.co/profile/bleed-ai" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 transition-all duration-300 hover:opacity-80 hover:scale-105">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
