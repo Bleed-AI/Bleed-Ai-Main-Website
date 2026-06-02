@@ -1,27 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
-import NavigationDropdown from "./NavigationDropdown";
-import { services } from "@/data/services";
 
 export default function Navigation() {
-  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [servicesOpen, setServicesOpen] = useState(false);
   const [freeToolsOpen, setFreeToolsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileServicesOpen, setMobileServicesOpen] = useState(true); // Default to open
   const [mobileFreeToolsOpen, setMobileFreeToolsOpen] = useState(false);
-  const [closeTimeout, setCloseTimeout] = useState<NodeJS.Timeout | null>(null);
   const [freeToolsCloseTimeout, setFreeToolsCloseTimeout] = useState<NodeJS.Timeout | null>(null);
-
-  // Check if we're on a services page
-  const isServicesPage = pathname?.startsWith('/services');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,7 +35,6 @@ export default function Navigation() {
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
-      setMobileServicesOpen(true); // Always show services when menu opens
     } else {
       document.body.style.overflow = '';
     }
@@ -70,31 +58,6 @@ export default function Navigation() {
     }, 150);
     setFreeToolsCloseTimeout(timeout);
   };
-
-  // Handle dropdown open/close with delay
-  const handleServicesEnter = () => {
-    if (closeTimeout) {
-      clearTimeout(closeTimeout);
-      setCloseTimeout(null);
-    }
-    setServicesOpen(true);
-  };
-
-  const handleServicesLeave = () => {
-    const timeout = setTimeout(() => {
-      setServicesOpen(false);
-    }, 150); // 150ms delay before closing
-    setCloseTimeout(timeout);
-  };
-
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (closeTimeout) {
-        clearTimeout(closeTimeout);
-      }
-    };
-  }, [closeTimeout]);
 
   return (
     <>
@@ -174,34 +137,12 @@ export default function Navigation() {
               )}
             </div>
 
-            {/* Services Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={handleServicesEnter}
-              onMouseLeave={handleServicesLeave}
+            <a
+              href="https://calculator.bleedai.com/packages"
+              className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
             >
-              <button
-                className={`flex items-center gap-1 text-sm font-medium transition-colors duration-300 ${
-                  isServicesPage
-                    ? 'text-[#B1130F] font-semibold'
-                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
-                }`}
-                aria-expanded={servicesOpen}
-                aria-haspopup="true"
-              >
-                Services
-                <svg
-                  className={`w-4 h-4 transition-transform duration-200 ${servicesOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              <NavigationDropdown isOpen={servicesOpen} onEnter={handleServicesEnter} onLeave={handleServicesLeave} currentPath={pathname} />
-            </div>
+              Packages
+            </a>
 
             <a
               href="#testimonials"
@@ -211,21 +152,21 @@ export default function Navigation() {
             </a>
 
             <a
-              href="/book-call/"
+              href="https://calculator.bleedai.com/"
               className="flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
             >
               <span className="text-base leading-none">🚀</span>
-              <span>Launch My Free Campaign</span>
+              <span>Cost Calculator</span>
             </a>
 
             <a
-              href="https://calculator.bleedai.com/"
+              href="https://calculator.bleedai.com/trials"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-5 py-2.5 bg-[#B1130F] text-white rounded-full text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow"
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span>Cost Calculator</span>
+                <span>Start My Trial Campaign</span>
                 <svg
                   className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
@@ -242,12 +183,12 @@ export default function Navigation() {
           {/* Mobile Actions */}
           <div className="flex lg:hidden items-center gap-2 sm:gap-3">
             <a
-              href="https://calculator.bleedai.com/"
+              href="https://calculator.bleedai.com/trials"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-3 sm:px-4 py-1.5 sm:py-2 bg-[#B1130F] text-white rounded-full text-xs sm:text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow whitespace-nowrap"
             >
-              <span className="relative z-10">Cost Calculator</span>
+              <span className="relative z-10">Start My Trial Campaign</span>
             </a>
 
             {/* Hamburger Menu */}
@@ -343,53 +284,18 @@ export default function Navigation() {
                     )}
                   </div>
 
-                  {/* Services Section */}
+                  {/* Packages Section */}
                   <div className="border-b border-[var(--border-color)] pb-6">
-                    <button
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                      className="flex items-center justify-between w-full text-left text-lg font-bold text-[var(--text-primary)] mb-4 hover:text-[#B1130F] transition-colors"
+                    <a
+                      href="https://calculator.bleedai.com/packages"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center gap-2 w-full text-left text-lg font-bold text-[var(--text-primary)] hover:text-[#B1130F] transition-colors"
                     >
-                      <span className="flex items-center gap-2">
-                        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                        </svg>
-                        Services
-                      </span>
-                      <svg
-                        className={`w-5 h-5 transition-transform duration-300 ${mobileServicesOpen ? 'rotate-180' : ''}`}
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                       </svg>
-                    </button>
-
-                    {mobileServicesOpen && (
-                      <div className="space-y-2">
-                        {services.map((service) => (
-                          <Link
-                            key={service.id}
-                            href={service.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="block"
-                          >
-                            <div className="flex items-start gap-3 p-4 rounded-xl hover:bg-[rgba(177,19,15,0.1)] border border-transparent hover:border-[#B1130F]/30 transition-all duration-200 active:scale-[0.98]">
-                              <span className="text-2xl flex-shrink-0 mt-0.5">{service.icon}</span>
-                              <div className="flex-1 min-w-0">
-                                <h4 className="font-semibold text-[var(--text-primary)] text-base mb-1">
-                                  {service.title}
-                                </h4>
-                                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                                  {service.description}
-                                </p>
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+                      Packages
+                    </a>
                   </div>
 
                   {/* Results Link */}

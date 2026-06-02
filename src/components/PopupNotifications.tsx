@@ -171,20 +171,20 @@ export default function PopupNotifications() {
 
               {/* Heading */}
               <h3 className="text-xl font-semibold text-[var(--text-primary)] leading-tight">
-                Apply For Your No-Cost Pilot Campaign
+                Apply For Your Trial Pilot Campaign
               </h3>
 
               {/* Subtext */}
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                Free Trial Offer: We'll Launch A No-Obligation 'Pilot Campaign' To Prove Outbound For Your Business Before Moving Forward
+                Trial Offer: We'll Launch A No-Obligation 'Pilot Campaign' To Prove Outbound For Your Business Before Moving Forward
               </p>
 
               {/* CTA Button */}
               <a
-                href="/book-call/"
+                href="https://calculator.bleedai.com/trials"
                 className="group relative inline-flex items-center justify-center px-8 py-4 bg-[#B1130F] text-white font-semibold text-sm rounded-full overflow-hidden transition-all duration-500 btn-glow"
               >
-                <span className="relative z-10">Launch my Free Campaign</span>
+                <span className="relative z-10">Start My Trial Campaign</span>
               </a>
             </div>
           </div>

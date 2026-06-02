@@ -26,17 +26,13 @@ export default function CtaSection() {
           Join B2B companies generating 100+ qualified opportunities every month.
         </p>
         <a
-          href="/book-call/"
+          href="https://calculator.bleedai.com/trials"
           className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B1130F] text-white font-semibold text-lg rounded-full overflow-hidden transition-all duration-500 btn-glow"
         >
-          <span className="relative z-10">Launch my Free Campaign</span>
+          <span className="relative z-10">Start My Trial Campaign</span>
           <ArrowRightIcon className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1" />
         </a>
         <div className="flex justify-center items-center gap-6 text-sm text-[var(--text-muted)] mt-6">
-          <span className="flex items-center gap-2">
-            <CheckIcon className="w-4 h-4 text-green-500" />
-            Zero Cost to Start
-          </span>
           <span className="flex items-center gap-2">
             <CheckIcon className="w-4 h-4 text-green-500" />
             Launch in 48 Hours

@@ -83,10 +83,10 @@ export default function FinalCta() {
           }`}
         >
           <a
-            href="/book-call/"
+            href="https://calculator.bleedai.com/trials"
             className="group relative inline-flex items-center gap-3 px-10 py-5 bg-[#B1130F] text-white font-semibold text-lg rounded-full overflow-hidden transition-all duration-500 btn-glow"
           >
-            <span className="relative z-10">Launch my Free Campaign</span>
+            <span className="relative z-10">Start My Trial Campaign</span>
             <ArrowRightIcon className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
           </a>
         </div>
@@ -97,13 +97,6 @@ export default function FinalCta() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <div className="flex items-center gap-2">
-            <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-            </svg>
-            <span>Zero Cost to Start</span>
-          </div>
-          <div className="hidden sm:block w-px h-4 bg-[var(--border-color)]" />
           <div className="flex items-center gap-2">
             <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />

@@ -23,21 +23,15 @@ export default function ValidateCta() {
 
         {/* CTA Button */}
         <a
-          href="/book-call/"
+          href="https://calculator.bleedai.com/trials"
           className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B1130F] text-white font-semibold text-lg rounded-full overflow-hidden transition-all duration-500 btn-glow mb-6"
         >
-          <span className="relative z-10">Launch My Free Campaign</span>
+          <span className="relative z-10">Start My Trial Campaign</span>
           <ArrowRightIcon className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
         </a>
 
         {/* Trust Indicators */}
         <div className="flex items-center justify-center gap-6 text-sm text-[var(--text-muted)]">
-          <span className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-[var(--text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
-            Zero Cost
-          </span>
           <span className="flex items-center gap-2">
             <svg className="w-4 h-4 text-[var(--text-muted)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
