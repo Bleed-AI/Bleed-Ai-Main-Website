@@ -1,8 +1,8 @@
 ---
 title: "Best Cold Email Agencies in 2026: A Honest Comparison Guide"
 excerpt: "An honest look at the top cold email agencies in 2026 — what each one does well, what to watch out for, and how BleedAI is structured differently."
-metaTitle: "Best Cold Email Agencies 2026 — Comparison & Buyer's Guide"
-metaDescription: "Comparing the top cold email agencies in 2026: Belkins, Cleverly, Martal Group, Cience, SalesRoads, and BleedAI. Strengths, pricing models, and how to choose."
+metaTitle: "Best Cold Email Agencies 2026: Top 7 Compared"
+metaDescription: "Compare the top cold email agencies of 2026 — Belkins, Cleverly, Martal, Cience, SalesRoads, and BleedAI. Strengths, pricing, and how to choose."
 keywords:
   - best cold email agencies 2026
   - cold email agency comparison

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { generateMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata({
-  title: "Book a Free Strategy Call | Launch Your Outbound Campaign",
+  title: "Book a Strategy Call for B2B Outbound Campaigns",
   description: "Free strategy session for your outbound goals. Get expert analysis, ICP recommendations, and a clear roadmap to 100+ qualified opportunities.",
   path: "/book-call",
   keywords: [

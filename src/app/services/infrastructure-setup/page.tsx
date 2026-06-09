@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { generateMetadata, generateServiceSchema } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata({
-  title: "Infrastructure Setup | Complete Outbound Deployment in 48 Hours",
+  title: "Outbound Infrastructure Setup in 48 Hours",
   description: "Done-for-you outbound infrastructure. Domains, emails, deliverability, CRM integrations—ready in 48 hours. Starter to Enterprise packages.",
   path: "/services/infrastructure-setup",
   keywords: [

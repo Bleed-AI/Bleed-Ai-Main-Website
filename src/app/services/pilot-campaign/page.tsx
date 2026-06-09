@@ -3,7 +3,7 @@ import { generateMetadata, generateServiceSchema } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata({
   title: "Free Pilot Campaign | Test Your Market Fit",
-  description: "Free or $800 pilot campaign to validate your offer. Reach 1k-5k prospects, test messaging, get real market data before scaling. Start in 1 week.",
+  description: "Pilot campaign to validate your offer. Reach 1k–5k prospects, test messaging, and get real market data before scaling. Start in 1 week.",
   path: "/services/pilot-campaign",
   keywords: [
     "pilot campaign",
