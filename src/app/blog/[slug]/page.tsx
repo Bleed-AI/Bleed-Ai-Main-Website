@@ -265,7 +265,7 @@ export default async function BlogPostPage({
         <RelatedPosts posts={relatedPosts} />
 
         {/* Email Subscribe — before footer */}
-        <EmailSubscribe />
+        <EmailSubscribe blogTitle={post.title} />
 
         <Footer />
         <ScrollToTopButton />

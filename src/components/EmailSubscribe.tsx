@@ -2,9 +2,18 @@
 
 import { useState } from 'react';
 
+// Paste your Google Apps Script Web App URL here once deployed.
+// Looks like: https://script.google.com/macros/s/AKfycb.../exec
+const SUBSCRIBE_WEBHOOK_URL =
+  'https://script.google.com/macros/s/AKfycby_WJm2RihnWgt8dHP3YQrO3nBvlFoEbfaq2eyzbfZBFUgkU5VGiOvvDMARr-wIkYba/exec';
+
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
-export default function EmailSubscribe() {
+interface Props {
+  blogTitle?: string;
+}
+
+export default function EmailSubscribe({ blogTitle }: Props) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<Status>('idle');
 
@@ -13,14 +22,27 @@ export default function EmailSubscribe() {
     if (!email || status === 'submitting') return;
     setStatus('submitting');
 
-    // TODO: Replace this block with your real newsletter provider.
-    // Examples:
-    //   - ConvertKit:  await fetch('https://app.convertkit.com/forms/<FORM_ID>/subscriptions', { method: 'POST', body: new FormData(e.target) })
-    //   - Mailchimp:   POST to '<your-mailchimp-action-url>'
-    //   - Formspree:   await fetch('https://formspree.io/f/<FORM_ID>', { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(e.target) })
-    await new Promise((r) => setTimeout(r, 600));
-    setStatus('success');
-    setEmail('');
+    try {
+      if (SUBSCRIBE_WEBHOOK_URL) {
+        await fetch(SUBSCRIBE_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({
+            email,
+            blogTitle: blogTitle || '',
+            sourceUrl: typeof window !== 'undefined' ? window.location.href : '',
+          }),
+        });
+      } else {
+        // No webhook configured yet — silently no-op so the UI still feels responsive.
+        await new Promise((r) => setTimeout(r, 400));
+      }
+      setStatus('success');
+      setEmail('');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
@@ -90,6 +112,12 @@ export default function EmailSubscribe() {
                   )}
                 </button>
               </form>
+            )}
+
+            {status === 'error' && (
+              <p className="text-sm text-red-500 mt-4">
+                Something went wrong. Try again in a moment.
+              </p>
             )}
 
             <p className="text-xs text-[var(--text-muted)] mt-4">
