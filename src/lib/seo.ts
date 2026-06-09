@@ -6,6 +6,7 @@ interface SEOProps {
   path: string;
   keywords?: string[];
   ogImage?: string;
+  noindex?: boolean;
 }
 
 export function generateMetadata({
@@ -13,7 +14,8 @@ export function generateMetadata({
   description,
   path,
   keywords = [],
-  ogImage = '/images/og-image.jpg'
+  ogImage = '/images/og-image.jpg',
+  noindex = false
 }: SEOProps): Metadata {
   const siteName = 'BleedAI';
   const baseUrl = 'https://bleedai.com'; // Update with your actual domain
@@ -30,11 +32,11 @@ export function generateMetadata({
     creator: 'BleedAI',
     publisher: 'BleedAI',
     robots: {
-      index: true,
-      follow: true,
+      index: !noindex,
+      follow: !noindex,
       googleBot: {
-        index: true,
-        follow: true,
+        index: !noindex,
+        follow: !noindex,
         'max-video-preview': -1,
         'max-image-preview': 'large',
         'max-snippet': -1,

@@ -13,6 +13,7 @@ export const metadata: Metadata = generateMetadata({
     "campaign audit",
     "expert analysis"
   ],
+  noindex: true,
 });
 
 import Navigation from '@/components/Navigation';

@@ -14,6 +14,7 @@ export const metadata: Metadata = generateMetadata({
     "AI workflows",
     "automated outreach"
   ],
+  noindex: true,
 });
 
 import Navigation from '@/components/Navigation';

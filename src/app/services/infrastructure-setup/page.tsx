@@ -14,6 +14,7 @@ export const metadata: Metadata = generateMetadata({
     "email warming",
     "infrastructure deployment"
   ],
+  noindex: true,
 });
 
 import Navigation from '@/components/Navigation';

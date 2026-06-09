@@ -7,6 +7,7 @@ const footerLinks = {
     { label: "Results", href: "#testimonials" },
     { label: "How It Works", href: "#process" },
     { label: "Case Studies", href: "#testimonials" },
+    { label: "Blog", href: "/blog/" },
     { label: "Start Trial Campaign", href: "https://calculator.bleedai.com/trials" },
   ],
   platforms: [

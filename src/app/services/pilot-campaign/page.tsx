@@ -14,6 +14,7 @@ export const metadata: Metadata = generateMetadata({
     "campaign launch",
     "market fit testing"
   ],
+  noindex: true,
 });
 
 import Navigation from '@/components/Navigation';
