@@ -106,9 +106,9 @@ export async function getPost(slug: string): Promise<Post> {
   const file = await unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkRehype)
+    .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeSlug)
-    .use(rehypeStringify)
+    .use(rehypeStringify, { allowDangerousHtml: true })
     .process(content);
   return {
     ...data,
