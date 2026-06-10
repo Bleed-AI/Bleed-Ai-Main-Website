@@ -51,12 +51,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  const postEntries: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}/`,
-    lastModified: new Date(post.date),
-    changeFrequency: 'monthly',
-    priority: 0.7,
-  }));
+  const postEntries: MetadataRoute.Sitemap = getAllPosts()
+    .filter((post) => !post.noindex)
+    .map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}/`,
+      lastModified: new Date(post.date),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    }));
 
   return [...staticEntries, ...postEntries];
 }

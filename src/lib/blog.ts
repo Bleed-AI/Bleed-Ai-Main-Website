@@ -25,6 +25,7 @@ export interface PostFrontmatter {
   date: string;
   author: string;
   faqs?: FaqItem[];
+  noindex?: boolean;
 }
 
 export interface PostSummary extends PostFrontmatter {

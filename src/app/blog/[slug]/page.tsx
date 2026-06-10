@@ -31,6 +31,7 @@ export async function generateMetadata({
       path: `/blog/${slug}`,
       keywords: post.keywords,
       ogImage: post.banner,
+      noindex: post.noindex,
     });
   } catch {
     return buildMeta({

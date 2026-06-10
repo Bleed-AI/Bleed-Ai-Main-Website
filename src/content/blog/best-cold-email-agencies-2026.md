@@ -13,6 +13,7 @@ keywords:
 banner: "/images/blog/best-cold-email-agencies-2026.png"
 date: "2026-06-10"
 author: "Taha Anwar"
+noindex: true
 faqs:
   - question: "What should I look for when choosing a cold email agency?"
     answer: "Four things matter more than the rest: how they source and qualify the prospect list, whether they own and warm their own sending infrastructure (or use yours), how many offer angles they test before scaling, and how transparent they are about reply rate vs. positive reply rate. Agencies that only report 'reply rate' often hide that most replies are negative."
