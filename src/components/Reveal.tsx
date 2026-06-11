@@ -19,12 +19,14 @@ export default function Reveal({
   className = "",
   as: Tag = "div" as ElementType,
   style,
+  ...rest
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
   as?: ElementType;
   style?: CSSProperties;
+  [key: string]: unknown;
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -51,6 +53,7 @@ export default function Reveal({
         shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       } ${className}`}
       style={{ ...style, transitionDelay: `${delay}ms` }}
+      {...rest}
     >
       {children}
     </Comp>
