@@ -1,10 +1,11 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import Ticker from "@/components/Ticker";
-import CampaignSnapshots from "@/components/CampaignSnapshots";
+import StatsStrip from "@/components/StatsStrip";
+import RepliesMarquee from "@/components/RepliesMarquee";
+import ResultsMarquee from "@/components/ResultsMarquee";
 import WhoIsThisFor from "@/components/WhoIsThisFor";
 import Testimonials from "@/components/Testimonials";
-import EmailThreads from "@/components/EmailThreads";
 import WhyAI from "@/components/WhyAI";
 import TahaLinkedinSnippet from "@/components/TahaLinkedinSnippet";
 import Capabilities from "@/components/Capabilities";
@@ -19,11 +20,12 @@ export default function Home() {
       <Navigation />
       <Ticker />
       <Hero />
-      {/* --- sections below are being migrated to the mockup design phase-by-phase --- */}
-      <CampaignSnapshots />
+      <StatsStrip />
+      <RepliesMarquee />
       <WhoIsThisFor />
+      <ResultsMarquee />
+      {/* --- sections below are being migrated to the mockup design phase-by-phase --- */}
       <Testimonials />
-      <EmailThreads />
       <WhyAI />
       <TahaLinkedinSnippet />
       <Capabilities />
