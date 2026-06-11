@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 const testimonials = [
@@ -45,6 +46,7 @@ const testimonials = [
 type PopupState = "idle" | "cta" | "testimonial-1" | "testimonial-2" | "testimonial-3" | "testimonial-4" | "done";
 
 export default function PopupNotifications() {
+  const pathname = usePathname();
   const [popupState, setPopupState] = useState<PopupState>("idle");
   const [isVisible, setIsVisible] = useState(false);
 
@@ -139,6 +141,9 @@ export default function PopupNotifications() {
   const showTestimonial = ["testimonial-1", "testimonial-2", "testimonial-3", "testimonial-4"].includes(popupState);
   const testimonialIndex = parseInt(popupState.split("-")[1] || "0") - 1;
   const currentTestimonial = testimonials[testimonialIndex] || testimonials[0];
+
+  // Homepage uses the mockup-styled SidePopup instead of this global popup.
+  if (pathname === "/") return null;
 
   return (
     <>

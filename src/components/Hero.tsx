@@ -1,126 +1,137 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { ArrowRightIcon } from "./Icons";
-import NeuralNetworkBackground from "@/components/ui/neural-network-background";
+import { useState } from "react";
+
+const TRIAL_URL = "https://calculator.bleedai.com/trials";
+const VIDEO_ID = "S0Oeg0sbB6k";
+const PLAYBOOK_DOC =
+  "https://docs.google.com/document/u/4/d/1h_PuevKWA6JWJ1tsGOaIdS1jcaRMBCNLE-XotSEWpMg/edit";
 
 export default function Hero() {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+  const [playing, setPlaying] = useState(false);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
-      <NeuralNetworkBackground />
+    <section id="hero" className="hero">
+      <div className="hero-grid" />
+      <div className="hero-orb1" />
+      <div className="hero-orb2" />
+      <div className="hero-orb3" />
 
-      {/* Content */}
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 lg:px-8 text-center pt-44 pb-24">
-        {/* Main Headline */}
-        <h1
-          className={`font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1] tracking-tight mb-5 transition-all duration-700 ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <span className="block text-[var(--text-primary)]">We Install Revenue Systems</span>
-          <span className="block gradient-text mt-2">that Scale B2B Firms in Weeks</span>
-        </h1>
-
-        {/* Description */}
-        <p
-          className={`text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8 leading-relaxed transition-all duration-700 delay-100 ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          Not a lead-gen agency, A full-service growth partner with a Cold-to-Sold system that turns strangers into customers.
-        </p>
-
-        {/* CTA Buttons */}
-        <div
-          className={`flex flex-col items-center justify-center gap-3 mb-10 transition-all duration-700 delay-200 ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          <a
-            href="https://calculator.bleedai.com/trials"
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B1130F] text-white font-semibold text-lg rounded-full overflow-hidden transition-all duration-500 btn-glow"
-          >
-            <span className="relative z-10">Start My Trial Campaign</span>
-            <ArrowRightIcon className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
-          </a>
-
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-[rgba(177,19,15,0.1)] border border-[rgba(177,19,15,0.2)]">
-              <svg className="w-4 h-4 text-[#22c55e]" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-              </svg>
-              <span className="text-sm font-medium text-[var(--text-primary)]">Launch in 48 Hours</span>
-            </div>
-          </div>
+      <div className="hero-inner">
+        <div className="hero-badge">
+          <span className="hero-badge-dot" />
+          Cold-to-Sold System&nbsp;·&nbsp;Live in 48 Hours
         </div>
 
-        {/* Social Proof */}
-        <div
-          className={`flex flex-wrap items-center justify-center gap-6 md:gap-10 transition-all duration-700 delay-300 ${
-            isLoaded ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          {/* Upwork */}
-          <div className="flex items-center gap-3">
-            <img src="/images/upwork-icon.svg" alt="Upwork" className="h-10 w-10" />
-            <div className="text-left">
-              <div className="text-[var(--text-primary)] font-medium">
-                Upwork / 5.0 <span className="text-yellow-500">★</span>
-              </div>
-              <div className="text-sm text-[var(--text-muted)]">85+ Reviews</div>
-            </div>
-          </div>
+        <h1>
+          We Install Revenue Systems
+          <br />
+          <em>that Scale B2B Firms in Weeks</em>
+        </h1>
 
-          {/* Clutch */}
+        <p className="hero-sub">
+          Not a lead-gen agency. A full-service growth partner with a Cold-to-Sold
+          system that turns strangers into customers.
+        </p>
+
+        <div className="hero-scarcity">
+          <span className="scarcity-dot" />
+          Only 3 more client spots open this month
+        </div>
+
+        <div className="hero-ctas">
+          <a href={TRIAL_URL} target="_blank" rel="noopener noreferrer" className="btn-red">
+            Start My Trial Campaign →
+          </a>
+        </div>
+        <div className="cta-trust">
+          <span>Launch in 48 hours</span>
+          <span>No commitment required</span>
+        </div>
+
+        <div className="hero-trust">
+          <div className="trust-pill">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/upwork-icon.svg" alt="Upwork" className="trust-logo" />
+            <span className="trust-plat-name">
+              Upwork / 5.0 <span className="trust-stars">★</span>
+            </span>
+          </div>
           <a
             href="https://clutch.co/profile/bleed-ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 hover:opacity-80 hover:scale-105 transition-all duration-300"
+            className="trust-pill"
           >
-            <img src="/images/clutch-icon.svg" alt="Clutch" className="h-10 w-10" />
-            <div className="text-left">
-              <div className="text-[var(--text-primary)] font-medium">
-                Clutch / 5.0 <span className="text-yellow-500">★</span>
-              </div>
-              <div className="text-sm text-[var(--text-muted)]">3+ Reviews</div>
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/clutch-icon.svg" alt="Clutch" className="trust-logo" />
+            <span className="trust-plat-name">
+              Clutch / 5.0 <span className="trust-stars">★</span>
+            </span>
           </a>
-
-          {/* Techreviewer */}
           <a
             href="https://techreviewer.co/companies/bleed-ai"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-3 hover:opacity-80 hover:scale-105 transition-all duration-300"
+            className="trust-pill"
           >
-            <img src="/images/techr-icon.svg" alt="Techreviewer" className="h-10 w-10" />
-            <div className="text-left">
-              <div className="text-[var(--text-primary)] font-medium">
-                Techreviewer / 5.0 <span className="text-yellow-500">★</span>
-              </div>
-              <div className="text-sm text-[var(--text-muted)]">7+ Reviews</div>
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/images/techr-icon.svg" alt="TechReviewer" className="trust-logo" />
+            <span className="trust-plat-name">
+              TechReviewer / 5.0 <span className="trust-stars">★</span>
+            </span>
+          </a>
+        </div>
+
+        <div className="press-line">
+          <span className="press-line-label">Featured in</span>
+          <a
+            href="https://usawire.com/cold-to-sold-how-bleed-ai-creates-predictable-b2b-pipeline-in-2025/"
+            className="press-badge"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l6 6v8a2 2 0 01-2 2z" />
+              <polyline points="17 21 17 13 7 13 7 21" />
+              <polyline points="7 3 7 8 15 8" />
+            </svg>
+            <strong>USAWire</strong>
           </a>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div
-        className={`absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 transition-all duration-700 delay-600 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="w-5 h-8 rounded-full border-2 border-[var(--border-strong)] flex items-start justify-center p-1">
-          <div className="w-1 h-2 bg-[#B1130F] rounded-full animate-bounce" />
+      <div className="video-wrap">
+        <div className="video-frame" onClick={() => setPlaying(true)}>
+          {playing ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0`}
+              title="Bleed AI playbook video"
+              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0 }}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                className="video-thumb"
+                src={`https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
+                alt="Watch the Bleed AI playbook video"
+              />
+              <div className="video-overlay">
+                <div className="video-play">
+                  <svg width="22" height="22" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </>
+          )}
         </div>
+        <a href={PLAYBOOK_DOC} target="_blank" rel="noopener noreferrer" className="video-textlink">
+          Check out the text version ↗
+        </a>
       </div>
     </section>
   );

@@ -1,176 +1,143 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import { useState } from "react";
+import Reveal from "@/components/Reveal";
 
-const testimonials = [
+const MARTIJN_PHOTO = "https://groupeffort.nl/wp-content/uploads/2026/01/MartijnSquigle.jpeg";
+
+const videos = [
   {
-    initials: "MV",
+    videoId: "ze3G9OwQcUg",
+    photo: MARTIJN_PHOTO,
     name: "Martijn Versteeg",
     role: "Group Effort",
-    quote: "Bleed AI generated over 100 opportunities in December, even during what's typically a very slow month for cold outreach.",
-    videoId: "ze3G9OwQcUg",
-    hasVideo: true,
-    image: "https://groupeffort.nl/wp-content/uploads/2026/01/MartijnSquigle.jpeg",
+    quote: "Over 100 opportunities in December alone. The targeting was precise - these were real companies that matched our ICP exactly.",
+    metric: "100+ opps · December",
   },
   {
-    initials: "AC",
+    videoId: "8sIZ_i7SsRk",
+    photo: "/alberto-castiel-client.jfif",
     name: "Alberto Castiel",
     role: "Minute Call",
-    quote: "Great consultation on cold outreach deliverability. Clear guidance on setting up the right infrastructure and improving email deliverability.",
-    videoId: "8sIZ_i7SsRk",
-    hasVideo: true,
-    image: "/alberto-castiel-client.jfif",
+    quote: "The email deliverability setup alone was worth it - we were hitting spam before Bleed AI rebuilt our infrastructure. Night and day difference.",
+    metric: "98%+ inbox placement",
   },
   {
-    initials: "AJ",
-    name: "Ahmad Jabbir",
-    role: "TEDx Speaker",
-    quote: "Clear step-by-step guidance, practical tips, and real hands-on help. My spam rate dropped and I finally started seeing results.",
     videoId: "zYmFS6kOFsY",
-    hasVideo: true,
-    image: "/ahmedprofile.jpg",
+    photo: "/ahmedprofile.jpg",
+    name: "Ahmad Jabbir",
+    role: "TEDx Speaker & Coach",
+    quote: "From a 40% spam rate to near-zero. The technical understanding Taha brings to cold email is genuinely unlike any other agency I've used.",
+    metric: "Spam rate → near zero",
   },
 ];
 
-function TestimonialCard({ testimonial, index }: { testimonial: typeof testimonials[0]; index: number }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+type Wall = {
+  pre: string;
+  hl: string;
+  post: string;
+  name: string;
+  co: string;
+  av: { type: "logo" | "photo" | "initials"; val: string };
+};
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
+const wall: Wall[] = [
+  { pre: "Already seeing ", hl: "great value", post: " so thanks once more. That is fantastic, a great start.", name: "John Mumo", co: "JustGreatLawyers", av: { type: "logo", val: "/images/co-justgreatlawyers.png" } },
+  { pre: "Great job, Taha! We can ", hl: "scale easily", post: " with this campaign. You're always great to work with.", name: "Jayanthi Raja", co: "Rebus AI", av: { type: "logo", val: "/images/co-rebusai.png" } },
+  { pre: "Great job on the emails boss. I have a ", hl: "letter of intent coming from a big player!", post: "", name: "John Speights", co: "JAMS Media", av: { type: "initials", val: "JS" } },
+  { pre: "Love to hear it, thank you again. ", hl: "First leads starting to come in", post: " after the rebuild.", name: "Hunter Owens", co: "Umbrella", av: { type: "photo", val: "/hunter-owens.jpg" } },
+  { pre: "Whatever you think is best. ", hl: "I will pay the next invoice", post: " to start on the new campaign.", name: "Jay", co: "More Conversions", av: { type: "logo", val: "/images/co-moreconversions.png" } },
+  { pre: "", hl: "1st confirmed ticket sale through you!", post: " The conference sold out, 150 attendees from 10+ countries.", name: "Martijn Versteeg", co: "Group Effort", av: { type: "photo", val: MARTIJN_PHOTO } },
+  { pre: "", hl: "I just paid the invoice", post: ", Taha. Excited to get started with you.", name: "Peter", co: "SupporterHub", av: { type: "initials", val: "P" } },
+];
 
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
+function TestiCard({ v, delay }: { v: (typeof videos)[0]; delay: number }) {
+  const [playing, setPlaying] = useState(false);
   return (
-    <div
-      ref={ref}
-      className={`group relative transition-all duration-700 ${
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
-      style={{ transitionDelay: `${index * 100}ms` }}
-    >
-      <div className="h-full p-6 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-primary)] hover:border-[#B1130F]/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(177,19,15,0.1)]">
-        {/* Video Section */}
-        {testimonial.hasVideo && (
-          <div className="relative mb-6 rounded-xl overflow-hidden aspect-video bg-[var(--bg-secondary)]">
-            {!isPlaying ? (
-              <>
-                <Image
-                  src={`https://img.youtube.com/vi/${testimonial.videoId}/maxresdefault.jpg`}
-                  alt={`${testimonial.name} testimonial`}
-                  fill
-                  className="object-cover"
-                />
-                <button
-                  onClick={() => setIsPlaying(true)}
-                  className="absolute inset-0 flex items-center justify-center bg-black/40 hover:bg-black/50 transition-colors"
-                >
-                  <div className="w-14 h-14 rounded-full bg-[#B1130F] flex items-center justify-center shadow-lg hover:scale-110 transition-transform">
-                    <svg className="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </div>
-                </button>
-              </>
-            ) : (
-              <iframe
-                src={`https://www.youtube.com/embed/${testimonial.videoId}?autoplay=1`}
-                title={`${testimonial.name} testimonial`}
-                className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-            )}
-          </div>
+    <Reveal className="testi-card" delay={delay}>
+      <div className="testi-thumb" onClick={() => setPlaying(true)}>
+        {playing ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${v.videoId}?autoplay=1&rel=0`}
+            title={`${v.name} testimonial`}
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: 0, zIndex: 2 }}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="testi-photo" src={v.photo} alt={v.name} loading="lazy" />
+            <div className="testi-thumb-shade" />
+            <div className="testi-play" style={{ position: "absolute" }}>
+              <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
+            </div>
+            <div className="testi-thumb-name">{v.name}</div>
+          </>
         )}
-
-        {/* Stars */}
-        <div className="flex items-center gap-1 mb-4">
-          {[...Array(5)].map((_, i) => (
-            <svg key={i} className="w-5 h-5 text-[#ff3d38]" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-            </svg>
-          ))}
-        </div>
-
-        {/* Quote */}
-        <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
-          &ldquo;{testimonial.quote}&rdquo;
-        </p>
-
-        {/* Author */}
-        <div className="flex items-center gap-4 pt-6 border-t border-[var(--border-color)]">
-          {testimonial.image ? (
-            <div className="relative w-12 h-12 rounded-full overflow-hidden ring-2 ring-[#B1130F]/20">
-              <Image
-                src={testimonial.image}
-                alt={testimonial.name}
-                fill
-                className="object-cover"
-              />
-            </div>
-          ) : (
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#B1130F] to-[#ff3d38] flex items-center justify-center text-white font-semibold">
-              {testimonial.initials}
-            </div>
-          )}
-          <div>
-            <div className="font-semibold text-[var(--text-primary)]">{testimonial.name}</div>
-            <div className="text-sm text-[var(--text-muted)]">{testimonial.role}</div>
-          </div>
-        </div>
       </div>
-    </div>
+      <div className="testi-body">
+        <div className="testi-quote">&ldquo;{v.quote}&rdquo;</div>
+        <div className="testi-name">{v.name}</div>
+        <div className="testi-role">{v.role}</div>
+        <div className="testi-metric">{v.metric}</div>
+      </div>
+    </Reveal>
   );
+}
+
+function Avatar({ av }: { av: Wall["av"] }) {
+  if (av.type === "initials") return <span className="wall-av-initials">{av.val}</span>;
+  const cls = av.type === "photo" ? "wall-av wall-av-photo" : "wall-av";
+  // eslint-disable-next-line @next/next/no-img-element
+  return <img className={cls} src={av.val} alt="" />;
 }
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="relative py-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-[var(--bg-secondary)]" />
-      <div className="absolute inset-0 bg-grid-pattern" />
+    <section id="testimonials">
+      <div className="sec">
+        <div className="sec-inner">
+          <Reveal className="sec-label">What Clients Say</Reveal>
+          <Reveal as="h2" className="sec-h2">
+            100+ Opportunities in December.
+            <br />
+            <em>Hear it directly from them.</em>
+          </Reveal>
+          <Reveal as="p" className="sec-sub" delay={80}>
+            Not stock testimonials. Video proof from real clients who let us show the actual campaign data.
+          </Reveal>
 
-      {/* Glow Orbs */}
-      <div className="absolute top-20 left-0 w-[400px] h-[400px] bg-[#B1130F]/5 rounded-full blur-[150px]" />
-      <div className="absolute bottom-20 right-0 w-[400px] h-[400px] bg-[#B1130F]/5 rounded-full blur-[150px]" />
-
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
-            <span className="text-sm font-medium text-[var(--text-secondary)]">Client Success Stories</span>
+          <div className="testi-grid">
+            {videos.map((v, i) => (
+              <TestiCard key={i} v={v} delay={i * 90} />
+            ))}
           </div>
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[var(--text-primary)] mb-4">
-            What Our Clients <span className="gradient-text">Say</span>
-          </h2>
-          <p className="text-[var(--text-secondary)] text-lg max-w-2xl mx-auto">
-            Don&apos;t just take our word for it. Here&apos;s what our clients have to say about working with us.
-          </p>
-        </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} testimonial={testimonial} index={index} />
-          ))}
+          <Reveal className="wall-label">More from clients</Reveal>
+          <Reveal className="wall-marquee">
+            <div className="wall-track">
+              {[...wall, ...wall].map((w, i) => (
+                <div className="wall-card" key={i} aria-hidden={i >= wall.length}>
+                  <div>
+                    <div className="wall-stars">★★★★★</div>
+                    <div className="wall-quote">
+                      &ldquo;{w.pre}
+                      <span className="hl">{w.hl}</span>
+                      {w.post}&rdquo;
+                    </div>
+                  </div>
+                  <div className="wall-who">
+                    <Avatar av={w.av} />
+                    <div>
+                      <div className="wall-name">{w.name}</div>
+                      <div className="wall-co">{w.co}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>

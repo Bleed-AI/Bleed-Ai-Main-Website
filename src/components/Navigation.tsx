@@ -5,31 +5,16 @@ import Image from "next/image";
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const [freeToolsOpen, setFreeToolsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFreeToolsOpen, setMobileFreeToolsOpen] = useState(false);
   const [freeToolsCloseTimeout, setFreeToolsCloseTimeout] = useState<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      // Show/hide based on scroll direction
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-
-      setScrolled(currentScrollY > 50);
-      setLastScrollY(currentScrollY);
-    };
-
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -62,9 +47,9 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
-          hidden ? "-translate-y-full" : "translate-y-0"
-        } ${mobileMenuOpen ? "z-[9990]" : "z-50"}`}
+        className={`fixed top-0 left-0 right-0 transition-all duration-500 translate-y-0 ${
+          mobileMenuOpen ? "z-[9990]" : "z-50"
+        }`}
       >
         <div
           className={`mx-2 sm:mx-4 lg:mx-8 mt-2 sm:mt-4 rounded-xl sm:rounded-2xl border transition-all duration-500 ${
@@ -145,7 +130,7 @@ export default function Navigation() {
             </a>
 
             <a
-              href="#testimonials"
+              href="#results-section"
               className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
             >
               Results
@@ -300,7 +285,7 @@ export default function Navigation() {
 
                   {/* Results Link */}
                   <a
-                    href="#testimonials"
+                    href="#results-section"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center gap-3 text-lg font-bold text-[var(--text-primary)] hover:text-[#B1130F] transition-colors duration-300 py-2"
                   >
