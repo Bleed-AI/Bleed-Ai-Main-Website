@@ -973,6 +973,47 @@ body {
   .bai .book-widget { width: calc(100vw - 32px); max-width: 320px; }
 }
 
+/* Exit-intent popup */
+@keyframes bai-ptc-scroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+.bai .popup-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.85); z-index: 9999; align-items: center; justify-content: center; display: none; }
+.bai .popup-overlay.open { display: flex; }
+.bai .popup-box { display: grid; grid-template-columns: 1fr 1.15fr; background: var(--card); border: 1px solid var(--border2); border-radius: 16px; overflow: hidden; max-width: 840px; width: 95%; max-height: 92vh; box-shadow: 0 24px 80px rgba(0,0,0,.7); }
+.bai .popup-left { background: linear-gradient(160deg, #12060c, var(--bg2)); padding: 30px 22px; border-right: 1px solid var(--border); position: relative; overflow: hidden; }
+.bai .popup-logo { display: flex; align-items: center; gap: 7px; margin-bottom: 16px; }
+.bai .ptc-wrap { position: absolute; top: 74px; left: 22px; right: 22px; bottom: 26px; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 13%, #000 87%, transparent); }
+.bai .ptc-track { display: flex; flex-direction: column; gap: 14px; animation: bai-ptc-scroll 26s linear infinite; }
+.bai .ptc-wrap:hover .ptc-track { animation-play-state: paused; }
+.bai .ptc-card { background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 10px; padding: 13px 14px; }
+.bai .ptc-stars { color: #f59e0b; font-size: 11px; letter-spacing: 2px; margin-bottom: 7px; }
+.bai .ptc-quote { font-size: 12px; color: rgba(255,255,255,.78); font-style: italic; line-height: 1.55; margin-bottom: 11px; }
+.bai .ptc-quote .hl { color: #3ddc84; font-style: normal; font-weight: 600; }
+.bai .ptc-person { display: flex; align-items: center; gap: 8px; }
+.bai .ptc-person img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; object-position: center top; border: 1.5px solid rgba(177,19,15,.4); flex-shrink: 0; }
+.bai .ptc-name { font-size: 11.5px; font-weight: 700; color: #fff; line-height: 1.2; }
+.bai .ptc-role { font-size: 10px; color: rgba(255,255,255,.5); }
+.bai .popup-right { padding: 34px 26px; position: relative; }
+.bai .popup-close { position: absolute; top: 12px; right: 14px; font-size: 22px; color: var(--muted); cursor: pointer; background: none; border: none; line-height: 1; }
+.bai .popup-right h3 { font-family: 'Inter', system-ui, sans-serif; font-size: 25px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 12px; line-height: 1.2; color: var(--text); }
+.bai .popup-right h3 em { font-style: italic; font-family: 'Instrument Serif', serif; font-weight: 400; background: linear-gradient(100deg, #b1130f, #e8302c 45%, #ff5a3c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 12px rgba(177,19,15,.4)); }
+.bai .popup-right p { font-size: 13px; color: var(--sub); margin-bottom: 20px; line-height: 1.6; }
+.bai .popup-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
+.bai .popup-dealsize { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 18px; }
+.bai .popup-deal { background: var(--bg2); border: 1px solid var(--border2); border-radius: 9px; padding: 12px 8px; font-size: 12.5px; font-weight: 700; color: var(--sub); cursor: pointer; text-align: center; transition: all .15s; }
+.bai .popup-deal:hover, .bai .popup-deal.sel { background: rgba(177,19,15,.12); border-color: rgba(177,19,15,.5); color: var(--text); }
+.bai .popup-email { width: 100%; background: var(--bg2); border: 1px solid var(--border2); border-radius: 9px; padding: 12px 14px; font-size: 13px; color: var(--text); margin-bottom: 16px; font-family: inherit; box-sizing: border-box; }
+.bai .popup-email::placeholder { color: var(--muted); }
+.bai .popup-email:focus { outline: none; border-color: var(--red); }
+.bai .popup-cta { width: 100%; padding: 14px; background: var(--red); color: #fff; font-size: 14px; font-weight: 700; border: none; border-radius: 9px; cursor: pointer; margin-bottom: 8px; transition: background .15s; }
+.bai .popup-cta:hover { background: var(--red2); }
+.bai .popup-fineprint { text-align: center; font-size: 10.5px; color: var(--muted); }
+.bai .popup-decline { text-align: center; font-size: 11.5px; color: var(--muted); cursor: pointer; font-style: italic; margin-top: 12px; }
+.bai .popup-decline:hover { color: var(--sub); }
+@media (max-width: 640px) {
+  .bai .popup-box { grid-template-columns: 1fr; }
+  .bai .popup-left { display: none; }
+  .bai .popup-right { padding: 30px 20px; }
+}
+
 @media (max-width: 760px) {
   .bai { padding-top: 68px; }
   .bai .sec { padding: 56px 22px; }
