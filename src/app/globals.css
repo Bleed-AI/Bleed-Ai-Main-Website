@@ -757,7 +757,7 @@ body {
 .bai .video-textlink:hover { color: var(--text); }
 
 /* Stats strip */
-.bai .stats-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg2); padding: 22px 48px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
+.bai .stats-strip { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(11, 11, 20, 0.55); backdrop-filter: blur(2px); padding: 22px 48px; display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
 .bai .stat-item { text-align: center; padding: 8px 36px; border-right: 1px solid var(--border); }
 .bai .stat-item:last-child { border-right: none; }
 .bai .stat-num { font-family: 'Inter', system-ui, sans-serif; font-size: 30px; font-weight: 900; color: var(--text); letter-spacing: -1.5px; line-height: 1; }
