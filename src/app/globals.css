@@ -53,20 +53,24 @@ html {
   --grain-opacity: 0.02;
 }
 
-/* ===== Mockup design-language tokens (alias mockup names onto live semantic tokens) ===== */
-:root {
+/* ===== Mockup design-language tokens — EXACT mockup dark palette (homepage is dark-only) ===== */
+.bai {
   --red: #b1130f;
   --red2: #d41a16;
   --green: #10b981;
   --yellow: #f59e0b;
-  --sub: var(--text-secondary);
-  --muted: var(--text-muted);
-  --card: var(--surface-elevated);
-  --border: var(--border-color);
-  --border2: var(--border-strong);
-  --text: var(--text-primary);
-  --bg2: var(--bg-secondary);
-  --bg3: var(--bg-tertiary);
+  --text: #eaeef8;
+  --sub: #9099b8;
+  --muted: #505570;
+  --bg: #07070d;
+  --bg2: #0b0b14;
+  --bg3: #101019;
+  --card: #141420;
+  --card2: #1a1a28;
+  --border: #1f1f30;
+  --border2: #2a2a3e;
+  /* override the live surface token within the homepage so ported rules match the mockup */
+  --surface-elevated: #1a1a28;
 }
 
 /* Serif italic + red-gradient accent for headline <em> (mockup signature look) */
@@ -653,7 +657,7 @@ body {
    HOMEPAGE — MOCKUP REDESIGN (all scoped under .bai to avoid collisions)
    Dark-only for now; uses aliased mockup tokens.
    ===================================================================== */
-.bai { background: var(--bg-primary); padding-top: 84px; }
+.bai { background: #07070d; padding-top: 84px; }
 
 /* Keyframes the mockup relies on */
 @keyframes bai-fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
@@ -950,6 +954,7 @@ body {
 .bai .book-widget-body { padding: 20px 20px 16px; }
 .bai .book-widget-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
 .bai .book-widget-avatar-placeholder { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--red); background: linear-gradient(135deg, #8a0e0b, #b1130f); display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; color: #fff; flex-shrink: 0; }
+.bai .book-widget-avatar { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--red); object-fit: cover; object-position: center top; flex-shrink: 0; }
 .bai .book-widget-who { flex: 1; }
 .bai .book-widget-name { font-size: 14px; font-weight: 700; color: #fff; line-height: 1.2; }
 .bai .book-widget-title { font-size: 11.5px; color: rgba(255,255,255,.5); line-height: 1.3; }
@@ -1008,6 +1013,29 @@ body {
 .bai .popup-fineprint { text-align: center; font-size: 10.5px; color: var(--muted); }
 .bai .popup-decline { text-align: center; font-size: 11.5px; color: var(--muted); cursor: pointer; font-style: italic; margin-top: 12px; }
 .bai .popup-decline:hover { color: var(--sub); }
+
+/* Bottom-left alternating side popup */
+.bai .left-pop { position: fixed; bottom: 28px; left: 28px; z-index: 7998; width: 318px; background: #161622; border: 1px solid rgba(255,255,255,.1); border-radius: 16px; box-shadow: 0 24px 70px rgba(0,0,0,.7), 0 0 0 1px rgba(177,19,15,.12); overflow: hidden; transform: translateY(24px); opacity: 0; pointer-events: none; transition: transform .45s cubic-bezier(.16,1,.3,1), opacity .45s; }
+.bai .left-pop.show { transform: translateY(0); opacity: 1; pointer-events: all; }
+.bai .left-pop-close { position: absolute; top: 10px; right: 11px; z-index: 3; background: rgba(255,255,255,.08); border: none; color: rgba(255,255,255,.5); width: 24px; height: 24px; border-radius: 50%; font-size: 15px; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center; }
+.bai .left-pop-close:hover { color: #fff; background: rgba(255,255,255,.16); }
+.bai .left-slide { display: none; padding: 20px 20px 16px; }
+.bai .left-slide.active { display: block; animation: bai-fadeUp .4s ease both; }
+.bai .lp-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(177,19,15,.14); border: 1px solid rgba(177,19,15,.32); border-radius: 20px; padding: 4px 11px; font-size: 10px; font-weight: 700; color: #ff5a4d; letter-spacing: .4px; margin-bottom: 12px; text-transform: uppercase; }
+.bai .lp-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #ff5a4d; animation: bai-dot 1.5s ease infinite; }
+.bai .lp-title { font-size: 17px; font-weight: 800; color: #fff; line-height: 1.25; margin-bottom: 8px; }
+.bai .lp-desc { font-size: 12px; color: rgba(255,255,255,.55); line-height: 1.5; margin-bottom: 16px; }
+.bai .lp-cta { display: block; width: 100%; text-align: center; padding: 12px; background: var(--red); color: #fff; font-size: 13.5px; font-weight: 700; border: none; border-radius: 9px; cursor: pointer; text-decoration: none; transition: background .15s; }
+.bai .lp-cta:hover { background: var(--red2); }
+.bai .lp-stars { color: #f59e0b; font-size: 12px; letter-spacing: 2px; margin-bottom: 10px; }
+.bai .lp-quote { font-size: 13px; color: rgba(255,255,255,.85); line-height: 1.55; font-style: italic; margin-bottom: 14px; }
+.bai .lp-person { display: flex; align-items: center; gap: 10px; }
+.bai .lp-person img { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid rgba(177,19,15,.4); }
+.bai .lp-person-name { font-size: 12.5px; font-weight: 700; color: #fff; line-height: 1.2; }
+.bai .lp-person-role { font-size: 11px; color: rgba(255,255,255,.5); }
+@media (max-width: 760px) {
+  .bai .left-pop { left: 16px; bottom: 16px; width: calc(100vw - 32px); max-width: 318px; }
+}
 @media (max-width: 640px) {
   .bai .popup-box { grid-template-columns: 1fr; }
   .bai .popup-left { display: none; }

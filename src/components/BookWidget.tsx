@@ -67,7 +67,8 @@ export default function BookWidget() {
         <div className="book-widget-bar" />
         <div className="book-widget-body">
           <div className="book-widget-head">
-            <div className="book-widget-avatar-placeholder">T</div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="book-widget-avatar" src="/images/taha-headshot.jpg" alt="Taha Anwar" />
             <div className="book-widget-who">
               <div className="book-widget-name">Taha Anwar</div>
               <div className="book-widget-title">Founder · Bleed AI</div>

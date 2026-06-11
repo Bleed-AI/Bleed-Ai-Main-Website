@@ -16,6 +16,7 @@ import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
 import BookWidget from "@/components/BookWidget";
 import ExitPopup from "@/components/ExitPopup";
+import SidePopup from "@/components/SidePopup";
 
 export default function Home() {
   return (
@@ -38,6 +39,7 @@ export default function Home() {
       <Footer />
       <BookWidget />
       <ExitPopup />
+      <SidePopup />
     </main>
   );
 }

@@ -11,7 +11,7 @@ export default function Founder() {
             <div className="founder-left">
               <Reveal className="founder-photo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/images/taha-headshot.jpg" alt="Taha Anwar, Founder of Bleed AI" />
+                <img src="/images/taha-anwar.png" alt="Taha Anwar, Founder of Bleed AI" />
               </Reveal>
               <Reveal
                 as="a"
