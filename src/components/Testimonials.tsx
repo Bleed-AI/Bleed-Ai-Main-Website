@@ -85,7 +85,6 @@ function TestiCard({ v, delay }: { v: (typeof videos)[0]; delay: number }) {
         <div className="testi-quote">&ldquo;{v.quote}&rdquo;</div>
         <div className="testi-name">{v.name}</div>
         <div className="testi-role">{v.role}</div>
-        <div className="testi-metric">{v.metric}</div>
       </div>
     </Reveal>
   );
