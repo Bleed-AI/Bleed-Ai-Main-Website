@@ -4,17 +4,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function Navigation() {
-  const [scrolled, setScrolled] = useState(false);
   const [freeToolsOpen, setFreeToolsOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileFreeToolsOpen, setMobileFreeToolsOpen] = useState(false);
   const [freeToolsCloseTimeout, setFreeToolsCloseTimeout] = useState<NodeJS.Timeout | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -51,14 +44,8 @@ export default function Navigation() {
           mobileMenuOpen ? "z-[9990]" : "z-50"
         }`}
       >
-        <div
-          className={`mx-2 sm:mx-4 lg:mx-8 mt-2 sm:mt-4 rounded-xl sm:rounded-2xl border transition-all duration-500 ${
-            scrolled
-              ? "bg-[var(--surface-elevated)]/90 backdrop-blur-xl border-[var(--border-color)] shadow-lg"
-              : "bg-transparent border-transparent"
-          }`}
-        >
-          <div className="px-3 sm:px-4 lg:px-6 py-3 sm:py-4 flex justify-between items-center">
+        <div className="border-b border-[var(--border-color)] bg-[#07070d]/90 backdrop-blur-xl">
+          <div className="px-4 sm:px-6 lg:px-12 h-14 sm:h-[58px] flex justify-between items-center">
           {/* Logo */}
           <a href="/" className="relative group">
             <Image

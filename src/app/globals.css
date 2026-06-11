@@ -668,7 +668,7 @@ body {
    ===================================================================== */
 .bai {
   position: relative;
-  padding-top: 84px;
+  padding-top: 58px;
   background-color: transparent;
   background-image: radial-gradient(circle, rgba(255,255,255,.038) 1px, transparent 1px);
   background-size: 28px 28px;
@@ -1064,7 +1064,7 @@ body {
 }
 
 @media (max-width: 760px) {
-  .bai { padding-top: 68px; }
+  .bai { padding-top: 56px; }
   .bai .sec { padding: 56px 22px; }
   .bai .hero { padding: 40px 22px 48px; }
   .bai .testi-grid { grid-template-columns: 1fr; }
