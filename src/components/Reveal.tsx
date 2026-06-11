@@ -1,6 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode, type ElementType } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+  type ElementType,
+  type CSSProperties,
+} from "react";
 
 /**
  * Scroll-reveal wrapper used across the homepage sections.
@@ -11,11 +18,13 @@ export default function Reveal({
   delay = 0,
   className = "",
   as: Tag = "div" as ElementType,
+  style,
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
   as?: ElementType;
+  style?: CSSProperties;
 }) {
   const ref = useRef<HTMLElement | null>(null);
   const [shown, setShown] = useState(false);
@@ -41,7 +50,7 @@ export default function Reveal({
       className={`transition-all duration-700 ease-out ${
         shown ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+      style={{ ...style, transitionDelay: `${delay}ms` }}
     >
       {children}
     </Comp>

@@ -1,119 +1,85 @@
 "use client";
 
+import Reveal from "@/components/Reveal";
+
+const BOOK_URL = "/book-call/";
+
+const pains = [
+  { icon: "🔄", title: "Relying on Referrals", desc: "Unpredictable pipeline that dries up at random." },
+  { icon: "💸", title: "Expensive Ads", desc: "Rising CAC quietly eating into your margins." },
+  { icon: "👥", title: "Underperforming SDRs", desc: "An in-house team that isn't hitting targets." },
+  { icon: "📉", title: "Agencies That Don't Deliver", desc: "Empty promises and zero pipeline to show." },
+];
+
+const industries = [
+  { icon: "🏢", title: "B2B Agencies", desc: "Marketing, creative, dev, ops - you have retainer clients but your pipeline dries up when one leaves. We keep it full.", tag: "Marketing · Creative · Development" },
+  { icon: "💻", title: "SaaS Companies", desc: "Your product sells itself on a demo. The problem is getting the right people on that demo. We solve that exact problem.", tag: "SMB · Mid-Market · B2B SaaS" },
+  { icon: "🎯", title: "Consultants & Coaches", desc: "High-ticket offer, proven methodology, but referrals aren't scaling. We build you a cold outbound machine that runs without you.", tag: "Consulting · Coaching · Advisory" },
+  { icon: "📋", title: "Recruitment Agencies", desc: "Client acquisition is a volume game. Our systems reach thousands of qualified companies per month with precision targeting.", tag: "Staffing · Executive Search · HR" },
+  { icon: "🎬", title: "Media & Production", desc: "Video, podcast, content - your work speaks for itself but clients don't find you. We put you in front of companies actively spending on content.", tag: "Video · Podcast · Content" },
+];
+
 export default function WhoIsThisFor() {
-  const painPoints = [
-    {
-      icon: "🔄",
-      title: "Relying on Referrals",
-      description: "Unpredictable pipeline that dries up randomly",
-    },
-    {
-      icon: "💸",
-      title: "Expensive Ads",
-      description: "High CAC eating into your margins",
-    },
-    {
-      icon: "👥",
-      title: "Underperforming In-house Teams",
-      description: "SDRs not hitting their targets",
-    },
-    {
-      icon: "📉",
-      title: "Agencies That Don't Deliver",
-      description: "Empty promises, zero results",
-    },
-  ];
-
   return (
-    <section className="relative py-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-[var(--bg-primary)]" />
+    <section id="for-section">
+      <div className="sec">
+        <div className="sec-inner">
+          <Reveal className="sec-label">Who Is This For</Reveal>
+          <Reveal as="h2" className="sec-h2">
+            Your offer works.
+            <br />
+            <em>You just need the right people to see it.</em>
+          </Reveal>
+          <Reveal as="p" className="sec-sub" delay={80}>
+            We work with B2B companies that have a proven offer and need a predictable pipeline - not another agency promising results in &ldquo;3–6 months.&rdquo;
+          </Reveal>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-[#B1130F]/5 rounded-full blur-[150px] -translate-y-1/2" />
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-[#B1130F]/5 rounded-full blur-[150px] -translate-y-1/2" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[var(--bg-primary)] border border-[var(--border-color)] mb-6">
-            <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
-            <span className="text-sm font-medium text-[var(--text-secondary)]">Perfect Fit Check</span>
+          <Reveal className="pain-intro">Stuck with one of these?</Reveal>
+          <div className="pain-row">
+            {pains.map((p, i) => (
+              <Reveal className="pain-card" key={i} delay={i * 80}>
+                <div className="pain-icon">{p.icon}</div>
+                <div className="pain-ptitle">{p.title}</div>
+                <div className="pain-desc">{p.desc}</div>
+              </Reveal>
+            ))}
           </div>
+          <Reveal className="pain-bridge">
+            If any of these sound familiar, here&apos;s exactly who we fix it for -
+          </Reveal>
 
-          <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-semibold text-[var(--text-primary)] mb-6">
-            Who is This <span className="gradient-text">For?</span>
-          </h2>
-
-          <p className="text-[var(--text-secondary)] text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            Bleed AI is for <span className="text-[var(--text-primary)] font-medium">B2B companies</span> that are stuck relying on referrals, expensive ads, underperforming in-house teams, or agencies that don&apos;t move the needle.
-          </p>
-        </div>
-
-        {/* Pain Points Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-          {painPoints.map((point, index) => (
-            <div
-              key={index}
-              className="group relative p-6 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)] hover:border-[#B1130F]/50 transition-all duration-500 hover:shadow-[0_0_30px_rgba(177,19,15,0.1)]"
+          <div className="for-grid">
+            {industries.map((c, i) => (
+              <Reveal className="for-card" key={i} delay={(i % 3) * 80}>
+                <div className="for-icon">{c.icon}</div>
+                <div className="for-title">{c.title}</div>
+                <div className="for-desc">{c.desc}</div>
+                <div className="for-tag">{c.tag}</div>
+              </Reveal>
+            ))}
+            <Reveal
+              className="for-card"
+              delay={160}
+              style={{
+                borderStyle: "dashed",
+                background: "transparent",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                textAlign: "center",
+                padding: 28,
+              }}
             >
-              {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-[rgba(177,19,15,0.1)] flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                {point.icon}
+              <div style={{ fontSize: 22, marginBottom: 10, opacity: 0.4 }}>?</div>
+              <div className="for-title" style={{ fontSize: 13 }}>Not sure if your niche works?</div>
+              <div className="for-desc" style={{ fontSize: 12, margin: "8px 0 14px" }}>
+                We&apos;ll tell you honestly. Takes 5 minutes.
               </div>
-
-              {/* Content */}
-              <h3 className="font-semibold text-[var(--text-primary)] mb-2">{point.title}</h3>
-              <p className="text-sm text-[var(--text-muted)]">{point.description}</p>
-
-              {/* Hover Line */}
-              <div className="absolute bottom-0 left-6 right-6 h-[2px] bg-gradient-to-r from-transparent via-[#B1130F] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom CTA Box */}
-        <div className="relative rounded-2xl border border-[var(--border-color)] bg-gradient-to-r from-[var(--bg-secondary)] via-[rgba(177,19,15,0.05)] to-[var(--bg-secondary)] p-8 md:p-10 text-center overflow-hidden">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, #B1130F 1px, transparent 0)`,
-              backgroundSize: '24px 24px'
-            }} />
-          </div>
-
-          <div className="relative z-10">
-            <p className="text-[var(--text-primary)] text-lg md:text-xl font-medium mb-2">
-              If this sounds like you...
-            </p>
-            <p className="text-[var(--text-secondary)] mb-6">
-              Let&apos;s build a revenue machine that actually works.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://calculator.bleedai.com/trials"
-                className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B1130F] text-white font-semibold text-lg rounded-full overflow-hidden transition-all duration-500 btn-glow"
-              >
-                <span className="relative z-10">Start My Trial Campaign</span>
-                <svg
-                  className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
+              <a href={BOOK_URL} className="btn-red" style={{ fontSize: 12, padding: "9px 18px" }}>
+                Check Niche Availability →
               </a>
-
-              <div className="flex items-center gap-2 text-[var(--text-muted)] text-sm">
-                <svg className="w-4 h-4 text-[#22c55e]" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                </svg>
-                <span>No commitment required</span>
-              </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </div>
