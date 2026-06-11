@@ -14,6 +14,7 @@ import Founder from "@/components/Founder";
 import Faq from "@/components/Faq";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
+import BookWidget from "@/components/BookWidget";
 
 export default function Home() {
   return (
@@ -34,6 +35,7 @@ export default function Home() {
       <Faq />
       <FinalCta />
       <Footer />
+      <BookWidget />
     </main>
   );
 }
