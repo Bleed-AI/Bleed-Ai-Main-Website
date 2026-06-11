@@ -28,7 +28,7 @@ export default function RepliesMarquee() {
             The kind of replies <em>we get.</em>
           </Reveal>
           <Reveal as="p" className="sec-sub" delay={80}>
-            Real responses from real decision-makers - to the exact cold emails and strategy docs our system sends. Not edited, not cherry-picked.
+            Real responses from real decision-makers - to the exact cold emails our system sends. Not edited, not cherry-picked.
           </Reveal>
 
           <Reveal className="email-marquee">
