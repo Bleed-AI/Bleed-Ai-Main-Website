@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const footerLinks = {
   company: [
-    { label: "Results", href: "#testimonials" },
-    { label: "How It Works", href: "#process" },
+    { label: "Results", href: "#results-section" },
+    { label: "How It Works", href: "#framework" },
     { label: "Case Studies", href: "#testimonials" },
     { label: "Blog", href: "/blog/" },
     { label: "Start Trial Campaign", href: "https://calculator.bleedai.com/trials" },
