@@ -71,9 +71,9 @@ export default function RootLayout({
         />
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="alternate icon" type="image/png" href="/favicon.png" />
-        <link rel="apple-touch-icon" href="/favicon.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=2" />
+        <link rel="shortcut icon" href="/favicon.png?v=2" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2" />
       </head>
       <body className="antialiased bg-white dark:bg-[#050508] text-black dark:text-white transition-colors" suppressHydrationWarning>
         <ThemeProvider>

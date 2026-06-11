@@ -67,7 +67,12 @@ function TestiCard({ v, delay }: { v: (typeof videos)[0]; delay: number }) {
         ) : (
           <>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="testi-photo" src={v.photo} alt={v.name} loading="lazy" />
+            <img
+              className="testi-photo"
+              src={`https://img.youtube.com/vi/${v.videoId}/maxresdefault.jpg`}
+              alt={`${v.name} testimonial`}
+              loading="lazy"
+            />
             <div className="testi-thumb-shade" />
             <div className="testi-play" style={{ position: "absolute" }}>
               <svg width="16" height="16" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" /></svg>
