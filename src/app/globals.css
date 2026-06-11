@@ -69,8 +69,17 @@ html {
   --card2: #1a1a28;
   --border: #1f1f30;
   --border2: #2a2a3e;
-  /* override the live surface token within the homepage so ported rules match the mockup */
+  /* override the LIVE semantic tokens within the homepage so kept components
+     (Navigation, Footer) and ported rules all use the mockup palette */
+  --bg-primary: #07070d;
+  --bg-secondary: #0b0b14;
+  --bg-tertiary: #101019;
   --surface-elevated: #1a1a28;
+  --text-primary: #eaeef8;
+  --text-secondary: #9099b8;
+  --text-muted: #505570;
+  --border-color: #1f1f30;
+  --border-strong: #2a2a3e;
 }
 
 /* Serif italic + red-gradient accent for headline <em> (mockup signature look) */
@@ -657,7 +666,19 @@ body {
    HOMEPAGE — MOCKUP REDESIGN (all scoped under .bai to avoid collisions)
    Dark-only for now; uses aliased mockup tokens.
    ===================================================================== */
-.bai { background: #07070d; padding-top: 84px; }
+.bai {
+  position: relative;
+  padding-top: 84px;
+  background-color: transparent;
+  background-image: radial-gradient(circle, rgba(255,255,255,.038) 1px, transparent 1px);
+  background-size: 28px 28px;
+  animation: bai-grid-drift 8s linear infinite;
+}
+/* Site-wide fixed glow layer (behind all content) - the mockup's global orbs */
+.bai-bg { position: fixed; inset: 0; z-index: -1; background: #07070d; overflow: hidden; pointer-events: none; }
+.bai-orb1 { position: absolute; width: 900px; height: 900px; border-radius: 50%; background: radial-gradient(ellipse, rgba(177,19,15,.13) 0%, transparent 65%); top: -300px; left: -200px; filter: blur(60px); animation: bai-orb1 14s ease infinite; }
+.bai-orb2 { position: absolute; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(ellipse, rgba(120,40,200,.08) 0%, transparent 65%); top: 20%; right: -150px; filter: blur(70px); animation: bai-orb2 18s ease infinite; }
+.bai-orb3 { position: absolute; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(ellipse, rgba(177,19,15,.08) 0%, transparent 70%); bottom: 10%; left: 35%; filter: blur(80px); animation: bai-orb3 22s ease infinite; }
 
 /* Keyframes the mockup relies on */
 @keyframes bai-fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }

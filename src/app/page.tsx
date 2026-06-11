@@ -21,6 +21,12 @@ import SidePopup from "@/components/SidePopup";
 export default function Home() {
   return (
     <main className="bai relative overflow-hidden">
+      {/* Site-wide fixed glow layer behind all content (mockup's global orbs) */}
+      <div className="bai-bg" aria-hidden="true">
+        <div className="bai-orb1" />
+        <div className="bai-orb2" />
+        <div className="bai-orb3" />
+      </div>
       <Navigation />
       <Ticker />
       <Hero />
