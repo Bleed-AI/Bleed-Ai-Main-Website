@@ -8,7 +8,6 @@ const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep
 
 export default function BookWidget() {
   const [open, setOpen] = useState(false);
-  const [secs, setSecs] = useState(4 * 60 + 59);
   const [days, setDays] = useState<{ d: string; n: string }[]>([]);
   const [active, setActive] = useState(-1);
   const autoOpened = useRef(false);
@@ -39,14 +38,6 @@ export default function BookWidget() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Countdown while open
-  useEffect(() => {
-    if (!open) return;
-    const id = setInterval(() => setSecs((s) => (s > 0 ? s - 1 : 0)), 1000);
-    return () => clearInterval(id);
-  }, [open]);
-
-  const timer = `${Math.floor(secs / 60)}:${String(secs % 60).padStart(2, "0")}`;
   const goCalendly = () => window.open(CALENDLY, "_blank", "noopener");
 
   return (
@@ -80,9 +71,6 @@ export default function BookWidget() {
           <div className="book-widget-headline">Book a 1-1 Strategy Call</div>
           <div className="book-widget-desc">
             15 min. We&apos;ll map your pipeline gaps and show you exactly what a campaign would look like for your niche.
-          </div>
-          <div className="book-widget-urgency">
-            <span className="book-widget-timer">{timer}</span>
           </div>
           <div className="book-widget-days">
             {days.map((d, i) => (
