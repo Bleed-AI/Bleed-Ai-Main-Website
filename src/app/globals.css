@@ -1084,6 +1084,7 @@ body {
   .bai .infra-card.tall { grid-row: auto; }
 }
 @media (max-width: 520px) {
-  .bai .infra-grid { grid-template-columns: 1fr; }
+  .bai .infra-grid { grid-template-columns: 1fr; grid-auto-rows: auto; }
   .bai .infra-card.wide { grid-column: span 1; }
+  .bai .infra-card.tall { grid-row: auto; }
 }
