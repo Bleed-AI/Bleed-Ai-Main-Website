@@ -79,10 +79,9 @@ export default function BookWidget() {
           </div>
           <div className="book-widget-headline">Book a 1-1 Strategy Call</div>
           <div className="book-widget-desc">
-            30 min. We&apos;ll map your pipeline gaps and show you exactly what a campaign would look like for your niche.
+            15 min. We&apos;ll map your pipeline gaps and show you exactly what a campaign would look like for your niche.
           </div>
           <div className="book-widget-urgency">
-            <span className="book-widget-urgency-txt">Only a few slots left.</span>
             <span className="book-widget-timer">{timer}</span>
           </div>
           <div className="book-widget-days">
