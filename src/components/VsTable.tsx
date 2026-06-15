@@ -12,21 +12,22 @@ const rows: [string, string, string][] = [
   ["ICP targeting", "AI lookalike modeling from your best existing clients", "Generic job title + industry filters from a list tool"],
   ["Reply handling", "AI screens every reply - only confirmed interest reaches you", "Raw replies forwarded, you filter manually"],
   ["Your domain", "Separate sending infrastructure - your domain never touched", "Often uses your primary domain, reputation at risk"],
+  ["Your pipeline", "Runs and compounds month after month", "Depends on referrals and luck, dries up between campaigns"],
 ];
 
 export default function VsTable() {
   return (
     <section id="vs-section">
-      <div className="sec">
+      <div className="sec dark">
         <div className="sec-inner">
-          <Reveal className="sec-label">The Real Difference</Reveal>
+          <Reveal className="sec-label">Before vs. After</Reveal>
           <Reveal as="h2" className="sec-h2">
-            Built differently.
+            What changes when you stop guessing
             <br />
-            <em>Because it has to work differently.</em>
+            <em>and start engineering.</em>
           </Reveal>
           <Reveal as="p" className="sec-sub" delay={80}>
-            Most agencies hire salespeople who got good at cold email. We were built by an AI engineer. That one difference compounds across every step of your campaign.
+            Most agencies hire salespeople who got good at cold email. We were built by an AI engineer, and that one difference changes what happens at every step. Here&apos;s the before and after, point by point.
           </Reveal>
 
           <Reveal className="vs-wrap">

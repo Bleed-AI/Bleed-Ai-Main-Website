@@ -7,7 +7,6 @@ import WhoIsThisFor from "@/components/WhoIsThisFor";
 import ResultsMarquee from "@/components/ResultsMarquee";
 import Framework from "@/components/Framework";
 import Testimonials from "@/components/Testimonials";
-import BeforeAfter from "@/components/BeforeAfter";
 import VsTable from "@/components/VsTable";
 import InfraBento from "@/components/InfraBento";
 import Founder from "@/components/Founder";
@@ -34,11 +33,10 @@ export default function Home() {
       <Hero />
       <StatsStrip />
       <RepliesMarquee />
-      <WhoIsThisFor />
-      <ResultsMarquee />
-      <Framework />
       <Testimonials />
-      <BeforeAfter />
+      <WhoIsThisFor />
+      <Framework />
+      <ResultsMarquee />
       <VsTable />
       <InfraBento />
       <Founder />
