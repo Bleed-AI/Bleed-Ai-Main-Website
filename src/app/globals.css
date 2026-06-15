@@ -953,9 +953,11 @@ body {
 .bai .faq-q { padding: 17px 20px; font-size: 14px; font-weight: 600; cursor: pointer; background: var(--card); display: flex; justify-content: space-between; align-items: center; gap: 16px; text-align: left; user-select: none; transition: background .15s; }
 .bai .faq-q:hover { background: var(--surface-elevated); }
 .bai .faq-ico { color: var(--red); font-size: 20px; transition: transform .2s; flex-shrink: 0; }
-.bai .faq-a { padding: 15px 20px; background: var(--bg3); font-size: 13px; color: var(--sub); line-height: 1.65; border-top: 1px solid var(--border); text-align: left; }
+.bai .faq-a { display: block; max-height: 0; overflow: hidden; padding: 0 20px; background: var(--bg3); font-size: 13px; color: var(--sub); line-height: 1.65; border-top: 1px solid transparent; text-align: left; opacity: 0; transform: translateY(-4px); transition: max-height .42s cubic-bezier(.4,0,.2,1), opacity .3s ease, padding .42s cubic-bezier(.4,0,.2,1), transform .38s ease, border-top-color .42s ease; will-change: max-height; }
 .bai .faq-a strong { color: var(--text); }
+.bai .faq-item.open .faq-a { max-height: 340px; opacity: 1; transform: none; padding: 15px 20px; border-top-color: var(--border); }
 .bai .faq-item.open .faq-ico { transform: rotate(45deg); }
+@media (prefers-reduced-motion: reduce) { .bai .faq-a { transition: none; } }
 
 /* Final CTA */
 .bai .final-cta { padding: 100px 80px; text-align: center; position: relative; overflow: hidden; background: transparent; }

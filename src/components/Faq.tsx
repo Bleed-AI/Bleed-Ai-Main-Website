@@ -13,6 +13,22 @@ const faqs: { q: string; a: ReactNode }[] = [
     ),
   },
   {
+    q: "What do I actually own?",
+    a: (
+      <>
+        <strong>Everything we build for you.</strong> The sending domains, the inboxes, the lead lists we build, the copy we write, and the campaign SOPs are all yours. If we ever part ways, you keep the whole system and can run it in-house any time. You&apos;re never renting access to your own pipeline.
+      </>
+    ),
+  },
+  {
+    q: "Is there a minimum commitment?",
+    a: (
+      <>
+        <strong>No lock-in. Packages are month to month.</strong> We&apos;d rather earn the next month with results than trap you in a long contract. If it&apos;s working, you&apos;ll stay because the pipeline is full, not because a contract says you have to.
+      </>
+    ),
+  },
+  {
     q: "What's the difference between a managed package and a one-time campaign?",
     a: (
       <>
@@ -82,7 +98,7 @@ export default function Faq() {
                   {f.q}
                   <span className="faq-ico">+</span>
                 </div>
-                {open === i && <div className="faq-a">{f.a}</div>}
+                <div className="faq-a">{f.a}</div>
               </div>
             ))}
           </Reveal>
