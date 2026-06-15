@@ -2,8 +2,8 @@
 
 import Reveal from "@/components/Reveal";
 
-const replies: { name: string; addr: string; body: string }[] = [
-  { name: "Anibal", addr: "anibal@borisai.com", body: "Thanks for putting this together! Seriously impressed by the depth of your research and how well you mapped out the tech landscape for Boris AI. Let's stay in touch." },
+const replies: { name: string; addr: string; body: string; redact?: string[] }[] = [
+  { name: "Anibal", addr: "anibal@borisai.com", body: "Thanks for putting this together! Seriously impressed by the depth of your research and how well you mapped out the tech landscape for Boris AI. Let's stay in touch.", redact: ["Boris AI"] },
   { name: "Ramón Rodrigáñez", addr: "ramon@novatalent.com", body: "This looks interesting, let me connect you with my Head of Growth who is running this internally so he can consider having you guys help us on this." },
   { name: "Lounès", addr: "lounes@glaise.studio", body: "Impressive report! Sure, send me your Calendly link and I'll book a call. Thank you!" },
   { name: "Mike", addr: "mike@avina.io", body: "Thanks for putting it together, looks like a solid assessment. Booked a call on Thursday 10am ET." },
@@ -14,6 +14,18 @@ const replies: { name: string; addr: string; body: string }[] = [
   { name: "Muhammad Ismaeel", addr: "muhammad@democritic.io", body: "Hey Taha, please send across the Calendly link. Happy to chat through what you sent." },
   { name: "Damien Oh", addr: "damien@adminoptimizer.com", body: "Hi Taha, let's discuss this over a call. Send me your Calendly link." },
 ];
+
+function renderBody(body: string, redact?: string[]) {
+  if (!redact || !redact.length) return body;
+  const pattern = new RegExp(`(${redact.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "g");
+  return body.split(pattern).map((part, i) =>
+    redact.includes(part) ? (
+      <span key={i} className="email-redact">{part}</span>
+    ) : (
+      part
+    )
+  );
+}
 
 export default function RepliesMarquee() {
   return (
