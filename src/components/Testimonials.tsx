@@ -38,7 +38,7 @@ type Wall = {
   post: string;
   name: string;
   co: string;
-  av: { type: "logo" | "photo" | "initials"; val: string };
+  av: { type: "logo" | "photo" | "initials" | "none"; val: string };
 };
 
 const wall: Wall[] = [
@@ -49,6 +49,9 @@ const wall: Wall[] = [
   { pre: "Whatever you think is best. ", hl: "I will pay the next invoice", post: " to start on the new campaign.", name: "Jay", co: "More Conversions", av: { type: "logo", val: "/images/co-moreconversions.png" } },
   { pre: "", hl: "1st confirmed ticket sale through you!", post: " The conference sold out, 150 attendees from 10+ countries.", name: "Martijn Versteeg", co: "Group Effort", av: { type: "photo", val: MARTIJN_PHOTO } },
   { pre: "", hl: "I just paid the invoice", post: ", Taha. Excited to get started with you.", name: "Peter", co: "SupporterHub", av: { type: "initials", val: "P" } },
+  { pre: "", hl: "WOOT, we just got our first lead!", post: " Sent an immediate follow-up right away.", name: "Kevin Nakao", co: "Capital Live Scan", av: { type: "none", val: "" } },
+  { pre: "", hl: "Excited about the stats!", post: " Now it's about converting them to paid users.", name: "Jayanthi Raja", co: "Rebus AI", av: { type: "logo", val: "/images/co-rebusai.png" } },
+  { pre: "", hl: "Exciting!", post: " Thank you for the update.", name: "Michael Leum", co: "FindHealthcareUSA", av: { type: "none", val: "" } },
 ];
 
 function TestiCard({ v, delay }: { v: (typeof videos)[0]; delay: number }) {
@@ -91,6 +94,7 @@ function TestiCard({ v, delay }: { v: (typeof videos)[0]; delay: number }) {
 }
 
 function Avatar({ av }: { av: Wall["av"] }) {
+  if (av.type === "none") return null;
   if (av.type === "initials") return <span className="wall-av-initials">{av.val}</span>;
   const cls = av.type === "photo" ? "wall-av wall-av-photo" : "wall-av";
   // eslint-disable-next-line @next/next/no-img-element
