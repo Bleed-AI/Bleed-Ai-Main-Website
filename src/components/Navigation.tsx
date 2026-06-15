@@ -92,6 +92,7 @@ export default function Navigation() {
                     { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
                     { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
                     { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
+                    { href: '/free-tools/cold-email-roi-calculator', icon: '💰', title: 'ROI Calculator', desc: 'See what a campaign could return' },
                   ].map((tool) => (
                     <a
                       key={tool.href}
@@ -238,6 +239,7 @@ export default function Navigation() {
                           { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
                           { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
                           { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
+                          { href: '/free-tools/cold-email-roi-calculator', icon: '💰', title: 'ROI Calculator', desc: 'See what a campaign could return' },
                         ].map((tool) => (
                           <a
                             key={tool.href}
