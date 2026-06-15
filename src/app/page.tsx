@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import Ticker from "@/components/Ticker";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
-import WhoIsThisFor from "@/components/WhoIsThisFor";
 import ResultsMarquee from "@/components/ResultsMarquee";
 import Framework from "@/components/Framework";
 import Testimonials from "@/components/Testimonials";
@@ -34,7 +33,6 @@ export default function Home() {
       <StatsStrip />
       <RepliesMarquee />
       <Testimonials />
-      <WhoIsThisFor />
       <Framework />
       <ResultsMarquee />
       <VsTable />

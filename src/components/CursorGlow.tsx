@@ -22,7 +22,7 @@ export default function CursorGlow() {
       if (!pending) {
         pending = true;
         requestAnimationFrame(() => {
-          el.style.transform = `translate3d(${x - 280}px, ${y - 280}px, 0)`;
+          el.style.transform = `translate3d(${x - 240}px, ${y - 240}px, 0)`;
           el.style.opacity = "1";
           pending = false;
         });
