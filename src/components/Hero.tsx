@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const TRIAL_URL = "https://calculator.bleedai.com/trials";
 const VIDEO_ID = "S0Oeg0sbB6k";
@@ -9,6 +9,14 @@ const PLAYBOOK_DOC =
 
 export default function Hero() {
   const [playing, setPlaying] = useState(false);
+  // Client spots: starts at 4, counts down through the month, resets monthly.
+  // Computed in an effect so SSR/CSR markup matches (no hydration mismatch).
+  const [spots, setSpots] = useState(3);
+  useEffect(() => {
+    const now = new Date();
+    const dim = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    setSpots(Math.max(1, Math.ceil(4 * (1 - now.getDate() / dim))));
+  }, []);
 
   return (
     <section id="hero" className="hero">
@@ -36,7 +44,7 @@ export default function Hero() {
 
         <div className="hero-scarcity">
           <span className="scarcity-dot" />
-          Only 3 more client spots open this month
+          Only {spots} more client spots open this month
         </div>
 
         <div className="hero-ctas">

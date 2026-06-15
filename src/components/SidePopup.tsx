@@ -18,8 +18,17 @@ export default function SidePopup() {
   const [current, setCurrent] = useState(0); // 0 = trial slide; 1..n = testimonial n
   const tptr = useRef(1);
 
-  // Show after a delay
+  // Close + remember for the session (stays closed once dismissed, even across reloads)
+  const close = () => {
+    setClosed(true);
+    try { sessionStorage.setItem("lpClosed", "1"); } catch {}
+  };
+
+  // Show after a delay, unless already dismissed this session
   useEffect(() => {
+    let dismissed = false;
+    try { dismissed = !!sessionStorage.getItem("lpClosed"); } catch {}
+    if (dismissed) { setClosed(true); return; }
     const t = setTimeout(() => setShown(true), 4500);
     return () => clearTimeout(t);
   }, []);
@@ -42,7 +51,7 @@ export default function SidePopup() {
 
   return (
     <div className={`left-pop${shown && !closed ? " show" : ""}`}>
-      <button className="left-pop-close" onClick={() => setClosed(true)} aria-label="Close">
+      <button className="left-pop-close" onClick={close} aria-label="Close">
         ×
       </button>
 
@@ -54,7 +63,7 @@ export default function SidePopup() {
         <div className="lp-desc">
           We&apos;ll launch a low-cost pilot campaign to prove outbound for your business - before you commit to anything bigger.
         </div>
-        <a href={TRIAL_URL} target="_blank" rel="noopener noreferrer" className="lp-cta" onClick={() => setClosed(true)}>
+        <a href={TRIAL_URL} target="_blank" rel="noopener noreferrer" className="lp-cta" onClick={close}>
           Start My Trial Campaign →
         </a>
       </div>

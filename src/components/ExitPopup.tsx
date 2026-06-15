@@ -50,25 +50,32 @@ const ptc: { quote: ReactNode; name: string; role: string; img: string }[] = [
 
 export default function ExitPopup() {
   const [open, setOpen] = useState(false);
-  const [deal, setDeal] = useState(-1);
 
-  // Exit-intent: fire once per session when the cursor leaves through the top
+  // Exit-intent: fire EVERY time the cursor leaves through the top of the viewport
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    try {
-      if (sessionStorage.getItem("bai-exit-shown")) return;
-    } catch {}
     const onOut = (e: MouseEvent) => {
-      if (e.relatedTarget == null && e.clientY <= 0) {
-        try {
-          sessionStorage.setItem("bai-exit-shown", "1");
-        } catch {}
-        setOpen(true);
-        document.removeEventListener("mouseout", onOut);
-      }
+      if (e.relatedTarget == null && e.clientY <= 0) setOpen(true);
     };
     document.addEventListener("mouseout", onOut);
     return () => document.removeEventListener("mouseout", onOut);
+  }, []);
+
+  // Tab-return: re-show the popup every time they come back to the tab
+  useEffect(() => {
+    const orig = document.title;
+    const onVis = () => {
+      if (document.hidden) {
+        document.title = "👀 Still thinking it over? - Bleed AI";
+      } else {
+        document.title = orig;
+        setOpen(true);
+      }
+    };
+    document.addEventListener("visibilitychange", onVis);
+    return () => {
+      document.removeEventListener("visibilitychange", onVis);
+      document.title = orig;
+    };
   }, []);
 
   // Escape to close
@@ -126,25 +133,11 @@ export default function ExitPopup() {
             Are you sure you don&apos;t want <em>more qualified meetings?</em>
           </h3>
           <p>
-            See exactly how many meetings and how much revenue our system could generate for your business.{" "}
+            See exactly what a campaign could return.{" "}
             <strong style={{ color: "var(--text)" }}>Takes 10 seconds.</strong>
           </p>
-          <div className="popup-label">Your average deal size</div>
-          <div className="popup-dealsize">
-            {["$5K – $15K", "$15K – $50K", "$50K – $100K", "$100K+"].map((d, i) => (
-              <div
-                className={`popup-deal${deal === i ? " sel" : ""}`}
-                key={i}
-                onClick={() => setDeal(i)}
-              >
-                {d}
-              </div>
-            ))}
-          </div>
-          <div className="popup-label">Work email</div>
-          <input type="email" className="popup-email" placeholder="you@company.com" />
           <button className="popup-cta" onClick={showRoi}>
-            Show My Potential ROI →
+            Calculate My ROI →
           </button>
           <div className="popup-fineprint">No spam. Just your numbers, instantly.</div>
           <div className="popup-decline" onClick={() => setOpen(false)}>
