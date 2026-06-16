@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 
-const CALCULATOR = "/free-tools/cold-email-roi-calculator";
+const CALCULATOR = "https://calculator.bleedai.com";
 const MARTIJN_PHOTO = "https://groupeffort.nl/wp-content/uploads/2026/01/MartijnSquigle.jpeg";
 
 const ptc: { quote: ReactNode; name: string; role: string; img: string }[] = [
