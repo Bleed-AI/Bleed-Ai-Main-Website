@@ -2,13 +2,91 @@
 
 import Reveal from "@/components/Reveal";
 
-const ico = (d: string | string[]) => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
-    {(Array.isArray(d) ? d : [d]).map((p, i) => (
-      <path key={i} d={p} />
-    ))}
-  </svg>
-);
+// Email Machine SVG injected as static markup so native SVG attributes and the
+// per-envelope `--d` custom properties keep working. The .bai-scoped CSS in
+// globals.css drives every animation (transform/opacity only, lightweight).
+const MACHINE_SVG = `
+      <!-- top feed pipe -->
+      <path d="M70 60 H636" fill="none" stroke="#23233a" stroke-width="3"/>
+      <text x="70" y="34" fill="#9099b8" font-size="10" font-family="monospace" text-anchor="middle">cold emails in</text>
+      <g transform="translate(48,40)"><rect width="18" height="11" rx="1.5" fill="#e6e9f2" stroke="#c2c8da"/><path d="M1 1.5 L9 7 L17 1.5" fill="none" stroke="#9aa2bd" stroke-width="1"/></g>
+      <g class="drop-env"><rect width="16" height="11" rx="1.5" fill="#e6e9f2" stroke="#c2c8da"/><path d="M1 1.5 L8 7 L15 1.5" fill="none" stroke="#9aa2bd" stroke-width="1"/></g>
+      <path d="M36 56 H104 L86 98 H54 Z" fill="#181826" stroke="#2a2a3e"/>
+      <path d="M70 98 V178" stroke="#2a2a3e" stroke-width="6" stroke-linecap="round"/>
+      <!-- conveyor belt -->
+      <rect x="30" y="192" width="752" height="16" rx="8" fill="#16161f" stroke="#2a2a3e"/>
+      <circle cx="38" cy="200" r="11" fill="#1a1a28" stroke="#2a2a3e"/>
+      <circle cx="774" cy="200" r="11" fill="#1a1a28" stroke="#2a2a3e"/>
+      <g stroke="#2a2a3e" stroke-width="1.5"><line x1="90" y1="200" x2="100" y2="200"/><line x1="170" y1="200" x2="180" y2="200"/><line x1="250" y1="200" x2="260" y2="200"/><line x1="330" y1="200" x2="340" y2="200"/><line x1="410" y1="200" x2="420" y2="200"/><line x1="490" y1="200" x2="500" y2="200"/><line x1="570" y1="200" x2="580" y2="200"/><line x1="650" y1="200" x2="660" y2="200"/><line x1="720" y1="200" x2="730" y2="200"/></g>
+      <!-- STATION 1: Deliverability (gauge) -->
+      <text x="168" y="80" fill="#9099b8" font-size="8.5" font-family="monospace" text-anchor="middle">DELIVERABILITY</text>
+      <rect class="cap-pulse" x="160" y="84" width="16" height="12" rx="2.5" fill="#b1130f"/>
+      <ellipse class="st-glow" style="animation-delay:-1.49s" cx="168" cy="132" rx="58" ry="50" fill="#b1130f"/>
+      <rect x="126" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#2a2a3e"/>
+      <path d="M150 148 A20 20 0 0 1 186 148" fill="none" stroke="#3a3a52" stroke-width="4" stroke-linecap="round"/>
+      <path d="M150 148 A20 20 0 0 1 181 132" fill="none" stroke="#e8302c" stroke-width="4" stroke-linecap="round"/>
+      <g class="gauge-needle"><line x1="168" y1="148" x2="180" y2="135" stroke="#eaeef8" stroke-width="2" stroke-linecap="round"/></g>
+      <!-- STATION 2: Warm-up (gears) -->
+      <text x="318" y="80" fill="#9099b8" font-size="8.5" font-family="monospace" text-anchor="middle">WARM-UP</text>
+      <rect class="cap-pulse" style="animation-delay:-1s" x="310" y="84" width="16" height="12" rx="2.5" fill="#b1130f"/>
+      <ellipse class="st-glow" style="animation-delay:-0.24s" cx="318" cy="132" rx="58" ry="50" fill="#b1130f"/>
+      <rect x="276" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#2a2a3e"/>
+      <g class="gear-a"><circle cx="308" cy="130" r="13" fill="none" stroke="#3a3a52" stroke-width="4"/><path d="M308 118 V142 M296 130 H320" stroke="#3a3a52" stroke-width="2.5"/><circle cx="308" cy="130" r="3" fill="#9099b8"/></g>
+      <g class="gear-b"><circle cx="338" cy="144" r="10" fill="none" stroke="#e8302c" stroke-width="4"/><path d="M338 134 V154 M328 144 H348" stroke="#e8302c" stroke-width="2"/><circle cx="338" cy="144" r="2.5" fill="#e8302c"/></g>
+      <!-- STATION 3: Personalization (stamp) -->
+      <text x="468" y="80" fill="#9099b8" font-size="8" font-family="monospace" text-anchor="middle">PERSONALIZATION</text>
+      <rect class="cap-pulse" style="animation-delay:-2s" x="460" y="84" width="16" height="12" rx="2.5" fill="#b1130f"/>
+      <ellipse class="st-glow" style="animation-delay:-2.98s" cx="468" cy="132" rx="58" ry="50" fill="#b1130f"/>
+      <rect x="426" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#2a2a3e"/>
+      <rect x="442" y="138" width="36" height="22" rx="2" fill="#e6e9f2" stroke="#c2c8da"/>
+      <line x1="448" y1="146" x2="472" y2="146" stroke="#9aa2bd" stroke-width="1.4"/><line x1="448" y1="151" x2="466" y2="151" stroke="#9aa2bd" stroke-width="1.4"/>
+      <g class="stamp"><rect x="484" y="114" width="16" height="14" rx="2" fill="#b1130f"/><line x1="492" y1="128" x2="492" y2="138" stroke="#b1130f" stroke-width="3"/></g>
+      <!-- STATION 4: Bleed AI Secret Sauce (gold) -->
+      <ellipse cx="618" cy="132" rx="58" ry="50" fill="#f5c54214"/>
+      <text x="618" y="80" fill="#f5c542" font-size="8.5" font-family="monospace" text-anchor="middle">SECRET SAUCE</text>
+      <rect class="cap-pulse" style="animation-delay:-3s" x="610" y="84" width="16" height="12" rx="2.5" fill="#f5c542"/>
+      <ellipse class="st-glow" style="animation-delay:-1.72s" cx="618" cy="132" rx="58" ry="50" fill="#f5c542"/>
+      <rect x="576" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#4a3a16"/>
+      <g class="gold-pulse"><g class="twinkle"><path d="M618 116 L621.9 126.1 L632 130 L621.9 133.9 L618 144 L614.1 133.9 L604 130 L614.1 126.1 Z" fill="#f5c542"/></g><circle cx="636" cy="119" r="2.4" fill="#f5c542"/><circle cx="601" cy="143" r="2" fill="#f5c542"/></g>
+      <text x="618" y="161" fill="#caa83a" font-size="7" font-family="monospace" text-anchor="middle">the Bleed AI edge</text>
+      <g class="hero-env" style="--d:0s">
+        <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
+        <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
+        <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
+        <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
+        <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
+      </g>
+      <g class="hero-env" style="--d:-4s">
+        <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
+        <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
+        <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
+        <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
+        <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
+      </g>
+      <g class="hero-env" style="--d:-8s">
+        <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
+        <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
+        <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
+        <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
+        <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
+      </g>
+      <!-- golden output + tray -->
+      <rect x="690" y="158" width="84" height="44" rx="10" fill="#12121c" stroke="#2a2a3e"/>
+      <g class="gold-pulse" transform="translate(716,162)"><rect width="32" height="20" rx="2.5" fill="#f5c542" stroke="#fff3c4" stroke-width="1.2"/><path d="M1.5 3 L16 12.5 L30.5 3" fill="none" stroke="#b8860b" stroke-width="1.2"/><text x="16" y="15" fill="#7a5a00" font-size="9" font-weight="bold" text-anchor="middle">★</text></g>
+      <text x="732" y="224" fill="#3ecf8e" font-size="9" font-family="monospace" text-anchor="middle">BOOKED CALL</text>
+      <g class="cal-notif">
+        <rect x="678" y="108" width="138" height="44" rx="9" fill="#16161f" stroke="#2a2a3e"/>
+        <rect x="688" y="118" width="22" height="22" rx="4" fill="#ffffff"/>
+        <rect x="688" y="118" width="22" height="7" rx="4" fill="#4285F4"/>
+        <text x="699" y="136" fill="#1a73e8" font-size="9" font-weight="bold" text-anchor="middle" font-family="system-ui,sans-serif">15</text>
+        <text x="718" y="126" fill="#eaeef8" font-size="9" font-weight="600" font-family="system-ui,sans-serif">Google Calendar</text>
+        <text x="718" y="139" fill="#9099b8" font-size="8" font-family="system-ui,sans-serif">New meeting booked</text>
+        <circle cx="806" cy="119" r="4.5" fill="#3ecf8e"/>
+      </g>
+`;
 
 export default function InfraBento() {
   return (
@@ -41,107 +119,21 @@ export default function InfraBento() {
             <span className="seg"><b>8/8</b> health signals green</span>
           </Reveal>
 
-          <div className="infra-grid">
-            <Reveal className="infra-card wide tall" delay={60}>
-              <span className="infra-ping" />
-              <div className="infra-top">
-                <div className="infra-ico">{ico("M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z")}</div>
-                <span className="infra-num">01</span>
-              </div>
-              <div className="infra-title">Deliverability Engine</div>
-              <div className="infra-gauge">
-                <div className="gauge-ring">
-                  <div className="gauge-val"><b>98.2%</b><span>Inbox rate</span></div>
-                </div>
-                <div className="gauge-meta">
-                  <div><span className="gm-dot" /> SPF / DKIM / DMARC aligned</div>
-                  <div><span className="gm-dot" /> Domain-to-volume ratios enforced</div>
-                  <div><span className="gm-dot" /> Safe ramp schedules, never spiked</div>
-                </div>
-              </div>
-              <div className="infra-desc">
-                The reputation guardrails that keep you in the primary inbox instead of spam - the single biggest reason cold email quietly fails for everyone else.
-              </div>
-            </Reveal>
-
-            <Reveal className="infra-card" delay={120}>
-              <span className="infra-ping" />
-              <div className="infra-top">
-                <div className="infra-ico">{ico(["M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z", "M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z"])}</div>
-                <span className="infra-num">02</span>
-              </div>
-              <div className="infra-title">Warmup &amp; Placement</div>
-              <div className="infra-desc">Best-practice mailbox warmups plus continuous placement checks - so you stay out of spam and in the inbox that converts.</div>
-            </Reveal>
-
-            <Reveal className="infra-card" delay={180}>
-              <span className="infra-ping" />
-              <div className="infra-top">
-                <div className="infra-ico">{ico("M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z")}</div>
-                <span className="infra-num">03</span>
-              </div>
-              <div className="infra-title">Health Monitoring</div>
-              <div className="infra-signals">
-                {Array.from({ length: 8 }).map((_, i) => <span className="sig-dot" key={i} />)}
-              </div>
-              <div className="infra-desc">We watch 8 early-warning signals that predict deliverability drops before your results ever move.</div>
-            </Reveal>
-
-            <Reveal className="infra-card" delay={60}>
-              <span className="infra-ping" />
-              <div className="infra-top">
-                <div className="infra-ico">{ico("M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75")}</div>
-                <span className="infra-num">04</span>
-              </div>
-              <div className="infra-title">Data Sourcing &amp; Validation</div>
-              <div className="infra-desc">Tooling that sources leads, validates every email, and strips risky addresses before a single send goes out.</div>
-            </Reveal>
-
-            <Reveal className="infra-card" delay={120}>
-              <span className="infra-ping" />
-              <div className="infra-top">
-                <div className="infra-ico">{ico("M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m5.231 13.481L15 17.25m-4.5-15H5.625c-.621 0-1.125.504-1.125 1.125v16.5c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9zm3.75 11.625a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z")}</div>
-                <span className="infra-num">05</span>
-              </div>
-              <div className="infra-title">Enrichment Layer</div>
-              <div className="infra-desc">We add the data points your targeting and personalization need - firmographics, tech stack, and live buying signals.</div>
-            </Reveal>
-
-            <Reveal className="infra-card" delay={60}>
-              <span className="infra-ping" />
-              <div className="infra-top">
-                <div className="infra-ico">{ico("M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75")}</div>
-                <span className="infra-num">06</span>
-              </div>
-              <div className="infra-title">Inbox &amp; Domain Rotation</div>
-              <div className="infra-desc">Systematic swapping of tired inboxes and domains, with clear rules for scaling volume up or down without risk.</div>
-            </Reveal>
-
-            <Reveal className="infra-card wide" delay={120}>
-              <span className="infra-ping" />
-              <div className="infra-top">
-                <div className="infra-ico">{ico(["M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z", "M18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"])}</div>
-                <span className="infra-num">07</span>
-              </div>
-              <div className="infra-title">AI Personalization</div>
-              <div className="infra-perso">
-                <span className="tok">{"{{first_name}}"}</span> at <span className="tok">{"{{company}}"}</span>
-                <span className="arr">→</span>
-                <span className="out">&ldquo;Hey Sarah, saw Veevo just raised your Series A...&rdquo;</span>
-              </div>
-              <div className="infra-desc">Hyper-relevant emails at scale - tailored hooks, context, and positioning for each prospect, without ever sounding like a template.</div>
-            </Reveal>
-
-            <Reveal className="infra-card" delay={180}>
-              <span className="infra-ping" />
-              <div className="infra-top">
-                <div className="infra-ico">{ico("M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5")}</div>
-                <span className="infra-num">08</span>
-              </div>
-              <div className="infra-title">Automation That Books Calls</div>
-              <div className="infra-desc">Automations keep the system running and route confirmed-interest replies straight into a clean booking flow, follow-ups included.</div>
-            </Reveal>
+          <div className="machine">
+            <svg viewBox="0 0 820 250" role="img" aria-label="Bleed AI email machine" dangerouslySetInnerHTML={{ __html: MACHINE_SVG }} />
           </div>
+
+          <Reveal className="mach-sauce">
+            <div className="ss-star">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 3l2.3 6.3L21 11l-6.7 1.7L12 19l-2.3-6.3L3 11l6.7-1.7L12 3z" fill="currentColor" stroke="none" />
+              </svg>
+            </div>
+            <div>
+              <div className="mach-sauce-t">✦ The Bleed AI Secret Sauce</div>
+              <div className="mach-sauce-d">The proprietary layer we don&rsquo;t put on a spec sheet. It&rsquo;s the reason the same tools, in someone else&rsquo;s hands, don&rsquo;t get the same numbers.</div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
