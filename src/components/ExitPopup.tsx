@@ -2,7 +2,11 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-const CALCULATOR = "https://bleedai.com/free-tools/cold-email-roi-calculator/";
+// TEMP: ROI calculator deploy is being stabilized, so the exit-popup CTA points to
+// the strategy call for now. REVERT to the ROI calculator once it is reliably live:
+//   const CALCULATOR = "https://bleedai.com/free-tools/cold-email-roi-calculator/";
+//   and change the button label back to "Calculate My ROI →".
+const CALCULATOR = "https://bleedai.com/book-call/";
 const MARTIJN_PHOTO = "https://groupeffort.nl/wp-content/uploads/2026/01/MartijnSquigle.jpeg";
 
 const ptc: { quote: ReactNode; name: string; role: string; img: string }[] = [
@@ -138,7 +142,7 @@ export default function ExitPopup() {
             <strong style={{ color: "var(--text)" }}>Takes 10 seconds.</strong>
           </p>
           <button className="popup-cta" onClick={showRoi}>
-            Calculate My ROI →
+            Book a strategy call →
           </button>
           <div className="popup-fineprint">No spam. Just your numbers, instantly.</div>
           <div className="popup-decline" onClick={close}>
