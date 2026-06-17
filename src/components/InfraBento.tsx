@@ -9,7 +9,6 @@ const MACHINE_SVG = `
       <!-- top feed pipe -->
       <path d="M70 60 H636" fill="none" stroke="#23233a" stroke-width="3"/>
       <text x="70" y="34" fill="#9099b8" font-size="10" font-family="monospace" text-anchor="middle">cold emails in</text>
-      <g transform="translate(48,40)"><rect width="18" height="11" rx="1.5" fill="#e6e9f2" stroke="#c2c8da"/><path d="M1 1.5 L9 7 L17 1.5" fill="none" stroke="#9aa2bd" stroke-width="1"/></g>
       <g class="drop-env"><rect width="16" height="11" rx="1.5" fill="#e6e9f2" stroke="#c2c8da"/><path d="M1 1.5 L8 7 L15 1.5" fill="none" stroke="#9aa2bd" stroke-width="1"/></g>
       <path d="M36 56 H104 L86 98 H54 Z" fill="#181826" stroke="#2a2a3e"/>
       <path d="M70 98 V178" stroke="#2a2a3e" stroke-width="6" stroke-linecap="round"/>
