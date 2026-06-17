@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 
-const CALCULATOR = "https://calculator.bleedai.com";
+const CALCULATOR = "https://bleedai.com/free-tools/cold-email-roi-calculator/";
 const MARTIJN_PHOTO = "https://groupeffort.nl/wp-content/uploads/2026/01/MartijnSquigle.jpeg";
 
 const ptc: { quote: ReactNode; name: string; role: string; img: string }[] = [
@@ -50,38 +50,39 @@ const ptc: { quote: ReactNode; name: string; role: string; img: string }[] = [
 
 export default function ExitPopup() {
   const [open, setOpen] = useState(false);
+  // Once dismissed (any close path), never show again this session - even across reloads.
+  const dismissed = useRef(false);
 
-  // Exit-intent: fire EVERY time the cursor leaves through the top of the viewport
+  // Close + remember for the session (mirrors SidePopup's "lpClosed" guard)
+  const close = () => {
+    setOpen(false);
+    dismissed.current = true;
+    try {
+      sessionStorage.setItem("epClosed", "1");
+    } catch {}
+  };
+
+  // Seed the dismissed flag from a prior dismissal this session
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("epClosed")) dismissed.current = true;
+    } catch {}
+  }, []);
+
+  // Exit-intent: show ONCE when the cursor leaves through the top of the viewport
   useEffect(() => {
     const onOut = (e: MouseEvent) => {
+      if (dismissed.current) return;
       if (e.relatedTarget == null && e.clientY <= 0) setOpen(true);
     };
     document.addEventListener("mouseout", onOut);
     return () => document.removeEventListener("mouseout", onOut);
   }, []);
 
-  // Tab-return: re-show the popup every time they come back to the tab
-  useEffect(() => {
-    const orig = document.title;
-    const onVis = () => {
-      if (document.hidden) {
-        document.title = "👀 Still thinking it over? - Bleed AI";
-      } else {
-        document.title = orig;
-        setOpen(true);
-      }
-    };
-    document.addEventListener("visibilitychange", onVis);
-    return () => {
-      document.removeEventListener("visibilitychange", onVis);
-      document.title = orig;
-    };
-  }, []);
-
   // Escape to close
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") close();
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
@@ -89,14 +90,14 @@ export default function ExitPopup() {
 
   const showRoi = () => {
     window.open(CALCULATOR, "_blank", "noopener");
-    setOpen(false);
+    close();
   };
 
   return (
     <div
       className={`popup-overlay${open ? " open" : ""}`}
       onClick={(e) => {
-        if (e.target === e.currentTarget) setOpen(false);
+        if (e.target === e.currentTarget) close();
       }}
     >
       <div className="popup-box">
@@ -126,7 +127,7 @@ export default function ExitPopup() {
         </div>
 
         <div className="popup-right">
-          <button className="popup-close" onClick={() => setOpen(false)} aria-label="Close">
+          <button className="popup-close" onClick={close} aria-label="Close">
             ×
           </button>
           <h3>
@@ -140,7 +141,7 @@ export default function ExitPopup() {
             Calculate My ROI →
           </button>
           <div className="popup-fineprint">No spam. Just your numbers, instantly.</div>
-          <div className="popup-decline" onClick={() => setOpen(false)}>
+          <div className="popup-decline" onClick={close}>
             No thanks, I&apos;m happy with inconsistent pipeline
           </div>
         </div>

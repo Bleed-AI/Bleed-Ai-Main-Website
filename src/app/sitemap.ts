@@ -25,26 +25,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
+    // Other free tools temporarily de-listed from the sitemap while being reworked/tested. Restore when re-added to nav.
+    // /free-tools/cold-email-spam-checker, /free-tools/b2b-icp-builder, /free-tools/cold-email-domain-calculator, /free-tools/cold-email-generator
     {
-      url: `${baseUrl}/free-tools/cold-email-spam-checker/`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/free-tools/b2b-icp-builder/`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/free-tools/cold-email-domain-calculator/`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/free-tools/cold-email-generator/`,
+      url: `${baseUrl}/free-tools/cold-email-roi-calculator/`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.7,

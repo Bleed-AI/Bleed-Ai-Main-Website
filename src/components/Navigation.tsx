@@ -88,10 +88,12 @@ export default function Navigation() {
                   onMouseLeave={handleFreeToolsLeave}
                 >
                   {[
-                    { href: '/free-tools/cold-email-spam-checker', icon: '🛡️', title: 'Spam Checker', desc: '100-point cold email audit' },
-                    { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
-                    { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
-                    { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
+                    // Other free tools temporarily hidden from nav while being reworked/tested (still reachable by direct URL). Restore when ready.
+                    // { href: '/free-tools/cold-email-spam-checker', icon: '🛡️', title: 'Spam Checker', desc: '100-point cold email audit' },
+                    // { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
+                    // { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
+                    // { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
+                    { href: '/free-tools/cold-email-roi-calculator', icon: '💰', title: 'ROI Calculator', desc: 'See exact campaign returns in 60 seconds' },
                   ].map((tool) => (
                     <a
                       key={tool.href}
@@ -234,10 +236,12 @@ export default function Navigation() {
                     {mobileFreeToolsOpen && (
                       <div className="space-y-2">
                         {[
-                          { href: '/free-tools/cold-email-spam-checker', icon: '🛡️', title: 'Spam Checker', desc: '100-point cold email audit' },
-                          { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
-                          { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
-                          { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
+                          // Other free tools temporarily hidden from nav while being reworked/tested (still reachable by direct URL). Restore when ready.
+                          // { href: '/free-tools/cold-email-spam-checker', icon: '🛡️', title: 'Spam Checker', desc: '100-point cold email audit' },
+                          // { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
+                          // { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
+                          // { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
+                          { href: '/free-tools/cold-email-roi-calculator', icon: '💰', title: 'ROI Calculator', desc: 'See exact campaign returns in 60 seconds' },
                         ].map((tool) => (
                           <a
                             key={tool.href}
