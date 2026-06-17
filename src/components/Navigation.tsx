@@ -93,14 +93,14 @@ export default function Navigation() {
                     // { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
                     // { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
                     // { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
-                    { href: '/free-tools/cold-email-roi-calculator', icon: '💰', title: 'ROI Calculator', desc: 'See exact campaign returns in 60 seconds' },
+                    { href: '/free-tools/cold-email-roi-calculator', icon: '', title: 'ROI Calculator', desc: 'See exact campaign returns in 60 seconds' },
                   ].map((tool) => (
                     <a
                       key={tool.href}
                       href={tool.href}
                       className="flex items-start gap-3 px-4 py-3 hover:bg-[rgba(177,19,15,0.08)] border-b border-[var(--border-color)] last:border-0 transition-colors duration-150"
                     >
-                      <span className="text-xl flex-shrink-0 mt-0.5">{tool.icon}</span>
+                      {tool.icon && <span className="text-xl flex-shrink-0 mt-0.5">{tool.icon}</span>}
                       <div>
                         <div className="text-sm font-semibold text-[var(--text-primary)]">{tool.title}</div>
                         <div className="text-xs text-[var(--text-secondary)] mt-0.5">{tool.desc}</div>
@@ -241,7 +241,7 @@ export default function Navigation() {
                           // { href: '/free-tools/b2b-icp-builder', icon: '🎯', title: 'ICP Builder', desc: 'Apollo-ready buyer list criteria' },
                           // { href: '/free-tools/cold-email-domain-calculator', icon: '🔧', title: 'Domain Calculator', desc: 'Exact domain & inbox setup plan' },
                           // { href: '/free-tools/cold-email-generator', icon: '✉️', title: 'Email Generator', desc: 'Signal-based emails that get replies' },
-                          { href: '/free-tools/cold-email-roi-calculator', icon: '💰', title: 'ROI Calculator', desc: 'See exact campaign returns in 60 seconds' },
+                          { href: '/free-tools/cold-email-roi-calculator', icon: '', title: 'ROI Calculator', desc: 'See exact campaign returns in 60 seconds' },
                         ].map((tool) => (
                           <a
                             key={tool.href}
@@ -249,7 +249,7 @@ export default function Navigation() {
                             onClick={() => setMobileMenuOpen(false)}
                             className="flex items-start gap-3 p-4 rounded-xl hover:bg-[rgba(177,19,15,0.1)] border border-transparent hover:border-[#B1130F]/30 transition-all duration-200 active:scale-[0.98]"
                           >
-                            <span className="text-2xl flex-shrink-0 mt-0.5">{tool.icon}</span>
+                            {tool.icon && <span className="text-2xl flex-shrink-0 mt-0.5">{tool.icon}</span>}
                             <div className="flex-1 min-w-0">
                               <h4 className="font-semibold text-[var(--text-primary)] text-base mb-1">{tool.title}</h4>
                               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{tool.desc}</p>
