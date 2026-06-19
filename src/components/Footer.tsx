@@ -8,6 +8,7 @@ const footerLinks = {
     { label: "How It Works", href: "#framework" },
     { label: "Case Studies", href: "#testimonials" },
     { label: "Blog", href: "/blog/" },
+    { label: "Our Infrastructure", href: "https://infra.bleedai.com/", external: true },
     { label: "Start Trial Campaign", href: "https://calculator.bleedai.com/trials" },
   ],
   platforms: [
@@ -82,6 +83,7 @@ export default function Footer() {
                       <li key={link.label}>
                         <a
                           href={link.href}
+                          {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                           className="text-[var(--text-muted)] hover:text-[#B1130F] transition-colors duration-300 text-sm"
                         >
                           {link.label}
