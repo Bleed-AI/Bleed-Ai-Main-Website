@@ -13,7 +13,7 @@ keywords:
 banner: "/images/blog/best-cold-email-agencies-2026.png"
 date: "2026-06-10"
 author: "Taha Anwar"
-noindex: true
+noindex: false
 faqs:
   - question: "What's the average reply rate for cold email in 2026?"
     answer: "Per Instantly's 2026 platform data (1.6M+ accounts), the platform-wide average is 3.43%. Top quartile sits at 5.5%+, and top performers (top 10%) hit 10.7%+. Industry varies: Legal Services is the highest at ~10%, SaaS/Software the lowest at 1.9-3.5%. If an agency promises you 'guaranteed 15% reply rates' without seeing your ICP, they're lying."

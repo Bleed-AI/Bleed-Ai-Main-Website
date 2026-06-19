@@ -13,7 +13,7 @@ keywords:
 banner: "/images/blog/apollo-vs-clay.png"
 date: "2026-06-10"
 author: "Taha Anwar"
-noindex: true
+noindex: false
 faqs:
   - question: "What's the actual difference between Apollo and Clay in one sentence?"
     answer: "Apollo is an all-in-one sales engagement platform (database + sequencing + dialer + CRM hooks) trying to be your one tool. Clay is a data orchestration platform that enriches and builds lists from 100+ sources and AI but doesn't send anything — you bring your own sender. Apollo's the toolkit; Clay's the workshop."
