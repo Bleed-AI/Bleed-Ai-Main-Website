@@ -22,10 +22,6 @@ BleedAI runs signal-based cold email for B2B SaaS, agencies, consultancies, and 
 ## Free tools
 
 - [Cold Email ROI Calculator](https://bleedai.com/free-tools/cold-email-roi-calculator/): Calculate exact campaign returns in 60 seconds
-- [Cold Email Spam Checker](https://bleedai.com/free-tools/cold-email-spam-checker/): 100-point spam score audit with exact fixes for each trigger
-- [B2B ICP Builder](https://bleedai.com/free-tools/b2b-icp-builder/): Generates ICP criteria (firmographics, technographics, buying signals, decision-maker titles) ready to paste into Apollo or Prospeo
-- [Cold Email Domain Calculator](https://bleedai.com/free-tools/cold-email-domain-calculator/): Calculates exact domain count, inbox setup, warmup timeline, and DNS records for any outreach volume
-- [Cold Email Generator](https://bleedai.com/free-tools/cold-email-generator/): Signal-based cold email drafts built around specific buying triggers (not templates)
 
 ## About
 
