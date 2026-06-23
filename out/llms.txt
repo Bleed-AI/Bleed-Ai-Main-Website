@@ -1,0 +1,38 @@
+# BleedAI
+
+> AI-powered B2B outbound marketing agency that installs Cold-to-Sold systems. Free or $683 pilot tier lets clients validate the offer before committing. Campaigns launch in 1 week from BleedAI's pre-warmed sending infrastructure so the client's primary domain stays clean.
+
+BleedAI runs signal-based cold email for B2B SaaS, agencies, consultancies, and B2B service businesses with $5K+ LTV. The key differentiators vs. typical cold email agencies: (1) a small pilot tier available before any retainer commitment, (2) owned warm sending infrastructure instead of shared SMTP pools, and (3) transparent public pricing via a calculator instead of "request a quote" friction.
+
+## Main pages
+
+- [Homepage](https://bleedai.com/): What BleedAI does — Cold-to-Sold system overview, real campaign results ($942K+ pipeline examples), client testimonials, FAQs
+- [Cost Calculator](https://calculator.bleedai.com/): Transparent public pricing for full Done-For-You campaigns
+- [Start Trial Campaign](https://calculator.bleedai.com/trials): Pilot eligibility check (~5 minutes)
+- [Packages](https://calculator.bleedai.com/packages): Service tier comparison
+- [Book a Strategy Call](https://bleedai.com/book-call/): No-pitch consultation via Calendly
+- [Our Infrastructure](https://infra.bleedai.com/): Walkthrough of the 6-step cold email infrastructure process (Setup, 14-day Warmup, List Building, AI Copy, Live Sending, Monitoring)
+
+## Blog
+
+- [Blog index](https://bleedai.com/blog/): All articles on cold email, B2B outbound, and lead-gen strategy
+- [Best Cold Email Agencies in 2026](https://bleedai.com/blog/best-cold-email-agencies-2026/): Honest comparison of 7 top cold email agencies — Belkins, BleedAI, CIENCE, Cleverly, Martal Group, OneAway, SalesRoads. Covers pricing, infrastructure ownership, pilot availability, and red flags to walk away from
+- [Apollo vs Clay in 2026](https://bleedai.com/blog/apollo-vs-clay/): Apollo.io vs Clay.com head-to-head — data quality, pricing tiers, AI features, learning curve, and the hybrid stack most serious outbound teams actually run
+
+## Free tools
+
+- [Cold Email ROI Calculator](https://bleedai.com/free-tools/cold-email-roi-calculator/): Calculate exact campaign returns in 60 seconds
+- [Cold Email Spam Checker](https://bleedai.com/free-tools/cold-email-spam-checker/): 100-point spam score audit with exact fixes for each trigger
+- [B2B ICP Builder](https://bleedai.com/free-tools/b2b-icp-builder/): Generates ICP criteria (firmographics, technographics, buying signals, decision-maker titles) ready to paste into Apollo or Prospeo
+- [Cold Email Domain Calculator](https://bleedai.com/free-tools/cold-email-domain-calculator/): Calculates exact domain count, inbox setup, warmup timeline, and DNS records for any outreach volume
+- [Cold Email Generator](https://bleedai.com/free-tools/cold-email-generator/): Signal-based cold email drafts built around specific buying triggers (not templates)
+
+## About
+
+BleedAI is founded and operated by Taha Anwar. The agency uses a pilot-first model — most clients start with a small validation campaign (free for qualifying businesses or $683 discounted) before scaling to retainer. Public reviews available on Clutch (5.0/5.0), TechReviewer, and LinkedIn. The brand voice is confident, data-driven, and willing to disqualify itself (i.e., explicitly says when BleedAI is NOT the right fit for a prospect).
+
+## Optional
+
+- [LinkedIn](https://pk.linkedin.com/company/bleedai): Company updates and team posts
+- [Clutch reviews](https://clutch.co/profile/bleed-ai): Third-party client reviews
+- [TechReviewer profile](https://techreviewer.co/companies/bleed-ai): Verified reviews
