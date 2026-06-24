@@ -93,12 +93,13 @@ function TestiCard({ v, delay }: { v: (typeof videos)[0]; delay: number }) {
   );
 }
 
-function Avatar({ av }: { av: Wall["av"] }) {
+function Avatar({ av, name }: { av: Wall["av"]; name: string }) {
   if (av.type === "none") return null;
   if (av.type === "initials") return <span className="wall-av-initials">{av.val}</span>;
   const cls = av.type === "photo" ? "wall-av wall-av-photo" : "wall-av";
+  const altText = av.type === "photo" ? `${name} photo` : `${name} company logo`;
   // eslint-disable-next-line @next/next/no-img-element
-  return <img className={cls} src={av.val} alt="" />;
+  return <img className={cls} src={av.val} alt={altText} />;
 }
 
 export default function Testimonials() {
@@ -136,7 +137,7 @@ export default function Testimonials() {
                     </div>
                   </div>
                   <div className="wall-who">
-                    <Avatar av={w.av} />
+                    <Avatar av={w.av} name={w.name} />
                     <div>
                       <div className="wall-name">{w.name}</div>
                       <div className="wall-co">{w.co}</div>

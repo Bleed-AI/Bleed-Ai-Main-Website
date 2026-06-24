@@ -100,7 +100,7 @@ export default function Framework() {
                   {s.tools.map((t, j) => (
                     <span className="step-tool" key={j}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={t.src} alt="" />
+                      <img src={t.src} alt={`${t.label} logo`} />
                       {t.label}
                     </span>
                   ))}
