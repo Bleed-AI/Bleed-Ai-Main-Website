@@ -897,7 +897,7 @@ body {
 .bai .wall-quote .hl { color: var(--green); font-style: normal; font-weight: 600; }
 .bai .wall-who { display: flex; align-items: center; gap: 10px; }
 .bai .wall-av { width: 38px; height: 38px; border-radius: 50%; object-fit: contain; background: #fff; border: 1px solid var(--border); flex-shrink: 0; padding: 3px; box-sizing: border-box; }
-.bai .wall-av-photo { object-fit: cover; object-position: center top; padding: 0; background: var(--surface-elevated); }
+.bai .wall-av-photo { object-fit: cover; object-position: center; padding: 0; background: var(--surface-elevated); }
 .bai .wall-av-initials { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #8a0e0b, var(--red)); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
 .bai .wall-name { font-size: 12.5px; font-weight: 700; color: var(--text); line-height: 1.2; }
 .bai .wall-co { font-size: 11px; color: var(--muted); }
