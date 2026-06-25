@@ -57,7 +57,7 @@ export default function Navigation() {
             </a>
 
             <a
-              href="#results-section"
+              href="/#results-section"
               className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
             >
               Results
@@ -181,7 +181,7 @@ export default function Navigation() {
 
                   {/* Results Link */}
                   <a
-                    href="#results-section"
+                    href="/#results-section"
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center gap-3 text-lg font-bold text-[var(--text-primary)] hover:text-[#B1130F] transition-colors duration-300 py-2"
                   >

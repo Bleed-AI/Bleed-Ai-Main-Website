@@ -23,7 +23,7 @@ export default function BlogIndexPage() {
   const posts = getAllPosts();
 
   return (
-    <main className="relative overflow-hidden min-h-screen">
+    <main className="relative overflow-x-clip min-h-screen">
       <BackgroundOrbs />
       <Navigation />
 

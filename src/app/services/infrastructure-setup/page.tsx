@@ -61,7 +61,7 @@ export default function InfrastructureSetupPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
       />
-      <main className="relative overflow-hidden">
+      <main className="relative overflow-x-clip">
         <Navigation />
 
       <ServiceHero

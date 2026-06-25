@@ -19,7 +19,7 @@ export const metadata = genMeta({
 
 export default function ColdEmailRoiCalculatorPage() {
   return (
-    <main className="bai relative overflow-hidden">
+    <main className="bai relative overflow-x-clip">
       {/* Site-wide fixed glow layer behind all content (mockup's global orbs) */}
       <div className="bai-bg" aria-hidden="true">
         <div className="bai-orb1" />
