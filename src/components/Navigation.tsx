@@ -21,12 +21,13 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 transition-all duration-500 translate-y-0 ${
+        className={`sticky top-0 left-0 right-0 transition-all duration-500 ${
           mobileMenuOpen ? "z-[9990]" : "z-50"
         }`}
       >
         <div className="border-b border-[var(--border-color)] bg-[#07070d]/90 backdrop-blur-xl">
-          <div className="px-4 sm:px-6 lg:px-12 h-14 sm:h-[58px] flex justify-between items-center">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <div className="h-14 sm:h-[58px] flex justify-between items-center">
           {/* Logo */}
           <a href="/" className="relative group">
             <Image
@@ -123,8 +124,9 @@ export default function Navigation() {
               </svg>
             </button>
           </div>
+            </div>
+          </div>
         </div>
-      </div>
       </nav>
 
       {/* Mobile Menu - Outside nav for proper z-index */}

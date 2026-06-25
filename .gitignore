@@ -31,3 +31,13 @@ Thumbs.db
 
 # Claude AI memory (local only)
 .claude/
+
+# Local-only design test page + its components (never deployed)
+# /home-test/ is an internal sandbox; not tracked in git so it stays off live.
+src/app/home-test/
+src/components/HeroTest.tsx
+src/components/TickerTest.tsx
+src/components/NavigationTest.tsx
+src/components/RepliesMarqueeTest.tsx
+out/home-test/
+out/_next/static/chunks/app/home-test/

@@ -143,7 +143,8 @@ export default function PopupNotifications() {
   const currentTestimonial = testimonials[testimonialIndex] || testimonials[0];
 
   // Homepage uses the mockup-styled SidePopup instead of this global popup.
-  if (pathname === "/") return null;
+  // /home-test is an internal clone of the homepage and should behave identically.
+  if (pathname === "/" || pathname?.startsWith("/home-test")) return null;
 
   return (
     <>

@@ -668,7 +668,6 @@ body {
    ===================================================================== */
 .bai {
   position: relative;
-  padding-top: 58px;
   background-color: transparent;
   background-image: radial-gradient(circle, rgba(255,255,255,.038) 1px, transparent 1px);
   background-size: 28px 28px;
@@ -693,9 +692,9 @@ body {
 @keyframes bai-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* Section scaffolding */
-.bai .sec { padding: 80px 80px; position: relative; overflow: hidden; }
+.bai .sec { padding: 80px 32px; /* was: 80px 80px — widened for grid uniformity with Nav/Footer */ position: relative; overflow: hidden; }
 .bai .sec.dark { background: transparent; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-.bai .sec-inner { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; }
+.bai .sec-inner { max-width: 1216px; /* was: 1080px — widened for grid uniformity */ margin: 0 auto; position: relative; z-index: 1; }
 .bai .sec-label { font-size: 9.5px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
 .bai .sec-h2 { font-family: 'Inter', system-ui, sans-serif; font-size: clamp(26px,3.5vw,42px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; color: var(--text); margin-bottom: 14px; }
 .bai .sec-sub { font-size: 15.5px; color: var(--sub); max-width: 520px; line-height: 1.65; margin-bottom: 48px; }
@@ -1002,7 +1001,7 @@ body {
 @media (prefers-reduced-motion: reduce) { .bai .faq-a { transition: none; } }
 
 /* Final CTA */
-.bai .final-cta { padding: 100px 80px; text-align: center; position: relative; overflow: hidden; background: transparent; }
+.bai .final-cta { padding: 100px 32px; /* was: 100px 80px — horizontal alignment with sections */ text-align: center; position: relative; overflow: hidden; background: transparent; }
 .bai .final-cta::before { content: ''; position: absolute; bottom: -80px; left: 50%; transform: translateX(-50%); width: 900px; height: 600px; background: radial-gradient(ellipse at bottom, rgba(177,19,15,.16), rgba(120,40,200,.06) 40%, transparent 70%); pointer-events: none; }
 .bai .final-cta::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 28px 28px; pointer-events: none; z-index: 0; }
 .bai .final-cta > * { position: relative; z-index: 1; }

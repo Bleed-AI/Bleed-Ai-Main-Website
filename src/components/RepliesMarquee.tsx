@@ -33,7 +33,7 @@ export default function RepliesMarquee() {
     <section id="replies-section">
       <div className="sec dark">
         <div className="sec-inner">
-          <Reveal className="email-label-row">
+          <Reveal className="email-label-row" style={{ justifyContent: "flex-start" }}>
             <span className="email-live-dot" />
             <span className="sec-label" style={{ margin: 0 }}>Straight from the inbox</span>
           </Reveal>

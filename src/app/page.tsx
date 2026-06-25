@@ -19,7 +19,7 @@ import CursorGlow from "@/components/CursorGlow";
 
 export default function Home() {
   return (
-    <main className="bai relative overflow-hidden">
+    <main className="bai relative overflow-x-clip">
       {/* Site-wide fixed glow layer behind all content (mockup's global orbs) */}
       <div className="bai-bg" aria-hidden="true">
         <div className="bai-orb1" />
@@ -27,8 +27,8 @@ export default function Home() {
         <div className="bai-orb3" />
       </div>
       <CursorGlow />
-      <Navigation />
       <Ticker />
+      <Navigation />
       <Hero />
       <StatsStrip />
       <RepliesMarquee />
