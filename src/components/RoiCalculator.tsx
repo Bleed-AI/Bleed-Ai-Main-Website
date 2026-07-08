@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-const GROSS_MARGIN = 70;
-
 // Cost follows volume via our real tiers - never a slider the prospect can drag down.
 function planFor(leads: number): { key: string; price: number } {
   if (leads <= 15000) return { key: "pilot", price: 1500 };
@@ -77,8 +75,7 @@ export default function RoiCalculator() {
   const clients = meetings * (closeRate / 100);
   const revMonth = clients * deal;
   const revYear = revMonth * 12;
-  const grossYear = revYear * (GROSS_MARGIN / 100);
-  const roi = grossYear / (plan.price * 12);
+  const roi = revYear / (plan.price * 12);
   const cpm = meetings > 0 ? plan.price / meetings : 0;
 
   const pipe = [
@@ -112,9 +109,6 @@ export default function RoiCalculator() {
           <div className="stage-meta">
             <span className="chip roi">
               Return&nbsp;<b className="mono">{(roi >= 10 ? Math.round(roi) : roi.toFixed(1)) + "x"}</b>
-            </span>
-            <span className="chip profit">
-              Gross profit / yr&nbsp;<b className="mono">{money(grossYear)}</b>
             </span>
             <span className="chip">
               Cost / meeting&nbsp;<b className="mono">{money(cpm)}</b>
@@ -179,7 +173,6 @@ export default function RoiCalculator() {
         .roi-calc .chip b { color: var(--text); }
         .roi-calc .chip.roi { border-color: rgba(177,19,15,.4); background: rgba(177,19,15,.12); color: #fff; }
         .roi-calc .chip.roi b { font-size: 15px; color: var(--red2); }
-        .roi-calc .chip.profit b { color: var(--green); }
 
         .roi-calc .pipe { display: flex; align-items: stretch; gap: 0; position: relative; margin-top: 10px; }
         .roi-calc .node { flex: 1; text-align: center; background: var(--bg3); border: 1px solid var(--border); border-radius: 11px; padding: 9px 6px; position: relative; z-index: 1; }
