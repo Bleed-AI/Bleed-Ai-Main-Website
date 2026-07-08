@@ -29,7 +29,7 @@ export default function SidePopup() {
     let dismissed = false;
     try { dismissed = !!sessionStorage.getItem("lpClosed"); } catch {}
     if (dismissed) { setClosed(true); return; }
-    const t = setTimeout(() => setShown(true), 4500);
+    const t = setTimeout(() => setShown(true), 20000);
     return () => clearTimeout(t);
   }, []);
 
