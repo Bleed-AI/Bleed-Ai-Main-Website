@@ -278,7 +278,7 @@ Since this is our blog: here's how we actually use these tools when running clie
 
 **Why we're not pitching either tool as the answer:** Because they aren't the answer. The tool stack matters less than the offer + ICP combination. We've seen $5K/month Clay-powered campaigns underperform $50/month Apollo campaigns because the offer was sharper. Tools amplify good targeting; they don't replace it.
 
-If you want a partner who's already figured out the tool stack and is focused on the offer/ICP layer instead, the [free pilot eligibility check](https://calculator.bleedai.com/trials) takes about 5 minutes.
+If you want a partner who's already figured out the tool stack and is focused on the offer/ICP layer instead, check out [The Outbound Sprint](https://calculator.bleedai.com/sprint): a fixed-price way to run real cold email experiments before you commit to anything bigger.
 
 ## The two questions to ask yourself
 

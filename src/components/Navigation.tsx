@@ -53,7 +53,7 @@ export default function Navigation() {
               href="https://calculator.bleedai.com/packages"
               className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
             >
-              Packages
+              Monthly Pricing
             </a>
 
             <a
@@ -64,21 +64,13 @@ export default function Navigation() {
             </a>
 
             <a
-              href="https://calculator.bleedai.com/"
-              className="flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
-            >
-              <span className="text-base leading-none">🚀</span>
-              <span>Cost Calculator</span>
-            </a>
-
-            <a
-              href="https://calculator.bleedai.com/trials"
+              href="https://calculator.bleedai.com/sprint"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-5 py-2.5 bg-[#B1130F] text-white rounded-full text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow"
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span>Start My Trial Campaign</span>
+                <span>Outbound Sprint</span>
                 <svg
                   className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
@@ -95,12 +87,12 @@ export default function Navigation() {
           {/* Mobile Actions */}
           <div className="flex lg:hidden items-center gap-2 sm:gap-3">
             <a
-              href="https://calculator.bleedai.com/trials"
+              href="https://calculator.bleedai.com/sprint"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-3 sm:px-4 py-1.5 sm:py-2 bg-[#B1130F] text-white rounded-full text-xs sm:text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow whitespace-nowrap"
             >
-              <span className="relative z-10">Start My Trial Campaign</span>
+              <span className="relative z-10">Outbound Sprint</span>
             </a>
 
             {/* Hamburger Menu */}
@@ -175,7 +167,7 @@ export default function Navigation() {
                       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                       </svg>
-                      Packages
+                      Monthly Pricing
                     </a>
                   </div>
 
@@ -193,13 +185,13 @@ export default function Navigation() {
 
                   {/* CTA Button */}
                   <a
-                    href="https://calculator.bleedai.com/"
+                    href="https://calculator.bleedai.com/sprint"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileMenuOpen(false)}
                     className="group flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#B1130F] text-white text-center rounded-full font-bold text-base hover:shadow-lg hover:shadow-[#B1130F]/30 transition-all duration-300 active:scale-[0.98] btn-glow mt-4"
                   >
-                    <span>Cost Calculator</span>
+                    <span>Outbound Sprint</span>
                     <svg
                       className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
                       fill="none"

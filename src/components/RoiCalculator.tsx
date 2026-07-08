@@ -170,7 +170,7 @@ export default function RoiCalculator() {
 
       <div className="cta-row">
         <a className="btn btn-red" href="/book-call/">Book a strategy call →</a>
-        <a className="btn btn-ghost" href="https://calculator.bleedai.com/trials" target="_blank" rel="noopener noreferrer">Start with a trial</a>
+        <a className="btn btn-ghost" href="https://calculator.bleedai.com/sprint" target="_blank" rel="noopener noreferrer">Start Your Sprint</a>
       </div>
 
       <div className="disc">

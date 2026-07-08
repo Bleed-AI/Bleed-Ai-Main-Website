@@ -13,7 +13,7 @@ const without = [
 
 const withBleed = [
   "Qualified meetings booked while you focus on delivery",
-  "Prove it with a low-cost trial campaign before you commit",
+  "Prove it with The Outbound Sprint, one fixed price, before you commit",
   "98%+ inbox placement, engineered at the DNS level",
   "Full campaign data: reply rates, pipeline value, conversion",
   "Laser-targeted ICP lists built from your best existing clients",

@@ -177,20 +177,20 @@ export default function PopupNotifications() {
 
               {/* Heading */}
               <h3 className="text-xl font-semibold text-[var(--text-primary)] leading-tight">
-                Apply For Your Trial Pilot Campaign
+                The Outbound Sprint
               </h3>
 
               {/* Subtext */}
               <p className="text-sm text-[var(--text-secondary)] leading-relaxed">
-                Trial Offer: We'll Launch A No-Obligation 'Pilot Campaign' To Prove Outbound For Your Business Before Moving Forward
+                We run The Outbound Sprint: up to 8 cold email experiments in 6 weeks, one fixed price, you keep everything.
               </p>
 
               {/* CTA Button */}
               <a
-                href="https://calculator.bleedai.com/trials"
+                href="https://calculator.bleedai.com/sprint"
                 className="group relative inline-flex items-center justify-center px-8 py-4 bg-[#B1130F] text-white font-semibold text-sm rounded-full overflow-hidden transition-all duration-500 btn-glow"
               >
-                <span className="relative z-10">Start My Trial Campaign</span>
+                <span className="relative z-10">Start Your Sprint</span>
               </a>
             </div>
           </div>

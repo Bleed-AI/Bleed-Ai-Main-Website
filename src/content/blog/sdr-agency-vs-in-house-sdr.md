@@ -272,7 +272,7 @@ Since this is our blog, here's the honest version:
 
 Translation: **we're not the right fit for every stage.** For early-stage teams, we're a faster, cheaper path to validated outbound than hiring an SDR. For late-stage teams, we complement your in-house SDR org — we don't replace it.
 
-If we sound like the right fit for your stage, the [free pilot eligibility check](https://calculator.bleedai.com/trials) takes about 5 minutes.
+If we sound like the right fit for your stage, check out [The Outbound Sprint](https://calculator.bleedai.com/sprint): a fixed-price way to test cold email before committing to more.
 
 ## Final thoughts
 

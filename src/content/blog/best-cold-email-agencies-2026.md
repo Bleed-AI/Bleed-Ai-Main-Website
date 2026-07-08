@@ -320,7 +320,7 @@ Since this is our blog, here's the honest version:
   </div>
 </div>
 
-Translation: **we're not the right fit for everyone**, and saying so up front is the cheapest filter both of us have. If we sound like a match, the [free pilot eligibility check](https://calculator.bleedai.com/trials) takes about 5 minutes.
+Translation: **we're not the right fit for everyone**, and saying so up front is the cheapest filter both of us have. If we sound like a match, check out [The Outbound Sprint](https://calculator.bleedai.com/sprint): a fixed-price way to test cold email for your business before committing to more.
 
 ## Recommendations by your situation
 
@@ -376,6 +376,6 @@ If you take **one thing** from this guide, take this:
   <p style="margin:0.85rem 0 0 0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem">Their answers will tell you more in 30 seconds than any sales deck will in an hour.</p>
 </div>
 
-When you're ready to test what an AI-first, signal-based campaign looks like for your business, the lowest-friction starting point is the pilot — eligibility check takes ~5 minutes and the campaign launches in a week. *No 12-month lock-in, no domain risk, no vibes-based pricing.*
+When you're ready to test what an AI-first, signal-based campaign looks like for your business, the lowest-friction starting point is The Outbound Sprint: a fixed-price way to run up to eight cold email experiments in six weeks, launching within a week of sign-off. *No 12-month lock-in, no domain risk, no vibes-based pricing.*
 
 Touch grass, look at the data, pick the agency that fits **your** business — not the one that ranked itself #1.

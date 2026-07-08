@@ -9,16 +9,16 @@ export default function InlineCta() {
               Want this for your business?
             </div>
             <h3 className="font-display text-xl sm:text-2xl font-semibold text-[var(--text-primary)] leading-snug">
-              Start a trial campaign and see results in 1 week.
+              We run The Outbound Sprint: up to 8 cold email experiments in 6 weeks, one fixed price.
             </h3>
           </div>
           <a
-            href="https://calculator.bleedai.com/trials"
+            href="https://calculator.bleedai.com/sprint"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#B1130F] text-white font-semibold text-sm rounded-full overflow-hidden transition-all duration-300 btn-glow whitespace-nowrap"
           >
-            <span className="relative z-10">Start My Trial Campaign</span>
+            <span className="relative z-10">Start Your Sprint</span>
             <svg
               className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"

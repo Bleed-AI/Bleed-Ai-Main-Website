@@ -5,10 +5,10 @@ import Reveal from "@/components/Reveal";
 
 const faqs: { q: string; a: ReactNode }[] = [
   {
-    q: "Do you offer a trial before committing to a package?",
+    q: "Can I test cold email before committing to a package?",
     a: (
       <>
-        <strong>Yes - for qualified companies, we offer a trial campaign.</strong> We first check that your offer, niche, and ICP are a good fit. If they are, we run a trial campaign so you can see real results before committing to a full managed package. Use the &ldquo;Check If Your Niche Is Available&rdquo; button to start that conversation.
+        <strong>Yes, that&apos;s what The Outbound Sprint is for.</strong> It&apos;s a fixed-price, 6-week engagement running up to 8 cold email experiments, so you see real results before committing to a full managed package. Use the Outbound Sprint button to get started.
       </>
     ),
   },
