@@ -293,7 +293,7 @@ export default function Hero() {
                 <div className="flex items-center gap-2.5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/taha-anwar.png"
+                    src="/images/taha-profile-2.png"
                     alt="Taha Anwar"
                     className="w-8 h-8 rounded-full object-cover border border-white/15"
                   />
