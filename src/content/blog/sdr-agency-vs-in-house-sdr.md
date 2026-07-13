@@ -13,7 +13,7 @@ keywords:
 banner: "/images/blog/sdr-agency-vs-in-house-sdr.png"
 date: "2026-07-05"
 author: "Taha Anwar"
-noindex: true
+noindex: false
 faqs:
   - question: "What's the fully-loaded cost of an in-house SDR in 2026?"
     answer: "$135K–$220K per rep per year. That's base salary ($60–90K) + variable comp / OTE bonuses ($40–60K) + tooling stack ($20–40K: Apollo/Clay + Salesforce/HubSpot + sequencer + LinkedIn Sales Navigator) + infrastructure ($15–30K: domains, inboxes, warming). Most founders quote the base salary and stop there — the tooling + infra is usually 30–40% of the real number."

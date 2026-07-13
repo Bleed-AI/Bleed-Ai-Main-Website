@@ -18,6 +18,8 @@ BleedAI runs signal-based cold email for B2B SaaS, agencies, consultancies, and 
 - [Blog index](https://bleedai.com/blog/): All articles on cold email, B2B outbound, and lead-gen strategy
 - [Best Cold Email Agencies in 2026](https://bleedai.com/blog/best-cold-email-agencies-2026/): Honest comparison of 7 top cold email agencies — Belkins, BleedAI, CIENCE, Cleverly, Martal Group, OneAway, SalesRoads. Covers pricing, infrastructure ownership, pilot availability, and red flags to walk away from
 - [Apollo vs Clay in 2026](https://bleedai.com/blog/apollo-vs-clay/): Apollo.io vs Clay.com head-to-head — data quality, pricing tiers, AI features, learning curve, and the hybrid stack most serious outbound teams actually run
+- [SDR Agency vs In-House SDR in 2026](https://bleedai.com/blog/sdr-agency-vs-in-house-sdr/): Honest 2026 comparison of hiring an SDR agency vs building an in-house SDR team — fully-loaded costs (Bridge Group 2024 + RepVue data), ramp time, churn rates, and the hybrid model most $10M+ B2B teams actually run
+- [Smartlead vs Instantly in 2026](https://bleedai.com/blog/smartlead-vs-instantly/): Head-to-head comparison of the two dominant cold email sending platforms — inbox rotation, warm-up, deliverability, AI features, and 2026 pricing verified against both companies' live pricing pages
 
 ## Free tools
 
