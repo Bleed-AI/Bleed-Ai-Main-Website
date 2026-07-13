@@ -58,6 +58,9 @@ export default function HeroTest() {
                   <span
                     className="bg-clip-text"
                     style={{
+                      fontFamily: "'Instrument Serif', Georgia, serif",
+                      fontStyle: "italic",
+                      fontWeight: 400,
                       backgroundImage:
                         "linear-gradient(90deg, #ff3d38 0%, #B1130F 25%, #ffd4d1 50%, #B1130F 75%, #ff6b67 100%)",
                       backgroundSize: "200% 100%",
@@ -253,7 +256,7 @@ export default function HeroTest() {
               {/* Video / thumbnail */}
               <div
                 onClick={() => setPlaying(true)}
-                className="relative aspect-video cursor-pointer"
+                className="relative aspect-video cursor-pointer overflow-hidden"
               >
                 {playing ? (
                   <iframe
