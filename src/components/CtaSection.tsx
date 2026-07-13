@@ -26,10 +26,10 @@ export default function CtaSection() {
           Join B2B companies generating 100+ qualified opportunities every month.
         </p>
         <a
-          href="https://calculator.bleedai.com/trials"
+          href="https://calculator.bleedai.com/sprint"
           className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B1130F] text-white font-semibold text-lg rounded-full overflow-hidden transition-all duration-500 btn-glow"
         >
-          <span className="relative z-10">Start My Trial Campaign</span>
+          <span className="relative z-10">Start Your Sprint</span>
           <ArrowRightIcon className="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1" />
         </a>
         <div className="flex justify-center items-center gap-6 text-sm text-[var(--text-muted)] mt-6">

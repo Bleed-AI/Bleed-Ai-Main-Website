@@ -4,16 +4,9 @@ import { useState } from "react";
 
 // Cost follows volume via our real tiers - never a slider the prospect can drag down.
 function planFor(leads: number): { key: string; price: number } {
-  if (leads <= 15000) return { key: "pilot", price: 1500 };
-  if (leads <= 40000) return { key: "growth", price: 2450 };
-  return { key: "scale", price: 3450 };
+  if (leads <= 45000) return { key: "growth", price: 3350 };
+  return { key: "scale", price: 5300 };
 }
-
-const PLANS = [
-  { key: "pilot", name: "Pilot", sub: "10k emails/mo", price: "$1,500/mo", emails: 10000 },
-  { key: "growth", name: "Growth", sub: "25k emails/mo", price: "$2,450/mo", emails: 25000 },
-  { key: "scale", name: "Scale", sub: "55k emails/mo", price: "$3,450/mo", emails: 55000 },
-];
 
 const money = (n: number): string =>
   n >= 1e6
@@ -69,10 +62,9 @@ function Slider({ label, value, display, min, max, step, onChange }: SliderProps
 }
 
 export default function RoiCalculator() {
-  const [leads, setLeads] = useState(25000);
+  const [leads, setLeads] = useState(10000);
   const [deal, setDeal] = useState(5000);
-  const [closeRate, setCloseRate] = useState(18);
-  const [margin, setMargin] = useState(70);
+  const [closeRate, setCloseRate] = useState(25);
   const [pos, setPos] = useState(0.5);
   const [book, setBook] = useState(25);
 
@@ -82,8 +74,7 @@ export default function RoiCalculator() {
   const clients = meetings * (closeRate / 100);
   const revMonth = clients * deal;
   const revYear = revMonth * 12;
-  const grossYear = revYear * (margin / 100);
-  const roi = grossYear / (plan.price * 12);
+  const roi = revYear / (plan.price * 12);
   const cpm = meetings > 0 ? plan.price / meetings : 0;
 
   const pipe = [
@@ -118,9 +109,6 @@ export default function RoiCalculator() {
             <span className="chip roi">
               Return&nbsp;<b className="mono">{(roi >= 10 ? Math.round(roi) : roi.toFixed(1)) + "x"}</b>
             </span>
-            <span className="chip profit">
-              Gross profit / yr&nbsp;<b className="mono">{money(grossYear)}</b>
-            </span>
             <span className="chip">
               Cost / meeting&nbsp;<b className="mono">{money(cpm)}</b>
             </span>
@@ -144,25 +132,10 @@ export default function RoiCalculator() {
       <div className="controls">
         <div className="ctrl-head">Tune your numbers</div>
 
-        <div className="plans">
-          {PLANS.map((p) => (
-            <button
-              key={p.key}
-              className={`plan${p.key === plan.key ? " on" : ""}`}
-              onClick={() => setLeads(p.emails)}
-            >
-              <div className="plan-name">{p.name}</div>
-              <div className="plan-sub">{p.sub}</div>
-              <div className="plan-price">{p.price}</div>
-            </button>
-          ))}
-        </div>
-
         <div className="sliders">
-          <Slider label="Leads contacted / month" value={leads} display={leads.toLocaleString()} min={2000} max={60000} step={1000} onChange={setLeads} />
+          <Slider label="Leads contacted / month" value={leads} display={leads.toLocaleString()} min={2000} max={75000} step={1000} onChange={setLeads} />
           <Slider label="Customer lifetime value" value={deal} display={"$" + deal.toLocaleString()} min={1000} max={25000} step={500} onChange={setDeal} />
           <Slider label="Your close rate" value={closeRate} display={closeRate + "%"} min={5} max={45} step={1} onChange={setCloseRate} />
-          <Slider label="Gross profit margin" value={margin} display={margin + "%"} min={40} max={90} step={5} onChange={setMargin} />
           <Slider label="Positive reply rate" value={pos} display={pos + "%"} min={0.2} max={1.5} step={0.1} onChange={setPos} />
           <Slider label="Appointment booking rate" value={book} display={book + "%"} min={10} max={50} step={1} onChange={setBook} />
         </div>
@@ -170,7 +143,7 @@ export default function RoiCalculator() {
 
       <div className="cta-row">
         <a className="btn btn-red" href="/book-call/">Book a strategy call →</a>
-        <a className="btn btn-ghost" href="https://calculator.bleedai.com/trials" target="_blank" rel="noopener noreferrer">Start with a trial</a>
+        <a className="btn btn-ghost" href="https://calculator.bleedai.com/sprint" target="_blank" rel="noopener noreferrer">Start Your Sprint</a>
       </div>
 
       <div className="disc">
@@ -199,7 +172,6 @@ export default function RoiCalculator() {
         .roi-calc .chip b { color: var(--text); }
         .roi-calc .chip.roi { border-color: rgba(177,19,15,.4); background: rgba(177,19,15,.12); color: #fff; }
         .roi-calc .chip.roi b { font-size: 15px; color: var(--red2); }
-        .roi-calc .chip.profit b { color: var(--green); }
 
         .roi-calc .pipe { display: flex; align-items: stretch; gap: 0; position: relative; margin-top: 10px; }
         .roi-calc .node { flex: 1; text-align: center; background: var(--bg3); border: 1px solid var(--border); border-radius: 11px; padding: 9px 6px; position: relative; z-index: 1; }
@@ -212,14 +184,6 @@ export default function RoiCalculator() {
 
         .roi-calc .controls { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px 22px; margin-bottom: 12px; }
         .roi-calc .ctrl-head { font-size: 11px; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-        .roi-calc .plans { display: grid; grid-template-columns: repeat(3,1fr); gap: 9px; margin-bottom: 16px; }
-        .roi-calc .plan { cursor: pointer; border: 1px solid var(--border2); background: var(--bg3); border-radius: 12px; padding: 8px 8px; text-align: center; transition: all .18s; }
-        .roi-calc .plan:hover { border-color: rgba(177,19,15,.4); }
-        .roi-calc .plan.on { border-color: var(--red); background: rgba(177,19,15,.1); }
-        .roi-calc .plan-name { font-weight: 800; font-size: 14px; color: var(--text); }
-        .roi-calc .plan-sub { font-size: 11px; color: var(--sub); margin-top: 3px; }
-        .roi-calc .plan-price { font-size: 11px; color: var(--muted); margin-top: 4px; }
-        .roi-calc .plan.on .plan-price { color: var(--red2); }
 
         .roi-calc .sliders { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
         .roi-calc .field-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }

@@ -9,7 +9,7 @@ const footerLinks = {
     { label: "Case Studies", href: "/#testimonials" },
     { label: "Blog", href: "/blog/" },
     { label: "Our Infrastructure", href: "https://infra.bleedai.com/", external: true },
-    { label: "Start Trial Campaign", href: "https://calculator.bleedai.com/trials" },
+    { label: "The Outbound Sprint", href: "https://calculator.bleedai.com/sprint" },
   ],
   platforms: [
     { label: "Clutch", href: "https://clutch.co/profile/bleed-ai" },

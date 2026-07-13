@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const TRIAL_URL = "https://calculator.bleedai.com/trials";
+const SPRINT_URL = "https://calculator.bleedai.com/sprint";
 const VIDEO_ID = "S0Oeg0sbB6k";
 const PLAYBOOK_DOC =
   "https://docs.google.com/document/u/4/d/1h_PuevKWA6JWJ1tsGOaIdS1jcaRMBCNLE-XotSEWpMg/edit";
@@ -48,8 +48,8 @@ export default function Hero() {
         </div>
 
         <div className="hero-ctas">
-          <a href={TRIAL_URL} target="_blank" rel="noopener noreferrer" className="btn-red">
-            Start My Trial Campaign →
+          <a href={SPRINT_URL} target="_blank" rel="noopener noreferrer" className="btn-red">
+            Start Your Sprint →
           </a>
         </div>
         <div className="cta-trust">

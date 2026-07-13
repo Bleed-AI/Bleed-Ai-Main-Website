@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 
-const TRIAL_URL = "https://calculator.bleedai.com/trials";
+const SPRINT_URL = "https://calculator.bleedai.com/sprint";
 const MARTIJN_PHOTO = "https://groupeffort.nl/wp-content/uploads/2026/01/MartijnSquigle.jpeg";
 
 const testimonials = [
@@ -15,7 +15,7 @@ const testimonials = [
 export default function SidePopup() {
   const [shown, setShown] = useState(false);
   const [closed, setClosed] = useState(false);
-  const [current, setCurrent] = useState(0); // 0 = trial slide; 1..n = testimonial n
+  const [current, setCurrent] = useState(0); // 0 = sprint slide; 1..n = testimonial n
   const tptr = useRef(1);
 
   // Close + remember for the session (stays closed once dismissed, even across reloads)
@@ -29,11 +29,11 @@ export default function SidePopup() {
     let dismissed = false;
     try { dismissed = !!sessionStorage.getItem("lpClosed"); } catch {}
     if (dismissed) { setClosed(true); return; }
-    const t = setTimeout(() => setShown(true), 4500);
+    const t = setTimeout(() => setShown(true), 20000);
     return () => clearTimeout(t);
   }, []);
 
-  // Rotate: trial -> testimonial -> trial -> next testimonial ...
+  // Rotate: sprint -> testimonial -> sprint -> next testimonial ...
   useEffect(() => {
     if (!shown || closed) return;
     const id = setInterval(() => {
@@ -59,12 +59,12 @@ export default function SidePopup() {
         <div className="lp-badge">
           <span className="dot" /> Limited Spots Available
         </div>
-        <div className="lp-title">Apply for your Trial Pilot Campaign</div>
+        <div className="lp-title">The Outbound Sprint</div>
         <div className="lp-desc">
-          We&apos;ll launch a low-cost pilot campaign to prove outbound for your business - before you commit to anything bigger.
+          Up to 8 cold email experiments in 6 weeks, one fixed price, you keep everything.
         </div>
-        <a href={TRIAL_URL} target="_blank" rel="noopener noreferrer" className="lp-cta" onClick={close}>
-          Start My Trial Campaign →
+        <a href={SPRINT_URL} target="_blank" rel="noopener noreferrer" className="lp-cta" onClick={close}>
+          Start Your Sprint →
         </a>
       </div>
 

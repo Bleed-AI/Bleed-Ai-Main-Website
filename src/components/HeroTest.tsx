@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-const TRIAL_URL = "https://calculator.bleedai.com/trials";
+const SPRINT_URL = "https://calculator.bleedai.com/sprint";
 const VIDEO_ID = "S0Oeg0sbB6k";
 
 export default function HeroTest() {
@@ -105,12 +105,12 @@ export default function HeroTest() {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-7">
               <a
-                href={TRIAL_URL}
+                href={SPRINT_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#B1130F] text-white font-semibold text-base rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(177,19,15,0.5)]"
               >
-                <span className="relative z-10">Start My Trial Campaign</span>
+                <span className="relative z-10">Start Your Sprint</span>
                 <svg
                   className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
