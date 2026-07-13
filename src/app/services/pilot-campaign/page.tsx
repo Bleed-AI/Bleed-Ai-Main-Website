@@ -2,16 +2,16 @@ import type { Metadata } from 'next';
 import { generateMetadata, generateServiceSchema } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata({
-  title: "Free Pilot Campaign | Test Your Market Fit",
-  description: "Pilot campaign to validate your offer. Reach 1k–5k prospects, test messaging, and get real market data before scaling. Start in 1 week.",
+  title: "The Outbound Sprint | Prove Cold Outreach Before You Scale",
+  description: "A six-week, fixed-price proof engagement. We run up to 8 cold email experiments against your market, keep what books meetings, and hand you the whole system. You own all of it.",
   path: "/services/pilot-campaign",
   keywords: [
-    "pilot campaign",
-    "free pilot",
+    "outbound sprint",
+    "cold email campaign",
     "market validation",
     "test offer",
-    "outbound pilot",
-    "campaign launch",
+    "cold outreach",
+    "b2b lead generation",
     "market fit testing"
   ],
   noindex: true,
@@ -20,10 +20,10 @@ export const metadata: Metadata = generateMetadata({
 import Navigation from '@/components/Navigation';
 
 const serviceSchema = generateServiceSchema({
-  name: "Pilot Campaign Launch",
-  description: "Test your offer with real market validation through pilot campaigns",
+  name: "The Outbound Sprint",
+  description: "A six-week, fixed-price proof engagement: up to 8 cold email experiments, a written success bar, and you keep the whole system.",
   url: "https://bleedai.com/services/pilot-campaign",
-  price: "0",
+  price: "2950",
 });
 import ServiceHero from '@/components/ServiceHero';
 import PackageCards, { Package } from '@/components/PackageCards';
@@ -36,60 +36,56 @@ import Footer from '@/components/Footer';
 
 const packages: Package[] = [
   {
-    id: 'free-pilot',
-    title: 'Free Pilot',
-    price: '$0',
-    description: 'Reach out to 1-2k prospects with 1 campaign launch. Check if you\'re eligible.',
+    id: 'sprint',
+    title: 'The Outbound Sprint',
+    price: '$2,950',
+    priceSubtext: 'one-time · 6 weeks',
+    description: 'We map every method and buying signal that fits your market, then run up to 8 campaign experiments as a tournament. You keep everything we build.',
     features: [
-      'Reach 1,000-2,000 prospects in your ICP',
-      '1 Campaign launch',
-      'Eligibility: Must have existing customers',
-      'LTV requirement: At least $3-5k',
-      'TAM requirement: At least 20k+',
-      'Unique offer or strong branding required',
-      'Perfect for validating market interest'
+      'Up to 8 campaign experiments run in parallel',
+      'Every sourcing method + buying signal for your market',
+      'A written success bar, agreed before we send',
+      'AI reply agent booking your positive replies',
+      'You keep the domains, inboxes, lists, copy & playbook',
+      'Re-run promise: no arm hits the bar, one more round on us'
     ],
-    ctaText: 'Check Eligibility',
-    ctaLink: '#book-call'
-  },
-  {
-    id: 'standard-pilot',
-    title: 'Discounted Pilot',
-    price: '$683',
-    description: 'Start in 1 week. Reach 2K Leads with 2-3 campaign launches and offer angles.',
-    features: [
-      'Start in 1 week',
-      'Reach 2000 of your ICP',
-      '2-3 Campaign launches',
-      '2-3 Offer angles testing',
-      "BleedAI's Warm Infrastructure (DFY)",
-      'Full DFY — BleedAI Sources, Scrapes & Validates',
-      'Strategy from scratch + A/B test variants',
-      'Client Handles Replies',
-      'Light Email / Upwork Support'
-    ],
-    ctaText: 'Get Discounted Pilot',
-    ctaLink: '#book-call',
+    ctaText: 'Start Your Sprint',
+    ctaLink: 'https://calculator.bleedai.com/sprint',
     popular: true
   },
   {
-    id: 'scale',
-    title: 'Find Best Message/Market Fit',
-    price: 'Custom',
-    priceSubtext: 'Scale Package',
-    description: 'Fully managed outbound service with complete strategy and execution handling.',
+    id: 'growth',
+    title: 'Growth',
+    price: '$3,350',
+    priceSubtext: 'per month',
+    description: 'The monthly program Sprint winners roll into. The whole outbound machine run for you, hunting new markets every month.',
     features: [
-      'Fully managed outbound service',
-      'Branded inboxes setup',
-      'Complete strategy & execution',
-      'Standard AI relevance campaigns',
-      'Advanced signal campaigns & workflows',
-      'CRM integrations',
-      'Automated LinkedIn connections with MQLs',
+      'All domains and inbox fees covered',
+      'Full DFY sourcing (Clay, Prospeo, directories)',
+      'Multiple experiments every month',
+      'Context-based sub-sequences that warm leads to booked calls',
+      'AI reply agent on every inbound reply',
+      'Dedicated Slack support, 5 days a week'
+    ],
+    ctaText: 'See Monthly Plans',
+    ctaLink: 'https://calculator.bleedai.com/packages'
+  },
+  {
+    id: 'scale',
+    title: 'Scale',
+    price: '$5,300',
+    priceSubtext: 'per month',
+    description: 'Multi-channel outbound at full strategic depth, for teams pressing the whole market at once.',
+    features: [
+      'Everything in Growth',
+      'Multi-touch: LinkedIn, SMS & optional calls, CRM-orchestrated',
+      'LinkedIn touchpoints on your interested leads',
+      'Advanced signal-based campaigns & workflows',
+      'Reverse lead magnets where a campaign calls for one',
       'Dedicated account management'
     ],
-    ctaText: 'Calculate Cost',
-    ctaLink: 'https://calculator.bleedai.com/'
+    ctaText: 'See Monthly Plans',
+    ctaLink: 'https://calculator.bleedai.com/packages'
   }
 ];
 
@@ -104,49 +100,49 @@ export default function PilotCampaignPage() {
         <Navigation />
 
       <ServiceHero
-        badge="Pilot Campaign"
-        title="Test Your Offer with"
-        gradientText="Real Market Validation"
-        subtitle="Launch campaigns that prove market interest before scaling"
-        description="From free pilots to fully managed campaigns—test your offer angles, validate messaging, and discover what resonates with your ICP before investing in scale."
+        badge="The Outbound Sprint"
+        title="Prove Cold Outreach"
+        gradientText="Before You Scale"
+        subtitle="A six-week, fixed-price proof engagement. You keep everything we build."
+        description="We map every method and buying signal that fits your market and run up to 8 campaign experiments against each other until one wins. Keep what books meetings and own the whole system."
         highlights={[
-          'Start Free or $800',
-          'Launch in 1 Week',
-          'Real Market Data'
+          '$2,950 One-Time',
+          '6 Weeks',
+          'You Own It All'
         ]}
-        ctaText="Launch Your Pilot"
+        ctaText="Start Your Sprint"
         ctaLink="#book-call"
       />
 
       <PackageCards
         packages={packages}
-        title="Choose Your Pilot Campaign"
-        subtitle="From free validation to fully managed campaigns—find the right fit for your business"
+        title="Prove It, Then Scale It"
+        subtitle="One fixed-price Sprint to find what works, then a monthly program to run the winner at scale"
       />
 
       <CalendlyEmbed
         url="https://calendly.com/bleedai/pilot-campaign-launch?embed_type=Inline&text_color=000000&primary_color=b1130f&month=2026-02"
-        title="Book Your Pilot Campaign Launch"
-        subtitle="Select a time to discuss your campaign strategy and get started"
+        title="Book Your Sprint Kickoff"
+        subtitle="Select a time to scope your market, write your success bar, and get started"
         benefits={[
           "Review your ICP and target market fit",
           "Discuss offer angles and messaging strategy",
-          "Understand campaign setup and timeline",
-          "Get expert recommendations for your pilot",
-          "Clarify eligibility requirements (for free pilot)",
+          "Write your success bar together, in your numbers",
+          "Understand the 6-week timeline and what you keep",
+          "See where the Sprint rolls into a monthly program",
           "Q&A about deliverables and expectations"
         ]}
       />
 
       <ServiceCta
-        title="Ready to Test Your Market Fit?"
-        description="Launch a pilot campaign and discover what messaging resonates with your ICP. Get real data before committing to scale."
-        ctaText="Launch Your Pilot Campaign"
+        title="Ready to Prove Your Market Fit?"
+        description="Run the Sprint, find the angle that books meetings, and get real data before you commit to a retainer."
+        ctaText="Start Your Sprint"
         ctaLink="#book-call"
         trustIndicators={[
-          'Free Pilot Available',
-          'Start in 1 Week',
-          'Expert Strategy Included'
+          'Fixed $2,950, One-Time',
+          '6 Weeks, Start to Scale',
+          'You Keep Everything'
         ]}
       />
 

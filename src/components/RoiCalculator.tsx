@@ -4,9 +4,8 @@ import { useState } from "react";
 
 // Cost follows volume via our real tiers - never a slider the prospect can drag down.
 function planFor(leads: number): { key: string; price: number } {
-  if (leads <= 15000) return { key: "pilot", price: 1500 };
-  if (leads <= 40000) return { key: "growth", price: 2450 };
-  return { key: "scale", price: 3450 };
+  if (leads <= 45000) return { key: "growth", price: 3350 };
+  return { key: "scale", price: 5300 };
 }
 
 const money = (n: number): string =>
@@ -134,7 +133,7 @@ export default function RoiCalculator() {
         <div className="ctrl-head">Tune your numbers</div>
 
         <div className="sliders">
-          <Slider label="Leads contacted / month" value={leads} display={leads.toLocaleString()} min={2000} max={60000} step={1000} onChange={setLeads} />
+          <Slider label="Leads contacted / month" value={leads} display={leads.toLocaleString()} min={2000} max={75000} step={1000} onChange={setLeads} />
           <Slider label="Customer lifetime value" value={deal} display={"$" + deal.toLocaleString()} min={1000} max={25000} step={500} onChange={setDeal} />
           <Slider label="Your close rate" value={closeRate} display={closeRate + "%"} min={5} max={45} step={1} onChange={setCloseRate} />
           <Slider label="Positive reply rate" value={pos} display={pos + "%"} min={0.2} max={1.5} step={0.1} onChange={setPos} />
