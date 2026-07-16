@@ -9,7 +9,6 @@ const items: { label: string; value: string }[] = [
   { label: "Video Production:", value: "45 leads · 46% positive reply rate" },
   { label: "Featured in", value: "USAWire" },
   { label: "Paid Events:", value: "$107K pipeline · 65.8% positive reply rate" },
-  { label: "“Spam rate from 40% to near zero”", value: "— Ahmad J., TEDx Speaker" },
   { label: "Coaching CRM:", value: "241 opps · 32% positive reply rate" },
 ];
 

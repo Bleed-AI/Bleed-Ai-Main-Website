@@ -17,7 +17,6 @@ import Footer from "@/components/Footer";
 import BookWidget from "@/components/BookWidget";
 import ExitPopup from "@/components/ExitPopup";
 import SidePopup from "@/components/SidePopup";
-import CursorGlow from "@/components/CursorGlow";
 
 export const metadata: Metadata = buildMeta({
   title: "Home Test (Internal)",
@@ -29,13 +28,7 @@ export const metadata: Metadata = buildMeta({
 export default function HomeTest() {
   return (
     <main className="bai relative overflow-x-clip" style={{ paddingTop: 0 }}>
-      {/* Site-wide fixed glow layer behind all content (mockup's global orbs) */}
-      <div className="bai-bg" aria-hidden="true">
-        <div className="bai-orb1" />
-        <div className="bai-orb2" />
-        <div className="bai-orb3" />
-      </div>
-      <CursorGlow />
+      {/* .bai-bg + CursorGlow now mounted site-wide in app/layout.tsx */}
       <TickerTest />
       <NavigationTest />
       <HeroTest />

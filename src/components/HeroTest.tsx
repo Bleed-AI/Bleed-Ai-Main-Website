@@ -16,24 +16,8 @@ export default function HeroTest() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-[#050508] pt-10 sm:pt-12 lg:pt-14 pb-16 sm:pb-20 lg:pb-24">
-      {/* Background glow orbs */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full bg-[#B1130F]/15 blur-[160px]" />
-        <div className="absolute -bottom-32 -right-32 w-[520px] h-[520px] rounded-full bg-[#B1130F]/10 blur-[180px]" />
-        {/* Subtle grid texture */}
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(177,19,15,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(177,19,15,0.5) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
-            maskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
-            WebkitMaskImage: "radial-gradient(ellipse at center, black 30%, transparent 80%)",
-          }}
-        />
-      </div>
-
+    <section className="relative overflow-hidden pt-10 sm:pt-12 lg:pt-14 pb-16 sm:pb-20 lg:pb-24">
+      {/* Background handled site-wide by .bai-bg orbs + CursorGlow (in app/home-test/page.tsx) */}
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1.45fr_1fr] gap-10 lg:gap-12 xl:gap-14 items-center">
           {/* LEFT: Text column */}

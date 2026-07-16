@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import PopupNotifications from "@/components/PopupNotifications";
 import Preloader from "@/components/Preloader";
 import NavigationProgress from "@/components/NavigationProgress";
+import CursorGlow from "@/components/CursorGlow";
 import { generateMetadata, organizationSchema, viewport as defaultViewport } from "@/lib/seo";
 import "./globals.css";
 
@@ -77,6 +78,13 @@ export default function RootLayout({
       </head>
       <body className="antialiased bg-white dark:bg-[#050508] text-black dark:text-white transition-colors" suppressHydrationWarning>
         <ThemeProvider>
+          {/* Site-wide fixed glow layer + cursor glow (uniform bg across every page) */}
+          <div className="bai-bg" aria-hidden="true">
+            <div className="bai-orb1" />
+            <div className="bai-orb2" />
+            <div className="bai-orb3" />
+          </div>
+          <CursorGlow />
           <Preloader />
           <NavigationProgress />
           {children}

@@ -20,12 +20,7 @@ export const metadata = genMeta({
 export default function ColdEmailRoiCalculatorPage() {
   return (
     <main className="bai relative overflow-x-clip">
-      {/* Site-wide fixed glow layer behind all content (mockup's global orbs) */}
-      <div className="bai-bg" aria-hidden="true">
-        <div className="bai-orb1" />
-        <div className="bai-orb2" />
-        <div className="bai-orb3" />
-      </div>
+      {/* .bai-bg + CursorGlow now mounted site-wide in app/layout.tsx */}
       <Navigation />
       <RoiCalculator />
       <Footer />
