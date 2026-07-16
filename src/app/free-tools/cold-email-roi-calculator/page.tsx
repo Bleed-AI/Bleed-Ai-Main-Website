@@ -4,9 +4,9 @@ import RoiCalculator from "@/components/RoiCalculator";
 import { generateMetadata as genMeta } from "@/lib/seo";
 
 export const metadata = genMeta({
-  title: "Cold Email ROI Calculator | Free Tool | Bleed AI",
+  title: "Cold Email ROI Calculator | Free Tool",
   description:
-    "See what a cold email campaign could realistically return. Set your lead volume, deal size, and funnel rates to project pipeline, revenue, ROI, and cost per meeting - live.",
+    "Project pipeline, revenue, ROI, and cost per meeting from your cold email campaigns. Set your lead volume, deal size, and funnel rates — live results.",
   path: "/free-tools/cold-email-roi-calculator",
   keywords: [
     "cold email ROI calculator",
