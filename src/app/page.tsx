@@ -1,6 +1,5 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
-import Ticker from "@/components/Ticker";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
 import ResultsMarquee from "@/components/ResultsMarquee";
@@ -20,7 +19,6 @@ export default function Home() {
   return (
     <main className="bai relative overflow-x-clip">
       {/* .bai-bg + CursorGlow now mounted site-wide in app/layout.tsx */}
-      <Ticker />
       <Navigation />
       <Hero />
       <StatsStrip />
