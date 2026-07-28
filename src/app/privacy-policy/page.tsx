@@ -8,6 +8,7 @@ export const metadata = genMeta({
     "How Bleed AI collects, uses, and protects personal information across bleedai.com — analytics, marketing, contact forms, and your rights under GDPR and CCPA.",
   path: "/privacy-policy",
   keywords: ["privacy policy", "data protection", "GDPR", "CCPA", "cookies"],
+  noindex: true,
 });
 
 const LAST_UPDATED = "July 28, 2026";

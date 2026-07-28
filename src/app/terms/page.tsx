@@ -13,6 +13,7 @@ export const metadata = genMeta({
     "user agreement",
     "service agreement",
   ],
+  noindex: true,
 });
 
 const LAST_UPDATED = "July 28, 2026";
