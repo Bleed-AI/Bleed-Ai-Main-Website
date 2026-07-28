@@ -127,7 +127,19 @@ export default function Footer() {
             <div className="text-sm text-[var(--text-muted)]">
               &copy; {new Date().getFullYear()} Bleed AI. All rights reserved.
             </div>
-            <div className="flex items-center gap-6 text-sm text-[var(--text-muted)]">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[var(--text-muted)]">
+              <a
+                href="/privacy-policy/"
+                className="hover:text-[#B1130F] transition-colors duration-300"
+              >
+                Privacy Policy
+              </a>
+              <a
+                href="/terms/"
+                className="hover:text-[#B1130F] transition-colors duration-300"
+              >
+                Terms &amp; Conditions
+              </a>
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#22c55e] animate-pulse" />
                 Accepting new clients
