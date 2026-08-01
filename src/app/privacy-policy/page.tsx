@@ -11,7 +11,7 @@ export const metadata = genMeta({
   noindex: true,
 });
 
-const LAST_UPDATED = "July 28, 2026";
+const LAST_UPDATED = "August 1, 2026";
 const CONTACT_EMAIL = "contact@bleedai.com";
 
 export default function PrivacyPolicyPage() {
@@ -238,11 +238,22 @@ export default function PrivacyPolicyPage() {
             <p>
               Under the CCPA/CPRA, our use of certain analytics and advertising
               cookies may be considered a &quot;sale&quot; or &quot;sharing&quot;
-              of personal information. See Section 8 for how to opt out.
+              of personal information. See Section 9 for how to opt out.
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              6. Cookies &amp; similar technologies
+              6. Mobile Terms &amp; SMS Data Protection
+            </h2>
+            <p>
+              No mobile information will be shared with third parties or
+              affiliates for marketing or promotional purposes. All the above
+              categories exclude text messaging originator opt-in data and
+              consent; this information will not be shared with any third
+              parties.
+            </p>
+
+            <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
+              7. Cookies &amp; similar technologies
             </h2>
             <p>
               Cookies are small text files stored on your device. We use them
@@ -265,7 +276,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              7. International transfers
+              8. International transfers
             </h2>
             <p>
               We are a global business and use service providers located in
@@ -277,7 +288,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              8. Your rights &amp; choices
+              9. Your rights &amp; choices
             </h2>
             <p>Depending on where you live, you may have the right to:</p>
             <ul className="list-disc pl-6 space-y-1.5">
@@ -316,7 +327,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              9. Data retention
+              10. Data retention
             </h2>
             <p>
               We keep personal information only for as long as necessary to
@@ -327,7 +338,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              10. Security
+              11. Security
             </h2>
             <p>
               We use administrative, technical, and physical safeguards
@@ -342,7 +353,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              11. Children
+              12. Children
             </h2>
             <p>
               The Site and Services are intended for business users aged 18 and
@@ -352,7 +363,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              12. Third-party links
+              13. Third-party links
             </h2>
             <p>
               The Site may contain links to third-party sites (e.g. YouTube
@@ -363,7 +374,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              13. Changes to this Policy
+              14. Changes to this Policy
             </h2>
             <p>
               We may update this Policy from time to time. When we do, we will
@@ -374,7 +385,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <h2 className="font-display text-2xl font-semibold text-white mt-10 mb-3">
-              14. Contact us
+              15. Contact us
             </h2>
             <p>
               For any questions, concerns, or requests regarding this Privacy
