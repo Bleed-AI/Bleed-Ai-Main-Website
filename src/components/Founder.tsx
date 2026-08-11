@@ -16,7 +16,7 @@ export default function Founder() {
               <Reveal
                 as="a"
                 className="founder-linkedin"
-                href="https://www.linkedin.com/in/taha-bleedai"
+                href="https://www.linkedin.com/in/taha-outbound"
                 target="_blank"
                 rel="noopener noreferrer"
               >

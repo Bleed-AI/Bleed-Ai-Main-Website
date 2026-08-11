@@ -22,7 +22,7 @@ export default function TahaLinkedinSnippet() {
 
         {/* Founder Card */}
         <a
-          href="https://www.linkedin.com/in/taha-bleedai"
+          href="https://www.linkedin.com/in/taha-outbound"
           target="_blank"
           rel="noopener noreferrer"
           className="block rounded-2xl border border-[var(--border-color)] bg-[var(--bg-primary)] p-8 md:p-10 hover:border-[#B1130F]/30 transition-all duration-500 hover:shadow-[0_0_40px_rgba(177,19,15,0.1)]"
