@@ -226,7 +226,7 @@ export default function ProcessFlow() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         #process {
           --pf-line: rgba(255, 90, 80, 0.38);
           --pf-glow: #ff6b67;
