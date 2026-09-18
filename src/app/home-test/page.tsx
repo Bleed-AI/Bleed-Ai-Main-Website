@@ -3,6 +3,7 @@ import { generateMetadata as buildMeta } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
 import HeroTest from "@/components/HeroTest";
 import ChannelStack from "@/components/ChannelStack";
+import ProcessFlow from "@/components/ProcessFlow";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
 import ResultsMarquee from "@/components/ResultsMarquee";
@@ -35,6 +36,7 @@ export default function HomeTest() {
       <Navigation />
       <HeroTest />
       <ChannelStack />
+      <ProcessFlow />
       <StatsStrip />
       <RepliesMarquee />
       <Testimonials />
