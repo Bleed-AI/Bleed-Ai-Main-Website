@@ -109,7 +109,7 @@ function CheckIcon() {
 
 export default function BookCall() {
   return (
-    <main className="relative overflow-x-clip">
+    <main className="bai relative overflow-x-clip">
       <BackgroundOrbs />
       <Navigation />
 
