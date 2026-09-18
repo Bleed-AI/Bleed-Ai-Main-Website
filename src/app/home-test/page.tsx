@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { generateMetadata as buildMeta } from "@/lib/seo";
-import NavigationTest from "@/components/NavigationTest";
-import HeroTest from "@/components/HeroTest";
-import TickerTest from "@/components/TickerTest";
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
 import StatsStrip from "@/components/StatsStrip";
-import RepliesMarqueeTest from "@/components/RepliesMarqueeTest";
+import RepliesMarquee from "@/components/RepliesMarquee";
 import ResultsMarquee from "@/components/ResultsMarquee";
 import Framework from "@/components/Framework";
 import Testimonials from "@/components/Testimonials";
@@ -25,15 +24,17 @@ export const metadata: Metadata = buildMeta({
   noindex: true,
 });
 
+// Staging mirror of the live homepage (src/app/page.tsx).
+// Keep this in sync with live. To trial a change in isolation, copy the
+// specific component into a "-Test" version and swap it in here only.
 export default function HomeTest() {
   return (
-    <main className="bai relative overflow-x-clip" style={{ paddingTop: 0 }}>
+    <main className="bai relative overflow-x-clip">
       {/* .bai-bg + CursorGlow now mounted site-wide in app/layout.tsx */}
-      <TickerTest />
-      <NavigationTest />
-      <HeroTest />
+      <Navigation />
+      <Hero />
       <StatsStrip />
-      <RepliesMarqueeTest />
+      <RepliesMarquee />
       <Testimonials />
       <Framework />
       <ResultsMarquee />
