@@ -47,7 +47,7 @@ const wall: Wall[] = [
   { pre: "Great job on the emails boss. I have a ", hl: "letter of intent coming from a big player!", post: "", name: "John Speights", co: "JAMS Media", av: { type: "initials", val: "JS" } },
   { pre: "Love to hear it, thank you again. ", hl: "First leads starting to come in", post: " after the rebuild.", name: "Hunter Owens", co: "Umbrella", av: { type: "photo", val: "/hunter-owens.jpg" } },
   { pre: "Whatever you think is best. ", hl: "I will pay the next invoice", post: " to start on the new campaign.", name: "Jay", co: "More Conversions", av: { type: "logo", val: "/images/co-moreconversions.png" } },
-  { pre: "", hl: "1st confirmed ticket sale through you!", post: " The conference sold out, 150 attendees from 10+ countries.", name: "Martijn Versteeg", co: "Group Effort", av: { type: "photo", val: MARTIJN_PHOTO } },
+  { pre: "", hl: "1st confirmed ticket sale through you!", post: " The conference sold out, 150 attendees from 10+ countries.", name: "Martijn Versteeg", co: "Group Effort", av: { type: "initials", val: "MV" } },
   { pre: "", hl: "I just paid the invoice", post: ", Taha. Excited to get started with you.", name: "Peter", co: "SupporterHub", av: { type: "initials", val: "P" } },
   { pre: "", hl: "WOOT, we just got our first lead!", post: " Sent an immediate follow-up right away.", name: "Kevin Nakao", co: "Capital Live Scan", av: { type: "none", val: "" } },
   { pre: "", hl: "Excited about the stats!", post: " Now it's about converting them to paid users.", name: "Jayanthi Raja", co: "Rebus AI", av: { type: "logo", val: "/images/co-rebusai.png" } },
