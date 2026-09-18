@@ -9,6 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 type Channel = {
   n: string;
+  day: string;
   title: string;
   desc: string;
   points: string[];
@@ -19,6 +20,7 @@ type Channel = {
 const channels: Channel[] = [
   {
     n: "01",
+    day: "Day 1",
     title: "Email Outreach",
     desc: "Hyper-personalized cold email at scale — engineered to land in the primary inbox, so every send actually gets seen.",
     points: ["Primary-inbox deliverability", "Personalized at scale", "Reply-ready sequences"],
@@ -32,6 +34,7 @@ const channels: Channel[] = [
   },
   {
     n: "02",
+    day: "Day 3",
     title: "LinkedIn Outreach",
     desc: "Warm, human touches that build familiarity before the ask — turning cold profiles into real conversations.",
     points: ["Profile-to-conversation flow", "Human, non-spammy touches", "Builds trust before the pitch"],
@@ -44,6 +47,7 @@ const channels: Channel[] = [
   },
   {
     n: "03",
+    day: "Day 6",
     title: "Call & SMS Outreach",
     desc: "Direct voice and text follow-up that closes the loop — reaching prospects where the response is instant.",
     points: ["Instant, direct contact", "Voice + text follow-up", "Closes the loop to booked calls"],
@@ -152,6 +156,10 @@ export default function ChannelStack() {
                     <span className="chan-icon">{c.icon}</span>
                     <span className="chan-num">{c.n}</span>
                   </div>
+                  <span className="chan-day">
+                    <span className="chan-day-dot" />
+                    {c.day}
+                  </span>
                   <h3 className="chan-title">{c.title}</h3>
                   <p className="chan-desc">{c.desc}</p>
                   <ul className="chan-points">
@@ -271,6 +279,29 @@ export default function ChannelStack() {
           letter-spacing: -1px;
           color: rgba(255, 255, 255, 0.12);
           line-height: 1;
+        }
+        .chan-day {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          align-self: flex-start;
+          padding: 5px 12px;
+          margin-bottom: 12px;
+          border-radius: 999px;
+          border: 1px solid color-mix(in srgb, var(--acc) 40%, transparent);
+          background: color-mix(in srgb, var(--acc) 12%, transparent);
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 0.4px;
+          text-transform: uppercase;
+          color: var(--acc);
+        }
+        .chan-day-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--acc);
+          box-shadow: 0 0 8px var(--acc);
         }
         .chan-title {
           font-family: "Inter", system-ui, sans-serif;
