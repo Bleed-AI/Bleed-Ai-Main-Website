@@ -7,9 +7,34 @@ const VIDEO_ID = "S0Oeg0sbB6k";
 
 // Channel badges (home-test only). Colors match the ChannelStack accents.
 const CHANNELS = [
-  { label: "Email", color: "#B1130F" },
-  { label: "LinkedIn", color: "#0A66C2" },
-  { label: "Call & SMS", color: "#10b981" },
+  {
+    label: "Email",
+    color: "#B1130F",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+        <path d="M3 6.5l9 6 9-6" />
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    color: "#0A66C2",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6.94 5A1.94 1.94 0 113.06 5a1.94 1.94 0 013.88 0zM3.4 8.5h3.1V21H3.4V8.5zm5.2 0h2.97v1.7h.04c.41-.78 1.42-1.6 2.93-1.6 3.13 0 3.71 2.06 3.71 4.73V21h-3.1v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H8.6V8.5z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Call & SMS",
+    color: "#10b981",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 5.5C4 4.7 4.7 4 5.5 4h2.1c.6 0 1.13.4 1.29.99l.9 3.2a1.35 1.35 0 01-.35 1.31l-1.2 1.2a12 12 0 005.06 5.06l1.2-1.2c.35-.35.86-.48 1.31-.35l3.2.9c.59.16.99.69.99 1.29v2.1c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 014 5.5z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function HeroTest() {
@@ -83,9 +108,11 @@ export default function HeroTest() {
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03]"
                 >
                   <span
-                    className="w-2 h-2 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: ch.color, boxShadow: `0 0 8px ${ch.color}` }}
-                  />
+                    className="flex items-center justify-center w-4 h-4 flex-shrink-0 [&>svg]:w-full [&>svg]:h-full"
+                    style={{ color: ch.color }}
+                  >
+                    {ch.icon}
+                  </span>
                   <span className="text-xs font-medium text-white/80">{ch.label}</span>
                 </span>
               ))}
