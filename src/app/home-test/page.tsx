@@ -10,9 +10,9 @@ import ResultsMarquee from "@/components/ResultsMarquee";
 import FrameworkTest from "@/components/FrameworkTest";
 import Testimonials from "@/components/Testimonials";
 import VsTable from "@/components/VsTable";
-import InfraBento from "@/components/InfraBento";
+import InfraBentoTest from "@/components/InfraBentoTest";
 import Founder from "@/components/Founder";
-import Faq from "@/components/Faq";
+import FaqTest from "@/components/FaqTest";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
 import BookWidget from "@/components/BookWidget";
@@ -43,9 +43,9 @@ export default function HomeTest() {
       <FrameworkTest />
       <ResultsMarquee />
       <VsTable />
-      <InfraBento />
+      <InfraBentoTest />
       <Founder />
-      <Faq />
+      <FaqTest />
       <FinalCta />
       <Footer />
       <BookWidget />
