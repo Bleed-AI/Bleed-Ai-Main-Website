@@ -7,7 +7,7 @@ import ProcessFlow from "@/components/ProcessFlow";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
 import ResultsMarquee from "@/components/ResultsMarquee";
-import Framework from "@/components/Framework";
+import FrameworkTest from "@/components/FrameworkTest";
 import Testimonials from "@/components/Testimonials";
 import VsTable from "@/components/VsTable";
 import InfraBento from "@/components/InfraBento";
@@ -40,7 +40,7 @@ export default function HomeTest() {
       <StatsStrip />
       <RepliesMarquee />
       <Testimonials />
-      <Framework />
+      <FrameworkTest />
       <ResultsMarquee />
       <VsTable />
       <InfraBento />
