@@ -154,12 +154,11 @@ export default function ChannelStack() {
                 <article className="chan-card" style={{ "--acc": c.accent } as React.CSSProperties}>
                   <div className="chan-card-top">
                     <span className="chan-icon">{c.icon}</span>
-                    <span className="chan-num">{c.n}</span>
+                    <span className="chan-day">
+                      <span className="chan-day-dot" />
+                      {c.day}
+                    </span>
                   </div>
-                  <span className="chan-day">
-                    <span className="chan-day-dot" />
-                    {c.day}
-                  </span>
                   <h3 className="chan-title">{c.title}</h3>
                   <p className="chan-desc">{c.desc}</p>
                   <ul className="chan-points">
@@ -272,27 +271,17 @@ export default function ChannelStack() {
           width: 26px;
           height: 26px;
         }
-        .chan-num {
-          font-family: "Inter", system-ui, sans-serif;
-          font-size: 40px;
-          font-weight: 900;
-          letter-spacing: -1px;
-          color: rgba(255, 255, 255, 0.12);
-          line-height: 1;
-        }
         .chan-day {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          align-self: flex-start;
-          padding: 5px 12px;
-          margin-bottom: 12px;
+          padding: 7px 15px;
           border-radius: 999px;
           border: 1px solid color-mix(in srgb, var(--acc) 40%, transparent);
           background: color-mix(in srgb, var(--acc) 12%, transparent);
-          font-size: 12px;
-          font-weight: 700;
-          letter-spacing: 0.4px;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 0.5px;
           text-transform: uppercase;
           color: var(--acc);
         }
