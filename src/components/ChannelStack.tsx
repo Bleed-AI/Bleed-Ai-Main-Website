@@ -157,8 +157,13 @@ export default function ChannelStack() {
         return;
       }
 
+      const accents = channels.map((c) => c.accent);
       const setActive = (idx: number) =>
-        dots.forEach((d, i) => d.classList.toggle("on", i === idx));
+        dots.forEach((d, i) => {
+          const on = i === idx;
+          d.classList.toggle("on", on);
+          d.style.background = on ? accents[idx] : "";
+        });
       setActive(0);
 
       gsap.to(track, {
@@ -217,6 +222,7 @@ export default function ChannelStack() {
             {channels.map((c) => (
               <div key={c.n} className="chan-panel">
                 <article className="chan-card" style={{ "--acc": c.accent } as React.CSSProperties}>
+                  <span className="chan-watermark">{c.n}</span>
                   {/* LEFT: copy */}
                   <div className="chan-card-left">
                     <div className="chan-card-top">
@@ -309,6 +315,27 @@ export default function ChannelStack() {
           box-shadow: 0 30px 80px -24px rgba(0, 0, 0, 0.85);
           overflow: hidden;
           will-change: transform, opacity;
+          transition: border-color 0.35s, box-shadow 0.35s;
+        }
+        .chan-card:hover {
+          border-color: color-mix(in srgb, var(--acc) 45%, rgba(255, 255, 255, 0.1));
+          box-shadow: 0 30px 90px -20px rgba(0, 0, 0, 0.9),
+            0 0 44px -10px color-mix(in srgb, var(--acc) 45%, transparent);
+        }
+        .chan-watermark {
+          position: absolute;
+          top: -34px;
+          right: 18px;
+          z-index: 0;
+          font-family: "Inter", system-ui, sans-serif;
+          font-size: 190px;
+          font-weight: 900;
+          line-height: 1;
+          letter-spacing: -6px;
+          color: transparent;
+          -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.05);
+          pointer-events: none;
+          user-select: none;
         }
         .chan-card::before {
           content: "";
@@ -332,6 +359,8 @@ export default function ChannelStack() {
           pointer-events: none;
         }
         .chan-card-left {
+          position: relative;
+          z-index: 1;
           display: flex;
           flex-direction: column;
           min-width: 0;
@@ -349,8 +378,13 @@ export default function ChannelStack() {
           align-items: center;
           justify-content: center;
           border-radius: 14px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          background: color-mix(in srgb, var(--acc) 14%, transparent);
+          border: 1px solid color-mix(in srgb, var(--acc) 28%, rgba(255, 255, 255, 0.1));
+          background: linear-gradient(
+            150deg,
+            color-mix(in srgb, var(--acc) 26%, transparent),
+            color-mix(in srgb, var(--acc) 7%, transparent)
+          );
+          box-shadow: inset 0 0 16px color-mix(in srgb, var(--acc) 16%, transparent);
           color: var(--acc);
         }
         .chan-icon :global(svg) {
@@ -417,13 +451,18 @@ export default function ChannelStack() {
         /* ---- animated mini-sequence (right) ---- */
         .chan-flow {
           position: relative;
+          z-index: 1;
           display: flex;
           flex-direction: column;
           gap: 18px;
           padding: 22px 22px;
           border-radius: 18px;
           border: 1px solid rgba(255, 255, 255, 0.07);
-          background: rgba(255, 255, 255, 0.02);
+          background: linear-gradient(
+            160deg,
+            color-mix(in srgb, var(--acc) 6%, rgba(255, 255, 255, 0.02)),
+            rgba(255, 255, 255, 0.015)
+          );
         }
         .chan-flow-label {
           font-size: 10.5px;
@@ -473,6 +512,32 @@ export default function ChannelStack() {
           height: 18px;
           background: linear-gradient(var(--acc), transparent);
           opacity: 0.4;
+          transform-origin: top;
+        }
+        .flow-step:nth-child(2) .flow-line {
+          animation: flowLine 3s ease-in-out infinite;
+          animation-delay: 0.35s;
+        }
+        .flow-step:nth-child(3) .flow-line {
+          animation: flowLine 3s ease-in-out infinite;
+          animation-delay: 1.35s;
+        }
+        @keyframes flowLine {
+          0%,
+          20% {
+            transform: scaleY(0.2);
+            opacity: 0.25;
+          }
+          35%,
+          58% {
+            transform: scaleY(1);
+            opacity: 0.9;
+          }
+          75%,
+          100% {
+            transform: scaleY(0.2);
+            opacity: 0.25;
+          }
         }
         @keyframes flowStep {
           0%,
@@ -507,11 +572,17 @@ export default function ChannelStack() {
           100% {
             box-shadow: 0 0 0 rgba(0, 0, 0, 0);
             transform: scale(1);
+            background: #0d0d15;
+            color: var(--acc);
+            border-color: color-mix(in srgb, var(--acc) 30%, rgba(255, 255, 255, 0.08));
           }
           12%,
           26% {
-            box-shadow: 0 0 18px color-mix(in srgb, var(--acc) 65%, transparent);
-            transform: scale(1.06);
+            box-shadow: 0 0 24px color-mix(in srgb, var(--acc) 60%, transparent);
+            transform: scale(1.08);
+            background: var(--acc);
+            color: #fff;
+            border-color: var(--acc);
           }
         }
 
@@ -528,7 +599,6 @@ export default function ChannelStack() {
         }
         .chan-progress :global(.chan-pd.on) {
           width: 40px;
-          background: #b1130f;
         }
 
         @media (max-width: 760px) {
