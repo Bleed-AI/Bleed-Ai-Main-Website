@@ -2,7 +2,7 @@
 
 // Ambient "Process" section (home-test only).
 // 3 panels, each with a looping mini-demo, joined by animated branch connectors.
-// Pure CSS animations — no scroll trigger, lightweight.
+// Pure CSS animations — no scroll trigger, lightweight. Brand-red themed.
 
 const IconBolt = (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
@@ -31,7 +31,7 @@ const Connector = () => (
         <path d="M40 110 L80 110" />
         <path d="M40 110 C54 110 58 150 80 150" />
       </g>
-      <circle r="2.4" fill="var(--pf-glow)" className="pf-spark">
+      <circle r="2.6" fill="var(--pf-glow)" className="pf-spark">
         <animateMotion dur="2.6s" repeatCount="indefinite" path="M0 110 L40 110 L80 110" />
       </circle>
     </svg>
@@ -39,18 +39,24 @@ const Connector = () => (
 );
 
 const steps = [
-  { day: "Day 1", label: "Email", icon: IconBolt, color: "#B1130F" },
-  { day: "Day 3", label: "LinkedIn", icon: IconLinkedin, color: "#2f6fed" },
-  { day: "Day 6", label: "Call", icon: IconPhone, color: "#10b981" },
+  { day: "Day 1", label: "Email", icon: IconBolt, color: "#ff5b56" },
+  { day: "Day 3", label: "LinkedIn", icon: IconLinkedin, color: "#4f8bff" },
+  { day: "Day 6", label: "Call", icon: IconPhone, color: "#22c98a" },
 ];
 
 const accounts = ["Fieldstone Group", "Northwind Labs", "Bramble & Co"];
 
 const bars = [
-  { h: 46, kind: "control" },
-  { h: 78, kind: "variant" },
-  { h: 40, kind: "control" },
+  { h: 44, kind: "control" },
+  { h: 74, kind: "variant" },
+  { h: 38, kind: "control" },
   { h: 96, kind: "variant" },
+];
+
+const panelMeta = [
+  { step: "01", title: "// selecting your best-fit accounts", caption: "We Find The Right Buyers" },
+  { step: "02", title: "// email · linkedin · calls, in sync", caption: "We Run Every Channel" },
+  { step: "03", title: "// testing every message we ship", caption: "We Optimize To Win" },
 ];
 
 export default function ProcessFlow() {
@@ -58,17 +64,19 @@ export default function ProcessFlow() {
     <section id="process">
       <div className="pf-inner">
         <div className="pf-head">
-          <div className="sec-label">The Process</div>
+          <div className="sec-label">The Cold-to-Sold Process</div>
           <h2 className="pf-title">
-            What happens <em>once we start?</em>
+            From a cold list to <em>booked calls.</em>
           </h2>
+          <p className="pf-sub">Three moves. One system. Fully done-for-you.</p>
         </div>
 
         <div className="pf-grid">
           {/* PANEL 1 — account selection */}
           <div className="pf-col">
             <div className="pf-card">
-              <div className="pf-card-title">Target account selection criteria</div>
+              <span className="pf-step">{panelMeta[0].step}</span>
+              <div className="pf-card-title">{panelMeta[0].title}</div>
               <div className="pf-accounts">
                 {accounts.map((a, i) => (
                   <div key={a} className={`pf-acct${i === 1 ? " sel" : ""}`}>
@@ -82,7 +90,7 @@ export default function ProcessFlow() {
                 ))}
               </div>
             </div>
-            <div className="pf-caption">Identify Pain Points</div>
+            <div className="pf-caption">{panelMeta[0].caption}</div>
           </div>
 
           <Connector />
@@ -90,7 +98,8 @@ export default function ProcessFlow() {
           {/* PANEL 2 — multi-channel sequence */}
           <div className="pf-col">
             <div className="pf-card">
-              <div className="pf-card-title">Multi-channel outreach setup</div>
+              <span className="pf-step">{panelMeta[1].step}</span>
+              <div className="pf-card-title">{panelMeta[1].title}</div>
               <div className="pf-seq">
                 <span className="pf-seq-rail">
                   <span className="pf-seq-fill" />
@@ -104,7 +113,7 @@ export default function ProcessFlow() {
                 ))}
               </div>
             </div>
-            <div className="pf-caption">Build &amp; Automate</div>
+            <div className="pf-caption">{panelMeta[1].caption}</div>
           </div>
 
           <Connector />
@@ -112,7 +121,8 @@ export default function ProcessFlow() {
           {/* PANEL 3 — A/B testing chart */}
           <div className="pf-col">
             <div className="pf-card">
-              <div className="pf-card-title">A/B testing of messaging</div>
+              <span className="pf-step">{panelMeta[2].step}</span>
+              <div className="pf-card-title">{panelMeta[2].title}</div>
               <div className="pf-chart">
                 <div className="pf-bars">
                   {bars.map((b, i) => (
@@ -126,19 +136,19 @@ export default function ProcessFlow() {
                 <div className="pf-baseline" />
                 <div className="pf-legend">
                   <span><i className="dot control" /> Control</span>
-                  <span><i className="dot variant" /> Variant B</span>
+                  <span><i className="dot variant" /> Winner</span>
                 </div>
               </div>
             </div>
-            <div className="pf-caption">Improve &amp; Iterate</div>
+            <div className="pf-caption">{panelMeta[2].caption}</div>
           </div>
         </div>
       </div>
 
       <style jsx>{`
         #process {
-          --pf-line: rgba(120, 220, 170, 0.4);
-          --pf-glow: #10b981;
+          --pf-line: rgba(255, 90, 80, 0.38);
+          --pf-glow: #ff6b67;
           position: relative;
           padding: 90px 22px;
         }
@@ -160,11 +170,20 @@ export default function ProcessFlow() {
         }
         .pf-title em {
           font-style: italic;
-          color: #ff6b67;
+          background: linear-gradient(90deg, #ff3d38, #ff8a86);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+        }
+        .pf-sub {
+          margin-top: 14px;
+          font-size: 15.5px;
+          color: #9099b8;
         }
         .pf-grid {
           display: grid;
-          grid-template-columns: 1fr 80px 1fr 80px 1fr;
+          grid-template-columns: 1fr 78px 1fr 78px 1fr;
           align-items: stretch;
           gap: 0;
         }
@@ -176,27 +195,53 @@ export default function ProcessFlow() {
         .pf-card {
           position: relative;
           flex: 1;
-          padding: 26px 24px;
+          padding: 30px 24px 26px;
           border-radius: 18px;
           border: 1px solid rgba(255, 255, 255, 0.09);
-          background: linear-gradient(165deg, #12121b 0%, #0b0b12 100%);
+          background: linear-gradient(165deg, #14141f 0%, #0b0b12 100%);
           box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.8);
           overflow: hidden;
+          transition: border-color 0.35s, box-shadow 0.35s;
+        }
+        .pf-card::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, #B1130F, #ff6b67);
+        }
+        .pf-card:hover {
+          border-color: rgba(255, 90, 80, 0.4);
+          box-shadow: 0 24px 70px -24px rgba(0, 0, 0, 0.9),
+            0 0 40px -12px rgba(255, 61, 56, 0.4);
+        }
+        .pf-step {
+          position: absolute;
+          top: 16px;
+          right: 18px;
+          font-family: "Inter", system-ui, sans-serif;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 1px;
+          color: transparent;
+          -webkit-text-stroke: 1px rgba(255, 107, 103, 0.4);
         }
         .pf-card-title {
           font-family: "JetBrains Mono", ui-monospace, monospace;
-          font-size: 13px;
-          letter-spacing: 0.3px;
-          color: #b9c0d8;
-          text-align: center;
+          font-size: 12.5px;
+          letter-spacing: 0.2px;
+          color: #ff9d99;
           margin-bottom: 22px;
+          padding-right: 34px;
         }
         .pf-caption {
           font-family: "Instrument Serif", Georgia, serif;
-          font-size: 25px;
+          font-size: 26px;
           font-style: italic;
           text-align: center;
-          color: #e8ebf5;
+          color: #f0f2fa;
         }
 
         /* ---------- Panel 1: accounts ---------- */
@@ -233,17 +278,15 @@ export default function ProcessFlow() {
         }
         .pf-acct-check {
           opacity: 0;
-          color: #10b981;
+          color: #ff6b67;
           display: flex;
         }
-        /* unselected rows: strike-through pulse */
         .pf-acct:not(.sel) {
           animation: acctStrike 4.5s ease-in-out infinite;
         }
         .pf-acct:not(.sel) .pf-acct-name::after {
           animation: acctLine 4.5s ease-in-out infinite;
         }
-        /* selected row: highlight + check */
         .pf-acct.sel {
           animation: acctSel 4.5s ease-in-out infinite;
         }
@@ -254,18 +297,9 @@ export default function ProcessFlow() {
           animation: acctCheck 4.5s ease-in-out infinite;
         }
         @keyframes acctSel {
-          0%, 20% {
-            border-color: transparent;
-            background: transparent;
-          }
-          35%, 92% {
-            border-color: rgba(16, 185, 129, 0.55);
-            background: rgba(16, 185, 129, 0.08);
-          }
-          100% {
-            border-color: transparent;
-            background: transparent;
-          }
+          0%, 20% { border-color: transparent; background: transparent; }
+          35%, 92% { border-color: rgba(255, 61, 56, 0.5); background: rgba(255, 61, 56, 0.09); }
+          100% { border-color: transparent; background: transparent; }
         }
         @keyframes acctCheck {
           0%, 25% { opacity: 0; transform: scale(0.6); }
@@ -304,7 +338,7 @@ export default function ProcessFlow() {
         .pf-seq-fill {
           position: absolute;
           inset: 0;
-          background: linear-gradient(#B1130F, #10b981);
+          background: linear-gradient(#ff3d38, #B1130F);
           transform: scaleY(0);
           transform-origin: top;
           animation: seqFill 3s ease-in-out infinite;
@@ -367,8 +401,8 @@ export default function ProcessFlow() {
           background: linear-gradient(#3a4160, #2a2f47);
         }
         .pf-bar.variant {
-          background: linear-gradient(#12b981, #0c8f64);
-          box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+          background: linear-gradient(#ff5b56, #B1130F);
+          box-shadow: 0 0 22px rgba(255, 61, 56, 0.3);
         }
         @keyframes barGrow {
           0% { transform: scaleY(0); }
@@ -400,7 +434,7 @@ export default function ProcessFlow() {
           border-radius: 3px;
         }
         .pf-legend .dot.control { background: #3a4160; }
-        .pf-legend .dot.variant { background: #12b981; }
+        .pf-legend .dot.variant { background: #ff3d38; }
 
         /* ---------- connectors ---------- */
         .pf-connector {
@@ -441,7 +475,7 @@ export default function ProcessFlow() {
           }
           .pf-seq-row { opacity: 1; }
           .pf-bar { transform: scaleY(1); }
-          .pf-acct.sel { border-color: rgba(16,185,129,0.5); background: rgba(16,185,129,0.08); }
+          .pf-acct.sel { border-color: rgba(255, 61, 56, 0.5); background: rgba(255, 61, 56, 0.09); }
           .pf-acct.sel .pf-acct-check { opacity: 1; }
         }
       `}</style>
