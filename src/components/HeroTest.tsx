@@ -5,6 +5,13 @@ import { useState, useEffect } from "react";
 const SPRINT_URL = "https://calculator.bleedai.com/sprint";
 const VIDEO_ID = "S0Oeg0sbB6k";
 
+// Channel badges (home-test only). Colors match the ChannelStack accents.
+const CHANNELS = [
+  { label: "Email", color: "#B1130F" },
+  { label: "LinkedIn", color: "#0A66C2" },
+  { label: "Call & SMS", color: "#10b981" },
+];
+
 export default function HeroTest() {
   const [playing, setPlaying] = useState(false);
   const [spots, setSpots] = useState(3);
@@ -17,7 +24,7 @@ export default function HeroTest() {
 
   return (
     <section className="relative overflow-hidden pt-10 sm:pt-12 lg:pt-14 pb-16 sm:pb-20 lg:pb-24">
-      {/* Background handled site-wide by .bai-bg orbs + CursorGlow (in app/home-test/page.tsx) */}
+      {/* Background handled site-wide by .bai-bg orbs + CursorGlow (in app/page.tsx) */}
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-[1.45fr_1fr] gap-10 lg:gap-12 xl:gap-14 items-center">
           {/* LEFT: Text column */}
@@ -63,12 +70,29 @@ export default function HeroTest() {
             </h1>
 
             {/* Subheadline */}
-            <p className="text-lg lg:text-xl text-white/65 leading-relaxed max-w-xl mb-7">
+            <p className="text-lg lg:text-xl text-white/65 leading-relaxed max-w-xl mb-5">
               Not a lead-gen agency. A full-service growth partner that turns
               strangers into customers — <span className="text-white/90 font-medium">live in 48 hours</span>.
             </p>
 
-            {/* Stat triplet */}
+            {/* Channel badges */}
+            <div className="flex flex-wrap items-center gap-2.5 mb-7">
+              {CHANNELS.map((ch) => (
+                <span
+                  key={ch.label}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03]"
+                >
+                  <span
+                    className="w-2 h-2 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: ch.color, boxShadow: `0 0 8px ${ch.color}` }}
+                  />
+                  <span className="text-xs font-medium text-white/80">{ch.label}</span>
+                </span>
+              ))}
+            </div>
+
+            {/* Stat triplet — temporarily hidden */}
+            {false && (
             <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8 pb-8 border-b border-white/10">
               {[
                 { num: "100+", label: "opps in December" },
@@ -88,6 +112,7 @@ export default function HeroTest() {
                 </div>
               ))}
             </div>
+            )}
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-7">
@@ -121,7 +146,7 @@ export default function HeroTest() {
                 onClick={() => {
                   setPlaying(true);
                   document
-                    .getElementById("hero-test-video")
+                    .getElementById("hero-video")
                     ?.scrollIntoView({ behavior: "smooth", block: "center" });
                 }}
                 className="inline-flex items-center gap-2 text-white/70 hover:text-white font-medium text-sm transition-colors"
@@ -176,7 +201,7 @@ export default function HeroTest() {
           </div>
 
           {/* RIGHT: Video column */}
-          <div id="hero-test-video" className="relative">
+          <div id="hero-video" className="relative">
             {/* Floating press credit — sits ABOVE the video, right-aligned */}
             <a
               href="https://usawire.com/cold-to-sold-how-bleed-ai-creates-predictable-b2b-pipeline-in-2025/"
@@ -209,7 +234,7 @@ export default function HeroTest() {
             </a>
 
             {/* Floating real stat — sits BELOW the video, left-aligned */}
-            <div className="hidden lg:flex absolute top-full mt-3 left-4 z-20 items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-[#B1130F]/30 bg-[#0a0a10]/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(177,19,15,0.25)] animate-[float_7s_ease-in-out_infinite_-2s]">
+            <div className="hidden lg:flex absolute top-full mt-3 left-4 z-20 items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-[#B1130F]/30 bg-[#0a0a10]/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] animate-[float_7s_ease-in-out_infinite_-2s]">
               <div className="font-display text-xl font-bold text-[#ff6b67] leading-none">100+</div>
               <div>
                 <div className="text-xs font-semibold text-white leading-tight">Opportunities Generated</div>

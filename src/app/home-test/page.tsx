@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
+import HeroTest from "@/components/HeroTest";
 import ChannelStack from "@/components/ChannelStack";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
@@ -33,7 +33,7 @@ export default function HomeTest() {
     <main className="bai relative overflow-x-clip">
       {/* .bai-bg + CursorGlow now mounted site-wide in app/layout.tsx */}
       <Navigation />
-      <Hero />
+      <HeroTest />
       <ChannelStack />
       <StatsStrip />
       <RepliesMarquee />
