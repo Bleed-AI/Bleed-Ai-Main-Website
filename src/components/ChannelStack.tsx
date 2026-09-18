@@ -59,61 +59,74 @@ const channels: Channel[] = [
 export default function ChannelStack() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const pinRef = useRef<HTMLDivElement | null>(null);
-  const stackRef = useRef<HTMLDivElement | null>(null);
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const dotsRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
     () => {
-      const cards = gsap.utils.toArray<HTMLElement>(".chan-card");
-      const n = cards.length;
-      const PEEK = 20; // px each lower card is nudged down
-      const SHRINK = 0.05; // scale drop per depth
+      const track = trackRef.current;
+      const viewport = viewportRef.current;
+      if (!track || !viewport) return;
+
+      const panels = gsap.utils.toArray<HTMLElement>(".chan-panel");
+      const dots = dotsRef.current
+        ? gsap.utils.toArray<HTMLElement>(dotsRef.current.children)
+        : [];
+      const n = panels.length;
 
       const reduce =
         typeof window !== "undefined" &&
         window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
       if (reduce) {
-        // Accessible fallback: no pin, simple stacked column.
-        gsap.set(cards, { position: "relative", opacity: 1, scale: 1, y: 0, marginBottom: 20 });
-        if (stackRef.current) stackRef.current.style.height = "auto";
+        // Accessible fallback: simple vertical stack, no pin, no horizontal move.
+        track.style.flexDirection = "column";
+        gsap.set(panels, { width: "100%", flex: "0 0 auto", marginBottom: 20 });
+        dots.forEach((d, i) => d.classList.toggle("on", i === 0));
         return;
       }
 
-      // Initial deck: card 0 on top, each lower one nudged down + shrunk.
-      cards.forEach((card, i) => {
-        gsap.set(card, {
-          yPercent: 0,
-          y: i * PEEK,
-          scale: 1 - i * SHRINK,
-          opacity: 1,
-          zIndex: n - i,
-          transformOrigin: "center top",
-        });
-      });
+      const setActive = (idx: number) =>
+        dots.forEach((d, i) => d.classList.toggle("on", i === idx));
+      setActive(0);
 
-      const tl = gsap.timeline({
+      gsap.to(track, {
+        x: () => -(track.scrollWidth - viewport.clientWidth),
+        ease: "none",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top top",
-          end: () => "+=" + window.innerHeight * (n - 1),
+          end: () => "+=" + (track.scrollWidth - viewport.clientWidth),
           pin: pinRef.current,
           scrub: 0.6,
           anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => setActive(Math.round(self.progress * (n - 1))),
         },
       });
 
-      // Each step: lift the current top card away, pull the ones beneath forward.
-      for (let i = 0; i < n - 1; i++) {
-        tl.to(cards[i], { yPercent: -118, opacity: 0, scale: 0.92, ease: "power2.in" }, i);
-        for (let j = i + 1; j < n; j++) {
-          const depth = j - i - 1;
-          tl.to(
-            cards[j],
-            { y: depth * PEEK, scale: 1 - depth * SHRINK, ease: "power2.out" },
-            i
-          );
-        }
-      }
+      // Subtle depth: inactive cards sit slightly back until they slide in.
+      panels.forEach((panel, i) => {
+        const card = panel.querySelector(".chan-card");
+        if (!card || i === 0) return;
+        gsap.fromTo(
+          card,
+          { scale: 0.9, opacity: 0.55 },
+          {
+            scale: 1,
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: () => "top+=" + (i - 0.85) * viewport.clientWidth + " top",
+              end: () => "top+=" + i * viewport.clientWidth + " top",
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          }
+        );
+      });
     },
     { scope: sectionRef }
   );
@@ -130,24 +143,34 @@ export default function ChannelStack() {
           </h2>
         </div>
 
-        <div ref={stackRef} className="chan-stack">
-          {channels.map((c) => (
-            <article key={c.n} className="chan-card" style={{ "--acc": c.accent } as React.CSSProperties}>
-              <div className="chan-card-top">
-                <span className="chan-icon">{c.icon}</span>
-                <span className="chan-num">{c.n}</span>
+        <div ref={viewportRef} className="chan-viewport">
+          <div ref={trackRef} className="chan-track">
+            {channels.map((c) => (
+              <div key={c.n} className="chan-panel">
+                <article className="chan-card" style={{ "--acc": c.accent } as React.CSSProperties}>
+                  <div className="chan-card-top">
+                    <span className="chan-icon">{c.icon}</span>
+                    <span className="chan-num">{c.n}</span>
+                  </div>
+                  <h3 className="chan-title">{c.title}</h3>
+                  <p className="chan-desc">{c.desc}</p>
+                  <ul className="chan-points">
+                    {c.points.map((p) => (
+                      <li key={p}>
+                        <span className="chan-dot" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
               </div>
-              <h3 className="chan-title">{c.title}</h3>
-              <p className="chan-desc">{c.desc}</p>
-              <ul className="chan-points">
-                {c.points.map((p) => (
-                  <li key={p}>
-                    <span className="chan-dot" />
-                    {p}
-                  </li>
-                ))}
-              </ul>
-            </article>
+            ))}
+          </div>
+        </div>
+
+        <div ref={dotsRef} className="chan-progress">
+          {channels.map((c) => (
+            <span key={c.n} className="chan-pd" />
           ))}
         </div>
       </div>
@@ -162,23 +185,33 @@ export default function ChannelStack() {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          gap: 34px;
-          padding: 64px 22px;
+          gap: 30px;
+          padding: 60px 22px;
           overflow: hidden;
         }
         .chan-head {
           text-align: center;
           max-width: 640px;
         }
-        .chan-stack {
-          position: relative;
+        .chan-viewport {
           width: 100%;
-          max-width: 620px;
-          height: 380px;
+          max-width: 1120px;
+          overflow: hidden;
+        }
+        .chan-track {
+          display: flex;
+          will-change: transform;
+        }
+        .chan-panel {
+          flex: 0 0 100%;
+          display: flex;
+          justify-content: center;
+          padding: 0 8px;
         }
         .chan-card {
-          position: absolute;
-          inset: 0;
+          position: relative;
+          width: 100%;
+          max-width: 600px;
           display: flex;
           flex-direction: column;
           padding: 34px 34px 30px;
@@ -252,7 +285,7 @@ export default function ChannelStack() {
           line-height: 1.6;
           color: #9099b8;
           margin-bottom: 20px;
-          max-width: 90%;
+          max-width: 92%;
         }
         .chan-points {
           display: flex;
@@ -275,11 +308,22 @@ export default function ChannelStack() {
           flex-shrink: 0;
           box-shadow: 0 0 10px var(--acc);
         }
+        .chan-progress {
+          display: flex;
+          gap: 8px;
+        }
+        .chan-pd {
+          width: 26px;
+          height: 4px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.14);
+          transition: background 0.3s, width 0.3s;
+        }
+        .chan-progress :global(.chan-pd.on) {
+          width: 40px;
+          background: #B1130F;
+        }
         @media (max-width: 640px) {
-          .chan-stack {
-            height: 420px;
-            max-width: 100%;
-          }
           .chan-card {
             padding: 26px 22px;
           }
