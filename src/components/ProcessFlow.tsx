@@ -44,7 +44,7 @@ const steps = [
   { day: "Day 6", label: "Call", icon: IconPhone, color: "#22c98a" },
 ];
 
-const accounts = ["Fieldstone Group", "Northwind Labs", "Bramble & Co"];
+const accounts = ["Vantage Peak", "Halcyon Labs", "Cobalt & Rowe"];
 
 const bars = [
   { h: 44, kind: "control" },
