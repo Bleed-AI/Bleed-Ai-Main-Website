@@ -2,89 +2,76 @@
 
 import Reveal from "@/components/Reveal";
 
-// Email Machine SVG injected as static markup so native SVG attributes and the
-// per-envelope `--d` custom properties keep working. The .bai-scoped CSS in
-// globals.css drives every animation (transform/opacity only, lightweight).
-const MACHINE_SVG = `
-      <!-- top feed pipe -->
-      <path d="M70 60 H636" fill="none" stroke="#23233a" stroke-width="3"/>
-      <text x="70" y="34" fill="#9099b8" font-size="10" font-family="monospace" text-anchor="middle">cold emails in</text>
-      <g class="drop-env"><rect width="16" height="11" rx="1.5" fill="#e6e9f2" stroke="#c2c8da"/><path d="M1 1.5 L8 7 L15 1.5" fill="none" stroke="#9aa2bd" stroke-width="1"/></g>
-      <path d="M36 56 H104 L86 98 H54 Z" fill="#181826" stroke="#2a2a3e"/>
-      <path d="M70 98 V178" stroke="#2a2a3e" stroke-width="6" stroke-linecap="round"/>
-      <!-- conveyor belt -->
-      <rect x="30" y="192" width="752" height="16" rx="8" fill="#16161f" stroke="#2a2a3e"/>
-      <circle cx="38" cy="200" r="11" fill="#1a1a28" stroke="#2a2a3e"/>
-      <circle cx="774" cy="200" r="11" fill="#1a1a28" stroke="#2a2a3e"/>
-      <g stroke="#2a2a3e" stroke-width="1.5"><line x1="90" y1="200" x2="100" y2="200"/><line x1="170" y1="200" x2="180" y2="200"/><line x1="250" y1="200" x2="260" y2="200"/><line x1="330" y1="200" x2="340" y2="200"/><line x1="410" y1="200" x2="420" y2="200"/><line x1="490" y1="200" x2="500" y2="200"/><line x1="570" y1="200" x2="580" y2="200"/><line x1="650" y1="200" x2="660" y2="200"/><line x1="720" y1="200" x2="730" y2="200"/></g>
-      <!-- STATION 1: Deliverability (gauge) -->
-      <text x="168" y="80" fill="#9099b8" font-size="8.5" font-family="monospace" text-anchor="middle">DELIVERABILITY</text>
-      <rect class="cap-pulse" x="160" y="84" width="16" height="12" rx="2.5" fill="#b1130f"/>
-      <ellipse class="st-glow" style="animation-delay:-1.49s" cx="168" cy="132" rx="58" ry="50" fill="#b1130f"/>
-      <rect x="126" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#2a2a3e"/>
-      <path d="M150 148 A20 20 0 0 1 186 148" fill="none" stroke="#3a3a52" stroke-width="4" stroke-linecap="round"/>
-      <path d="M150 148 A20 20 0 0 1 181 132" fill="none" stroke="#e8302c" stroke-width="4" stroke-linecap="round"/>
-      <g class="gauge-needle"><line x1="168" y1="148" x2="180" y2="135" stroke="#eaeef8" stroke-width="2" stroke-linecap="round"/></g>
-      <!-- STATION 2: Warm-up (gears) -->
-      <text x="318" y="80" fill="#9099b8" font-size="8.5" font-family="monospace" text-anchor="middle">WARM-UP</text>
-      <rect class="cap-pulse" style="animation-delay:-1s" x="310" y="84" width="16" height="12" rx="2.5" fill="#b1130f"/>
-      <ellipse class="st-glow" style="animation-delay:-0.24s" cx="318" cy="132" rx="58" ry="50" fill="#b1130f"/>
-      <rect x="276" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#2a2a3e"/>
-      <g class="gear-a"><circle cx="308" cy="130" r="13" fill="none" stroke="#3a3a52" stroke-width="4"/><path d="M308 118 V142 M296 130 H320" stroke="#3a3a52" stroke-width="2.5"/><circle cx="308" cy="130" r="3" fill="#9099b8"/></g>
-      <g class="gear-b"><circle cx="338" cy="144" r="10" fill="none" stroke="#e8302c" stroke-width="4"/><path d="M338 134 V154 M328 144 H348" stroke="#e8302c" stroke-width="2"/><circle cx="338" cy="144" r="2.5" fill="#e8302c"/></g>
-      <!-- STATION 3: Personalization (stamp) -->
-      <text x="468" y="80" fill="#9099b8" font-size="8" font-family="monospace" text-anchor="middle">PERSONALIZATION</text>
-      <rect class="cap-pulse" style="animation-delay:-2s" x="460" y="84" width="16" height="12" rx="2.5" fill="#b1130f"/>
-      <ellipse class="st-glow" style="animation-delay:-2.98s" cx="468" cy="132" rx="58" ry="50" fill="#b1130f"/>
-      <rect x="426" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#2a2a3e"/>
-      <rect x="442" y="138" width="36" height="22" rx="2" fill="#e6e9f2" stroke="#c2c8da"/>
-      <line x1="448" y1="146" x2="472" y2="146" stroke="#9aa2bd" stroke-width="1.4"/><line x1="448" y1="151" x2="466" y2="151" stroke="#9aa2bd" stroke-width="1.4"/>
-      <g class="stamp"><rect x="484" y="114" width="16" height="14" rx="2" fill="#b1130f"/><line x1="492" y1="128" x2="492" y2="138" stroke="#b1130f" stroke-width="3"/></g>
-      <!-- STATION 4: Bleed AI Secret Sauce (gold) -->
-      <ellipse cx="618" cy="132" rx="58" ry="50" fill="#f5c54214"/>
-      <text x="618" y="80" fill="#f5c542" font-size="8.5" font-family="monospace" text-anchor="middle">SECRET SAUCE</text>
-      <rect class="cap-pulse" style="animation-delay:-3s" x="610" y="84" width="16" height="12" rx="2.5" fill="#f5c542"/>
-      <ellipse class="st-glow" style="animation-delay:-1.72s" cx="618" cy="132" rx="58" ry="50" fill="#f5c542"/>
-      <rect x="576" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#4a3a16"/>
-      <g class="gold-pulse"><g class="twinkle"><path d="M618 116 L621.9 126.1 L632 130 L621.9 133.9 L618 144 L614.1 133.9 L604 130 L614.1 126.1 Z" fill="#f5c542"/></g><circle cx="636" cy="119" r="2.4" fill="#f5c542"/><circle cx="601" cy="143" r="2" fill="#f5c542"/></g>
-      <text x="618" y="161" fill="#caa83a" font-size="7" font-family="monospace" text-anchor="middle">the Bleed AI edge</text>
-      <g class="hero-env" style="--d:0s">
-        <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
-        <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
-        <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
-        <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
-        <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
-      </g>
-      <g class="hero-env" style="--d:-4s">
-        <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
-        <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
-        <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
-        <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
-        <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
-      </g>
-      <g class="hero-env" style="--d:-8s">
-        <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
-        <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
-        <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
-        <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
-        <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
-      </g>
-      <!-- golden output + tray -->
-      <rect x="690" y="158" width="84" height="44" rx="10" fill="#12121c" stroke="#2a2a3e"/>
-      <g class="gold-pulse" transform="translate(716,162)"><rect width="32" height="20" rx="2.5" fill="#f5c542" stroke="#fff3c4" stroke-width="1.2"/><path d="M1.5 3 L16 12.5 L30.5 3" fill="none" stroke="#b8860b" stroke-width="1.2"/><text x="16" y="15" fill="#7a5a00" font-size="9" font-weight="bold" text-anchor="middle">★</text></g>
-      <text x="732" y="224" fill="#3ecf8e" font-size="9" font-family="monospace" text-anchor="middle">BOOKED CALL</text>
-      <g class="cal-notif">
-        <rect x="678" y="108" width="138" height="44" rx="9" fill="#16161f" stroke="#2a2a3e"/>
-        <rect x="688" y="118" width="22" height="22" rx="4" fill="#ffffff"/>
-        <rect x="688" y="118" width="22" height="7" rx="4" fill="#4285F4"/>
-        <text x="699" y="136" fill="#1a73e8" font-size="9" font-weight="bold" text-anchor="middle" font-family="system-ui,sans-serif">15</text>
-        <text x="718" y="126" fill="#eaeef8" font-size="9" font-weight="600" font-family="system-ui,sans-serif">Google Calendar</text>
-        <text x="718" y="139" fill="#9099b8" font-size="8" font-family="system-ui,sans-serif">New meeting booked</text>
-        <circle cx="806" cy="119" r="4.5" fill="#3ecf8e"/>
-      </g>
+// Multi-channel engine (home-test only). Self-contained SVG with SMIL
+// animation so it doesn't depend on the old email-machine CSS.
+// Live InfraBento is untouched — revert = point home-test back to it.
+const ENGINE_SVG = `
+  <!-- glow behind core -->
+  <ellipse cx="410" cy="125" rx="100" ry="62" fill="#b1130f" opacity="0.12">
+    <animate attributeName="opacity" values="0.08;0.2;0.08" dur="3s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- input label -->
+  <text x="100" y="18" fill="#9099b8" font-size="10" font-family="monospace" text-anchor="middle">cold outreach in</text>
+
+  <!-- INPUT: Email -->
+  <g>
+    <rect x="16" y="28" width="168" height="44" rx="11" fill="#12121c" stroke="#ff5b56" stroke-opacity="0.4"/>
+    <rect x="30" y="37" width="26" height="26" rx="7" fill="#ff5b56"/>
+    <rect x="36" y="45" width="14" height="10" rx="2" fill="none" stroke="#fff" stroke-width="1.2"/>
+    <path d="M36.5 45.6 L43 50.5 L49.5 45.6" fill="none" stroke="#fff" stroke-width="1.2"/>
+    <text x="66" y="55" fill="#e4e7f2" font-size="13" font-family="monospace">Email</text>
+  </g>
+
+  <!-- INPUT: LinkedIn -->
+  <g>
+    <rect x="16" y="103" width="168" height="44" rx="11" fill="#12121c" stroke="#4f8bff" stroke-opacity="0.4"/>
+    <rect x="30" y="112" width="26" height="26" rx="7" fill="#4f8bff"/>
+    <text x="43" y="130" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">in</text>
+    <text x="66" y="130" fill="#e4e7f2" font-size="13" font-family="monospace">LinkedIn</text>
+  </g>
+
+  <!-- INPUT: Call & SMS -->
+  <g>
+    <rect x="16" y="178" width="168" height="44" rx="11" fill="#12121c" stroke="#22c98a" stroke-opacity="0.4"/>
+    <rect x="30" y="187" width="26" height="26" rx="7" fill="#22c98a"/>
+    <path d="M36 191.5c0-.5.4-.9.9-.9h2c.4 0 .75.28.85.66l.55 2.1c.08.3-.02.6-.24.82l-.8.8a8 8 0 003.5 3.5l.8-.8c.22-.22.52-.32.82-.24l2.1.55c.38.1.66.45.66.85v2c0 .5-.4.9-.9.9A10.5 10.5 0 0136 191.5z" fill="#fff"/>
+    <text x="66" y="205" fill="#e4e7f2" font-size="13" font-family="monospace">Call &amp; SMS</text>
+  </g>
+
+  <!-- feed lines into core -->
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.13" stroke-width="1.4" stroke-dasharray="4 5">
+    <path d="M184 50 C262 50 272 106 330 108"/>
+    <path d="M184 125 L330 125"/>
+    <path d="M184 200 C262 200 272 144 330 142"/>
+  </g>
+
+  <!-- travelling pulses in -->
+  <circle r="3.2" fill="#ff5b56"><animateMotion dur="2.4s" repeatCount="indefinite" path="M184 50 C262 50 272 106 330 108"/></circle>
+  <circle r="3.2" fill="#4f8bff"><animateMotion dur="2.4s" begin="0.4s" repeatCount="indefinite" path="M184 125 L330 125"/></circle>
+  <circle r="3.2" fill="#22c98a"><animateMotion dur="2.4s" begin="0.8s" repeatCount="indefinite" path="M184 200 C262 200 272 144 330 142"/></circle>
+
+  <!-- CORE engine -->
+  <rect x="330" y="86" width="160" height="78" rx="16" fill="#16161f" stroke="#b1130f" stroke-width="1.5"/>
+  <rect x="330" y="86" width="160" height="3" rx="1.5" fill="#ff6b67"/>
+  <text x="410" y="118" fill="#ff8a86" font-size="12.5" font-weight="bold" text-anchor="middle" font-family="monospace">BLEED AI ENGINE</text>
+  <text x="410" y="136" fill="#9099b8" font-size="8" text-anchor="middle" font-family="monospace">deliverability · warm-up · AI copy</text>
+  <g>
+    <circle cx="392" cy="148" r="2.4" fill="#ff6b67"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" repeatCount="indefinite"/></circle>
+    <circle cx="410" cy="148" r="2.4" fill="#ff6b67"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.47s" repeatCount="indefinite"/></circle>
+    <circle cx="428" cy="148" r="2.4" fill="#ff6b67"><animate attributeName="opacity" values="0.3;1;0.3" dur="1.4s" begin="0.94s" repeatCount="indefinite"/></circle>
+  </g>
+
+  <!-- output line -->
+  <path d="M490 125 L604 125" fill="none" stroke="#ffffff" stroke-opacity="0.13" stroke-width="1.4" stroke-dasharray="4 5"/>
+  <circle r="3.2" fill="#ff6b67"><animateMotion dur="1.8s" repeatCount="indefinite" path="M490 125 L604 125"/></circle>
+  <circle r="3.2" fill="#3ecf8e"><animateMotion dur="1.8s" begin="0.9s" repeatCount="indefinite" path="M490 125 L604 125"/></circle>
+
+  <!-- OUTPUT: booked call -->
+  <rect x="604" y="102" width="198" height="46" rx="11" fill="#0e1a14" stroke="#10b981" stroke-opacity="0.55"/>
+  <circle cx="628" cy="125" r="11" fill="none" stroke="#3ecf8e" stroke-width="1.6"/>
+  <path d="M623 125.5 l3.2 3.2 l6 -6.4" fill="none" stroke="#3ecf8e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="650" y="130" fill="#3ecf8e" font-size="13" font-weight="bold" font-family="monospace">BOOKED CALL</text>
 `;
 
 export default function InfraBentoTest() {
@@ -99,7 +86,7 @@ export default function InfraBentoTest() {
             <em>The part other agencies can&apos;t build.</em>
           </Reveal>
           <Reveal as="p" className="sec-sub" delay={80} style={{ maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
-            We run outreach across email, LinkedIn, and calls &amp; SMS — but email is where most agencies quietly break. Landing in the primary inbox, at scale, without burning domains is an engineering problem. Here&apos;s the system we run on every account - monitored, instrumented, and tuned like a production pipeline.
+            We run outreach across email, LinkedIn, and calls &amp; SMS — all feeding one engine. Landing in the primary inbox, connecting on LinkedIn, and reaching the phone, at scale, without burning your name is an engineering problem. Here&apos;s the system we run on every account - monitored, instrumented, and tuned like a production pipeline.
           </Reveal>
 
           <Reveal className="tpill">
@@ -111,7 +98,7 @@ export default function InfraBentoTest() {
           </Reveal>
 
           <Reveal className="infra-status">
-            <span className="seg"><span className="infra-livedot" /> All systems operational</span>
+            <span className="seg"><span className="infra-livedot" /> All channels operational</span>
             <span className="seg-div" />
             <span className="seg"><b>98.2%</b> inbox placement</span>
             <span className="seg-div" />
@@ -119,7 +106,7 @@ export default function InfraBentoTest() {
           </Reveal>
 
           <div className="machine">
-            <svg viewBox="0 0 820 250" role="img" aria-label="Bleed AI email machine" dangerouslySetInnerHTML={{ __html: MACHINE_SVG }} />
+            <svg viewBox="0 0 820 250" role="img" aria-label="Bleed AI multi-channel engine" dangerouslySetInnerHTML={{ __html: ENGINE_SVG }} />
           </div>
 
           <Reveal className="mach-sauce">
