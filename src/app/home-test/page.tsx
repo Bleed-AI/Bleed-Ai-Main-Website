@@ -6,12 +6,12 @@ import ChannelStack from "@/components/ChannelStack";
 import ProcessFlow from "@/components/ProcessFlow";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
-import ResultsMarquee from "@/components/ResultsMarquee";
+import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
 import FrameworkTest from "@/components/FrameworkTest";
 import Testimonials from "@/components/Testimonials";
-import VsTable from "@/components/VsTable";
+import VsTableTest from "@/components/VsTableTest";
 import InfraBentoTest from "@/components/InfraBentoTest";
-import Founder from "@/components/Founder";
+import FounderTest from "@/components/FounderTest";
 import FaqTest from "@/components/FaqTest";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
@@ -41,10 +41,10 @@ export default function HomeTest() {
       <RepliesMarquee />
       <Testimonials />
       <FrameworkTest />
-      <ResultsMarquee />
-      <VsTable />
+      <ResultsMarqueeTest />
+      <VsTableTest />
       <InfraBentoTest />
-      <Founder />
+      <FounderTest />
       <FaqTest />
       <FinalCta />
       <Footer />
