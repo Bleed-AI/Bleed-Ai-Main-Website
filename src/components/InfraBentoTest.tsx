@@ -48,29 +48,33 @@ const MACHINE_SVG = `
       <rect x="576" y="96" width="84" height="72" rx="12" fill="#181826" stroke="#4a3a16"/>
       <g class="gold-pulse"><g class="twinkle"><path d="M618 116 L621.9 126.1 L632 130 L621.9 133.9 L618 144 L614.1 133.9 L604 130 L614.1 126.1 Z" fill="#f5c542"/></g><circle cx="636" cy="119" r="2.4" fill="#f5c542"/><circle cx="601" cy="143" r="2" fill="#f5c542"/></g>
       <text x="618" y="161" fill="#caa83a" font-size="7" font-family="monospace" text-anchor="middle">the Bleed AI edge</text>
+      <!-- item 1: EMAIL -->
       <g class="hero-env" style="--d:0s">
         <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
         <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
         <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
         <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
         <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
+        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
       </g>
+      <!-- item 2: LINKEDIN -->
       <g class="hero-env" style="--d:-4s">
         <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
-        <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
-        <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
-        <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
+        <rect width="30" height="20" rx="3" fill="#e7eaf3" stroke="#c2c8da"/>
+        <rect x="3" y="5" width="10" height="10" rx="2" fill="#0A66C2"/>
+        <text x="8" y="13.2" fill="#fff" font-size="8" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">in</text>
+        <g class="fx-pers"><line x1="17" y1="9" x2="26" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="17" y1="13" x2="24" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
         <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
+        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
       </g>
+      <!-- item 3: CALL & SMS -->
       <g class="hero-env" style="--d:-8s">
         <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
-        <rect width="30" height="20" rx="2.5" fill="#e7eaf3" stroke="#c2c8da"/>
-        <path d="M1 2 L15 12 L29 2" fill="none" stroke="#9aa2bd" stroke-width="1.1"/>
-        <g class="fx-pers"><line x1="6" y1="9" x2="24" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="6" y1="13" x2="18" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
+        <rect width="30" height="20" rx="3" fill="#e7eaf3" stroke="#c2c8da"/>
+        <path d="M6 7c0-.4.35-.75.75-.75h1.6c.35 0 .65.24.73.58l.45 1.8c.06.25-.02.5-.2.66l-.7.7a6.5 6.5 0 002.7 2.7l.7-.7c.17-.17.42-.25.66-.2l1.8.45c.34.08.58.38.58.73v1.6c0 .4-.35.75-.75.75A9 9 0 016 7z" fill="#22c98a"/>
+        <g class="fx-pers"><line x1="18" y1="9" x2="26" y2="9" stroke="#b1130f" stroke-width="1.4"/><line x1="18" y1="13" x2="24" y2="13" stroke="#9aa2bd" stroke-width="1.4"/></g>
         <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
-        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><path d="M0 1 L15 12 L30 1" fill="none" stroke="#b8860b" stroke-width="1.1"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
+        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
       </g>
       <!-- golden output + tray -->
       <rect x="690" y="158" width="84" height="44" rx="10" fill="#12121c" stroke="#2a2a3e"/>
