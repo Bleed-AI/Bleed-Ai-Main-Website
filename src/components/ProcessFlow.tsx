@@ -181,9 +181,8 @@ export default function ProcessFlow() {
                   </div>
                   <div className="pf-crm-row">
                     <span className="pf-crm-ico">{IconPhone}</span>
-                    <span>You follow up — Call &amp; SMS</span>
+                    <span>Follow up — Call &amp; SMS</span>
                   </div>
-                  <div className="pf-crm-note">CRM &amp; infra set up by us</div>
                 </div>
               </div>
             </div>
