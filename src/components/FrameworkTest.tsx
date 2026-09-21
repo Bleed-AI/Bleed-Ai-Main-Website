@@ -33,6 +33,11 @@ const TruckIcon = (
     <circle cx="17" cy="17.5" r="1.6" />
   </svg>
 );
+const PhoneIcon = (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 5.5C4 4.7 4.7 4 5.5 4h2.1c.6 0 1.13.4 1.29.99l.9 3.2a1.35 1.35 0 01-.35 1.31l-1.2 1.2a12 12 0 005.06 5.06l1.2-1.2c.35-.35.86-.48 1.31-.35l3.2.9c.59.16.99.69.99 1.29v2.1c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 014 5.5z" />
+  </svg>
+);
 
 const steps: Step[] = [
   {
@@ -73,9 +78,12 @@ const steps: Step[] = [
     num: "04",
     tag: "Conversion",
     name: "Sell",
-    desc: "A qualified prospect lands on your calendar. You show up, close, and grow. Everything before this step? We handled it.",
+    desc: "Replies land in your CRM, where your team follows up by call & SMS and books the meeting. You show up, close, and grow — everything before this step, we handled.",
     pill: "Your job starts here",
     active: true,
+    channels: [
+      { label: "Call & SMS", color: "#10b981", icon: PhoneIcon },
+    ],
     tools: [
       { src: "/images/logo-calendly.png", label: "Calendly" },
       { src: "/images/logo-hubspot.png", label: "HubSpot" },
@@ -120,20 +128,19 @@ export default function FrameworkTest() {
                 <div className="step-desc">{s.desc}</div>
                 {s.pill && <div className="step-pill">{s.pill}</div>}
                 <div className="step-tools">
-                  {s.channels
-                    ? s.channels.map((c, j) => (
-                        <span className="step-tool" key={j}>
-                          <span style={{ color: c.color, display: "inline-flex", alignItems: "center" }}>{c.icon}</span>
-                          {c.label}
-                        </span>
-                      ))
-                    : s.tools.map((t, j) => (
-                        <span className="step-tool" key={j}>
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={t.src} alt={`${t.label} logo`} />
-                          {t.label}
-                        </span>
-                      ))}
+                  {s.channels?.map((c, j) => (
+                    <span className="step-tool" key={`c${j}`}>
+                      <span style={{ color: c.color, display: "inline-flex", alignItems: "center" }}>{c.icon}</span>
+                      {c.label}
+                    </span>
+                  ))}
+                  {s.tools.map((t, j) => (
+                    <span className="step-tool" key={`t${j}`}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={t.src} alt={`${t.label} logo`} />
+                      {t.label}
+                    </span>
+                  ))}
                 </div>
               </Reveal>
             ))}
