@@ -29,23 +29,6 @@ const IconPhone = (
   </svg>
 );
 
-const Connector = () => (
-  <div className="pf-connector" aria-hidden="true">
-    <svg viewBox="0 0 80 220" preserveAspectRatio="none">
-      <g fill="none" stroke="var(--pf-line)" strokeWidth="1.4" strokeDasharray="4 5" className="pf-dash">
-        <path d="M0 70 C22 70 26 110 40 110" />
-        <path d="M0 110 L40 110" />
-        <path d="M0 150 C22 150 26 110 40 110" />
-        <path d="M40 110 C54 110 58 70 80 70" />
-        <path d="M40 110 L80 110" />
-        <path d="M40 110 C54 110 58 150 80 150" />
-      </g>
-      <circle r="2.6" fill="var(--pf-glow)" className="pf-spark">
-        <animateMotion dur="2.6s" repeatCount="indefinite" path="M0 110 L40 110 L80 110" />
-      </circle>
-    </svg>
-  </div>
-);
 
 const steps = [
   { day: "Day 1", label: "Email", icon: IconEnvelope, color: "#ff5b56" },
@@ -151,7 +134,21 @@ export default function ProcessFlow() {
             <div className="pf-caption">{panelMeta[0].caption}</div>
           </div>
 
-          <Connector />
+          <div className="pf-connector" aria-hidden="true">
+            <svg viewBox="0 0 80 220" preserveAspectRatio="none">
+              <g fill="none" stroke="var(--pf-line)" strokeWidth="1.4" strokeDasharray="4 5" className="pf-dash">
+                <path d="M0 70 C22 70 26 110 40 110" />
+                <path d="M0 110 L40 110" />
+                <path d="M0 150 C22 150 26 110 40 110" />
+                <path d="M40 110 C54 110 58 70 80 70" />
+                <path d="M40 110 L80 110" />
+                <path d="M40 110 C54 110 58 150 80 150" />
+              </g>
+              <circle r="2.6" fill="var(--pf-glow)" className="pf-spark">
+                <animateMotion dur="2.6s" repeatCount="indefinite" path="M0 110 L40 110 L80 110" />
+              </circle>
+            </svg>
+          </div>
 
           {/* PANEL 2 — outreach -> CRM follow-up */}
           <div className="pf-col">
@@ -189,7 +186,21 @@ export default function ProcessFlow() {
             <div className="pf-caption">{panelMeta[1].caption}</div>
           </div>
 
-          <Connector />
+          <div className="pf-connector" aria-hidden="true">
+            <svg viewBox="0 0 80 220" preserveAspectRatio="none">
+              <g fill="none" stroke="var(--pf-line)" strokeWidth="1.4" strokeDasharray="4 5" className="pf-dash">
+                <path d="M0 70 C22 70 26 110 40 110" />
+                <path d="M0 110 L40 110" />
+                <path d="M0 150 C22 150 26 110 40 110" />
+                <path d="M40 110 C54 110 58 70 80 70" />
+                <path d="M40 110 L80 110" />
+                <path d="M40 110 C54 110 58 150 80 150" />
+              </g>
+              <circle r="2.6" fill="var(--pf-glow)" className="pf-spark">
+                <animateMotion dur="2.6s" repeatCount="indefinite" path="M0 110 L40 110 L80 110" />
+              </circle>
+            </svg>
+          </div>
 
           {/* PANEL 3 — A/B test -> winner (multi-stage) */}
           <div className="pf-col">
