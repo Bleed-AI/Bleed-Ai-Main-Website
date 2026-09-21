@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Reveal from "@/components/Reveal";
 
 // --- tiny step icons -------------------------------------------------------
@@ -122,8 +123,42 @@ const channels: Channel[] = [
 ];
 
 export default function ChannelStack() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
+  // Parallax: layers with [data-speed] drift at different rates on scroll.
+  useEffect(() => {
+    const root = sectionRef.current;
+    if (!root) return;
+    if (typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+
+    const els = Array.from(root.querySelectorAll<HTMLElement>("[data-speed]"));
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const vh = window.innerHeight || 1;
+      for (const el of els) {
+        const r = el.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const delta = (center - vh / 2) / vh; // ~ -0.5..0.5 while in view
+        const speed = parseFloat(el.dataset.speed || "0");
+        el.style.transform = `translate3d(0, ${(delta * speed).toFixed(1)}px, 0)`;
+      }
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
-    <section id="channels">
+    <section id="channels" ref={sectionRef}>
       <div className="chan-inner">
         <div className="chan-head">
           <div className="sec-label">Every Channel, One System</div>
@@ -145,13 +180,13 @@ export default function ChannelStack() {
                 className="chan-rowinner"
                 style={{ "--acc": c.accent, "--acc2": c.accent2 } as React.CSSProperties}
               >
-                <span className="chan-node">
+                <span className="chan-node" data-speed="-18">
                   <span className="chan-node-ring" />
                   {c.icon}
                 </span>
 
                 <article className="chan-card">
-                  <span className="chan-watermark">{c.n}</span>
+                  <span className="chan-watermark" data-speed="46">{c.n}</span>
 
                   <div className="chan-card-head">
                     <span className="chan-day">
@@ -172,7 +207,7 @@ export default function ChannelStack() {
                       ))}
                     </ul>
 
-                    <div className="chan-flow" aria-hidden="true">
+                    <div className="chan-flow" aria-hidden="true" data-speed="20">
                       <div className="chan-flow-label">The sequence</div>
                       {c.flow.map((s, i) => (
                         <div key={s.label} className="flow-step" style={{ animationDelay: `${i * 1}s` }}>
