@@ -44,7 +44,15 @@ const steps = [
   { day: "Day 6", label: "Call", icon: IconPhone, color: "#22c98a" },
 ];
 
-const sources = ["Apollo", "Sales Navigator", "Prospeo", "Apify", "Serper"];
+const sources = [
+  { name: "Apollo", logo: "/images/sources/apollo.png" },
+  { name: "LinkedIn", logo: "/images/sources/linkedin.png" },
+  { name: "Google Maps", logo: "/images/sources/googlemaps.png" },
+  { name: "OpenWebNinja", logo: "/images/sources/openwebninja.png" },
+  { name: "Prospeo", logo: "/images/sources/prospeo.png" },
+  { name: "Apify", logo: "/images/sources/apify.png" },
+  { name: "Serper", logo: "/images/sources/serper.png" },
+];
 
 const bars = [
   { h: 44, kind: "control" },
@@ -81,12 +89,14 @@ export default function ProcessFlow() {
                 <div className="pf-src-cap">12+ sources</div>
                 <div className="pf-src-chips">
                   {sources.map((s, i) => (
-                    <span key={s} className="pf-src-chip" style={{ animationDelay: `${i * 0.3}s` }}>
-                      {s}
+                    <span key={s.name} className="pf-src-chip" style={{ animationDelay: `${i * 0.25}s` }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={s.logo} alt={s.name} className="pf-src-logo" />
+                      {s.name}
                     </span>
                   ))}
-                  <span className="pf-src-chip more" style={{ animationDelay: `${sources.length * 0.3}s` }}>
-                    +7
+                  <span className="pf-src-chip more" style={{ animationDelay: `${sources.length * 0.25}s` }}>
+                    +5
                   </span>
                 </div>
 
@@ -282,9 +292,12 @@ export default function ProcessFlow() {
           flex-wrap: wrap;
           justify-content: center;
           gap: 7px;
-          max-width: 270px;
+          max-width: 320px;
         }
         .pf-src-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
           font-family: "JetBrains Mono", ui-monospace, monospace;
           font-size: 11.5px;
           font-weight: 600;
@@ -295,6 +308,13 @@ export default function ProcessFlow() {
           background: #0d0d15;
           opacity: 0;
           animation: srcChip 4s ease-in-out infinite;
+        }
+        .pf-src-logo {
+          width: 15px;
+          height: 15px;
+          object-fit: contain;
+          border-radius: 3px;
+          flex-shrink: 0;
         }
         .pf-src-chip.more {
           color: #ff9d99;
