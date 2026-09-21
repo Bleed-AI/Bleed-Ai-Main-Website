@@ -125,6 +125,7 @@ export default function ChannelStack() {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const cardsRef = useRef<(HTMLElement | null)[]>([]);
   const dotsRef = useRef<(HTMLElement | null)[]>([]);
+  const glowRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const track = trackRef.current;
@@ -159,18 +160,45 @@ export default function ChannelStack() {
       target = scrollable > 0 ? scrolled / scrollable : 0;
     };
 
+    // accent colors per channel, for the ambient glow that shifts as you scroll
+    const accents = channels.map((c) => c.accent);
+    const hexRgb = (h: string): [number, number, number] => {
+      const v = parseInt(h.slice(1), 16);
+      return [(v >> 16) & 255, (v >> 8) & 255, v & 255];
+    };
+    const mix = (a: string, b: string, t: number) => {
+      const A = hexRgb(a);
+      const B = hexRgb(b);
+      const c = (j: number) => Math.round(A[j] + (B[j] - A[j]) * t);
+      return `${c(0)}, ${c(1)}, ${c(2)}`;
+    };
+
     const render = (seg: number) => {
       const active = Math.round(seg);
+
+      // ambient glow: interpolate between the two nearest channel accents
+      const i0 = Math.max(0, Math.min(n - 1, Math.floor(seg)));
+      const i1 = Math.max(0, Math.min(n - 1, i0 + 1));
+      const rgb = mix(accents[i0], accents[i1], seg - i0);
+      if (glowRef.current) {
+        glowRef.current.style.background =
+          `radial-gradient(closest-side at 50% 42%, rgba(${rgb}, 0.22), rgba(${rgb}, 0.05) 55%, transparent 72%)`;
+      }
+
       cardsRef.current.forEach((card, i) => {
         if (!card) return;
-        const d = seg - i; // 0 = centered
-        const y = -d * 42;
-        const op = Math.max(0, 1 - Math.abs(d) * 1.25);
-        const scale = 1 - Math.min(Math.abs(d) * 0.07, 0.16);
-        card.style.transform = `translate3d(0, calc(-50% + ${y.toFixed(2)}px), 0) scale(${scale.toFixed(4)})`;
+        const d = seg - i; // 0 = centered/active
+        const ad = Math.abs(d);
+        const y = -d * 40;
+        const z = -ad * 60; // recede in 3D
+        const rot = Math.max(-16, Math.min(16, -d * 11)); // tilt as it passes
+        const op = Math.max(0, 1 - ad * 1.2);
+        const scale = 1 - Math.min(ad * 0.06, 0.16);
+        card.style.transform =
+          `translate3d(0, calc(-50% + ${y.toFixed(2)}px), ${z.toFixed(1)}px) rotateX(${rot.toFixed(2)}deg) scale(${scale.toFixed(4)})`;
         card.style.opacity = op.toFixed(3);
-        card.style.zIndex = String(Math.round(100 - Math.abs(d) * 10));
-        card.style.pointerEvents = Math.abs(d) < 0.5 ? "auto" : "none";
+        card.style.zIndex = String(Math.round(100 - ad * 10));
+        card.style.pointerEvents = ad < 0.5 ? "auto" : "none";
       });
       dotsRef.current.forEach((dot, i) => dot?.classList.toggle("on", i === active));
     };
@@ -178,7 +206,7 @@ export default function ChannelStack() {
     // Continuous easing loop: current glides toward the scroll target every
     // frame, so motion stays buttery on wheel and trackpad alike.
     const loop = () => {
-      current += (target - current) * 0.09;
+      current += (target - current) * 0.11;
       if (Math.abs(target - current) < 0.00025) {
         current = target;
         idle += 1;
@@ -211,6 +239,7 @@ export default function ChannelStack() {
     <section id="channels">
       <div className="chan-track" ref={trackRef}>
         <div className="chan-sticky">
+          <div className="chan-glow" ref={glowRef} aria-hidden="true" />
           <div className="chan-head">
             <div className="sec-label">Every Channel, One System</div>
             <h2 className="sec-h2">
@@ -296,7 +325,17 @@ export default function ChannelStack() {
           padding: 46px 22px 34px;
           overflow: hidden;
         }
+        .chan-glow {
+          position: absolute;
+          inset: -12%;
+          z-index: 0;
+          pointer-events: none;
+          filter: blur(30px);
+          transition: background 0.25s linear;
+        }
         .chan-head {
+          position: relative;
+          z-index: 2;
           flex: 0 0 auto;
           text-align: center;
           max-width: 640px;
@@ -304,10 +343,12 @@ export default function ChannelStack() {
         }
         .chan-stage {
           position: relative;
+          z-index: 1;
           flex: 1 1 auto;
           width: 100%;
           max-width: 900px;
           align-self: center;
+          perspective: 1300px;
           overflow: hidden;
           -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 93%, transparent 100%);
           mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 93%, transparent 100%);
@@ -319,6 +360,7 @@ export default function ChannelStack() {
           right: 0;
           opacity: 0;
           transform: translate3d(0, -50%, 0);
+          transform-style: preserve-3d;
           will-change: transform, opacity;
           backface-visibility: hidden;
           display: flex;
