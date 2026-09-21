@@ -149,12 +149,17 @@ export default function ChannelStack() {
     }
 
     let raf = 0;
-    const apply = () => {
-      raf = 0;
+    let idle = 0;
+    let target = 0;
+    let current = 0;
+
+    const computeTarget = () => {
       const scrollable = track.offsetHeight - window.innerHeight;
       const scrolled = Math.min(Math.max(-track.getBoundingClientRect().top, 0), Math.max(scrollable, 1));
-      const p = scrollable > 0 ? scrolled / scrollable : 0;
-      const seg = p * (n - 1);
+      target = scrollable > 0 ? scrolled / scrollable : 0;
+    };
+
+    const render = (seg: number) => {
       const active = Math.round(seg);
       cardsRef.current.forEach((card, i) => {
         if (!card) return;
@@ -162,22 +167,42 @@ export default function ChannelStack() {
         const y = -d * 42;
         const op = Math.max(0, 1 - Math.abs(d) * 1.25);
         const scale = 1 - Math.min(Math.abs(d) * 0.07, 0.16);
-        card.style.transform = `translateY(calc(-50% + ${y.toFixed(1)}px)) scale(${scale.toFixed(3)})`;
+        card.style.transform = `translate3d(0, calc(-50% + ${y.toFixed(2)}px), 0) scale(${scale.toFixed(4)})`;
         card.style.opacity = op.toFixed(3);
         card.style.zIndex = String(Math.round(100 - Math.abs(d) * 10));
         card.style.pointerEvents = Math.abs(d) < 0.5 ? "auto" : "none";
       });
       dotsRef.current.forEach((dot, i) => dot?.classList.toggle("on", i === active));
     };
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(apply);
+
+    // Continuous easing loop: current glides toward the scroll target every
+    // frame, so motion stays buttery on wheel and trackpad alike.
+    const loop = () => {
+      current += (target - current) * 0.09;
+      if (Math.abs(target - current) < 0.00025) {
+        current = target;
+        idle += 1;
+      } else {
+        idle = 0;
+      }
+      render(current * (n - 1));
+      raf = idle < 12 ? requestAnimationFrame(loop) : 0;
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    apply();
+    const kick = () => {
+      computeTarget();
+      idle = 0;
+      if (!raf) raf = requestAnimationFrame(loop);
+    };
+
+    window.addEventListener("scroll", kick, { passive: true });
+    window.addEventListener("resize", kick);
+    computeTarget();
+    current = target;
+    render(current * (n - 1));
+    kick();
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("scroll", kick);
+      window.removeEventListener("resize", kick);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
@@ -293,8 +318,9 @@ export default function ChannelStack() {
           left: 0;
           right: 0;
           opacity: 0;
-          transform: translateY(-50%);
-          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
+          transform: translate3d(0, -50%, 0);
+          will-change: transform, opacity;
+          backface-visibility: hidden;
           display: flex;
           flex-direction: column;
           border-radius: 22px;
