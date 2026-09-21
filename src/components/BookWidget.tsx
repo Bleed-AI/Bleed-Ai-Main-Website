@@ -23,8 +23,12 @@ export default function BookWidget() {
     setDays(arr);
   }, []);
 
-  // Auto-open once the visitor scrolls ~40% down
+  // Auto-open once the visitor scrolls ~40% down — but never auto-open again
+  // once the visitor has closed it this session.
   useEffect(() => {
+    try {
+      if (sessionStorage.getItem("bwClosed")) autoOpened.current = true;
+    } catch {}
     const onScroll = () => {
       if (autoOpened.current) return;
       const max = document.documentElement.scrollHeight - window.innerHeight;
@@ -37,6 +41,13 @@ export default function BookWidget() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Close and remember it for the session (auto-open won't fire again).
+  const close = () => {
+    setOpen(false);
+    autoOpened.current = true;
+    try { sessionStorage.setItem("bwClosed", "1"); } catch {}
+  };
 
   const goCalendly = () => window.open(CALENDLY, "_blank", "noopener");
 
@@ -64,7 +75,7 @@ export default function BookWidget() {
               <div className="book-widget-name">Taha Anwar</div>
               <div className="book-widget-title">Founder · Bleed AI</div>
             </div>
-            <button className="book-widget-close" onClick={() => setOpen(false)} aria-label="Close">
+            <button className="book-widget-close" onClick={close} aria-label="Close">
               ×
             </button>
           </div>

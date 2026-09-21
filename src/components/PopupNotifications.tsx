@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -49,16 +49,33 @@ export default function PopupNotifications() {
   const pathname = usePathname();
   const [popupState, setPopupState] = useState<PopupState>("idle");
   const [isVisible, setIsVisible] = useState(false);
+  const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
+
+  // Fully dismiss for the rest of the session: cancel every pending step and
+  // remember it so it never shows again this session, on any page.
+  const dismiss = () => {
+    timeoutsRef.current.forEach((t) => clearTimeout(t));
+    timeoutsRef.current = [];
+    setIsVisible(false);
+    setTimeout(() => setPopupState("done"), 300);
+    try { sessionStorage.setItem("pnSeen", "1"); } catch {}
+  };
 
   // Main popup sequence
   useEffect(() => {
-    let timeouts: NodeJS.Timeout[] = [];
+    // Already shown or dismissed earlier this session? Never run again.
+    try {
+      if (sessionStorage.getItem("pnSeen")) return;
+    } catch {}
 
-    // Show CTA after 10 seconds
+    const timeouts: NodeJS.Timeout[] = [];
+
+    // Show CTA after 10 seconds (and mark as seen so navigation won't restart it)
     timeouts.push(
       setTimeout(() => {
         setPopupState("cta");
         setIsVisible(true);
+        try { sessionStorage.setItem("pnSeen", "1"); } catch {}
       }, 10000)
     );
 
@@ -117,25 +134,15 @@ export default function PopupNotifications() {
       }, 42200) // 37900 + 4300
     );
 
+    timeoutsRef.current = timeouts;
     return () => {
       timeouts.forEach((timeout) => clearTimeout(timeout));
     };
   }, []);
 
-  const handleCTAClose = () => {
-    setIsVisible(false);
-    setTimeout(() => {
-      setPopupState("testimonial-1");
-      setIsVisible(true);
-    }, 300);
-  };
-
-  const handleTestimonialClose = () => {
-    setIsVisible(false);
-    setTimeout(() => {
-      setPopupState("done");
-    }, 300);
-  };
+  // Any close button now fully dismisses for the session (no more re-appearing).
+  const handleCTAClose = dismiss;
+  const handleTestimonialClose = dismiss;
 
   const showCTA = popupState === "cta";
   const showTestimonial = ["testimonial-1", "testimonial-2", "testimonial-3", "testimonial-4"].includes(popupState);
