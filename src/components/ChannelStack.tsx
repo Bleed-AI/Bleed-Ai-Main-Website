@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+
 // --- tiny step icons -------------------------------------------------------
 const IconSend = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
@@ -120,26 +122,87 @@ const channels: Channel[] = [
 ];
 
 export default function ChannelStack() {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const cardsRef = useRef<(HTMLElement | null)[]>([]);
+  const dotsRef = useRef<(HTMLElement | null)[]>([]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+    const n = channels.length;
+    const reduce =
+      typeof window !== "undefined" &&
+      (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || window.innerWidth < 760);
+
+    if (reduce) {
+      track.style.height = "auto";
+      cardsRef.current.forEach((c) => {
+        if (!c) return;
+        c.style.position = "relative";
+        c.style.top = "auto";
+        c.style.opacity = "1";
+        c.style.transform = "none";
+        c.style.marginBottom = "22px";
+      });
+      dotsRef.current.forEach((d, i) => d?.classList.toggle("on", i === 0));
+      return;
+    }
+
+    let raf = 0;
+    const apply = () => {
+      raf = 0;
+      const scrollable = track.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-track.getBoundingClientRect().top, 0), Math.max(scrollable, 1));
+      const p = scrollable > 0 ? scrolled / scrollable : 0;
+      const seg = p * (n - 1);
+      const active = Math.round(seg);
+      cardsRef.current.forEach((card, i) => {
+        if (!card) return;
+        const d = seg - i; // 0 = centered
+        const y = -d * 46;
+        const op = Math.max(0, 1 - Math.abs(d) * 1.25);
+        const scale = 1 - Math.min(Math.abs(d) * 0.07, 0.16);
+        card.style.transform = `translateY(calc(-50% + ${y.toFixed(1)}px)) scale(${scale.toFixed(3)})`;
+        card.style.opacity = op.toFixed(3);
+        card.style.zIndex = String(Math.round(100 - Math.abs(d) * 10));
+        card.style.pointerEvents = Math.abs(d) < 0.5 ? "auto" : "none";
+      });
+      dotsRef.current.forEach((dot, i) => dot?.classList.toggle("on", i === active));
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    apply();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <section id="channels">
-      <div className="chan-inner">
-        <div className="chan-head">
-          <div className="sec-label">Every Channel, One System</div>
-          <h2 className="sec-h2">
-            We don&apos;t just send emails.
-            <br />
-            <em>We reach them everywhere.</em>
-          </h2>
-        </div>
+      <div className="chan-track" ref={trackRef}>
+        <div className="chan-sticky">
+          <div className="chan-head">
+            <div className="sec-label">Every Channel, One System</div>
+            <h2 className="sec-h2">
+              We don&apos;t just send emails.
+              <br />
+              <em>We reach them everywhere.</em>
+            </h2>
+          </div>
 
-        <div className="chan-stack">
-          {channels.map((c, idx) => (
-            <div
-              key={c.n}
-              className="chan-item"
-              style={{ "--acc": c.accent, "--acc2": c.accent2, top: `${104 + idx * 18}px`, zIndex: idx + 1 } as React.CSSProperties}
-            >
-              <article className="chan-card">
+          <div className="chan-stage">
+            {channels.map((c, idx) => (
+              <article
+                key={c.n}
+                ref={(el) => { cardsRef.current[idx] = el; }}
+                className="chan-card"
+                style={{ "--acc": c.accent, "--acc2": c.accent2 } as React.CSSProperties}
+              >
                 <span className="chan-watermark">{c.n}</span>
 
                 <div className="chan-card-top">
@@ -174,38 +237,61 @@ export default function ChannelStack() {
                   </div>
                 </div>
               </article>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <div className="chan-progress">
+            {channels.map((c, i) => (
+              <span
+                key={c.n}
+                ref={(el) => { dotsRef.current[i] = el; }}
+                className="chan-pd"
+              />
+            ))}
+          </div>
         </div>
       </div>
 
       <style jsx>{`
         #channels {
           position: relative;
-          padding: 80px 22px 120px;
         }
-        .chan-inner {
-          max-width: 940px;
-          margin: 0 auto;
+        /* pinned: section holds one screen of scroll; cards transition within */
+        .chan-track {
+          position: relative;
+          height: 210vh;
         }
-        .chan-head {
-          text-align: center;
-          max-width: 640px;
-          margin: 0 auto 44px;
-        }
-
-        /* native sticky-stack: each card sticks and the next scrolls over it */
-        .chan-stack {
+        .chan-sticky {
+          position: sticky;
+          top: 0;
+          height: 100vh;
           display: flex;
           flex-direction: column;
-          gap: 64px;
+          align-items: center;
+          padding: 46px 22px 34px;
+          overflow: hidden;
         }
-        .chan-item {
-          position: sticky;
-          /* top + z-index set inline per index */
+        .chan-head {
+          flex: 0 0 auto;
+          text-align: center;
+          max-width: 640px;
+          margin: 0 auto;
+        }
+        .chan-stage {
+          position: relative;
+          flex: 1 1 auto;
+          width: 100%;
+          max-width: 900px;
+          align-self: center;
         }
         .chan-card {
-          position: relative;
+          position: absolute;
+          top: 50%;
+          left: 0;
+          right: 0;
+          opacity: 0;
+          transform: translateY(-50%);
+          transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
           display: flex;
           flex-direction: column;
           border-radius: 24px;
@@ -444,12 +530,33 @@ export default function ChannelStack() {
           }
         }
 
+        /* progress dots */
+        .chan-progress {
+          flex: 0 0 auto;
+          display: flex;
+          gap: 9px;
+          margin-top: 18px;
+        }
+        .chan-pd {
+          width: 28px;
+          height: 4px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.14);
+          transition: width 0.3s, background 0.3s;
+        }
+        .chan-pd.on {
+          width: 44px;
+          background: #ff6b67;
+        }
+
         @media (max-width: 760px) {
-          .chan-item { position: static; }
-          .chan-stack { gap: 22px; }
-          .chan-card { padding: 24px 20px; }
+          .chan-track { height: auto; }
+          .chan-sticky { position: static; height: auto; overflow: visible; padding: 60px 20px; }
+          .chan-stage { height: auto; }
+          .chan-card { padding: 24px 20px; margin-bottom: 22px; }
           .chan-title { font-size: 24px; }
           .chan-card-body { grid-template-columns: 1fr; gap: 18px; }
+          .chan-progress { display: none; }
         }
       `}</style>
     </section>
