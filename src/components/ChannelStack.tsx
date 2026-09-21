@@ -159,7 +159,7 @@ export default function ChannelStack() {
       cardsRef.current.forEach((card, i) => {
         if (!card) return;
         const d = seg - i; // 0 = centered
-        const y = -d * 46;
+        const y = -d * 42;
         const op = Math.max(0, 1 - Math.abs(d) * 1.25);
         const scale = 1 - Math.min(Math.abs(d) * 0.07, 0.16);
         card.style.transform = `translateY(calc(-50% + ${y.toFixed(1)}px)) scale(${scale.toFixed(3)})`;
@@ -283,6 +283,9 @@ export default function ChannelStack() {
           width: 100%;
           max-width: 900px;
           align-self: center;
+          overflow: hidden;
+          -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask-image: linear-gradient(180deg, transparent 0, #000 7%, #000 93%, transparent 100%);
         }
         .chan-card {
           position: absolute;
@@ -294,11 +297,11 @@ export default function ChannelStack() {
           transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.45s ease;
           display: flex;
           flex-direction: column;
-          border-radius: 24px;
+          border-radius: 22px;
           border: 1px solid rgba(255, 255, 255, 0.1);
           background: linear-gradient(160deg, #14141e 0%, #0b0b12 100%);
           box-shadow: 0 34px 90px -26px rgba(0, 0, 0, 0.92);
-          padding: 34px 38px;
+          padding: 28px 32px;
           overflow: hidden;
         }
         .chan-card::before {
@@ -343,7 +346,7 @@ export default function ChannelStack() {
           display: flex;
           align-items: center;
           justify-content: space-between;
-          margin-bottom: 18px;
+          margin-bottom: 14px;
         }
         .chan-icon {
           width: 56px;
@@ -386,10 +389,10 @@ export default function ChannelStack() {
           position: relative;
           z-index: 1;
           font-family: "Inter", system-ui, sans-serif;
-          font-size: 32px;
+          font-size: 28px;
           font-weight: 800;
           letter-spacing: -0.6px;
-          margin-bottom: 10px;
+          margin-bottom: 8px;
           background: linear-gradient(90deg, #ffffff, color-mix(in srgb, var(--acc2) 70%, #ffffff));
           -webkit-background-clip: text;
           background-clip: text;
@@ -399,18 +402,18 @@ export default function ChannelStack() {
         .chan-desc {
           position: relative;
           z-index: 1;
-          font-size: 15.5px;
-          line-height: 1.6;
+          font-size: 15px;
+          line-height: 1.55;
           color: #9099b8;
           max-width: 640px;
-          margin-bottom: 24px;
+          margin-bottom: 18px;
         }
         .chan-card-body {
           position: relative;
           z-index: 1;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 28px;
+          gap: 22px;
           align-items: start;
         }
         .chan-points {
@@ -439,8 +442,8 @@ export default function ChannelStack() {
           position: relative;
           display: flex;
           flex-direction: column;
-          gap: 16px;
-          padding: 20px;
+          gap: 13px;
+          padding: 16px 18px;
           border-radius: 16px;
           border: 1px solid rgba(255, 255, 255, 0.07);
           background: linear-gradient(
