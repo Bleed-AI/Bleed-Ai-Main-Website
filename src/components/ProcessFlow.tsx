@@ -44,7 +44,7 @@ const steps = [
   { day: "Day 6", label: "Call", icon: IconPhone, color: "#22c98a" },
 ];
 
-const accounts = ["Vantage Peak", "Halcyon Labs", "Cobalt & Rowe"];
+const sources = ["Apollo", "Sales Navigator", "Prospeo", "Apify", "Serper"];
 
 const bars = [
   { h: 44, kind: "control" },
@@ -54,7 +54,7 @@ const bars = [
 ];
 
 const panelMeta = [
-  { step: "01", title: "// selecting your best-fit accounts", caption: "We Find The Right Buyers" },
+  { step: "01", title: "// sourced · enriched · verified", caption: "We Find The Right Buyers" },
   { step: "02", title: "// email · linkedin · calls, in sync", caption: "We Run Every Channel" },
   { step: "03", title: "// testing every message we ship", caption: "We Optimize To Win" },
 ];
@@ -77,17 +77,36 @@ export default function ProcessFlow() {
             <div className="pf-card">
               <span className="pf-step">{panelMeta[0].step}</span>
               <div className="pf-card-title">{panelMeta[0].title}</div>
-              <div className="pf-accounts">
-                {accounts.map((a, i) => (
-                  <div key={a} className={`pf-acct${i === 1 ? " sel" : ""}`}>
-                    <span className="pf-acct-name">{a}</span>
-                    <span className="pf-acct-check">
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12.5l4.5 4.5L19 7" />
-                      </svg>
+              <div className="pf-src">
+                <div className="pf-src-cap">12+ sources</div>
+                <div className="pf-src-chips">
+                  {sources.map((s, i) => (
+                    <span key={s} className="pf-src-chip" style={{ animationDelay: `${i * 0.3}s` }}>
+                      {s}
                     </span>
-                  </div>
-                ))}
+                  ))}
+                  <span className="pf-src-chip more" style={{ animationDelay: `${sources.length * 0.3}s` }}>
+                    +7
+                  </span>
+                </div>
+
+                <span className="pf-src-pipe" />
+
+                <div className="pf-src-node enrich">
+                  <span className="pf-src-dot" />
+                  <span>Enrich — Clay · 35 fields</span>
+                </div>
+
+                <span className="pf-src-pipe" />
+
+                <div className="pf-src-node verify">
+                  <span className="pf-src-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12.5l4.5 4.5L19 7" />
+                    </svg>
+                  </span>
+                  <span>Verified buyer</span>
+                </div>
               </div>
             </div>
             <div className="pf-caption">{panelMeta[0].caption}</div>
@@ -244,77 +263,93 @@ export default function ProcessFlow() {
           color: #f0f2fa;
         }
 
-        /* ---------- Panel 1: accounts ---------- */
-        .pf-accounts {
+        /* ---------- Panel 1: sources pipeline ---------- */
+        .pf-src {
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          align-items: center;
+          gap: 9px;
         }
-        .pf-acct {
+        .pf-src-cap {
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 11px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          color: #6a7192;
+        }
+        .pf-src-chips {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 7px;
+          max-width: 270px;
+        }
+        .pf-src-chip {
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 11.5px;
+          font-weight: 600;
+          color: #c7cbe0;
+          padding: 5px 10px;
+          border-radius: 7px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: #0d0d15;
+          opacity: 0;
+          animation: srcChip 4s ease-in-out infinite;
+        }
+        .pf-src-chip.more {
+          color: #ff9d99;
+          border-color: rgba(255, 61, 56, 0.3);
+          background: rgba(255, 61, 56, 0.08);
+        }
+        @keyframes srcChip {
+          0%, 6% { opacity: 0; transform: translateY(-6px) scale(0.9); }
+          20%, 88% { opacity: 1; transform: translateY(0) scale(1); }
+          100% { opacity: 0; transform: translateY(-6px) scale(0.9); }
+        }
+        .pf-src-pipe {
+          width: 2px;
+          height: 15px;
+          background: linear-gradient(#ff3d38, transparent);
+          opacity: 0.5;
+        }
+        .pf-src-node {
           display: flex;
           align-items: center;
-          justify-content: space-between;
-          padding: 14px 16px;
+          gap: 9px;
+          padding: 10px 16px;
           border-radius: 10px;
-          border: 1px solid transparent;
+          border: 1px solid rgba(255, 255, 255, 0.09);
+          background: #0d0d15;
           font-family: "JetBrains Mono", ui-monospace, monospace;
-          font-size: 14px;
-          color: #6a7192;
-          position: relative;
+          font-size: 12.5px;
+          font-weight: 600;
+          color: #e4e7f2;
         }
-        .pf-acct-name {
-          position: relative;
+        .pf-src-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #ff6b67;
+          box-shadow: 0 0 10px #ff6b67;
+          animation: srcPulse 1.6s ease-in-out infinite;
         }
-        .pf-acct-name::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          top: 50%;
-          width: 100%;
-          height: 1px;
-          background: currentColor;
-          transform: scaleX(0);
-          transform-origin: left;
+        @keyframes srcPulse {
+          0%, 100% { opacity: 0.4; transform: scale(0.8); }
+          50% { opacity: 1; transform: scale(1.15); }
         }
-        .pf-acct-check {
-          opacity: 0;
-          color: #ff6b67;
+        .pf-src-node.verify {
+          border-color: rgba(62, 207, 142, 0.4);
+          background: rgba(62, 207, 142, 0.08);
+        }
+        .pf-src-check {
           display: flex;
+          color: #3ecf8e;
+          animation: srcCheck 4s ease-in-out infinite;
         }
-        .pf-acct:not(.sel) {
-          animation: acctStrike 4.5s ease-in-out infinite;
-        }
-        .pf-acct:not(.sel) .pf-acct-name::after {
-          animation: acctLine 4.5s ease-in-out infinite;
-        }
-        .pf-acct.sel {
-          animation: acctSel 4.5s ease-in-out infinite;
-        }
-        .pf-acct.sel .pf-acct-name {
-          color: #eef1fa;
-        }
-        .pf-acct.sel .pf-acct-check {
-          animation: acctCheck 4.5s ease-in-out infinite;
-        }
-        @keyframes acctSel {
-          0%, 20% { border-color: transparent; background: transparent; }
-          35%, 92% { border-color: rgba(255, 61, 56, 0.5); background: rgba(255, 61, 56, 0.09); }
-          100% { border-color: transparent; background: transparent; }
-        }
-        @keyframes acctCheck {
-          0%, 25% { opacity: 0; transform: scale(0.6); }
-          40%, 92% { opacity: 1; transform: scale(1); }
-          100% { opacity: 0; transform: scale(0.6); }
-        }
-        @keyframes acctStrike {
-          0%, 25% { color: #6a7192; }
-          45%, 92% { color: #3f455e; }
-          100% { color: #6a7192; }
-        }
-        @keyframes acctLine {
-          0%, 25% { transform: scaleX(0); }
-          45%, 92% { transform: scaleX(1); }
-          100% { transform: scaleX(0); }
+        @keyframes srcCheck {
+          0%, 55% { opacity: 0; transform: scale(0.5); }
+          70%, 92% { opacity: 1; transform: scale(1); }
+          100% { opacity: 0; transform: scale(0.5); }
         }
 
         /* ---------- Panel 2: sequence ---------- */
