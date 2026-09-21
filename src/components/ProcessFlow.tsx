@@ -83,7 +83,7 @@ const bars = [
 
 const panelMeta = [
   { step: "01", title: "// sourced · enriched · verified", caption: "We Find The Right Buyers" },
-  { step: "02", title: "// outreach → crm follow-up", caption: "We Run Every Channel" },
+  { step: "02", title: "// outreach → your crm", caption: "We Run Every Channel" },
   { step: "03", title: "// a/b test → scale the winner", caption: "We Optimize To Win" },
 ];
 
@@ -177,12 +177,13 @@ export default function ProcessFlow() {
 
                 <div className="pf-crm">
                   <div className="pf-crm-top">
-                    <span className="pf-src-dot" /> Reply lands in your CRM
+                    <span className="pf-src-dot" /> Replies land in your CRM
                   </div>
                   <div className="pf-crm-row">
                     <span className="pf-crm-ico">{IconPhone}</span>
-                    <span>We follow up — Call &amp; SMS</span>
+                    <span>You follow up — Call &amp; SMS</span>
                   </div>
+                  <div className="pf-crm-note">CRM &amp; infra set up by us</div>
                 </div>
               </div>
             </div>
@@ -197,7 +198,7 @@ export default function ProcessFlow() {
               <span className="pf-step">{panelMeta[2].step}</span>
               <div className="pf-card-title">{panelMeta[2].title}</div>
               <div className="pf-src">
-                <div className="pf-src-cap">Message variants</div>
+                <div className="pf-src-cap">Copy Variants</div>
                 <div className="pf-variants">
                   <span className="pf-variant a">Variant A</span>
                   <span className="pf-variant b">Variant B</span>
@@ -514,6 +515,13 @@ export default function ProcessFlow() {
         .pf-crm-ico {
           display: flex;
           color: #22c98a;
+        }
+        .pf-crm-note {
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 10px;
+          letter-spacing: 0.3px;
+          color: #6a7192;
+          text-align: center;
         }
         /* Panel 3: message variants */
         .pf-variants {

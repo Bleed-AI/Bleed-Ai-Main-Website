@@ -102,9 +102,9 @@ const channels: Channel[] = [
   {
     n: "03",
     day: "Ongoing",
-    title: "CRM & Follow-ups",
-    desc: "Every reply and warm lead lands in the CRM we set up for you — where our team runs the follow-ups and calls that turn interest into booked, closed deals.",
-    points: ["Done-for-you CRM app", "Follow-ups & calls handled", "Every lead worked to a close"],
+    title: "CRM & Infrastructure",
+    desc: "Every reply and warm lead lands in the CRM we set up for you — the infrastructure your team uses to follow up, call, and close. We build it; you work the pipeline.",
+    points: ["Done-for-you CRM app", "You follow up & call inside it", "Full infra, set up by us"],
     accent: "#10b981",
     accent2: "#34e6a8",
     icon: (
