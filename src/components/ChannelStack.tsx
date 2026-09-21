@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-
-gsap.registerPlugin(ScrollTrigger);
+import Reveal from "@/components/Reveal";
 
 // --- tiny step icons -------------------------------------------------------
 const IconSend = (
@@ -128,86 +123,9 @@ const channels: Channel[] = [
 ];
 
 export default function ChannelStack() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const pinRef = useRef<HTMLDivElement | null>(null);
-  const viewportRef = useRef<HTMLDivElement | null>(null);
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const dotsRef = useRef<HTMLDivElement | null>(null);
-
-  useGSAP(
-    () => {
-      const track = trackRef.current;
-      const viewport = viewportRef.current;
-      if (!track || !viewport) return;
-
-      const panels = gsap.utils.toArray<HTMLElement>(".chan-panel");
-      const dots = dotsRef.current
-        ? gsap.utils.toArray<HTMLElement>(dotsRef.current.children)
-        : [];
-      const n = panels.length;
-
-      const reduce =
-        typeof window !== "undefined" &&
-        window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-
-      if (reduce) {
-        track.style.flexDirection = "column";
-        gsap.set(panels, { width: "100%", flex: "0 0 auto", marginBottom: 20 });
-        dots.forEach((d, i) => d.classList.toggle("on", i === 0));
-        return;
-      }
-
-      const accents = channels.map((c) => c.accent);
-      const setActive = (idx: number) =>
-        dots.forEach((d, i) => {
-          const on = i === idx;
-          d.classList.toggle("on", on);
-          d.style.background = on ? accents[idx] : "";
-        });
-      setActive(0);
-
-      gsap.to(track, {
-        x: () => -(track.scrollWidth - viewport.clientWidth),
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: () => "+=" + (track.scrollWidth - viewport.clientWidth),
-          pin: pinRef.current,
-          scrub: 0.6,
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => setActive(Math.round(self.progress * (n - 1))),
-        },
-      });
-
-      panels.forEach((panel, i) => {
-        const card = panel.querySelector(".chan-card");
-        if (!card || i === 0) return;
-        gsap.fromTo(
-          card,
-          { scale: 0.92, opacity: 0.6 },
-          {
-            scale: 1,
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: () => "top+=" + (i - 0.85) * viewport.clientWidth + " top",
-              end: () => "top+=" + i * viewport.clientWidth + " top",
-              scrub: true,
-              invalidateOnRefresh: true,
-            },
-          }
-        );
-      });
-    },
-    { scope: sectionRef }
-  );
-
   return (
-    <section ref={sectionRef} id="channels">
-      <div ref={pinRef} className="chan-pin">
+    <section id="channels">
+      <div className="chan-inner">
         <div className="chan-head">
           <div className="sec-label">Every Channel, One System</div>
           <h2 className="sec-h2">
@@ -217,53 +135,46 @@ export default function ChannelStack() {
           </h2>
         </div>
 
-        <div ref={viewportRef} className="chan-viewport">
-          <div ref={trackRef} className="chan-track">
-            {channels.map((c) => (
-              <div key={c.n} className="chan-panel">
-                <article className="chan-card" style={{ "--acc": c.accent } as React.CSSProperties}>
-                  <span className="chan-watermark">{c.n}</span>
-                  {/* LEFT: copy */}
-                  <div className="chan-card-left">
-                    <div className="chan-card-top">
-                      <span className="chan-icon">{c.icon}</span>
-                      <span className="chan-day">
-                        <span className="chan-day-dot" />
-                        {c.day}
-                      </span>
-                    </div>
-                    <h3 className="chan-title">{c.title}</h3>
-                    <p className="chan-desc">{c.desc}</p>
-                    <ul className="chan-points">
-                      {c.points.map((p) => (
-                        <li key={p}>
-                          <span className="chan-bullet" />
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+        <div className="chan-list">
+          {channels.map((c, idx) => (
+            <Reveal className="chan-item" key={c.n} delay={idx * 90}>
+              <article className="chan-card" style={{ "--acc": c.accent } as React.CSSProperties}>
+                <span className="chan-watermark">{c.n}</span>
 
-                  {/* RIGHT: animated mini-sequence */}
-                  <div className="chan-flow" aria-hidden="true">
-                    <div className="chan-flow-label">The sequence</div>
-                    {c.flow.map((s, i) => (
-                      <div key={s.label} className="flow-step" style={{ animationDelay: `${i * 1}s` }}>
-                        <span className="flow-ico">{s.icon}</span>
-                        <span className="flow-text">{s.label}</span>
-                        {i < c.flow.length - 1 && <span className="flow-line" />}
-                      </div>
+                {/* LEFT: copy */}
+                <div className="chan-card-left">
+                  <div className="chan-card-top">
+                    <span className="chan-icon">{c.icon}</span>
+                    <span className="chan-day">
+                      <span className="chan-day-dot" />
+                      {c.day}
+                    </span>
+                  </div>
+                  <h3 className="chan-title">{c.title}</h3>
+                  <p className="chan-desc">{c.desc}</p>
+                  <ul className="chan-points">
+                    {c.points.map((p) => (
+                      <li key={p}>
+                        <span className="chan-bullet" />
+                        {p}
+                      </li>
                     ))}
-                  </div>
-                </article>
-              </div>
-            ))}
-          </div>
-        </div>
+                  </ul>
+                </div>
 
-        <div ref={dotsRef} className="chan-progress">
-          {channels.map((c) => (
-            <span key={c.n} className="chan-pd" />
+                {/* RIGHT: animated mini-sequence */}
+                <div className="chan-flow" aria-hidden="true">
+                  <div className="chan-flow-label">The sequence</div>
+                  {c.flow.map((s, i) => (
+                    <div key={s.label} className="flow-step" style={{ animationDelay: `${i * 1}s` }}>
+                      <span className="flow-ico">{s.icon}</span>
+                      <span className="flow-text">{s.label}</span>
+                      {i < c.flow.length - 1 && <span className="flow-line" />}
+                    </div>
+                  ))}
+                </div>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -271,40 +182,25 @@ export default function ChannelStack() {
       <style jsx>{`
         #channels {
           position: relative;
+          padding: 80px 22px;
         }
-        .chan-pin {
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 30px;
-          padding: 60px 22px;
-          overflow: hidden;
+        .chan-inner {
+          max-width: 960px;
+          margin: 0 auto;
         }
         .chan-head {
           text-align: center;
           max-width: 640px;
+          margin: 0 auto 44px;
         }
-        .chan-viewport {
-          width: 100%;
-          max-width: 1180px;
-          overflow: hidden;
-        }
-        .chan-track {
+        .chan-list {
           display: flex;
-          will-change: transform;
-        }
-        .chan-panel {
-          flex: 0 0 100%;
-          display: flex;
-          justify-content: center;
-          padding: 0 8px;
+          flex-direction: column;
+          gap: 22px;
         }
         .chan-card {
           position: relative;
           width: 100%;
-          max-width: 960px;
           display: grid;
           grid-template-columns: 1.25fr 1fr;
           gap: 30px;
@@ -314,7 +210,6 @@ export default function ChannelStack() {
           background: linear-gradient(160deg, #12121b 0%, #0b0b12 100%);
           box-shadow: 0 30px 80px -24px rgba(0, 0, 0, 0.85);
           overflow: hidden;
-          will-change: transform, opacity;
           transition: border-color 0.35s, box-shadow 0.35s;
         }
         .chan-card:hover {
@@ -523,36 +418,15 @@ export default function ChannelStack() {
           animation-delay: 1.35s;
         }
         @keyframes flowLine {
-          0%,
-          20% {
-            transform: scaleY(0.2);
-            opacity: 0.25;
-          }
-          35%,
-          58% {
-            transform: scaleY(1);
-            opacity: 0.9;
-          }
-          75%,
-          100% {
-            transform: scaleY(0.2);
-            opacity: 0.25;
-          }
+          0%, 20% { transform: scaleY(0.2); opacity: 0.25; }
+          35%, 58% { transform: scaleY(1); opacity: 0.9; }
+          75%, 100% { transform: scaleY(0.2); opacity: 0.25; }
         }
         @keyframes flowStep {
-          0%,
-          100% {
-            opacity: 0.4;
-          }
-          8% {
-            opacity: 1;
-          }
-          28% {
-            opacity: 1;
-          }
-          40% {
-            opacity: 0.4;
-          }
+          0%, 100% { opacity: 0.4; }
+          8% { opacity: 1; }
+          28% { opacity: 1; }
+          40% { opacity: 0.4; }
         }
         .flow-step:nth-child(2) .flow-ico {
           animation: flowGlow 3s ease-in-out infinite;
@@ -567,38 +441,20 @@ export default function ChannelStack() {
           animation-delay: 2s;
         }
         @keyframes flowGlow {
-          0%,
-          40%,
-          100% {
+          0%, 40%, 100% {
             box-shadow: 0 0 0 rgba(0, 0, 0, 0);
             transform: scale(1);
             background: #0d0d15;
             color: var(--acc);
             border-color: color-mix(in srgb, var(--acc) 30%, rgba(255, 255, 255, 0.08));
           }
-          12%,
-          26% {
+          12%, 26% {
             box-shadow: 0 0 24px color-mix(in srgb, var(--acc) 60%, transparent);
             transform: scale(1.08);
             background: var(--acc);
             color: #fff;
             border-color: var(--acc);
           }
-        }
-
-        .chan-progress {
-          display: flex;
-          gap: 8px;
-        }
-        .chan-pd {
-          width: 26px;
-          height: 4px;
-          border-radius: 4px;
-          background: rgba(255, 255, 255, 0.14);
-          transition: background 0.3s, width 0.3s;
-        }
-        .chan-progress :global(.chan-pd.on) {
-          width: 40px;
         }
 
         @media (max-width: 760px) {
