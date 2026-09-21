@@ -4,9 +4,18 @@
 // 3 panels, each with a looping mini-demo, joined by animated branch connectors.
 // Pure CSS animations — no scroll trigger, lightweight. Brand-red themed.
 
-const IconBolt = (
-  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M13 2L4.5 13.5H11L9.5 22L18.5 9.5H12L13 2z" />
+const IconEnvelope = (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+    <path d="M3 6.5l9 6 9-6" />
+  </svg>
+);
+const IconTruck = (
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
+    <rect x="1.5" y="6" width="12.5" height="9" rx="1.5" />
+    <path d="M14 9h3.5l3 3v3H14z" />
+    <circle cx="5.5" cy="17.5" r="1.6" />
+    <circle cx="17" cy="17.5" r="1.6" />
   </svg>
 );
 const IconLinkedin = (
@@ -39,9 +48,10 @@ const Connector = () => (
 );
 
 const steps = [
-  { day: "Day 1", label: "Email", icon: IconBolt, color: "#ff5b56" },
+  { day: "Day 1", label: "Email", icon: IconEnvelope, color: "#ff5b56" },
   { day: "Day 3", label: "LinkedIn", icon: IconLinkedin, color: "#4f8bff" },
-  { day: "Day 6", label: "Call", icon: IconPhone, color: "#22c98a" },
+  { day: "Day 5", label: "Direct Mail", icon: IconTruck, color: "#f5a623" },
+  { day: "CRM", label: "Call & SMS", icon: IconPhone, color: "#22c98a" },
 ];
 
 const sources = [
@@ -74,7 +84,7 @@ const bars = [
 
 const panelMeta = [
   { step: "01", title: "// sourced · enriched · verified", caption: "We Find The Right Buyers" },
-  { step: "02", title: "// email · linkedin · calls, in sync", caption: "We Run Every Channel" },
+  { step: "02", title: "// email · linkedin · direct mail · crm", caption: "We Run Every Channel" },
   { step: "03", title: "// testing every message we ship", caption: "We Optimize To Win" },
 ];
 
@@ -184,8 +194,8 @@ export default function ProcessFlow() {
                 </div>
                 <div className="pf-baseline" />
                 <div className="pf-legend">
-                  <span><i className="dot control" /> Control</span>
-                  <span><i className="dot variant" /> Winner</span>
+                  <span><i className="dot control" /> Variant A</span>
+                  <span><i className="dot variant" /> Variant B</span>
                 </div>
               </div>
             </div>
@@ -444,7 +454,7 @@ export default function ProcessFlow() {
           position: relative;
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 16px;
           padding-left: 16px;
         }
         .pf-seq-rail {
@@ -509,8 +519,8 @@ export default function ProcessFlow() {
           display: flex;
           align-items: flex-end;
           justify-content: center;
-          gap: 16px;
-          height: 150px;
+          gap: 18px;
+          height: 230px;
         }
         .pf-bar {
           width: 34px;
