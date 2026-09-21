@@ -5,7 +5,7 @@ import Reveal from "@/components/Reveal";
 const SPRINT_URL = "https://calculator.bleedai.com/sprint";
 
 const rows: [string, string, string][] = [
-  ["Channels", "Email, LinkedIn, and call & SMS - one coordinated system", "Email only, if that"],
+  ["Channels", "Email, LinkedIn & direct mail - plus a done-for-you CRM to follow up", "Email only, if that"],
   ["Who built it", "AI engineer - 1M+ technical students taught", "Salesperson who got good at outbound"],
   ["Deliverability", "Built at the DNS/infrastructure level - 98%+ inbox", "Template warmup tools, reactive fixes when spam climbs"],
   ["Your commitment", "One fixed-price Outbound Sprint first - no monthly retainer lock-in", "Upfront retainer required, results promised but not guaranteed"],

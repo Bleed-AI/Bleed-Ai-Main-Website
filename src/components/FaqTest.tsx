@@ -16,7 +16,7 @@ const faqs: { q: string; a: ReactNode }[] = [
     q: "Which channels do you run?",
     a: (
       <>
-        <strong>All three — email, LinkedIn, and calls &amp; SMS — as one coordinated sequence.</strong> Most prospects don&apos;t reply to the first email, so we follow up on LinkedIn and, where it fits, by call or SMS. More relevant touchpoints means more booked calls, without being spammy on any single channel.
+        <strong>Cold outreach runs across three channels — email, LinkedIn, and direct mail — as one coordinated sequence.</strong> Every reply lands in the CRM we set up for you, where your team follows up by call and SMS to close. More relevant touchpoints means more booked meetings, without being spammy on any single channel.
       </>
     ),
   },

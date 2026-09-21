@@ -11,7 +11,7 @@ const MACHINE_SVG = `
       <text x="70" y="34" fill="#9099b8" font-size="10" font-family="monospace" text-anchor="middle">cold outreach in</text>
       <g class="drop-env" style="animation-delay:0s"><rect width="16" height="11" rx="2" fill="#ff5b56"/><rect x="3" y="3.3" width="10" height="5.4" rx="1" fill="none" stroke="#fff" stroke-width="0.9"/><path d="M3.3 3.6 L8 6.8 L12.7 3.6" fill="none" stroke="#fff" stroke-width="0.9"/></g>
       <g class="drop-env" style="animation-delay:-1.33s"><rect width="16" height="11" rx="2" fill="#0A66C2"/><text x="8" y="8.4" fill="#fff" font-size="7" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">in</text></g>
-      <g class="drop-env" style="animation-delay:-2.66s"><rect width="16" height="11" rx="2" fill="#22c98a"/><path d="M4.5 3.8c0-.28.22-.5.5-.5h1c.22 0 .4.15.46.36l.28 1.1c.04.15-.01.3-.12.4l-.44.44a4 4 0 001.6 1.6l.44-.44c.1-.1.26-.15.4-.12l1.1.28c.2.05.36.24.36.46v1c0 .28-.22.5-.5.5A5.6 5.6 0 014.5 3.8z" fill="#fff"/></g>
+      <g class="drop-env" style="animation-delay:-2.66s"><rect width="16" height="11" rx="2" fill="#f5a623"/><g stroke="#fff" stroke-width="1" fill="none"><rect x="3" y="3.5" width="6" height="4.5" rx="0.6"/><path d="M9 5h1.7l1.4 1.4V8H9z"/></g><circle cx="4.8" cy="9" r="0.8" fill="#fff"/><circle cx="10.3" cy="9" r="0.8" fill="#fff"/></g>
       <path d="M36 56 H104 L86 98 H54 Z" fill="#181826" stroke="#2a2a3e"/>
       <path d="M70 98 V178" stroke="#2a2a3e" stroke-width="6" stroke-linecap="round"/>
       <!-- conveyor belt -->
@@ -67,11 +67,11 @@ const MACHINE_SVG = `
         <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
         <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
       </g>
-      <!-- item 3: CALL & SMS -->
+      <!-- item 3: DIRECT MAIL -->
       <g class="hero-env" style="--d:-8s">
         <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
-        <rect width="30" height="20" rx="3" fill="#22c98a"/>
-        <path d="M10 7.6c0-.5.4-.9.9-.9h1.8c.4 0 .74.28.83.66l.5 2c.07.28-.02.56-.22.75l-.85.85a7.5 7.5 0 003.05 3.05l.85-.85c.2-.2.48-.28.75-.22l2 .5c.38.1.66.44.66.83v1.8c0 .5-.4.9-.9.9A10.2 10.2 0 0110 7.6z" fill="#fff"/>
+        <rect width="30" height="20" rx="3" fill="#f5a623"/>
+        <g stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="7" width="11" height="7.5" rx="1"/><path d="M17 9.5h3l2.5 2.5v2.5H17z"/><circle cx="9" cy="16" r="1.3" fill="#fff" stroke="none"/><circle cx="20" cy="16" r="1.3" fill="#fff" stroke="none"/></g>
         <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
         <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
       </g>
@@ -102,7 +102,7 @@ export default function InfraBentoTest() {
             <em>The part other agencies can&apos;t build.</em>
           </Reveal>
           <Reveal as="p" className="sec-sub" delay={80} style={{ maxWidth: 560, marginLeft: "auto", marginRight: "auto" }}>
-            We run outreach across email, LinkedIn, and calls &amp; SMS — but email is where most agencies quietly break. Landing in the primary inbox, at scale, without burning domains is an engineering problem. Here&apos;s the system we run on every account - monitored, instrumented, and tuned like a production pipeline.
+            We run outreach across email, LinkedIn, and direct mail — but email is where most agencies quietly break. Landing in the primary inbox, at scale, without burning domains is an engineering problem. Here&apos;s the system we run on every account - monitored, instrumented, and tuned like a production pipeline.
           </Reveal>
 
           <Reveal className="tpill">
@@ -134,7 +134,7 @@ export default function InfraBentoTest() {
             {[
               { l: "Email", c: "#ff5b56" },
               { l: "LinkedIn", c: "#4f8bff" },
-              { l: "Call & SMS", c: "#22c98a" },
+              { l: "Direct Mail", c: "#f5a623" },
             ].map((x) => (
               <span
                 key={x.l}

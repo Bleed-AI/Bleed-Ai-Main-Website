@@ -25,9 +25,12 @@ const LinkedinIcon = (
     <path d="M6.94 5A1.94 1.94 0 113.06 5a1.94 1.94 0 013.88 0zM3.4 8.5h3.1V21H3.4V8.5zm5.2 0h2.97v1.7h.04c.41-.78 1.42-1.6 2.93-1.6 3.13 0 3.71 2.06 3.71 4.73V21h-3.1v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H8.6V8.5z" />
   </svg>
 );
-const PhoneIcon = (
+const TruckIcon = (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 5.5C4 4.7 4.7 4 5.5 4h2.1c.6 0 1.13.4 1.29.99l.9 3.2a1.35 1.35 0 01-.35 1.31l-1.2 1.2a12 12 0 005.06 5.06l1.2-1.2c.35-.35.86-.48 1.31-.35l3.2.9c.59.16.99.69.99 1.29v2.1c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 014 5.5z" />
+    <rect x="1.5" y="6" width="12.5" height="9" rx="1.5" />
+    <path d="M14 9h3.5l3 3v3H14z" />
+    <circle cx="5.5" cy="17.5" r="1.6" />
+    <circle cx="17" cy="17.5" r="1.6" />
   </svg>
 );
 
@@ -58,12 +61,12 @@ const steps: Step[] = [
     num: "03",
     tag: "Outreach",
     name: "Reach",
-    desc: "AI-personalized outreach across email, LinkedIn, and calls & SMS. Every reply is handled and qualified by our team — only confirmed interest reaches your calendar.",
+    desc: "AI-personalized outreach across email, LinkedIn, and direct mail. Every reply is qualified and lands in your CRM — only confirmed interest reaches your calendar.",
     tools: [],
     channels: [
       { label: "Email", color: "#ff5b56", icon: EmailIcon },
       { label: "LinkedIn", color: "#4f8bff", icon: LinkedinIcon },
-      { label: "Call & SMS", color: "#22c98a", icon: PhoneIcon },
+      { label: "Direct Mail", color: "#f5a623", icon: TruckIcon },
     ],
   },
   {

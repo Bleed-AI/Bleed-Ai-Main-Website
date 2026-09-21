@@ -27,11 +27,14 @@ const CHANNELS = [
     ),
   },
   {
-    label: "Call & SMS",
-    color: "#10b981",
+    label: "Direct Mail",
+    color: "#f5a623",
     icon: (
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 5.5C4 4.7 4.7 4 5.5 4h2.1c.6 0 1.13.4 1.29.99l.9 3.2a1.35 1.35 0 01-.35 1.31l-1.2 1.2a12 12 0 005.06 5.06l1.2-1.2c.35-.35.86-.48 1.31-.35l3.2.9c.59.16.99.69.99 1.29v2.1c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 014 5.5z" />
+        <rect x="1.5" y="6" width="12.5" height="9" rx="1.5" />
+        <path d="M14 9h3.5l3 3v3H14z" />
+        <circle cx="5.5" cy="17.5" r="1.6" />
+        <circle cx="17" cy="17.5" r="1.6" />
       </svg>
     ),
   },
