@@ -54,6 +54,17 @@ const sources = [
   { name: "Serper", logo: "/images/sources/serper.png" },
 ];
 
+const enrichTools = [
+  { name: "Clay", logo: "/images/enrich/clay.png" },
+  { name: "Prospeo", logo: "/images/enrich/prospeo.png" },
+  { name: "Serper", logo: "/images/enrich/serper.png" },
+  { name: "Parallel", logo: "/images/enrich/parallel.png" },
+  { name: "OpenWebNinja", logo: "/images/enrich/openwebninja.png" },
+  { name: "OpenAI", logo: "/images/enrich/openai.png" },
+  { name: "Claude", logo: "/images/enrich/claude.png" },
+  { name: "Perplexity", logo: "/images/enrich/perplexity.png" },
+];
+
 const bars = [
   { h: 44, kind: "control" },
   { h: 74, kind: "variant" },
@@ -102,9 +113,18 @@ export default function ProcessFlow() {
 
                 <span className="pf-src-pipe" />
 
-                <div className="pf-src-node enrich">
-                  <span className="pf-src-dot" />
-                  <span>Enrich — Clay · 35 fields</span>
+                <div className="pf-src-enrich">
+                  <div className="pf-src-enrich-top">
+                    <span className="pf-src-dot" /> Enrich · 35 fields
+                  </div>
+                  <div className="pf-src-elogos">
+                    {enrichTools.map((e, i) => (
+                      <span key={e.name} className="pf-src-elogo" style={{ animationDelay: `${i * 0.25}s` }} title={e.name}>
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={e.logo} alt={e.name} />
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 <span className="pf-src-pipe" />
@@ -360,6 +380,53 @@ export default function ProcessFlow() {
         .pf-src-node.verify {
           border-color: rgba(62, 207, 142, 0.4);
           background: rgba(62, 207, 142, 0.08);
+        }
+        .pf-src-enrich {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          padding: 12px 16px 14px;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 61, 56, 0.22);
+          background: rgba(255, 61, 56, 0.05);
+        }
+        .pf-src-enrich-top {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 12.5px;
+          font-weight: 600;
+          color: #e4e7f2;
+        }
+        .pf-src-elogos {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 7px;
+          max-width: 232px;
+        }
+        .pf-src-elogo {
+          width: 27px;
+          height: 27px;
+          border-radius: 7px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 4px;
+          background: #15151f;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          animation: eloPulse 4s ease-in-out infinite;
+        }
+        .pf-src-elogo img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+        @keyframes eloPulse {
+          0%, 100% { opacity: 0.55; }
+          50% { opacity: 1; }
         }
         .pf-src-check {
           display: flex;
