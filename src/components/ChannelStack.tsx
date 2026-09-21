@@ -141,6 +141,7 @@ export default function ChannelStack() {
       cardsRef.current.forEach((c) => {
         if (!c) return;
         c.style.position = "relative";
+        c.style.top = "auto";
         c.style.opacity = "1";
         c.style.transform = "none";
         c.style.marginBottom = "22px";
@@ -150,38 +151,61 @@ export default function ChannelStack() {
     }
 
     let raf = 0;
-    const update = () => {
-      raf = 0;
+    let idle = 0;
+    let target = 0;
+    let current = 0;
+
+    const computeTarget = () => {
       const scrollable = track.offsetHeight - window.innerHeight;
       const scrolled = Math.min(Math.max(-track.getBoundingClientRect().top, 0), Math.max(scrollable, 1));
-      const p = scrollable > 0 ? scrolled / scrollable : 0;
-      const seg = p * (n - 1); // 0..n-1
-      const active = Math.round(seg);
+      target = scrollable > 0 ? scrolled / scrollable : 0;
+    };
 
+    const applySeg = (seg: number) => {
+      const active = Math.round(seg);
       cardsRef.current.forEach((card, i) => {
         if (!card) return;
         const d = seg - i; // 0 = centered
-        const y = -d * 64;
-        const op = Math.max(0, 1 - Math.abs(d) * 1.25);
-        const scale = 1 - Math.min(Math.abs(d) * 0.07, 0.18);
-        card.style.transform = `translateY(${y}px) scale(${scale})`;
-        card.style.opacity = String(op);
+        const y = -d * 60;
+        const op = Math.max(0, 1 - Math.abs(d) * 1.15);
+        const scale = 1 - Math.min(Math.abs(d) * 0.06, 0.16);
+        // cards are anchored at top:50%, so keep the -50% centering in the transform
+        card.style.transform = `translateY(calc(-50% + ${y.toFixed(1)}px)) scale(${scale.toFixed(3)})`;
+        card.style.opacity = op.toFixed(3);
         card.style.zIndex = String(Math.round(100 - Math.abs(d) * 10));
         card.style.pointerEvents = Math.abs(d) < 0.5 ? "auto" : "none";
       });
-
       dotsRef.current.forEach((dot, i) => dot?.classList.toggle("on", i === active));
     };
 
-    const onScroll = () => {
-      if (!raf) raf = requestAnimationFrame(update);
+    // Smoothly ease the displayed position toward the scroll target so
+    // mouse-wheel steps glide instead of snapping.
+    const tick = () => {
+      current += (target - current) * 0.14;
+      if (Math.abs(target - current) < 0.0004) {
+        current = target;
+        idle += 1;
+      } else {
+        idle = 0;
+      }
+      applySeg(current * (n - 1));
+      raf = idle < 8 ? requestAnimationFrame(tick) : 0;
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    update();
+    const kick = () => {
+      computeTarget();
+      idle = 0;
+      if (!raf) raf = requestAnimationFrame(tick);
+    };
+
+    window.addEventListener("scroll", kick, { passive: true });
+    window.addEventListener("resize", kick);
+    computeTarget();
+    current = target;
+    applySeg(current * (n - 1));
+    kick();
     return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
+      window.removeEventListener("scroll", kick);
+      window.removeEventListener("resize", kick);
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
@@ -287,7 +311,11 @@ export default function ChannelStack() {
         }
         .chan-card {
           position: absolute;
-          inset: 0;
+          top: 50%;
+          left: 0;
+          right: 0;
+          opacity: 0;
+          transform: translateY(-50%);
           display: flex;
           flex-direction: column;
           border-radius: 24px;
