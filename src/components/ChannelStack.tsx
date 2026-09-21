@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-
 // --- tiny step icons -------------------------------------------------------
 const IconSend = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
@@ -122,115 +120,26 @@ const channels: Channel[] = [
 ];
 
 export default function ChannelStack() {
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const cardsRef = useRef<(HTMLElement | null)[]>([]);
-  const dotsRef = useRef<(HTMLElement | null)[]>([]);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-    const n = channels.length;
-
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-
-    if (reduce) {
-      // Fallback: static stacked cards, no pin.
-      track.style.height = "auto";
-      cardsRef.current.forEach((c) => {
-        if (!c) return;
-        c.style.position = "relative";
-        c.style.top = "auto";
-        c.style.opacity = "1";
-        c.style.transform = "none";
-        c.style.marginBottom = "22px";
-      });
-      dotsRef.current.forEach((d, i) => d?.classList.toggle("on", i === 0));
-      return;
-    }
-
-    let raf = 0;
-    let idle = 0;
-    let target = 0;
-    let current = 0;
-
-    const computeTarget = () => {
-      const scrollable = track.offsetHeight - window.innerHeight;
-      const scrolled = Math.min(Math.max(-track.getBoundingClientRect().top, 0), Math.max(scrollable, 1));
-      target = scrollable > 0 ? scrolled / scrollable : 0;
-    };
-
-    const applySeg = (seg: number) => {
-      const active = Math.round(seg);
-      cardsRef.current.forEach((card, i) => {
-        if (!card) return;
-        const d = seg - i; // 0 = centered
-        const y = -d * 60;
-        const op = Math.max(0, 1 - Math.abs(d) * 1.15);
-        const scale = 1 - Math.min(Math.abs(d) * 0.06, 0.16);
-        // cards are anchored at top:50%, so keep the -50% centering in the transform
-        card.style.transform = `translateY(calc(-50% + ${y.toFixed(1)}px)) scale(${scale.toFixed(3)})`;
-        card.style.opacity = op.toFixed(3);
-        card.style.zIndex = String(Math.round(100 - Math.abs(d) * 10));
-        card.style.pointerEvents = Math.abs(d) < 0.5 ? "auto" : "none";
-      });
-      dotsRef.current.forEach((dot, i) => dot?.classList.toggle("on", i === active));
-    };
-
-    // Smoothly ease the displayed position toward the scroll target so
-    // mouse-wheel steps glide instead of snapping.
-    const tick = () => {
-      current += (target - current) * 0.14;
-      if (Math.abs(target - current) < 0.0004) {
-        current = target;
-        idle += 1;
-      } else {
-        idle = 0;
-      }
-      applySeg(current * (n - 1));
-      raf = idle < 8 ? requestAnimationFrame(tick) : 0;
-    };
-    const kick = () => {
-      computeTarget();
-      idle = 0;
-      if (!raf) raf = requestAnimationFrame(tick);
-    };
-
-    window.addEventListener("scroll", kick, { passive: true });
-    window.addEventListener("resize", kick);
-    computeTarget();
-    current = target;
-    applySeg(current * (n - 1));
-    kick();
-    return () => {
-      window.removeEventListener("scroll", kick);
-      window.removeEventListener("resize", kick);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
   return (
     <section id="channels">
-      <div className="chan-track" ref={trackRef} style={{ height: `${channels.length * 100}vh` }}>
-        <div className="chan-sticky">
-          <div className="chan-head">
-            <div className="sec-label">Every Channel, One System</div>
-            <h2 className="sec-h2">
-              We don&apos;t just send emails.
-              <br />
-              <em>We reach them everywhere.</em>
-            </h2>
-          </div>
+      <div className="chan-inner">
+        <div className="chan-head">
+          <div className="sec-label">Every Channel, One System</div>
+          <h2 className="sec-h2">
+            We don&apos;t just send emails.
+            <br />
+            <em>We reach them everywhere.</em>
+          </h2>
+        </div>
 
-          <div className="chan-stage">
-            {channels.map((c, idx) => (
-              <article
-                key={c.n}
-                ref={(el) => { cardsRef.current[idx] = el; }}
-                className="chan-card"
-                style={{ "--acc": c.accent, "--acc2": c.accent2 } as React.CSSProperties}
-              >
+        <div className="chan-stack">
+          {channels.map((c, idx) => (
+            <div
+              key={c.n}
+              className="chan-item"
+              style={{ "--acc": c.accent, "--acc2": c.accent2, top: `${104 + idx * 18}px`, zIndex: idx + 1 } as React.CSSProperties}
+            >
+              <article className="chan-card">
                 <span className="chan-watermark">{c.n}</span>
 
                 <div className="chan-card-top">
@@ -265,66 +174,46 @@ export default function ChannelStack() {
                   </div>
                 </div>
               </article>
-            ))}
-          </div>
-
-          <div className="chan-progress">
-            {channels.map((c, i) => (
-              <span
-                key={c.n}
-                ref={(el) => { dotsRef.current[i] = el; }}
-                className="chan-pd"
-              />
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
 
       <style jsx>{`
         #channels {
           position: relative;
+          padding: 80px 22px 120px;
         }
-        .chan-track {
-          position: relative;
-        }
-        .chan-sticky {
-          position: sticky;
-          top: 0;
-          height: 100vh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 26px;
-          padding: 40px 22px;
-          overflow: hidden;
+        .chan-inner {
+          max-width: 940px;
+          margin: 0 auto;
         }
         .chan-head {
           text-align: center;
           max-width: 640px;
+          margin: 0 auto 44px;
         }
-        .chan-stage {
-          position: relative;
-          width: 100%;
-          max-width: 900px;
-          height: 420px;
+
+        /* native sticky-stack: each card sticks and the next scrolls over it */
+        .chan-stack {
+          display: flex;
+          flex-direction: column;
+          gap: 64px;
+        }
+        .chan-item {
+          position: sticky;
+          /* top + z-index set inline per index */
         }
         .chan-card {
-          position: absolute;
-          top: 50%;
-          left: 0;
-          right: 0;
-          opacity: 0;
-          transform: translateY(-50%);
+          position: relative;
           display: flex;
           flex-direction: column;
           border-radius: 24px;
           border: 1px solid rgba(255, 255, 255, 0.1);
-          background: linear-gradient(160deg, #13131d 0%, #0b0b12 100%);
-          box-shadow: 0 34px 90px -26px rgba(0, 0, 0, 0.9);
+          background: linear-gradient(160deg, #14141e 0%, #0b0b12 100%);
+          box-shadow: 0 34px 90px -26px rgba(0, 0, 0, 0.92);
           padding: 34px 38px;
           overflow: hidden;
-          will-change: transform, opacity;
         }
         .chan-card::before {
           content: "";
@@ -437,7 +326,6 @@ export default function ChannelStack() {
           grid-template-columns: 1fr 1fr;
           gap: 28px;
           align-items: start;
-          margin-top: auto;
         }
         .chan-points {
           display: flex;
@@ -556,25 +444,9 @@ export default function ChannelStack() {
           }
         }
 
-        /* ---- progress dots ---- */
-        .chan-progress {
-          display: flex;
-          gap: 9px;
-        }
-        .chan-pd {
-          width: 28px;
-          height: 4px;
-          border-radius: 4px;
-          background: rgba(255, 255, 255, 0.14);
-          transition: width 0.3s, background 0.3s;
-        }
-        .chan-pd.on {
-          width: 44px;
-          background: #ff6b67;
-        }
-
         @media (max-width: 760px) {
-          .chan-stage { height: 500px; }
+          .chan-item { position: static; }
+          .chan-stack { gap: 22px; }
           .chan-card { padding: 24px 20px; }
           .chan-title { font-size: 24px; }
           .chan-card-body { grid-template-columns: 1fr; gap: 18px; }
