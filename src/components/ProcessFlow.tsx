@@ -51,7 +51,6 @@ const steps = [
   { day: "Day 1", label: "Email", icon: IconEnvelope, color: "#ff5b56" },
   { day: "Day 3", label: "LinkedIn", icon: IconLinkedin, color: "#4f8bff" },
   { day: "Day 5", label: "Direct Mail", icon: IconTruck, color: "#f5a623" },
-  { day: "CRM", label: "Call & SMS", icon: IconPhone, color: "#22c98a" },
 ];
 
 const sources = [
@@ -84,8 +83,8 @@ const bars = [
 
 const panelMeta = [
   { step: "01", title: "// sourced · enriched · verified", caption: "We Find The Right Buyers" },
-  { step: "02", title: "// email · linkedin · direct mail · crm", caption: "We Run Every Channel" },
-  { step: "03", title: "// testing every message we ship", caption: "We Optimize To Win" },
+  { step: "02", title: "// outreach → crm follow-up", caption: "We Run Every Channel" },
+  { step: "03", title: "// a/b test → scale the winner", caption: "We Optimize To Win" },
 ];
 
 export default function ProcessFlow() {
@@ -154,22 +153,37 @@ export default function ProcessFlow() {
 
           <Connector />
 
-          {/* PANEL 2 — multi-channel sequence */}
+          {/* PANEL 2 — outreach -> CRM follow-up */}
           <div className="pf-col">
             <div className="pf-card">
               <span className="pf-step">{panelMeta[1].step}</span>
               <div className="pf-card-title">{panelMeta[1].title}</div>
-              <div className="pf-seq">
-                <span className="pf-seq-rail">
-                  <span className="pf-seq-fill" />
-                </span>
-                {steps.map((s, i) => (
-                  <div key={s.label} className="pf-seq-row" style={{ animationDelay: `${i * 0.9}s`, ["--c" as string]: s.color } as React.CSSProperties}>
-                    <span className="pf-seq-day">{s.day}</span>
-                    <span className="pf-seq-ico">{s.icon}</span>
-                    <span className="pf-seq-label">{s.label}</span>
+              <div className="pf-src">
+                <div className="pf-src-cap">Outreach channels</div>
+                <div className="pf-seq">
+                  <span className="pf-seq-rail">
+                    <span className="pf-seq-fill" />
+                  </span>
+                  {steps.map((s, i) => (
+                    <div key={s.label} className="pf-seq-row" style={{ animationDelay: `${i * 0.9}s`, ["--c" as string]: s.color } as React.CSSProperties}>
+                      <span className="pf-seq-day">{s.day}</span>
+                      <span className="pf-seq-ico">{s.icon}</span>
+                      <span className="pf-seq-label">{s.label}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <span className="pf-src-pipe" />
+
+                <div className="pf-crm">
+                  <div className="pf-crm-top">
+                    <span className="pf-src-dot" /> Reply lands in your CRM
                   </div>
-                ))}
+                  <div className="pf-crm-row">
+                    <span className="pf-crm-ico">{IconPhone}</span>
+                    <span>We follow up — Call &amp; SMS</span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className="pf-caption">{panelMeta[1].caption}</div>
@@ -177,25 +191,46 @@ export default function ProcessFlow() {
 
           <Connector />
 
-          {/* PANEL 3 — A/B testing chart */}
+          {/* PANEL 3 — A/B test -> winner (multi-stage) */}
           <div className="pf-col">
             <div className="pf-card">
               <span className="pf-step">{panelMeta[2].step}</span>
               <div className="pf-card-title">{panelMeta[2].title}</div>
-              <div className="pf-chart">
-                <div className="pf-bars">
-                  {bars.map((b, i) => (
-                    <span
-                      key={i}
-                      className={`pf-bar ${b.kind}`}
-                      style={{ height: `${b.h}%`, animationDelay: `${i * 0.18}s` }}
-                    />
-                  ))}
+              <div className="pf-src">
+                <div className="pf-src-cap">Message variants</div>
+                <div className="pf-variants">
+                  <span className="pf-variant a">Variant A</span>
+                  <span className="pf-variant b">Variant B</span>
                 </div>
-                <div className="pf-baseline" />
-                <div className="pf-legend">
-                  <span><i className="dot control" /> Variant A</span>
-                  <span><i className="dot variant" /> Variant B</span>
+
+                <span className="pf-src-pipe" />
+
+                <div className="pf-chart">
+                  <div className="pf-bars">
+                    {bars.map((b, i) => (
+                      <span
+                        key={i}
+                        className={`pf-bar ${b.kind}`}
+                        style={{ height: `${b.h}%`, animationDelay: `${i * 0.18}s` }}
+                      />
+                    ))}
+                  </div>
+                  <div className="pf-baseline" />
+                  <div className="pf-legend">
+                    <span><i className="dot control" /> Variant A</span>
+                    <span><i className="dot variant" /> Variant B</span>
+                  </div>
+                </div>
+
+                <span className="pf-src-pipe" />
+
+                <div className="pf-src-node verify">
+                  <span className="pf-src-check">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12.5l4.5 4.5L19 7" />
+                    </svg>
+                  </span>
+                  <span>Winner scaled</span>
                 </div>
               </div>
             </div>
@@ -438,6 +473,71 @@ export default function ProcessFlow() {
           0%, 100% { opacity: 0.55; }
           50% { opacity: 1; }
         }
+        /* Panel 2: CRM follow-up stage */
+        .pf-crm {
+          display: flex;
+          flex-direction: column;
+          gap: 9px;
+          padding: 12px 16px 13px;
+          border-radius: 12px;
+          border: 1px solid rgba(62, 207, 142, 0.35);
+          background: rgba(62, 207, 142, 0.06);
+          width: 100%;
+          max-width: 264px;
+        }
+        .pf-crm .pf-src-dot {
+          background: #3ecf8e;
+          box-shadow: 0 0 10px #3ecf8e;
+        }
+        .pf-crm-top {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 12px;
+          font-weight: 600;
+          color: #b9c0d8;
+        }
+        .pf-crm-row {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          padding: 9px 12px;
+          border-radius: 9px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: #0d0d15;
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 13px;
+          font-weight: 600;
+          color: #e4e7f2;
+        }
+        .pf-crm-ico {
+          display: flex;
+          color: #22c98a;
+        }
+        /* Panel 3: message variants */
+        .pf-variants {
+          display: flex;
+          gap: 10px;
+        }
+        .pf-variant {
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 12px;
+          font-weight: 700;
+          padding: 7px 14px;
+          border-radius: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: #0d0d15;
+        }
+        .pf-variant.a {
+          color: #9aa2c4;
+          border-color: rgba(154, 162, 196, 0.3);
+        }
+        .pf-variant.b {
+          color: #ff9d99;
+          border-color: rgba(255, 61, 56, 0.35);
+          background: rgba(255, 61, 56, 0.06);
+        }
         .pf-src-check {
           display: flex;
           color: #3ecf8e;
@@ -519,8 +619,8 @@ export default function ProcessFlow() {
           display: flex;
           align-items: flex-end;
           justify-content: center;
-          gap: 18px;
-          height: 230px;
+          gap: 16px;
+          height: 150px;
         }
         .pf-bar {
           width: 34px;
