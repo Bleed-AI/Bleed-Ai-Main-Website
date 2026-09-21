@@ -60,7 +60,7 @@ const MACHINE_SVG = `
         <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
       </g>
       <!-- item 2: LINKEDIN -->
-      <g class="hero-env" style="--d:-4s">
+      <g class="hero-env" style="--d:-2.4s">
         <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
         <rect width="30" height="20" rx="3" fill="#0A66C2"/>
         <text x="15" y="15" fill="#fff" font-size="12" font-weight="bold" text-anchor="middle" font-family="Arial, sans-serif">in</text>
@@ -68,10 +68,27 @@ const MACHINE_SVG = `
         <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
       </g>
       <!-- item 3: DIRECT MAIL -->
-      <g class="hero-env" style="--d:-8s">
+      <g class="hero-env" style="--d:-4.8s">
         <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
         <rect width="30" height="20" rx="3" fill="#f5a623"/>
         <g stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="7" width="11" height="7.5" rx="1"/><path d="M17 9.5h3l2.5 2.5v2.5H17z"/><circle cx="9" cy="16" r="1.3" fill="#fff" stroke="none"/><circle cx="20" cy="16" r="1.3" fill="#fff" stroke="none"/></g>
+        <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
+      </g>
+      <!-- item 4: MESSAGE (SMS) -->
+      <g class="hero-env" style="--d:-7.2s">
+        <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
+        <rect width="30" height="20" rx="3" fill="#22c98a"/>
+        <path d="M6 6.5h18v8H13l-3.5 3v-3H6z" fill="none" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>
+        <g fill="#fff"><circle cx="11.5" cy="10.5" r="1.1"/><circle cx="15" cy="10.5" r="1.1"/><circle cx="18.5" cy="10.5" r="1.1"/></g>
+        <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+        <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
+      </g>
+      <!-- item 5: CALL -->
+      <g class="hero-env" style="--d:-9.6s">
+        <ellipse class="fx-warm" cx="15" cy="10" rx="25" ry="18" fill="#ff7a1a"/>
+        <rect width="30" height="20" rx="3" fill="#06b6d4"/>
+        <path d="M10 7.6c0-.5.4-.9.9-.9h1.8c.4 0 .74.28.83.66l.5 2c.07.28-.02.56-.22.75l-.85.85a7.5 7.5 0 003.05 3.05l.85-.85c.2-.2.48-.28.75-.22l2 .5c.38.1.66.44.66.83v1.8c0 .5-.4.9-.9.9A10.2 10.2 0 0110 7.6z" fill="#fff"/>
         <g class="fx-check"><circle cx="27" cy="2.5" r="5.5" fill="#3ecf8e"/><path d="M24.6 2.6 L26.3 4.3 L29.4 1" fill="none" stroke="#06281a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></g>
         <g class="fx-gold"><rect x="-1" y="-1" width="32" height="22" rx="3" fill="#f5c542" stroke="#fff3c4"/><text x="15" y="14.5" fill="#7a5a00" font-size="10" font-weight="bold" text-anchor="middle">★</text></g>
       </g>
@@ -135,6 +152,8 @@ export default function InfraBentoTest() {
               { l: "Email", c: "#ff5b56" },
               { l: "LinkedIn", c: "#4f8bff" },
               { l: "Direct Mail", c: "#f5a623" },
+              { l: "Message", c: "#22c98a" },
+              { l: "Call", c: "#06b6d4" },
             ].map((x) => (
               <span
                 key={x.l}
