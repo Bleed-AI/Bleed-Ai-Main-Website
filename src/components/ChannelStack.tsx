@@ -34,12 +34,6 @@ const IconMessage = (
     <path d="M21 11.5a8.5 8.5 0 01-11.9 7.8L3 21l1.7-6A8.5 8.5 0 1121 11.5z" />
   </svg>
 );
-const IconSms = (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 11.5a8.5 8.5 0 01-11.9 7.8L3 21l1.7-6A8.5 8.5 0 1121 11.5z" />
-    <path d="M8 10h8M8 13.5h5" />
-  </svg>
-);
 const IconPhone = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
     <path d="M4 5.5C4 4.7 4.7 4 5.5 4h2.1c.6 0 1.13.4 1.29.99l.9 3.2a1.35 1.35 0 01-.35 1.31l-1.2 1.2a12 12 0 005.06 5.06l1.2-1.2c.35-.35.86-.48 1.31-.35l3.2.9c.59.16.99.69.99 1.29v2.1c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 014 5.5z" />
@@ -107,21 +101,22 @@ const channels: Channel[] = [
   },
   {
     n: "03",
-    day: "Day 6",
-    title: "Call & SMS Outreach",
-    desc: "Direct voice and text follow-up that closes the loop — reaching prospects where the response is instant.",
-    points: ["Instant, direct contact", "Voice + text follow-up", "Closes the loop to booked calls"],
+    day: "Ongoing",
+    title: "CRM & Follow-ups",
+    desc: "Every reply and warm lead lands in the CRM we set up for you — where our team runs the follow-ups and calls that turn interest into booked, closed deals.",
+    points: ["Done-for-you CRM app", "Follow-ups & calls handled", "Every lead worked to a close"],
     accent: "#10b981",
     accent2: "#34e6a8",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 5.5C4 4.7 4.7 4 5.5 4h2.1c.6 0 1.13.4 1.29.99l.9 3.2a1.35 1.35 0 01-.35 1.31l-1.2 1.2a12 12 0 005.06 5.06l1.2-1.2c.35-.35.86-.48 1.31-.35l3.2.9c.59.16.99.69.99 1.29v2.1c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 014 5.5z" />
+        <rect x="3" y="4" width="18" height="16" rx="2.5" />
+        <path d="M3 9h18M9 9v11" />
       </svg>
     ),
     flow: [
-      { label: "SMS sent", icon: IconSms },
-      { label: "Direct call", icon: IconPhone },
-      { label: "Deal booked", icon: IconCheck },
+      { label: "Lead lands in CRM", icon: IconConnect },
+      { label: "Follow-up & call", icon: IconPhone },
+      { label: "Deal closed", icon: IconCheck },
     ],
   },
 ];
