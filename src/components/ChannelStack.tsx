@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Reveal from "@/components/Reveal";
 
 // --- tiny step icons -------------------------------------------------------
 const IconSend = (
@@ -123,27 +122,57 @@ const channels: Channel[] = [
 ];
 
 export default function ChannelStack() {
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const cardsRef = useRef<(HTMLElement | null)[]>([]);
+  const dotsRef = useRef<(HTMLElement | null)[]>([]);
 
-  // Parallax: layers with [data-speed] drift at different rates on scroll.
   useEffect(() => {
-    const root = sectionRef.current;
-    if (!root) return;
-    if (typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const n = channels.length;
 
-    const els = Array.from(root.querySelectorAll<HTMLElement>("[data-speed]"));
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+    if (reduce) {
+      // Fallback: static stacked cards, no pin.
+      track.style.height = "auto";
+      cardsRef.current.forEach((c) => {
+        if (!c) return;
+        c.style.position = "relative";
+        c.style.opacity = "1";
+        c.style.transform = "none";
+        c.style.marginBottom = "22px";
+      });
+      dotsRef.current.forEach((d, i) => d?.classList.toggle("on", i === 0));
+      return;
+    }
+
     let raf = 0;
     const update = () => {
       raf = 0;
-      const vh = window.innerHeight || 1;
-      for (const el of els) {
-        const r = el.getBoundingClientRect();
-        const center = r.top + r.height / 2;
-        const delta = (center - vh / 2) / vh; // ~ -0.5..0.5 while in view
-        const speed = parseFloat(el.dataset.speed || "0");
-        el.style.transform = `translate3d(0, ${(delta * speed).toFixed(1)}px, 0)`;
-      }
+      const scrollable = track.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(Math.max(-track.getBoundingClientRect().top, 0), Math.max(scrollable, 1));
+      const p = scrollable > 0 ? scrolled / scrollable : 0;
+      const seg = p * (n - 1); // 0..n-1
+      const active = Math.round(seg);
+
+      cardsRef.current.forEach((card, i) => {
+        if (!card) return;
+        const d = seg - i; // 0 = centered
+        const y = -d * 64;
+        const op = Math.max(0, 1 - Math.abs(d) * 1.25);
+        const scale = 1 - Math.min(Math.abs(d) * 0.07, 0.18);
+        card.style.transform = `translateY(${y}px) scale(${scale})`;
+        card.style.opacity = String(op);
+        card.style.zIndex = String(Math.round(100 - Math.abs(d) * 10));
+        card.style.pointerEvents = Math.abs(d) < 0.5 ? "auto" : "none";
+      });
+
+      dotsRef.current.forEach((dot, i) => dot?.classList.toggle("on", i === active));
     };
+
     const onScroll = () => {
       if (!raf) raf = requestAnimationFrame(update);
     };
@@ -158,196 +187,133 @@ export default function ChannelStack() {
   }, []);
 
   return (
-    <section id="channels" ref={sectionRef}>
-      <div className="chan-inner">
-        <div className="chan-head">
-          <div className="sec-label">Every Channel, One System</div>
-          <h2 className="sec-h2">
-            We don&apos;t just send emails.
-            <br />
-            <em>We reach them everywhere.</em>
-          </h2>
-        </div>
+    <section id="channels">
+      <div className="chan-track" ref={trackRef} style={{ height: `${channels.length * 100}vh` }}>
+        <div className="chan-sticky">
+          <div className="chan-head">
+            <div className="sec-label">Every Channel, One System</div>
+            <h2 className="sec-h2">
+              We don&apos;t just send emails.
+              <br />
+              <em>We reach them everywhere.</em>
+            </h2>
+          </div>
 
-        <div className="chan-timeline">
-          <span className="chan-spine" aria-hidden="true">
-            <span className="chan-spark" />
-          </span>
-
-          {channels.map((c, idx) => (
-            <Reveal className="chan-row" key={c.n} delay={idx * 90}>
-              <div
-                className="chan-rowinner"
+          <div className="chan-stage">
+            {channels.map((c, idx) => (
+              <article
+                key={c.n}
+                ref={(el) => { cardsRef.current[idx] = el; }}
+                className="chan-card"
                 style={{ "--acc": c.accent, "--acc2": c.accent2 } as React.CSSProperties}
               >
-                <span className="chan-node" data-speed="-18">
-                  <span className="chan-node-ring" />
-                  {c.icon}
-                </span>
+                <span className="chan-watermark">{c.n}</span>
 
-                <article className="chan-card">
-                  <span className="chan-watermark" data-speed="46">{c.n}</span>
+                <div className="chan-card-top">
+                  <span className="chan-icon">{c.icon}</span>
+                  <span className="chan-day">
+                    <span className="chan-day-dot" />
+                    {c.day}
+                  </span>
+                </div>
+                <h3 className="chan-title">{c.title}</h3>
+                <p className="chan-desc">{c.desc}</p>
 
-                  <div className="chan-card-head">
-                    <span className="chan-day">
-                      <span className="chan-day-dot" />
-                      {c.day}
-                    </span>
+                <div className="chan-card-body">
+                  <ul className="chan-points">
+                    {c.points.map((p) => (
+                      <li key={p}>
+                        <span className="chan-bullet" />
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="chan-flow" aria-hidden="true">
+                    <div className="chan-flow-label">The sequence</div>
+                    {c.flow.map((s, i) => (
+                      <div key={s.label} className="flow-step" style={{ animationDelay: `${i * 1}s` }}>
+                        <span className="flow-ico">{s.icon}</span>
+                        <span className="flow-text">{s.label}</span>
+                        {i < c.flow.length - 1 && <span className="flow-line" />}
+                      </div>
+                    ))}
                   </div>
-                  <h3 className="chan-title">{c.title}</h3>
-                  <p className="chan-desc">{c.desc}</p>
+                </div>
+              </article>
+            ))}
+          </div>
 
-                  <div className="chan-card-body">
-                    <ul className="chan-points">
-                      {c.points.map((p) => (
-                        <li key={p}>
-                          <span className="chan-bullet" />
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <div className="chan-flow" aria-hidden="true" data-speed="20">
-                      <div className="chan-flow-label">The sequence</div>
-                      {c.flow.map((s, i) => (
-                        <div key={s.label} className="flow-step" style={{ animationDelay: `${i * 1}s` }}>
-                          <span className="flow-ico">{s.icon}</span>
-                          <span className="flow-text">{s.label}</span>
-                          {i < c.flow.length - 1 && <span className="flow-line" />}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </article>
-              </div>
-            </Reveal>
-          ))}
+          <div className="chan-progress">
+            {channels.map((c, i) => (
+              <span
+                key={c.n}
+                ref={(el) => { dotsRef.current[i] = el; }}
+                className="chan-pd"
+              />
+            ))}
+          </div>
         </div>
       </div>
 
       <style jsx>{`
         #channels {
           position: relative;
-          padding: 80px 22px;
         }
-        .chan-inner {
-          max-width: 980px;
-          margin: 0 auto;
+        .chan-track {
+          position: relative;
+        }
+        .chan-sticky {
+          position: sticky;
+          top: 0;
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 26px;
+          padding: 40px 22px;
+          overflow: hidden;
         }
         .chan-head {
           text-align: center;
           max-width: 640px;
-          margin: 0 auto 48px;
         }
-
-        /* ---- timeline spine ---- */
-        .chan-timeline {
+        .chan-stage {
           position: relative;
+          width: 100%;
+          max-width: 900px;
+          height: 420px;
         }
-        .chan-spine {
-          position: absolute;
-          left: 31px;
-          top: 24px;
-          bottom: 24px;
-          width: 2px;
-          border-radius: 2px;
-          background: linear-gradient(180deg, #B1130F 0%, #0A66C2 50%, #10b981 100%);
-          opacity: 0.5;
-          overflow: visible;
-        }
-        .chan-spark {
-          position: absolute;
-          left: 50%;
-          top: 0;
-          width: 9px;
-          height: 9px;
-          border-radius: 50%;
-          background: #fff;
-          transform: translate(-50%, 0);
-          box-shadow: 0 0 12px 3px rgba(255, 255, 255, 0.6);
-          animation: chanSpark 6s ease-in-out infinite;
-        }
-        @keyframes chanSpark {
-          0% { top: 0%; opacity: 0; }
-          8% { opacity: 1; }
-          92% { opacity: 1; }
-          100% { top: 100%; opacity: 0; }
-        }
-
-        .chan-row + .chan-row {
-          margin-top: 22px;
-        }
-        .chan-rowinner {
-          position: relative;
-          padding-left: 82px;
-        }
-
-        /* ---- node on the spine ---- */
-        .chan-node {
-          position: absolute;
-          left: 10px;
-          top: 30px;
-          width: 44px;
-          height: 44px;
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: linear-gradient(150deg, var(--acc), var(--acc2));
-          color: #fff;
-          box-shadow: 0 0 0 5px rgba(10, 10, 16, 1), 0 0 22px -2px var(--acc);
-          z-index: 2;
-        }
-        .chan-node :global(svg) {
-          width: 21px;
-          height: 21px;
-        }
-        .chan-node-ring {
-          position: absolute;
-          inset: -6px;
-          border-radius: 50%;
-          border: 1.5px solid var(--acc);
-          opacity: 0.5;
-          animation: chanRing 2.6s ease-out infinite;
-        }
-        @keyframes chanRing {
-          0% { transform: scale(0.8); opacity: 0.6; }
-          70%, 100% { transform: scale(1.35); opacity: 0; }
-        }
-
-        /* ---- card ---- */
         .chan-card {
-          position: relative;
-          border-radius: 22px;
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          border-radius: 24px;
           border: 1px solid rgba(255, 255, 255, 0.1);
           background: linear-gradient(160deg, #13131d 0%, #0b0b12 100%);
-          box-shadow: 0 28px 70px -26px rgba(0, 0, 0, 0.85);
-          padding: 30px 34px 32px;
+          box-shadow: 0 34px 90px -26px rgba(0, 0, 0, 0.9);
+          padding: 34px 38px;
           overflow: hidden;
-          transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s;
-        }
-        .chan-card:hover {
-          transform: translateY(-3px);
-          border-color: color-mix(in srgb, var(--acc) 50%, rgba(255, 255, 255, 0.1));
-          box-shadow: 0 34px 90px -24px rgba(0, 0, 0, 0.92),
-            0 0 46px -10px color-mix(in srgb, var(--acc) 50%, transparent);
+          will-change: transform, opacity;
         }
         .chan-card::before {
           content: "";
           position: absolute;
           top: 0;
           left: 0;
-          bottom: 0;
-          width: 4px;
-          background: linear-gradient(180deg, var(--acc), var(--acc2));
+          right: 0;
+          height: 4px;
+          background: linear-gradient(90deg, var(--acc), var(--acc2));
         }
         .chan-card::after {
           content: "";
           position: absolute;
-          top: -80px;
-          right: -80px;
-          width: 280px;
-          height: 280px;
+          top: -90px;
+          right: -90px;
+          width: 320px;
+          height: 320px;
           border-radius: 50%;
           background: radial-gradient(circle, var(--acc) 0%, transparent 68%);
           opacity: 0.16;
@@ -355,11 +321,11 @@ export default function ChannelStack() {
         }
         .chan-watermark {
           position: absolute;
-          top: -30px;
-          right: 20px;
+          top: -34px;
+          right: 22px;
           z-index: 0;
           font-family: "Inter", system-ui, sans-serif;
-          font-size: 170px;
+          font-size: 200px;
           font-weight: 900;
           line-height: 1;
           letter-spacing: -6px;
@@ -368,20 +334,39 @@ export default function ChannelStack() {
           pointer-events: none;
           user-select: none;
         }
-        .chan-card-head {
+        .chan-card-top {
           position: relative;
           z-index: 1;
-          margin-bottom: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 18px;
+        }
+        .chan-icon {
+          width: 56px;
+          height: 56px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 15px;
+          border: 1px solid color-mix(in srgb, var(--acc) 28%, rgba(255, 255, 255, 0.1));
+          background: linear-gradient(150deg, var(--acc), var(--acc2));
+          color: #fff;
+          box-shadow: 0 0 24px -4px var(--acc);
+        }
+        .chan-icon :global(svg) {
+          width: 28px;
+          height: 28px;
         }
         .chan-day {
           display: inline-flex;
           align-items: center;
           gap: 7px;
-          padding: 6px 14px;
+          padding: 7px 15px;
           border-radius: 999px;
           border: 1px solid color-mix(in srgb, var(--acc) 40%, transparent);
           background: color-mix(in srgb, var(--acc) 12%, transparent);
-          font-size: 12.5px;
+          font-size: 13px;
           font-weight: 800;
           letter-spacing: 0.5px;
           text-transform: uppercase;
@@ -398,7 +383,7 @@ export default function ChannelStack() {
           position: relative;
           z-index: 1;
           font-family: "Inter", system-ui, sans-serif;
-          font-size: 30px;
+          font-size: 32px;
           font-weight: 800;
           letter-spacing: -0.6px;
           margin-bottom: 10px;
@@ -411,30 +396,31 @@ export default function ChannelStack() {
         .chan-desc {
           position: relative;
           z-index: 1;
-          font-size: 15px;
+          font-size: 15.5px;
           line-height: 1.6;
           color: #9099b8;
-          max-width: 620px;
-          margin-bottom: 22px;
+          max-width: 640px;
+          margin-bottom: 24px;
         }
         .chan-card-body {
           position: relative;
           z-index: 1;
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 26px;
+          gap: 28px;
           align-items: start;
+          margin-top: auto;
         }
         .chan-points {
           display: flex;
           flex-direction: column;
-          gap: 13px;
+          gap: 14px;
         }
         .chan-points li {
           display: flex;
           align-items: center;
           gap: 11px;
-          font-size: 14.5px;
+          font-size: 15px;
           color: #c7cbe0;
         }
         .chan-bullet {
@@ -452,7 +438,7 @@ export default function ChannelStack() {
           display: flex;
           flex-direction: column;
           gap: 16px;
-          padding: 20px 20px;
+          padding: 20px;
           border-radius: 16px;
           border: 1px solid rgba(255, 255, 255, 0.07);
           background: linear-gradient(
@@ -542,13 +528,28 @@ export default function ChannelStack() {
           }
         }
 
+        /* ---- progress dots ---- */
+        .chan-progress {
+          display: flex;
+          gap: 9px;
+        }
+        .chan-pd {
+          width: 28px;
+          height: 4px;
+          border-radius: 4px;
+          background: rgba(255, 255, 255, 0.14);
+          transition: width 0.3s, background 0.3s;
+        }
+        .chan-pd.on {
+          width: 44px;
+          background: #ff6b67;
+        }
+
         @media (max-width: 760px) {
-          .chan-spine { left: 21px; }
-          .chan-rowinner { padding-left: 58px; }
-          .chan-node { left: 2px; width: 38px; height: 38px; top: 26px; }
-          .chan-card { padding: 24px 20px 26px; }
-          .chan-title { font-size: 23px; }
-          .chan-card-body { grid-template-columns: 1fr; gap: 20px; }
+          .chan-stage { height: 500px; }
+          .chan-card { padding: 24px 20px; }
+          .chan-title { font-size: 24px; }
+          .chan-card-body { grid-template-columns: 1fr; gap: 18px; }
         }
       `}</style>
     </section>
