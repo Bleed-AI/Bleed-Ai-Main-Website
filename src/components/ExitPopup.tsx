@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
 const CALCULATOR = "https://bleedai.com/free-tools/cold-email-roi-calculator/";
-const MARTIJN_PHOTO = "https://groupeffort.nl/wp-content/uploads/2026/01/MartijnSquigle.jpeg";
 
-const ptc: { quote: ReactNode; name: string; role: string; img: string }[] = [
+const ptc: { quote: ReactNode; name: string; role: string; img?: string; initials?: string }[] = [
   {
     quote: (
       <>
@@ -14,7 +13,7 @@ const ptc: { quote: ReactNode; name: string; role: string; img: string }[] = [
     ),
     name: "Martijn Versteeg",
     role: "Group Effort",
-    img: MARTIJN_PHOTO,
+    initials: "MV",
   },
   {
     quote: (
@@ -113,8 +112,28 @@ export default function ExitPopup() {
                   <div className="ptc-stars">★★★★★</div>
                   <div className="ptc-quote">{t.quote}</div>
                   <div className="ptc-person">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={t.img} alt={t.name} loading="lazy" />
+                    {t.initials ? (
+                      <span
+                        style={{
+                          width: 40,
+                          height: 40,
+                          borderRadius: "50%",
+                          flexShrink: 0,
+                          display: "inline-flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontWeight: 700,
+                          fontSize: 13,
+                          color: "#fff",
+                          background: "linear-gradient(135deg, #B1130F, #ff3d38)",
+                        }}
+                      >
+                        {t.initials}
+                      </span>
+                    ) : (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={t.img} alt={t.name} loading="lazy" />
+                    )}
                     <div>
                       <div className="ptc-name">{t.name}</div>
                       <div className="ptc-role">{t.role}</div>

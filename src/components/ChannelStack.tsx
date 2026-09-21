@@ -622,11 +622,20 @@ export default function ChannelStack() {
 
         @media (max-width: 760px) {
           .chan-track { height: auto; }
-          .chan-sticky { position: static; height: auto; overflow: visible; padding: 60px 20px; }
-          .chan-stage { height: auto; }
+          .chan-sticky { position: static; height: auto; overflow: visible; padding: 56px 20px; }
+          .chan-stage {
+            height: auto;
+            perspective: none;
+            overflow: visible;
+            -webkit-mask-image: none;
+            mask-image: none;
+          }
+          .chan-glow { display: none; }
           .chan-card { padding: 24px 20px; margin-bottom: 22px; }
           .chan-title { font-size: 24px; }
+          .chan-desc { font-size: 14.5px; }
           .chan-card-body { grid-template-columns: 1fr; gap: 18px; }
+          .chan-watermark { font-size: 150px; top: -26px; }
           .chan-progress { display: none; }
         }
       `}</style>

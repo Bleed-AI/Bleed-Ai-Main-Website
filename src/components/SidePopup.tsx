@@ -3,10 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const SPRINT_URL = "https://calculator.bleedai.com/sprint";
-const MARTIJN_PHOTO = "https://groupeffort.nl/wp-content/uploads/2026/01/MartijnSquigle.jpeg";
 
-const testimonials = [
-  { quote: "Over 100 opportunities in December. The targeting was precise - real companies that matched our ICP.", img: MARTIJN_PHOTO, name: "Martijn Versteeg", role: "Group Effort" },
+type Testi = { quote: string; name: string; role: string; img?: string; initials?: string };
+const testimonials: Testi[] = [
+  { quote: "Over 100 opportunities in December. The targeting was precise - real companies that matched our ICP.", initials: "MV", name: "Martijn Versteeg", role: "Group Effort" },
   { quote: "Great guidance on deliverability and infrastructure. We went from hitting spam to landing in the inbox.", img: "/alberto-castiel-client.jfif", name: "Alberto Castiel", role: "Minute Call" },
   { quote: "Clear step-by-step help. My spam rate dropped and I finally started seeing results.", img: "/ahmedprofile.jpg", name: "Ahmad Jabbir", role: "TEDx Speaker & Coach" },
   { quote: "Love to hear it, thank you again. First leads starting to come in after the rebuild.", img: "/hunter-owens.jpg", name: "Hunter Owens", role: "Umbrella" },
@@ -73,8 +73,28 @@ export default function SidePopup() {
           <div className="lp-stars">★★★★★</div>
           <div className="lp-quote">&ldquo;{t.quote}&rdquo;</div>
           <div className="lp-person">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={t.img} alt={t.name} loading="lazy" />
+            {t.initials ? (
+              <span
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  flexShrink: 0,
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: 700,
+                  fontSize: 13,
+                  color: "#fff",
+                  background: "linear-gradient(135deg, #B1130F, #ff3d38)",
+                }}
+              >
+                {t.initials}
+              </span>
+            ) : (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img src={t.img} alt={t.name} loading="lazy" />
+            )}
             <div>
               <div className="lp-person-name">{t.name}</div>
               <div className="lp-person-role">{t.role}</div>

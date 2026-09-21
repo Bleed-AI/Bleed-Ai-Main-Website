@@ -693,13 +693,19 @@ export default function ProcessFlow() {
         }
 
         @media (max-width: 900px) {
+          #process { padding: 66px 18px; }
           .pf-grid {
             grid-template-columns: 1fr;
-            gap: 26px;
+            gap: 24px;
           }
           .pf-connector {
             display: none;
           }
+          .pf-head { margin-bottom: 34px; }
+        }
+        @media (max-width: 560px) {
+          .pf-card { padding: 24px 18px 22px; }
+          .pf-card-title { margin-bottom: 18px; }
         }
         @media (prefers-reduced-motion: reduce) {
           .pf-dash,
