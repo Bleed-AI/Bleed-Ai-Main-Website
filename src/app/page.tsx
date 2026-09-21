@@ -1,14 +1,16 @@
 import Navigation from "@/components/Navigation";
-import Hero from "@/components/Hero";
+import HeroTest from "@/components/HeroTest";
+import ChannelStack from "@/components/ChannelStack";
+import ProcessFlow from "@/components/ProcessFlow";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
-import ResultsMarquee from "@/components/ResultsMarquee";
-import Framework from "@/components/Framework";
+import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
+import FrameworkTest from "@/components/FrameworkTest";
 import Testimonials from "@/components/Testimonials";
-import VsTable from "@/components/VsTable";
-import InfraBento from "@/components/InfraBento";
-import Founder from "@/components/Founder";
-import Faq from "@/components/Faq";
+import VsTableTest from "@/components/VsTableTest";
+import InfraBentoTest from "@/components/InfraBentoTest";
+import FounderTest from "@/components/FounderTest";
+import FaqTest from "@/components/FaqTest";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
 import BookWidget from "@/components/BookWidget";
@@ -20,16 +22,18 @@ export default function Home() {
     <main className="bai relative overflow-x-clip">
       {/* .bai-bg + CursorGlow now mounted site-wide in app/layout.tsx */}
       <Navigation />
-      <Hero />
+      <HeroTest />
+      <ChannelStack />
+      <ProcessFlow />
       <StatsStrip />
       <RepliesMarquee />
       <Testimonials />
-      <Framework />
-      <ResultsMarquee />
-      <VsTable />
-      <InfraBento />
-      <Founder />
-      <Faq />
+      <FrameworkTest />
+      <ResultsMarqueeTest />
+      <VsTableTest />
+      <InfraBentoTest />
+      <FounderTest />
+      <FaqTest />
       <FinalCta />
       <Footer />
       <BookWidget />
