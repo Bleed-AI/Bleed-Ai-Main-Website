@@ -49,7 +49,7 @@ export default function Footer() {
                 height={40}
                 className="h-10 w-auto mb-6"
               />
-              <p className="text-[var(--text-secondary)] leading-relaxed max-w-sm mb-8">
+              <p className="text-white/75 leading-relaxed max-w-sm mb-8">
                 Your full-service growth partner with a proven Cold-to-Sold system that turns strangers into customers. We install revenue systems that scale B2B firms in weeks, not months.
               </p>
 
@@ -61,7 +61,7 @@ export default function Footer() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full border border-[var(--border-color)] flex items-center justify-center text-[var(--text-muted)] hover:border-[#B1130F] hover:text-[#B1130F] hover:bg-[#B1130F]/5 transition-all duration-300 hover:scale-105"
+                    className="w-10 h-10 rounded-full border border-[var(--border-color)] flex items-center justify-center text-white/70 hover:border-[#B1130F] hover:text-[#B1130F] hover:bg-[#B1130F]/5 transition-all duration-300 hover:scale-105"
                     aria-label={link.label}
                   >
                     {link.icon}
@@ -84,7 +84,7 @@ export default function Footer() {
                         <a
                           href={link.href}
                           {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                          className="text-[var(--text-muted)] hover:text-[#B1130F] transition-colors duration-300 text-sm"
+                          className="text-white/70 hover:text-[#B1130F] transition-colors duration-300 text-sm"
                         >
                           {link.label}
                         </a>
@@ -105,7 +105,7 @@ export default function Footer() {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[var(--text-muted)] hover:text-[#B1130F] transition-colors duration-300 text-sm inline-flex items-center gap-1"
+                          className="text-white/70 hover:text-[#B1130F] transition-colors duration-300 text-sm inline-flex items-center gap-1"
                         >
                           {link.label}
                           <svg className="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -124,10 +124,10 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="py-6 border-t border-[var(--border-color)]">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-sm text-[var(--text-muted)]">
+            <div className="text-sm text-white/70">
               &copy; {new Date().getFullYear()} Bleed AI. All rights reserved.
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-[var(--text-muted)]">
+            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/70">
               <a
                 href="/privacy-policy/"
                 className="hover:text-[#B1130F] transition-colors duration-300"
