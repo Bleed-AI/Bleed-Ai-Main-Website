@@ -65,7 +65,7 @@ const channels: Channel[] = [
     day: "Day 1",
     title: "Email Outreach",
     desc: "Hyper-personalized cold email at scale — engineered to land in the primary inbox, so every send actually gets seen.",
-    points: ["Primary-inbox deliverability", "Personalized at scale", "Reply-ready sequences"],
+    points: ["Primary-inbox deliverability", "Personalized at scale", "A/B tested copy & subject lines"],
     accent: "#B1130F",
     accent2: "#ff6b67",
     icon: (
@@ -85,7 +85,7 @@ const channels: Channel[] = [
     day: "Day 3",
     title: "LinkedIn Outreach",
     desc: "Warm, human touches that build familiarity before the ask — turning cold profiles into real conversations.",
-    points: ["Profile-to-conversation flow", "Human, non-spammy touches", "Builds trust before the pitch"],
+    points: ["Profile-to-conversation flow", "Human, non-spammy touches", "A/B tested messaging"],
     accent: "#0A66C2",
     accent2: "#4f8bff",
     icon: (
@@ -104,7 +104,7 @@ const channels: Channel[] = [
     day: "Ongoing",
     title: "CRM & Infrastructure",
     desc: "Every reply and warm lead lands in the CRM we set up for you — the infrastructure your team uses to follow up, call, and close. We build it; you work the pipeline.",
-    points: ["Done-for-you CRM app", "You follow up & call inside it", "Full infra, set up by us"],
+    points: ["Done-for-you CRM app", "You follow up & call inside it", "Your whole pipeline in one place"],
     accent: "#10b981",
     accent2: "#34e6a8",
     icon: (
