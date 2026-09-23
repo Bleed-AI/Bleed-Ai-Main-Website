@@ -109,7 +109,7 @@ export default function Testimonials() {
         <div className="sec-inner">
           <Reveal className="sec-label">What Clients Say</Reveal>
           <Reveal as="h2" className="sec-h2">
-            100+ Opportunities in December.
+            100+ Opportunities in a Single Month.
             <br />
             <em>Hear it directly from them.</em>
           </Reveal>
