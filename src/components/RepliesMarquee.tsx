@@ -35,13 +35,13 @@ export default function RepliesMarquee() {
         <div className="sec-inner">
           <Reveal className="email-label-row" style={{ justifyContent: "flex-start" }}>
             <span className="email-live-dot" />
-            <span className="sec-label" style={{ margin: 0 }}>Straight from the inbox</span>
+            <span className="sec-label" style={{ margin: 0 }}>Straight from prospects</span>
           </Reveal>
           <Reveal as="h2" className="sec-h2">
             The kind of replies <em>we get.</em>
           </Reveal>
           <Reveal as="p" className="sec-sub" delay={80}>
-            Real responses from real decision-makers - to the exact cold emails our system sends. Not edited, not cherry-picked.
+            Real responses from real decision-makers - to the cold outreach our system runs. Not edited, not cherry-picked.
           </Reveal>
 
           <Reveal className="email-marquee">
