@@ -1,0 +1,590 @@
+<title>BleedAI Website Build Brief</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap">
+<style>
+/* Layout: a build spec. Reading column for decisions and copy, wide dark "site" frames for every mockup and live animation, sticky chapter bar. */
+:root{
+ --bg:#f4f5f7; --paper:#ffffff; --ink:#14161c; --ink2:#4a4f5c; --mute:#757b8a; --line:#dfe2e8;
+ --accent:#b1130f; --accent-soft:#f8e6e5; --ok:#1d7a4f; --ok-soft:#e3f3ea; --warn:#9a6200; --warn-soft:#fbf0d9; --blue:#2c4fa3; --blue-soft:#e6ecf8;
+ --m-bg:#08080c; --m-bg2:#131318; --m-card:#17171d; --m-line:rgba(255,255,255,.1); --m-fg:#f5f5f7; --m-fg2:rgba(245,245,247,.7); --m-mute:rgba(245,245,247,.45); --m-red:#b1130f; --m-red2:#ff3d38; --m-ok:#4fd18b;
+ --f-display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
+ --f-body:"Source Sans 3",ui-sans-serif,system-ui,sans-serif;
+ --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+ --f-serif:"Instrument Serif",Georgia,serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+ --bg:#101217; --paper:#171a21; --ink:#eceef3; --ink2:#b4b9c6; --mute:#868c9b; --line:#2a2e38;
+ --accent:#ff5a52; --accent-soft:#3a1a1a; --ok:#5fcf98; --ok-soft:#16301f; --warn:#f0b54a; --warn-soft:#352a12; --blue:#8fb0ff; --blue-soft:#1b2540; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#101217; --paper:#171a21; --ink:#eceef3; --ink2:#b4b9c6; --mute:#868c9b; --line:#2a2e38;
+ --accent:#ff5a52; --accent-soft:#3a1a1a; --ok:#5fcf98; --ok-soft:#16301f; --warn:#f0b54a; --warn-soft:#352a12; --blue:#8fb0ff; --blue-soft:#1b2540; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;margin:0;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1080px;margin:0 auto;padding-block:0 80px}
+.col{max-width:720px}
+h1,h2,h3,h4{font-family:var(--f-display);text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-.02em}
+h2{font-size:clamp(25px,3.3vw,33px);font-weight:800;letter-spacing:-.01em}
+h3{font-size:20px;font-weight:600}
+h4{font-size:16px;font-weight:600}
+p{margin:0}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.stamp{font-family:var(--f-mono);font-size:12px;color:var(--mute)}
+.lede{font-size:19px;color:var(--ink2);max-width:690px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.stack-l{display:flex;flex-direction:column;gap:22px}
+section{padding-block:52px 8px;border-top:1px solid var(--line);margin-top:36px;scroll-margin-top:60px}
+header.top{padding-block:44px 8px}
+nav.chapters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;overflow-x:auto;white-space:nowrap}
+nav.chapters a{font-family:var(--f-mono);font-size:12px;text-decoration:none;color:var(--ink2);padding:6px 10px;border-radius:999px;margin-right:2px;display:inline-block}
+nav.chapters a:hover,nav.chapters a:focus-visible{background:var(--paper);color:var(--ink);outline:2px solid var(--line)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.grid2>*,.grid3>*{min-width:0}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.box h4{margin-bottom:6px}
+.box p,.box li{color:var(--ink2);font-size:16px}
+ul.clean{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:4px;vertical-align:middle;white-space:nowrap}
+.t-his{background:var(--ok-soft);color:var(--ok)} .t-mine{background:var(--blue-soft);color:var(--blue)} .t-open{background:var(--warn-soft);color:var(--warn)} .t-cut{background:var(--accent-soft);color:var(--accent)}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:660px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);font-weight:500}
+tr:last-child td{border-bottom:0}
+td code,p code,li code{font-family:var(--f-mono);font-size:13px;background:var(--bg);padding:1px 5px;border-radius:4px}
+.callout{border-left:3px solid var(--accent);background:var(--paper);padding:16px 20px;border-radius:0 10px 10px 0}
+.callout.ok{border-left-color:var(--ok)} .callout.warn{border-left-color:var(--warn)}
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+details summary{cursor:pointer;font-weight:600}
+details[open] summary{margin-bottom:10px}
+.label{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);display:block}
+.copyblock{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.copyblock .k{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+.copyblock .v{font-size:16px}
+.copyblock .v.big{font-family:var(--f-display);font-size:21px;font-weight:600;line-height:1.25}
+ol.loom{margin:0;padding-left:0;list-style:none;display:grid;gap:10px;counter-reset:l}
+ol.loom li{counter-increment:l;display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+ol.loom li::before{content:counter(l);font-family:var(--f-display);font-weight:800;font-size:24px;color:var(--accent);line-height:1}
+ol.loom li b{display:block}
+ol.loom li span{color:var(--ink2);font-size:15px}
+.script{font-family:var(--f-serif);font-style:italic;font-size:21px;line-height:1.45;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px 24px;display:flex;flex-direction:column;gap:12px}
+.script .cue{font-family:var(--f-mono);font-style:normal;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+
+/* ---------- dark site frames ---------- */
+.mock{background:var(--m-bg);color:var(--m-fg);border-radius:12px;overflow:hidden;border:1px solid #23232b;box-shadow:0 18px 40px -24px rgba(0,0,0,.45)}
+.mock .bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:#121218;border-bottom:1px solid var(--m-line)}
+.mock .bar i{width:9px;height:9px;border-radius:50%;background:#2c2c35;display:block}
+.mock .bar span{font-family:var(--f-mono);font-size:11px;color:var(--m-mute);margin-left:8px;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mock .bar button{font-family:var(--f-mono);font-size:11px;background:transparent;color:var(--m-fg2);border:1px solid var(--m-line);border-radius:999px;padding:3px 10px;cursor:pointer}
+.mock .bar button:focus-visible{outline:2px solid var(--m-red2)}
+.mock .in{padding:26px 24px}
+.mh{font-family:var(--f-display);font-weight:800;font-size:clamp(22px,3.1vw,34px);line-height:1.1;letter-spacing:-.015em}
+.mh em{font-family:var(--f-serif);font-weight:400;font-style:italic;color:var(--m-red2);letter-spacing:0}
+.ms{color:var(--m-fg2);font-size:15px;margin-top:10px;max-width:600px}
+.eb{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--m-red2);margin-bottom:10px;display:block}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.b1{background:var(--m-red);color:#fff;padding:9px 16px;border-radius:999px;font-size:14px;font-weight:600}
+.b2{border:1px solid var(--m-line);color:var(--m-fg);padding:9px 16px;border-radius:999px;font-size:14px}
+.fine{font-size:12.5px;color:var(--m-mute);margin-top:12px}
+.chip{font-size:11.5px;padding:3px 9px;border-radius:999px;background:var(--m-bg2);border:1px solid var(--m-line);color:var(--m-fg2);display:inline-block}
+
+/* step engine: every [data-s] is visible at rest; JS adds .run to the demo, then .on per step */
+.demo [data-s]{transition:opacity .45s ease,transform .45s ease,background-color .4s ease,border-color .4s ease,color .4s ease,flex-grow .5s ease}
+.demo.run [data-s]:not(.on){opacity:.12;transform:translateY(6px)}
+.demo.run [data-s].keep:not(.on){opacity:.35;transform:none}
+
+/* A: passes */
+.track{position:relative;margin-top:22px}
+.track .rail{position:absolute;left:0;right:0;top:15px;height:2px;background:var(--m-line)}
+.track .fill{position:absolute;left:0;top:15px;height:2px;background:var(--m-red2);width:100%;transition:width .6s ease}
+.passes{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.pass .dot{width:32px;height:32px;border-radius:50%;background:var(--m-bg);border:2px solid var(--m-red2);display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;color:var(--m-fg)}
+.pass .card{margin-top:10px;background:var(--m-card);border:1px solid var(--m-line);border-radius:10px;padding:11px}
+.pass .k{font-family:var(--f-mono);font-size:10px;color:var(--m-red2);letter-spacing:.1em;text-transform:uppercase}
+.pass h5{margin:3px 0;font-family:var(--f-display);font-size:15px;color:var(--m-fg)}
+.pass p{font-size:12.5px;color:var(--m-fg2);line-height:1.45}
+.pass .ch{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.pass.on .dot{background:var(--m-red)}
+.branches{margin-top:14px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.branches div{font-size:12px;color:var(--m-fg2);border:1px dashed rgba(255,61,56,.4);border-radius:8px;padding:8px 10px;min-width:0}
+.branches b{color:var(--m-fg);display:block;font-size:12.5px}
+@media (max-width:760px){.passes,.branches{grid-template-columns:1fr 1fr}.track .rail,.track .fill{display:none}}
+
+/* B: signal to row */
+.sig{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.4fr);gap:16px;margin-top:20px;align-items:start}
+@media (max-width:760px){.sig{grid-template-columns:1fr}}
+.post{background:var(--m-card);border:1px solid var(--m-line);border-radius:10px;padding:14px;font-size:13.5px;color:var(--m-fg2)}
+.post .who{font-weight:600;color:var(--m-fg);font-size:14px}
+.post mark{background:transparent;color:var(--m-fg);background-image:linear-gradient(rgba(255,61,56,.4),rgba(255,61,56,.4));background-repeat:no-repeat;background-size:100% 100%;padding:0 2px;transition:background-size .6s ease}
+.demo.run .post mark:not(.on){background-size:0 100%;opacity:1;transform:none}
+.sheet{width:100%;border-collapse:collapse;min-width:0;font-size:12.5px}
+.sheet th,.sheet td{border-bottom:1px solid var(--m-line);padding:8px;color:var(--m-fg2);text-align:left}
+.sheet th{color:var(--m-mute);font-size:10px}
+.sheet td.ok{color:var(--m-ok);font-family:var(--f-mono)}
+
+/* C: AI follow-up */
+.conv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:20px}
+@media (max-width:760px){.conv{grid-template-columns:1fr}}
+.bub{border-radius:12px;padding:10px 12px;font-size:13.5px;max-width:92%;margin-bottom:8px}
+.bub.them{background:var(--m-bg2);border:1px solid var(--m-line);color:var(--m-fg)}
+.bub.us{background:rgba(177,19,15,.22);border:1px solid rgba(255,61,56,.35);color:var(--m-fg);margin-left:auto}
+.meta{font-family:var(--f-mono);font-size:10.5px;color:var(--m-mute);margin:-2px 0 10px}
+.meta.r{text-align:right}
+.stampok{display:inline-block;font-family:var(--f-mono);font-size:10.5px;color:var(--m-ok);border:1px solid var(--m-ok);border-radius:4px;padding:1px 6px;margin-left:6px}
+.feed{list-style:none;margin:0;padding:0 0 0 18px;border-left:2px solid var(--m-line);display:flex;flex-direction:column;gap:12px}
+.feed li{position:relative;font-size:13px;color:var(--m-fg2)}
+.feed li::before{content:"";position:absolute;left:-25px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--m-red2)}
+.feed li b{color:var(--m-fg);font-weight:600}
+.feed li .d{font-family:var(--f-mono);font-size:10.5px;color:var(--m-mute);display:block}
+
+/* D: doors */
+.doors{position:relative;margin-top:20px;display:grid;grid-template-columns:1fr minmax(0,1.1fr) 1fr;grid-template-rows:auto auto auto;gap:14px 18px;align-items:center}
+.doors svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.doors svg path{fill:none;stroke:rgba(255,61,56,.45);stroke-width:1.5;stroke-dasharray:4 5}
+.door{position:relative;background:var(--m-card);border:1px solid var(--m-line);border-radius:10px;padding:10px 12px;font-size:12.5px;color:var(--m-fg2);min-width:0}
+.door b{display:block;color:var(--m-fg);font-size:14px;font-family:var(--f-display)}
+.door.hit.on{border-color:var(--m-red2);box-shadow:0 0 0 3px rgba(255,61,56,.18)}
+.acct{grid-column:2;grid-row:2;position:relative;text-align:center;background:var(--m-bg2);border:1px solid rgba(255,61,56,.5);border-radius:12px;padding:16px}
+.acct b{font-family:var(--f-display);font-size:17px;display:block}
+.acct span{font-size:12px;color:var(--m-mute)}
+@media (max-width:620px){.doors{grid-template-columns:1fr 1fr}.acct{grid-column:1 / -1;grid-row:auto;order:-1}.doors svg{display:none}}
+
+/* E: trial */
+.trial{display:flex;gap:10px;margin-top:20px}
+.trial>div{flex:1 1 0;min-width:0;background:var(--m-card);border:1px solid var(--m-line);border-radius:10px;padding:12px}
+.trial .k{font-family:var(--f-mono);font-size:10px;color:var(--m-red2);letter-spacing:.1em;text-transform:uppercase}
+.trial h5{margin:3px 0 4px;font-family:var(--f-display);font-size:15px}
+.trial p{font-size:12.5px;color:var(--m-fg2);line-height:1.45}
+.demo.run .trial>div.now{flex-grow:1.8;border-color:rgba(255,61,56,.6)}
+@media (max-width:760px){.trial{flex-direction:column}}
+
+.specs{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.specs>div{min-width:0;font-size:15px;color:var(--ink2)}
+.specs b{color:var(--ink);display:block;font-size:14px;font-family:var(--f-mono);font-weight:500;letter-spacing:.02em}
+.foot{margin-top:56px;color:var(--mute);font-size:14px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="wrap">
+<header class="top stack">
+ <span class="eyebrow">Website rebuild · build brief for Shahwaiz</span>
+ <h1>Stop looking like a cold email agency.<br>Show them the experiments instead.</h1>
+ <p class="stamp">Created: 2026-10-16 · Last updated: 2026-10-16 (v3, Taha's answers applied) · Author: Claude for Taha · Notion: Business Model and pitch planning</p>
+ <p class="lede">Everything Shahwaiz needs to rebuild bleedai.com: what we say now, every page, the homepage section by section with final copy, five live animation prototypes, the build order and how we check it is done. It merges three earlier notes (10-07, 10-08, 10-14) into one. Where they disagreed, the newest one won unless two of Taha's rulings collided; those collisions are listed first.</p>
+ <div class="callout col"><b>v3, Taha's answers (2026-10-16).</b> Both open questions answered yes. Sprint back to $2,950 and it is a headline offer. Trial form cut to three questions that route to the trial, the Sprint or the calculator. Industry pages instead of one page per market pair. Banned words stay out of the pitch but are allowed where SEO needs them. Homepage built on a test route first, every other page ships when done. Old founder video stays for now. Animations: fewer, polished, nothing that looks like a template. Infrastructure site is phase 2. All of it is in the decisions table, and in <code>HANDOFF.md</code> next to this page.</div>
+</header>
+
+<nav class="chapters" aria-label="Chapters">
+ <a href="#decisions">1 Decisions</a><a href="#loom">2 Loom</a><a href="#story">3 What we say</a><a href="#pages">4 Pages</a><a href="#home">5 Homepage</a><a href="#motion">6 Animations</a><a href="#pricing">7 Pricing</a><a href="#trial">8 Trial page</a><a href="#more">9 Other pages</a><a href="#video">10 Video</a><a href="#build">11 Build order</a><a href="#sources">12 Sources</a>
+</nav>
+
+<!-- 1 -->
+<section id="decisions" class="stack-l">
+ <div class="stack"><span class="eyebrow">1 · Decisions</span><h2>What is locked, what is a default, what waits on Taha</h2>
+ <p class="col">Green is Taha's ruling. Blue is my call; veto by number. Amber is built on my default until Taha answers, and each one names exactly what changes if the answer differs.</p></div>
+ <div class="tbl"><table>
+  <thead><tr><th>#</th><th>Decision</th><th>Status</th></tr></thead>
+  <tbody>
+   <tr><td>H1</td><td>Never "cold email agency", "outbound agency", "lead gen", "B2B outbound" in the pitch: hero, navigation, homepage headings, /pricing, /trial. No services list on the homepage. <b>SEO exception (10-16):</b> those words are allowed in the blog, meta descriptions, FAQ answers and pages written for search, because we need the rankings.</td><td><span class="tag t-his">Taha 10-07, 10-14, 10-16</span></td></tr>
+   <tr><td>H2</td><td>The retainer (Growth, Scale) is the public price everyone sees.</td><td><span class="tag t-his">Taha 10-08</span></td></tr>
+   <tr><td>H3</td><td>Performance models (pay per meeting, base plus success fee, revenue share) exist, picked per client, shown only as a qualified option with <b>no prices on the site</b> (10-14 overrides the "from" prices in the 10-08 mockup).</td><td><span class="tag t-his">Taha 10-08, 10-14</span></td></tr>
+   <tr><td>H4</td><td>The free trial is the front door of the business until the 2026-11-04 review: about 1,500 leads, 2 emails, only for vendors who pass the fit test.</td><td><span class="tag t-his">Taha 10-13, 10-15</span></td></tr>
+   <tr><td>D1</td><td><b>The trial is on the site as an application, never as a "Free" plan.</b> Main button "Apply for a trial". A three question form routes people (section 8). The page says we take a few a month. No price card says "free" and "free" is not in the navigation.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+   <tr><td>D2</td><td><b>A passed trial goes straight into Growth or Scale monthly.</b> The Sprint is <b>$2,950</b> (back from $3,350) and stays a headline offer: the start for anyone the trial does not fit.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+   <tr><td>H5</td><td><b>Four ways in, one page:</b> the trial (qualified, no price), the Sprint $2,950, Growth $3,350 / month and Scale $5,300 / month, plus the calculator for one campaign under $1K.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+   <tr><td>H6</td><td><b>Ship order:</b> every new page goes live when it is done. The homepage is built on a test route (as with /home-test in September), then swapped in. The site goes live publicly <b>before</b> Taha's final review; his final calls come after, on the live site.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+   <tr><td>H7</td><td><b>Keep the current hero layout.</b> It works. New words, plus one polished animation in it.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+   <tr><td>H8</td><td><b>Animation bar: polished and unusual, never template.</b> Visitors know sites are made with AI now, so stock fades and generic SaaS motion read as cheap. Fewer animations done very well beats five done fine. Keep the whole thing simple to build.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+   <tr><td>H9</td><td><b>Industry pages, not a page per market pair.</b> Pairs launch too often for one page each.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+   <tr><td>H10</td><td><b>Infrastructure is phase 2.</b> infra.bleedai.com is out of date with our workflows. Whether it folds into bleedai.com or stays separate is decided after the main rebuild.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+   <tr><td>1</td><td>Hero = the 10-14 line ("You've automated the obvious..."). "For proven B2B products" sits above it as the who-it's-for label.</td><td><span class="tag t-mine">My call</span></td></tr>
+   <tr><td>2</td><td>The Pass System keeps its name, a homepage section and its own page.</td><td><span class="tag t-mine">My call</span></td></tr>
+   <tr><td>3</td><td>Scale includes direct mail up to 150 cards a month (about $144 at our $0.96 First Class 6x9 cost), at cost above that. Closes the 10-08 Q1.</td><td><span class="tag t-mine">My call</span></td></tr>
+   <tr><td>4</td><td>Industry pages: one template, five pages (Healthcare, Construction, Logistics, Compliance and regulated, AI and software services), each from one data file. A new market pair becomes a section inside its industry file, never a new page. These are the links the reply agent sends. Closes 10-08 Q3.</td><td><span class="tag t-mine">My call, inside H9</span></td></tr>
+   <tr><td>5</td><td>Proof shows only what is on <code>clients/bleedai/PROOF-AND-CREDIBILITY.md</code>. One empty slot is reserved for the first trial result (Countfire launched 2026-10-16). Nothing is invented to fill it.</td><td><span class="tag t-mine">My call</span></td></tr>
+   <tr><td>6</td><td>Paid ads and content are not shown as channels we run for clients. We claim only what we run today.</td><td><span class="tag t-mine">My call (10-08)</span></td></tr>
+   <tr><td>7</td><td>The Founder block keeps the <b>old video</b> for now. Taha records a new one the week of 2026-10-26, after the animations exist so he can reuse them. The launch never waits on it.</td><td><span class="tag t-his">Taha 10-16</span></td></tr>
+  </tbody></table></div>
+ <p class="callout col">The 10-08 plan's Q2 ("does a pilot line appear on the site") is gone: the trial replaced the $250 pilot. The 10-08 artifact stays as the reasoning record and now carries a pointer to this page.</p>
+</section>
+
+<!-- 2 -->
+<section id="loom" class="stack-l">
+ <div class="stack"><span class="eyebrow">2 · For Taha</span><h2>The Loom, in five chapters, about five minutes</h2>
+ <p class="col">Scroll this page while you talk. Each chapter maps to a section, so Shahwaiz can rewatch one part without hunting.</p></div>
+ <ol class="loom">
+  <li><div><b>Why we are changing it (40s) · section 3</b><span>The site still sells an agency. The people we now reach are AI-native teams who already run Clay or similar tools; a list of services reads like a slower version of their own stack. We sell the experiments they do not have the hands for, and they see replies before they pay.</span></div></li>
+  <li><div><b>The pages (40s) · section 4</b><span>Five new or reworked pages, four retired. The trial page and the market pages are new ideas; the rest is the 10-08 plan tidied up.</span></div></li>
+  <li><div><b>The homepage, top to bottom (90s) · section 5</b><span>What stays from the September build (most of the look), what gets new words, and the four new sections. Read the hero line out loud.</span></div></li>
+  <li><div><b>The animations (60s) · section 6</b><span>Play each prototype. Point at the one thing each must make obvious. Say "explain, do not decorate" and the three rules at the end.</span></div></li>
+  <li><div><b>Pricing, trial and the order of work (60s) · sections 7, 8, 11</b><span>Trial first, then monthly. No free plan card, no performance prices. Then the build order: ship steps 1 and 2 today, then one section at a time.</span></div></li>
+ </ol>
+</section>
+
+<!-- 3 -->
+<section id="story" class="stack-l">
+ <div class="stack"><span class="eyebrow">3 · What we say</span><h2>One sentence, and the words that are banned</h2></div>
+ <div class="grid2">
+  <div class="box"><span class="label">Today, as a visitor reads it</span><h4 style="margin-top:6px">"A done-for-you cold outbound system that books calls."</h4><p>Hero "We Install Cold-to-Sold, live in 48 hours". A category every founder gets pitched weekly.</p></div>
+  <div class="box"><span class="label">New</span><h4 style="margin-top:6px">"We run the outbound experiments your team does not have the hands for, across email, LinkedIn, mail and phone, and you see the replies before you pay."</h4><p>For proven B2B products. Method: the Pass System. Front door: a qualified trial.</p></div>
+ </div>
+ <div class="grid3">
+  <div class="box"><h4>Who it is for</h4><p>B2B products that already sell: paying customers, a sales conversation before the deal, a few thousand reachable buyer companies. Often a founder or a 1 to 3 person sales team.</p></div>
+  <div class="box"><h4>What a tool will not do for them</h4><ul class="clean"><li>Find buyers by signal: companies hiring now for the seat the product replaces, plus the person who signs</li><li>Run one market from many sender identities, so ten angles get tested on one list</li><li>25 days across email, LinkedIn, mail and phone, stopping the moment someone replies</li><li>A reply agent and follow-up so no warm thread dies</li><li>Run before they pay</li></ul></div>
+  <div class="box"><h4>Never in the pitch</h4><ul class="clean"><li>Cold email agency, outbound agency, lead gen, B2B outbound (hero, nav, homepage headings, /pricing, /trial; allowed for SEO in the blog, meta, FAQ answers)</li><li>"We Install Cold-to-Sold"</li><li>Email volume as the reason to pick a plan</li><li>"Your team follows up by call and SMS"</li><li>Prices for performance models</li><li>The word "free" as a plan name</li><li>Em dashes or en dashes</li></ul></div>
+ </div>
+</section>
+
+<!-- 4 -->
+<section id="pages" class="stack-l">
+ <div class="stack"><span class="eyebrow">4 · Pages</span><h2>Build or rework, retire, and what ships when</h2>
+ <p class="col">Two codebases: <code>Bleed-Ai-Main-Website</code> (bleedai.com, Next.js, GSAP, Tailwind) and <code>Outbound_Cost_Calculator</code> (calculator.bleedai.com). Everything new goes on bleedai.com.</p></div>
+ <div class="tbl"><table>
+  <thead><tr><th>Path</th><th>Status</th><th>What it is</th></tr></thead>
+  <tbody>
+   <tr><td><code>/</code></td><td><span class="tag t-mine">Rework</span></td><td>Section 5. Build it on <code>/home-v2</code> (noindex) first, swap into <code>/</code> when it is done. Keep the September look and the hero layout, change the story and the order.</td></tr>
+   <tr><td><code>/trial</code></td><td><span class="tag t-open">New (D1)</span></td><td>Section 8. How a trial works, the fit test as the application form.</td></tr>
+   <tr><td><code>/pricing</code> "How we work with you"</td><td><span class="tag t-mine">New</span></td><td>Section 7. Four ways in: trial, Sprint, Growth, Scale, plus the calculator line; performance partnership on a call.</td></tr>
+   <tr><td><code>/pass-system</code></td><td><span class="tag t-mine">New</span></td><td>The method in full. Where Taha's LinkedIn posts and videos point.</td></tr>
+   <tr><td><code>/industries/[slug]</code></td><td><span class="tag t-mine">New template</span></td><td>Five industry pages rendered from <code>src/content/industries/{slug}.json</code>; market pairs are sections inside them. No prices.</td></tr>
+   <tr><td>calculator <code>/sprint</code></td><td><span class="tag t-mine">Update</span></td><td>Price back to <b>$2,950</b>: <code>PRICES</code> in <code>src/components/SprintView.tsx</code> defaults to the $3,350 tier; make $2,950 the default and drop the "same as one month of Growth" line, since it is no longer true. Growth stays $3,350 in <code>src/lib/pricing.config.ts</code>. Drop "cold email" from the title and copy.</td></tr>
+   <tr><td>calculator <code>/packages</code></td><td><span class="tag t-cut">Redirect</span></td><td>301 to <code>bleedai.com/pricing</code>.</td></tr>
+   <tr><td><code>/services/pilot-campaign</code>, <code>/services/evergreen-campaign</code>, <code>/services/infrastructure-setup</code></td><td><span class="tag t-cut">Retire</span></td><td>301 to <code>/pricing</code>.</td></tr>
+   <tr><td><code>/services/consultation</code></td><td><span class="tag t-cut">Retire</span></td><td>301 to <code>/book-call</code>. The $79 call pulls the cheapest buyers.</td></tr>
+   <tr><td><code>/home-test</code></td><td><span class="tag t-cut">Remove</span></td><td>The test page went live on 09-22; delete it and the unused <code>*Test</code> duplicates once the new homepage ships.</td></tr>
+   <tr><td><code>/free-tools/*</code>, <code>/blog</code></td><td><span class="tag t-his">Keep</span></td><td>Footer only, out of the main navigation. They carry the SEO keywords, so keep them. In the "Best Cold Email Agencies 2026" post fix only the $0 Free Pilot offer (section 11).</td></tr>
+   <tr><td>calculator <code>/trials</code></td><td><span class="tag t-open">Flag</span></td><td>A paid "Trial Campaigns" page already lives here and will be confused with the trial on bleedai.com. Rename or retire it; ask Taha if unsure.</td></tr>
+   <tr><td>infra.bleedai.com</td><td><span class="tag t-open">Phase 2</span></td><td>Still says the client's team does call and SMS follow-up; mailbox specs differ from the calculator. After the rebuild: update it to our current workflows, then decide with Taha whether it becomes a page on bleedai.com.</td></tr>
+  </tbody></table></div>
+ <p class="stamp">Navigation: How it works (/pass-system) · Pricing · Industries (dropdown) · Book a call · button "Apply for a trial".</p>
+</section>
+
+<!-- 5 -->
+<section id="home" class="stack-l">
+ <div class="stack"><span class="eyebrow">5 · Homepage</span><h2>Same look, new order, final words</h2>
+ <p class="col">Component names are the real files in <code>src/components</code>, as wired in <code>src/app/page.tsx</code> on 2026-10-16. Copy below is final unless Taha changes it on the Loom.</p></div>
+ <div class="tbl"><table>
+  <thead><tr><th>#</th><th>Section</th><th>File</th><th>Action</th></tr></thead>
+  <tbody>
+   <tr><td>1</td><td>Hero</td><td><code>HeroTest.tsx</code></td><td><span class="tag t-his">Keep layout</span> new copy below, keep the video slot on the right, add one signature animation (for example a buyer row from B typing itself in under the headline)</td></tr>
+   <tr><td>2</td><td>Proof strip</td><td><code>StatsStrip.tsx</code></td><td><span class="tag t-his">Keep</span> but render the real numbers server side, animate from there</td></tr>
+   <tr><td>3</td><td>What a tool will not do</td><td><code>NotATool.tsx</code></td><td><span class="tag t-open">New</span> six short cards</td></tr>
+   <tr><td>4</td><td>We find your buyers first</td><td><code>SignalSheet.tsx</code></td><td><span class="tag t-open">New</span> animation B</td></tr>
+   <tr><td>5</td><td>The Pass System</td><td><code>PassSystem.tsx</code></td><td><span class="tag t-open">New</span> animation A; replaces <code>ProcessFlow</code> and <code>FrameworkTest</code></td></tr>
+   <tr><td>6</td><td>Every door</td><td><code>ChannelStack.tsx</code></td><td><span class="tag t-mine">Extend</span> animation D; add mail, phone, website form; follow-up is ours</td></tr>
+   <tr><td>7</td><td>No warm reply goes cold</td><td><code>AiFollowUp.tsx</code></td><td><span class="tag t-open">New</span> animation C</td></tr>
+   <tr><td>8</td><td>See replies before you pay</td><td><code>TrialFlow.tsx</code></td><td><span class="tag t-open">New</span> animation E, links /trial</td></tr>
+   <tr><td>9</td><td>Replies, testimonials, results</td><td><code>RepliesMarquee</code>, <code>Testimonials</code>, <code>ResultsMarqueeTest</code></td><td><span class="tag t-his">Keep</span> plus one reserved card "First trial result" hidden until we have one</td></tr>
+   <tr><td>10</td><td>Who this is for</td><td><code>WhoIsThisFor.tsx</code></td><td><span class="tag t-mine">Rewrite</span> to the trial fit test</td></tr>
+   <tr><td>11</td><td>How we work with you</td><td><code>PricingTeaser.tsx</code></td><td><span class="tag t-open">New</span> three lines, links /pricing</td></tr>
+   <tr><td>12</td><td>Founder, FAQ, final call to action</td><td><code>FounderTest</code>, <code>FaqTest</code>, <code>FinalCta</code></td><td><span class="tag t-mine">Update</span> keep the old video for now, FAQ rewritten</td></tr>
+   <tr><td>cut</td><td>"Typical outbound agency" table, infrastructure bento</td><td><code>VsTableTest</code>, <code>InfraBentoTest</code></td><td><span class="tag t-cut">Cut / shrink</span> comparing ourselves to an agency keeps us in that category; infrastructure becomes one proof line</td></tr>
+  </tbody></table></div>
+
+ <div class="mock" aria-label="Hero mockup">
+  <div class="bar"><i></i><i></i><i></i><span>bleedai.com</span></div>
+  <div class="in">
+   <span class="eb">For proven B2B products</span>
+   <div class="mh">You've automated the obvious. We run the outbound <em>experiments</em> your team doesn't have the hands for.</div>
+   <p class="ms">Give us the goal and a budget. We find the buyers who need you right now, reach them on email, LinkedIn and mail, and you see the replies before you pay us.</p>
+   <div class="btns"><span class="b1">Apply for a trial</span><span class="b2">See how it works</span></div>
+   <p class="fine">We run a few trials a month, for products that already sell. · 85+ client campaigns · 5.0 on Upwork, Clutch and TechReviewer</p>
+  </div>
+ </div>
+
+ <div class="grid2">
+  <div class="copyblock"><span class="k">3 · What a tool will not do (heading)</span><span class="v big">You already have the tools. You don't have the hands.</span><span class="v">Cards: Buyers found by signal · Ten angles on one list · Four doors, one account · Every reply answered in minutes · Deliverability we measure ourselves · It runs before you pay</span></div>
+  <div class="copyblock"><span class="k">4 · Buyer sheet (heading)</span><span class="v big">We find your buyers before you reply.</span><span class="v">Every campaign opens with something your buyer would pay for: who is buying right now, the person who signs, and why we think so. Sample is blurred; use a real row count from a live pair sheet, checked on the day it ships.</span></div>
+  <div class="copyblock"><span class="k">5 · Pass System (heading)</span><span class="v big">One email is easy to ignore. Four doors in 30 days is not.</span><span class="v">We work your target accounts in passes. Each pass uses a new door and a better reason, so the person who signs actually sees you.</span></div>
+  <div class="copyblock"><span class="k">6 · Every door (heading)</span><span class="v big">We run the doors. You take the meetings.</span><span class="v">Email · LinkedIn · Direct mail · Phone (warm only) · Website forms · CRM that stays yours. Rewrite the CRM card: follow-up is our job, not the client's.</span></div>
+  <div class="copyblock"><span class="k">7 · AI follow-up (heading)</span><span class="v big">No warm reply goes cold.</span><span class="v">An AI agent answers every reply in minutes, in your voice, and chases every yes that goes quiet. A person approves what it sends until you trust it.</span></div>
+  <div class="copyblock"><span class="k">8 · Trial (heading)</span><span class="v big">See the replies before you pay us.</span><span class="v">If your product already sells, we build a list of about 1,500 of your buyers, write the campaign with you, send it, and hand you every reply. Then you decide.</span></div>
+  <div class="copyblock"><span class="k">10 · Who this is for</span><span class="v"><b>Great fit:</b> paying customers you can name · a sales conversation before the deal · thousands of possible buyers · a small sales team that already believes in outbound.<br><b>Not yet:</b> pre-revenue · self-serve tools at a few dollars a seat · you want ads or SEO · you sell outbound or lead generation yourself.</span></div>
+  <div class="copyblock"><span class="k">12 · FAQ, rewrite to these questions</span><span class="v">What is a pass? · Which channels do you run? · Who qualifies for a trial? · What happens after the trial? · How does pricing work? · Whose domains and data are they, and what do I keep? · How fast do we start? ("build starts in 48 hours, first sends in about 2 weeks once inboxes are warm")</span></div>
+ </div>
+</section>
+
+<!-- 6 -->
+<section id="motion" class="stack-l">
+ <div class="stack"><span class="eyebrow">6 · Animations</span><h2>Five animations that explain, each one live</h2>
+ <p class="col">Each frame below plays when it scrolls into view and loops, with a Replay button. They are rough on purpose: they fix the story each one tells and in what order, never the look. Do not copy them or the reference sites literally; the bar is in the callout below. Build them in GSAP with ScrollTrigger (already installed). Every reference was opened on 2026-10-16; the full list is in <code>animation-references.md</code> next to this page.</p></div>
+
+ <div class="callout col"><b>The bar (Taha 10-16).</b> Polished and out of the box, something a visitor has not seen on ten other SaaS sites. People can tell an AI made site from stock motion, so no generic fade up on every block. If time is short, do <b>A (Pass System), B (buyer row) and E (trial)</b> properly and keep C and D simple. One remarkable animation beats five ordinary ones, and the build stays simple.</div>
+ <div class="callout warn col"><b>Three rules for all five.</b> Pin at most one section, never on touch screens, for under 1.5 screen heights. Every loop holds on its finished state and the same message exists as plain text. <code>prefers-reduced-motion</code> shows the finished state, no pin, no loop (use <code>gsap.matchMedia()</code>). No three.js in these sections.</div>
+
+ <!-- A -->
+ <div class="mock demo" data-demo="A" data-hold="2600" data-speed="1100">
+  <div class="bar"><i></i><i></i><i></i><span>A · The Pass System · bleedai.com/#pass-system</span><button type="button" class="replay">Replay</button></div>
+  <div class="in">
+   <div class="mh" style="font-size:clamp(20px,2.6vw,28px)">One email is easy to ignore. <em>Four doors</em> in 30 days is not.</div>
+   <div class="track"><div class="rail"></div><div class="fill"></div>
+    <div class="passes">
+     <div class="pass" data-s="1"><div class="dot">0</div><div class="card"><span class="k">Day 0 · Warm</span><h5>They see us first</h5><p>A like and a sharp comment on their posts, before we ask for anything.</p><div class="ch"><span class="chip">LinkedIn</span></div></div></div>
+     <div class="pass" data-s="2"><div class="dot">1</div><div class="card"><span class="k">Day 3 · The give</span><h5>Something worth paying for</h5><p>A sheet of their buyers with a live signal, one tap to get it.</p><div class="ch"><span class="chip">Email</span><span class="chip">LinkedIn</span></div></div></div>
+     <div class="pass" data-s="4"><div class="dot">2</div><div class="card"><span class="k">Day 12 · Inside</span><h5>Their team routes us</h5><p>One easy question to two or three people on the team.</p><div class="ch"><span class="chip">LinkedIn</span><span class="chip">Email</span></div></div></div>
+     <div class="pass" data-s="5"><div class="dot">3</div><div class="card"><span class="k">Day 20 · Final push</span><h5>Every door</h5><p>The trial offer, a postcard on their desk, then a call.</p><div class="ch"><span class="chip">Email</span><span class="chip">Mail</span><span class="chip">Phone</span></div></div></div>
+    </div>
+   </div>
+   <div class="branches" data-s="3">
+    <div><b>Yes</b>The sheet arrives within the hour</div>
+    <div><b>Yes, then quiet</b>Chased on every channel</div>
+    <div><b>Not now</b>An honest answer and a date</div>
+    <div><b>Remove me</b>Stopped everywhere, same day</div>
+   </div>
+  </div>
+ </div>
+ <div class="specs">
+  <div><b>Make obvious</b>Several doors over 30 days, and that a reply changes the path.</div>
+  <div><b>Mechanic</b>Pinned, scrubbed. A red line fills day 0 to day 30; each pass node lights and its channel chips appear. At pass 1 a reply chip drops in and forks into four branches.</div>
+  <div><b>Mobile</b>Vertical stack, no pin, line hidden, branches as tappable chips.</div>
+  <div><b>Reference</b>Attio "Speed to lead, every time." (pinned step graph) + Stripe Connect "Control how funds flow" (branch paths).</div>
+ </div>
+
+ <!-- B -->
+ <div class="mock demo" data-demo="B" data-hold="2600" data-speed="800">
+  <div class="bar"><i></i><i></i><i></i><span>B · We find your buyers first · bleedai.com/#buyers</span><button type="button" class="replay">Replay</button></div>
+  <div class="in">
+   <div class="mh" style="font-size:clamp(20px,2.6vw,28px)">We find your buyers <em>before</em> you reply.</div>
+   <div class="sig">
+    <div class="post"><div class="who">Northside Orthopaedic Group</div><div class="stamp" style="color:var(--m-mute)">Job post · 2 days ago</div><p style="margin-top:8px">We are hiring a <mark data-s="1">Prior Authorization Specialist</mark> to manage payer approvals for a growing 6 surgeon practice. Reports to the practice manager.</p></div>
+    <div style="overflow-x:auto"><table class="sheet">
+     <thead><tr><th>Practice</th><th>Signal</th><th>Who signs</th><th></th></tr></thead>
+     <tbody>
+      <tr><td data-s="2">Northside Ortho</td><td data-s="3">Hiring prior auth</td><td data-s="4">Practice manager</td><td class="ok" data-s="5">✓</td></tr>
+      <tr><td data-s="6">Lakeview Family Care</td><td data-s="6">Hiring billing lead</td><td data-s="6">Owner physician</td><td class="ok" data-s="6">✓</td></tr>
+      <tr><td data-s="7">Ridge Dermatology</td><td data-s="7">Front desk x2</td><td data-s="7">COO</td><td class="ok" data-s="7">✓</td></tr>
+     </tbody></table></div>
+   </div>
+   <p class="fine">Sample rows, invented for the mockup. The live site uses a blurred real sheet.</p>
+  </div>
+ </div>
+ <div class="specs">
+  <div><b>Make obvious</b>A public signal becomes a named buyer with the person who signs.</div>
+  <div><b>Mechanic</b>Post types in, the key phrase gets a red highlight sweep, the highlight flies into row one (GSAP Flip), cells fill left to right, a check lands. Two more rows, then hold.</div>
+  <div><b>Mobile</b>Post above, sheet below; skip the fly, keep the fill.</div>
+  <div><b>Reference</b>Granola hero (typing) + Clay waterfall and Ramp invoice fill (structured record).</div>
+ </div>
+
+ <!-- C -->
+ <div class="mock demo" data-demo="C" data-hold="2600" data-speed="1000">
+  <div class="bar"><i></i><i></i><i></i><span>C · No warm reply goes cold · bleedai.com/#follow-up</span><button type="button" class="replay">Replay</button></div>
+  <div class="in">
+   <div class="mh" style="font-size:clamp(20px,2.6vw,28px)">No warm reply goes <em>cold</em>.</div>
+   <div class="conv">
+    <div>
+     <div class="bub them" data-s="1">Sure, send it over.</div><div class="meta" data-s="1">Lead · 10:02</div>
+     <div class="bub us" data-s="2">Here it is: 26 practices in your segment hiring for prior auth this month. Worth 15 minutes to see the whole market?</div>
+     <div class="meta r" data-s="3">Agent · answered in 4 min <span class="stampok">Approved by a person</span></div>
+    </div>
+    <div>
+     <span class="label" style="color:var(--m-mute);margin-bottom:10px" data-s="4">Then they go quiet</span>
+     <ul class="feed">
+      <li data-s="4"><span class="d">Day 3</span><b>LinkedIn</b> a short note on the sheet</li>
+      <li data-s="5"><span class="d">Day 6</span><b>Email</b> one new practice added to their list</li>
+      <li data-s="6"><span class="d">Day 9</span><b>Phone</b> "did the sheet reach you?"</li>
+      <li data-s="7"><span class="d">Day 12</span><b>Mail</b> a postcard showing their market</li>
+     </ul>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div class="specs">
+  <div><b>Make obvious</b>Speed (minutes), a human approves, and a quiet yes gets chased on other channels, each touch bringing something new.</div>
+  <div><b>Mechanic</b>Triggered once on enter, no scrub. Reply bubble, "Drafting..." with a running timer, answer, approved stamp, then the chase feed pushes in one item at a time.</div>
+  <div><b>Mobile</b>Same, stacked.</div>
+  <div><b>Reference</b>Linear "AI and automations" (elapsed time, Draft) + Ramp bubbles + Resend "Modular webhooks" feed.</div>
+ </div>
+
+ <!-- D -->
+ <div class="mock demo" data-demo="D" data-hold="2400" data-speed="650">
+  <div class="bar"><i></i><i></i><i></i><span>D · Every door · bleedai.com/#channels</span><button type="button" class="replay">Replay</button></div>
+  <div class="in">
+   <div class="mh" style="font-size:clamp(20px,2.6vw,28px)">We run the doors. <em>You</em> take the meetings.</div>
+   <div class="doors">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M18 18 C35 18 35 50 50 50"/><path d="M82 18 C65 18 65 50 50 50"/><path d="M18 82 C35 82 35 50 50 50"/><path d="M82 82 C65 82 65 50 50 50"/><path d="M18 50 L50 50"/></svg>
+    <div class="door" data-s="1" style="grid-column:1;grid-row:1"><b>Inbox</b>Fresh domains, verified addresses</div>
+    <div class="door" data-s="2" style="grid-column:3;grid-row:1"><b>LinkedIn</b>Warm before the ask</div>
+    <div class="door" data-s="3" style="grid-column:1;grid-row:2"><b>Website form</b>For the ones with no email</div>
+    <div class="acct"><b>One account</b><span>the person who signs</span></div>
+    <div class="door hit keep" data-s="5" style="grid-column:3;grid-row:2"><b>Phone</b>When a yes goes quiet</div>
+    <div class="door" data-s="4" style="grid-column:1;grid-row:3"><b>Their desk</b>A postcard of their own market</div>
+    <div class="door" data-s="4" style="grid-column:3;grid-row:3"><b>CRM</b>Every thread, yours to keep</div>
+   </div>
+  </div>
+ </div>
+ <div class="specs">
+  <div><b>Make obvious</b>One account, many doors, and that a single door opening is what we wait for.</div>
+  <div><b>Mechanic</b>Doors fade in around the account, dashed SVG paths draw in (stroke-dashoffset), then one door pulses red ("opened") and the rest dim.</div>
+  <div><b>Mobile</b>Account on top, doors in two columns, no paths. This replaces the current sticky card stack only if Shahwaiz prefers; otherwise add the three new cards to the existing stack.</div>
+  <div><b>Reference</b>11x "One shared brain. Across every channel." (dark, red accent, close to ours), flattened to SVG.</div>
+ </div>
+
+ <!-- E -->
+ <div class="mock demo" data-demo="E" data-hold="2400" data-speed="1100">
+  <div class="bar"><i></i><i></i><i></i><span>E · Trial · bleedai.com/#trial</span><button type="button" class="replay">Replay</button></div>
+  <div class="in">
+   <div class="mh" style="font-size:clamp(20px,2.6vw,28px)">See the replies <em>before</em> you pay us.</div>
+   <div class="trial">
+    <div data-s="1" class="keep"><span class="k">Week 0</span><h5>Apply</h5><p>Three quick questions. Most people see their answer straight away.</p></div>
+    <div data-s="2" class="keep"><span class="k">Week 1</span><h5>We build the list</h5><p>About 1,500 of your buyers, every address checked.</p></div>
+    <div data-s="3" class="keep"><span class="k">Week 1</span><h5>You approve the copy</h5><p>One 15 minute call, in your voice.</p></div>
+    <div data-s="4" class="keep"><span class="k">Weeks 2 to 3</span><h5>You see every reply</h5><p>Positive replies are handed to you, the AI answers the rest.</p></div>
+    <div data-s="5" class="keep"><span class="k">Then</span><h5>You decide</h5><p>Keep going monthly, or walk away with what we found.</p></div>
+   </div>
+  </div>
+ </div>
+ <div class="specs">
+  <div><b>Make obvious</b>The order: replies come before money.</div>
+  <div><b>Mechanic</b>Five cards; the active one widens (flex-grow) as you scroll, with ScrollTrigger snap. "You decide" stays muted until "You see every reply" has been active.</div>
+  <div><b>Mobile</b>Vertical, tap to expand.</div>
+  <div><b>Reference</b>Relevance AI "Drive ROI in just weeks with your first team of agents".</div>
+ </div>
+ <p class="stamp">Copy in E ("one 15 minute call") follows free-trial-playbook.md sections 6 and 8.</p>
+</section>
+
+<!-- 7 -->
+<section id="pricing" class="stack-l">
+ <div class="stack"><span class="eyebrow">7 · Pricing</span><h2>/pricing, "How we work with you"</h2>
+ <p class="col">One page, four ways in (H5). The trial leads for those who qualify, the Sprint is the headline paid start, Growth and Scale are where clients live, and the calculator catches small budgets. The performance partnership sits below with no numbers.</p></div>
+ <div class="mock">
+  <div class="bar"><i></i><i></i><i></i><span>bleedai.com/pricing</span></div>
+  <div class="in">
+   <span class="eb">How we work with you</span>
+   <div class="mh">Start with a trial. Stay because it works.</div>
+   <p class="ms">No lock-in, and you keep the domains, the lists and every thread.</p>
+   <div class="specs" style="margin-top:18px">
+    <div class="pass"><div class="card" style="margin:0;border-color:rgba(255,61,56,.5)"><span class="k">If you qualify</span><h5>The trial</h5><p>For products that already sell. About 1,500 of your buyers, two emails, every reply handed to you before you pay anything. A few a month.</p><div class="ch"><span class="chip">Apply</span></div></div></div>
+    <div class="pass"><div class="card" style="margin:0;border-color:rgba(255,61,56,.5)"><span class="k">Most people start here</span><h5>The Sprint · $2,950 once</h5><p>Six weeks. Your market mapped and tested across several campaigns on email and LinkedIn, with the success bar written before we send.</p></div></div>
+    <div class="pass"><div class="card" style="margin:0"><span class="k">Monthly</span><h5>Growth · $3,350 / month</h5><p>The Pass System on email and LinkedIn. The inside pass. AI follow-up. New segments tested every month. CRM and Slack support.</p></div></div>
+    <div class="pass"><div class="card" style="margin:0"><span class="k">Monthly</span><h5>Scale · $5,300 / month</h5><p>Everything in Growth plus every door: direct mail to your top accounts (150 cards a month included), warm phone follow-up, the website form door, the most strategy time.</p></div></div>
+   </div>
+   <div style="height:1px;background:var(--m-line);margin-block:18px"></div>
+   <span class="eb">Smaller budget?</span>
+   <p class="ms">Launch a single campaign for under $1K on the calculator (calculator.bleedai.com). Price it yourself, no call needed.</p>
+   <div style="height:1px;background:var(--m-line);margin-block:18px"></div>
+   <span class="eb">For proven products</span>
+   <p class="ms">Performance partnership. When the product has already won, we can share the risk: paid per qualified meeting, a success fee on deals we source, or a revenue share. Priced on a call. You qualify if you have several paying customers you can name, one result with a number on it, deals sold through a conversation, and you can tell us which meetings became deals.</p>
+   <div class="btns"><span class="b1">Apply for a trial</span><span class="b2">Start a Sprint</span><span class="b2">Book a call</span></div>
+  </div>
+ </div>
+ <details><summary>Internal, never on the site: how we pick the model on a call</summary>
+  <p style="color:var(--ink2)">Pay per meeting: platform $2,500 to $3,350 plus $400 to $750 per qualified meeting held. Base plus success fee: $4,500 to $6,000 plus 10% of first-year contract value sourced. Revenue share: $3,000 to $5,000 setup plus 15 to 20% of first-year revenue sourced, proof score 8+ only. Retainer when the market is unproven for us, switching after 60 to 90 days of real numbers. Source: knowledge-base/strategies/pass-system.md section 8.</p>
+ </details>
+</section>
+
+<!-- 8 -->
+<section id="trial" class="stack-l">
+ <div class="stack"><span class="eyebrow">8 · Trial page (D1)</span><h2>/trial: three questions, then the right door</h2>
+ <p class="col">A trial uses about 3,000 sends of our scarcest resource, so a short form sorts people before anyone books a call. Not strict (Taha 10-16): the point is to catch unproven products and tiny budgets and send them somewhere useful, never to turn people away empty handed. The rest of the fit test (English speaking buyers, enough buyer companies, not a competitor) we check ourselves before the call.</p></div>
+ <div class="grid2">
+  <div class="box"><h4>Page order</h4><ul class="clean"><li>Heading: "See the replies before you pay us."</li><li>Animation E</li><li>What you get: about 1,500 buyers, two emails, every reply, a readout</li><li>What we need from you: a 15 minute copy call, someone to take the positive replies</li><li>Who it is for (same list as homepage section 10)</li><li>The form</li></ul></div>
+  <div class="box"><h4>Form (ids stable)</h4><ul class="clean"><li><code>customers</code> How many customers pay you today, and do they keep paying? (None yet · A few, mostly one-off · 3+ paying, coming back or on contract)</li><li><code>acv</code> What is a typical customer worth to you in a year? (Under $5K · $5K to $20K · $20K+)</li><li><code>budget</code> Once outbound works, what could you put into it each month? (Under $1K · $1K to $3K · $3K+)</li><li>Then contact: <code>website</code>, <code>email</code></li></ul></div>
+ </div>
+ <div class="tbl"><table><thead><tr><th>Answers</th><th>What they see next</th></tr></thead><tbody><tr><td>3+ paying customers who come back, worth $5K+ a year, budget $3K+</td><td><b>Trial.</b> "Looks like a fit." Calendly embed straight away.</td></tr><tr><td>Some customers and budget $1K+, but not all three above</td><td><b>Sprint first, calculator second.</b> "We only run a few trials a month and keep them for products with repeat customers. Here is how to start now." Sprint card ($2,950, link to calculator.bleedai.com/sprint) and the calculator card.</td></tr><tr><td>No customers yet, or budget under $1K</td><td><b>Calculator first, Sprint second.</b> Same sentence, calculator card on top: "Launch a single campaign for under $1K."</td></tr></tbody></table></div>
+ <div class="callout col"><b>Where it goes.</b> Thresholds live in one config object so Taha can change them without a code hunt. Every submit posts to an n8n webhook on our instance (the Automations-Builder-n8n project holds the key) that writes a lead row and posts to Slack, whatever the route, so nobody is lost. The calculator already sends its own form emails through Resend (<code>src/app/api/send-inquiry</code>); reuse that pattern if it is quicker. Qualifying inside Calendly instead is fine if Shahwaiz prefers, as long as the routing above still happens.</div>
+</section>
+
+<!-- 9 -->
+<section id="more" class="stack-l">
+ <div class="stack"><span class="eyebrow">9 · Other pages</span><h2>/pass-system and the industry pages</h2></div>
+ <div class="grid2">
+  <div class="box"><h4>/pass-system</h4><ul class="clean"><li>Animation A, full size</li><li>Each pass in detail: goal, door, what we send, what counts as a reply</li><li>The four branches, with what happens next in each</li><li>One anonymised account's 30 days as a timeline (Claude supplies from a live pair once one reads out)</li><li>Taha's video on the method, link out to infra.bleedai.com as "see the machine"</li></ul></div>
+  <div class="box"><h4>/industries/[slug]</h4><ul class="clean"><li>Five pages: <code>healthcare</code> (pairs 1 healthcare, 3 dental front office, 7 medtech regulatory) · <code>construction</code> (2 precon) · <code>logistics</code> (4 freight desk) · <code>compliance</code> (6 CMMC, 8 food safety) · <code>ai-and-software</code> (5 AI implementation)</li><li>One data file per industry: <code>title</code>, <code>buyers</code>, then a <code>segments</code> list (one per pair: <code>signal</code>, <code>who_signs</code>, <code>sample_rows</code> blurred, <code>doors</code>)</li><li>Layout: heading naming the industry, animation B fed by its rows, its segments, how a start works, Apply button</li><li>A new pair adds a segment to an existing file; a sixth page only when a pair fits none of the five</li><li>No prices, no numbers we cannot source. Claude writes the JSON after the template exists. Slugs never change once live: the reply agent links them</li></ul></div>
+ </div>
+</section>
+
+<!-- 10 -->
+<section id="video" class="stack-l">
+ <div class="stack"><span class="eyebrow">10 · Video</span><h2>Old video now, a new one later</h2>
+ <p class="col">The site ships with the current Founder video. Taha records a new one the week of 2026-10-26, after watching the old one and once the animations exist so he can cut to them. Below is the starting idea: about 75 seconds, talking to camera, the Pass System animation in the middle. Spoken words, not a script to read word for word.</p></div>
+ <div class="script">
+  <span class="cue">Open, to camera</span>
+  <p>Hey, I'm Taha. Most of the teams we talk to have already automated the obvious. You've got Clay, you've got a sequencer, maybe an AI writing your emails.</p>
+  <p>What you probably don't have is the hands to run ten experiments at once. That's what we do.</p>
+  <span class="cue">Cut to the passes</span>
+  <p>We find companies that need you right now, like a practice hiring for the exact job your product does, and the person who signs. Then we work each account over about thirty days. LinkedIn first, then something genuinely useful, then their team, then a postcard and a call.</p>
+  <p>Every reply gets answered in minutes, and anyone who says yes and goes quiet gets chased on every channel.</p>
+  <span class="cue">Back to camera</span>
+  <p>And if your product already sells, we'll run it before you pay us. You see the replies first. Apply on this page and we'll tell you within two days if it's a fit.</p>
+ </div>
+</section>
+
+<!-- 11 -->
+<section id="build" class="stack-l">
+ <div class="stack"><span class="eyebrow">11 · Build order</span><h2>Ship one step at a time, never half changed</h2>
+ <p class="col">Steps 1 to 2 and every new page go live as they are done. Steps 3 to 7 are built on <code>/home-v2</code> and swapped into <code>/</code> together. Taha reviews the live site after the swap (H6).</p></div>
+ <div class="tbl"><table>
+  <thead><tr><th>#</th><th>Repo</th><th>Change</th></tr></thead>
+  <tbody>
+   <tr><td>1</td><td>main</td><td>Retire the four /services pages with 301s; remove from nav and sitemap. Delete /home-test. (Today)</td></tr>
+   <tr><td>2</td><td>main</td><td>Strip every em dash and en dash from site copy. Fix the stats strip so real numbers render without JavaScript. (Today)</td></tr>
+   <tr><td>3</td><td>main</td><td>Hero copy, buttons and its animation, on <code>/home-v2</code>; navigation as in section 4</td></tr>
+   <tr><td>4</td><td>main</td><td>PassSystem (animation A) replacing ProcessFlow and FrameworkTest</td></tr>
+   <tr><td>5</td><td>main</td><td>NotATool, SignalSheet (B), AiFollowUp (C); ChannelStack extended (D); cut VsTable, shrink InfraBento to one line</td></tr>
+   <tr><td>6</td><td>main</td><td>TrialFlow (E), /trial with the form and the n8n webhook</td></tr>
+   <tr><td>7</td><td>main</td><td>WhoIsThisFor, PricingTeaser, FAQ rewrite (old Founder video stays); then swap <code>/home-v2</code> into <code>/</code></td></tr>
+   <tr><td>8</td><td>main + calculator</td><td>/pricing; calculator /packages 301; /sprint back to $2,950 and new copy; rename or retire calculator /trials</td></tr>
+   <tr><td>9</td><td>main</td><td>/pass-system, then the /industries/[slug] template with the healthcare data file first</td></tr>
+   <tr><td>10</td><td>main</td><td>Cleanup list from the 10-08 crawl (section 7 of that page): the blog post advertising a $0 Free Pilot, mismatched campaign figures, five different launch-speed claims, placeholder names in the replies marquee, the "3 spots open" badge, calculator header linking home</td></tr>
+  <tr><td>11</td><td>infra</td><td>Phase 2 (H10): bring infra.bleedai.com up to date with our workflows, then decide with Taha whether it joins bleedai.com</td></tr>
+  </tbody></table></div>
+ <div class="grid2">
+  <div class="box"><h4>Done means</h4><ul class="clean"><li>Zero em or en dashes anywhere on either site (grep the build output)</li><li>None of the banned phrases in the pitch pages named in H1 (grep those routes; the blog is exempt)</li><li>Every number and quote is on the BleedAI proof sheet; Claude checks the list before launch</li><li>Each animation's reduced-motion version shows the finished state</li><li>No pinning on touch; no horizontal scroll at 375px</li><li>Old service URLs return 301; /pricing, /trial, /pass-system and the healthcare industry page are in the sitemap</li><li>The trial form posts, lands in Slack, and shows the right next step for all three routes</li><li>The Sprint reads $2,950 on bleedai.com and the calculator</li></ul></div>
+  <div class="box"><h4>Claude does, not Shahwaiz</h4><ul class="clean"><li>Industry data files covering every live pair</li><li>The /pass-system timeline from a real pair readout</li><li>Proof check of the final copy</li><li>Reply agent prompt updated to link /industries/{slug} and /trial once live</li><li>The first trial result card, once Countfire reads out</li></ul></div>
+ </div>
+</section>
+
+<!-- 12 -->
+<section id="sources" class="stack">
+ <span class="eyebrow">12 · Sources</span>
+ <ul class="clean col" style="color:var(--ink2)">
+  <li>Notion task "Business Model and pitch planning" (10-07, 10-08, 10-14 blocks)</li>
+  <li><a href="https://claude.ai/artifact/6kTFZUqRXKMHf5YM6XhNBo">BleedAI Website Repositioning</a> (10-08 decision memo, cleanup crawl) and its folder <code>clients/bleedai/strategy/website-positioning-2026-10-08/</code></li>
+  <li><a href="https://claude.ai/artifact/L79CG5avjNDZnUQs7YRgVW">The Trial Engine Plan</a> section 8, positioning for AI-native companies</li>
+  <li><code>knowledge-base/strategies/free-trial-playbook.md</code> (fit test, trial size, flow) · <code>knowledge-base/strategies/pass-system.md</code> section 8 (models) · <code>docs/company-direction.md</code> October 2026</li>
+  <li><code>clients/bleedai/PROOF-AND-CREDIBILITY.md</code> · <code>animation-references.md</code> in this folder</li>
+  <li>Website repo state read 2026-10-16: last commit 2026-09-23, homepage composition in <code>src/app/page.tsx</code></li>
+ </ul>
+ <p class="foot">Source of this page: <code>clients/bleedai/strategy/website-build-brief-2026-10-16/index.html</code></p>
+</section>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var demos = Array.prototype.slice.call(document.querySelectorAll('.demo'));
+  demos.forEach(function(d){
+    var els = Array.prototype.slice.call(d.querySelectorAll('[data-s]'));
+    var max = els.reduce(function(m,e){return Math.max(m, +e.getAttribute('data-s'));},0);
+    var speed = +d.getAttribute('data-speed') || 1000, hold = +d.getAttribute('data-hold') || 2500;
+    var fill = d.querySelector('.fill');
+    var timer = null, step = 0, visible = false;
+    function paint(){
+      els.forEach(function(e){var s=+e.getAttribute('data-s'); e.classList.toggle('on', s<=step); e.classList.toggle('now', s===step);});
+      if (fill) fill.style.width = Math.min(100, step/max*100) + '%';
+    }
+    function tick(){
+      if (!visible) { timer = null; return; }
+      if (step >= max) { timer = setTimeout(function(){ step = 0; paint(); timer = setTimeout(tick, speed); }, hold); return; }
+      step++; paint(); timer = setTimeout(tick, speed);
+    }
+    function start(){ if (reduce) return; clearTimeout(timer); d.classList.add('run'); step = 0; paint(); timer = setTimeout(tick, 350); }
+    var btn = d.querySelector('.replay');
+    if (reduce) { if (btn) btn.hidden = true; return; }
+    if (btn) btn.addEventListener('click', function(){ visible = true; start(); });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function(entries){
+        entries.forEach(function(en){
+          if (en.isIntersecting && !visible) { visible = true; start(); }
+          else if (!en.isIntersecting && visible) { visible = false; clearTimeout(timer); timer = null; d.classList.remove('run'); }
+        });
+      }, {threshold: 0.35}).observe(d);
+    }
+  });
+})();
+</script>
