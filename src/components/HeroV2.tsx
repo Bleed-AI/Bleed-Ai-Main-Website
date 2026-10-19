@@ -1,0 +1,379 @@
+"use client";
+
+import { useState } from "react";
+
+const TRIAL_URL = "/trial";
+const VIDEO_ID = "S0Oeg0sbB6k";
+
+// Door badges. Colors match the ChannelStack accents.
+const CHANNELS = [
+  {
+    label: "Email",
+    color: "#B1130F",
+    icon: (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2.5" y="4.5" width="19" height="15" rx="2.5" />
+        <path d="M3 6.5l9 6 9-6" />
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    color: "#0A66C2",
+    icon: (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M6.94 5A1.94 1.94 0 113.06 5a1.94 1.94 0 013.88 0zM3.4 8.5h3.1V21H3.4V8.5zm5.2 0h2.97v1.7h.04c.41-.78 1.42-1.6 2.93-1.6 3.13 0 3.71 2.06 3.71 4.73V21h-3.1v-5.5c0-1.31-.02-3-1.83-3-1.83 0-2.11 1.43-2.11 2.9V21H8.6V8.5z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Direct Mail",
+    color: "#f5a623",
+    icon: (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
+        <rect x="1.5" y="6" width="12.5" height="9" rx="1.5" />
+        <path d="M14 9h3.5l3 3v3H14z" />
+        <circle cx="5.5" cy="17.5" r="1.6" />
+        <circle cx="17" cy="17.5" r="1.6" />
+      </svg>
+    ),
+  },
+  {
+    label: "Phone",
+    color: "#10b981",
+    icon: (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.9} strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 5.5C4 4.7 4.7 4 5.5 4h2.1c.6 0 1.13.4 1.29.99l.9 3.2a1.35 1.35 0 01-.35 1.31l-1.2 1.2a12 12 0 005.06 5.06l1.2-1.2c.35-.35.86-.48 1.31-.35l3.2.9c.59.16.99.69.99 1.29v2.1c0 .8-.7 1.5-1.5 1.5A15.5 15.5 0 014 5.5z" />
+      </svg>
+    ),
+  },
+];
+
+export default function HeroV2() {
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <section className="relative overflow-hidden pt-10 sm:pt-12 lg:pt-14 pb-16 sm:pb-20 lg:pb-24">
+      {/* Background handled site-wide by .bai-bg orbs + CursorGlow (in app/page.tsx) */}
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.45fr_1fr] gap-10 lg:gap-12 xl:gap-14 items-center">
+          {/* LEFT: Text column */}
+          <div className="text-white">
+            {/* Live spots badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#B1130F]/40 bg-[#B1130F]/10 backdrop-blur-sm mb-6">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[#B1130F] opacity-75 animate-ping" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#B1130F]" />
+              </span>
+              <span className="text-xs font-semibold tracking-wide text-white/90">
+                For proven B2B products
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="font-display font-bold tracking-tight text-3xl sm:text-4xl lg:text-[2.9rem] xl:text-[3.25rem] leading-[1.14] mb-6">
+              You&apos;ve automated the obvious.
+              <br />
+              We run the{" "}
+              <span className="relative inline-block">
+                <span
+                  className="bg-clip-text"
+                  style={{
+                    fontFamily: "'Instrument Serif', Georgia, serif",
+                    fontStyle: "italic",
+                    fontWeight: 400,
+                    backgroundImage:
+                      "linear-gradient(90deg, #ff3d38 0%, #B1130F 25%, #ffd4d1 50%, #B1130F 75%, #ff6b67 100%)",
+                    backgroundSize: "200% 100%",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    color: "transparent",
+                    animation: "textShine 8s linear infinite",
+                  }}
+                >
+                  outbound experiments
+                </span>
+                <span className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-[#ff3d38] via-[#B1130F] to-[#ff6b67] rounded-full opacity-60" />
+              </span>{" "}
+              your team doesn&apos;t have the hands for.
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-lg lg:text-xl text-white/65 leading-relaxed max-w-xl mb-5">
+              Give us the goal and a budget. We find the buyers who need you right now,
+              reach them on email, LinkedIn and mail, and{" "}
+              <span className="text-white/90 font-medium">you see the replies before you pay us</span>.
+            </p>
+
+            {/* Channel badges */}
+            <div className="flex flex-wrap items-center gap-2.5 mb-7">
+              {CHANNELS.map((ch) => (
+                <span
+                  key={ch.label}
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03]"
+                >
+                  <span
+                    className="inline-flex items-center justify-center flex-shrink-0"
+                    style={{ color: ch.color }}
+                  >
+                    {ch.icon}
+                  </span>
+                  <span className="text-xs font-medium text-white/80">{ch.label}</span>
+                </span>
+              ))}
+            </div>
+
+            {/* Stat triplet — temporarily hidden */}
+            {false && (
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 mb-8 pb-8 border-b border-white/10">
+              {[
+                { num: "100+", label: "opps in December" },
+                { num: "98%+", label: "inbox placement" },
+                { num: "1 Week", label: "launch time" },
+              ].map((s, i) => (
+                <div key={i} className="flex items-center gap-6">
+                  <div>
+                    <div className="font-display text-2xl lg:text-3xl font-bold text-white leading-none mb-1">
+                      {s.num}
+                    </div>
+                    <div className="text-xs uppercase tracking-wider text-white/50">
+                      {s.label}
+                    </div>
+                  </div>
+                  {i < 2 && <div className="h-10 w-px bg-white/10" />}
+                </div>
+              ))}
+            </div>
+            )}
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-7">
+              <a
+                href={TRIAL_URL}
+                className="group relative inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-[#B1130F] text-white font-semibold text-base rounded-full overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(177,19,15,0.5)]"
+              >
+                <span className="relative z-10">Apply for a trial</span>
+                <svg
+                  className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+                {/* Shimmer overlay */}
+                <span
+                  className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
+                  }}
+                />
+              </a>
+              <button
+                type="button"
+                onClick={() => {
+                  setPlaying(true);
+                  document
+                    .getElementById("hero-video")
+                    ?.scrollIntoView({ behavior: "smooth", block: "center" });
+                }}
+                className="inline-flex items-center gap-2 text-white/70 hover:text-white font-medium text-sm transition-colors"
+              >
+                <span className="flex items-center justify-center w-8 h-8 rounded-full border border-white/20 group-hover:border-[#B1130F]">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+                See how it works
+              </button>
+            </div>
+
+            {/* Small print */}
+            <p className="text-xs text-white/45 mb-3">
+              We run a few trials a month, for products that already sell. · 85+ client campaigns
+            </p>
+
+            {/* Trust badges */}
+            <div className="flex flex-wrap items-center gap-2.5">
+              {[
+                { icon: "/images/upwork-icon.svg", name: "Upwork", href: null },
+                { icon: "/images/clutch-icon.svg", name: "Clutch", href: "https://clutch.co/profile/bleed-ai" },
+                { icon: "/images/techr-icon.svg", name: "TechReviewer", href: "https://techreviewer.co/companies/bleed-ai" },
+              ].map((p) => {
+                const inner = (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={p.icon} alt={`${p.name} logo`} className="w-5 h-5 flex-shrink-0" />
+                    <span className="text-xs font-medium text-white/80">
+                      {p.name} / <span className="text-white">5.0</span>
+                    </span>
+                    <span className="text-[#ffb800] text-sm leading-none">★</span>
+                  </>
+                );
+                return p.href ? (
+                  <a
+                    key={p.name}
+                    href={p.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20 transition-colors"
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <div
+                    key={p.name}
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/[0.03]"
+                  >
+                    {inner}
+                  </div>
+                );
+              })}
+            </div>
+
+          </div>
+
+          {/* RIGHT: Video column */}
+          <div id="hero-video" className="relative">
+            {/* Floating press credit — sits ABOVE the video, right-aligned */}
+            <a
+              href="https://usawire.com/cold-to-sold-how-bleed-ai-creates-predictable-b2b-pipeline-in-2025/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden lg:flex absolute bottom-full mb-3 right-4 z-20 items-center gap-3 px-4 py-2.5 rounded-xl border border-white/10 bg-[#0a0a10]/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] animate-[float_6s_ease-in-out_infinite] hover:border-[#B1130F]/50 hover:bg-[#0a0a10] transition-colors group"
+            >
+              <div className="flex flex-col gap-1.5">
+                <div className="text-[9px] font-bold tracking-[0.14em] uppercase text-white/55 leading-none">
+                  As Featured In
+                </div>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/usawire-logo.png"
+                  alt="USAWire"
+                  className="h-5 w-auto object-contain"
+                />
+              </div>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                className="text-white/30 flex-shrink-0 group-hover:text-[#B1130F] group-hover:translate-x-0.5 transition-all"
+              >
+                <path d="M7 17L17 7M17 7H7M17 7V17" />
+              </svg>
+            </a>
+
+            {/* Floating real stat — sits BELOW the video, left-aligned */}
+            <div className="hidden lg:flex absolute top-full mt-3 left-4 z-20 items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-[#B1130F]/30 bg-[#0a0a10]/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] animate-[float_7s_ease-in-out_infinite_-2s]">
+              <div className="font-display text-xl font-bold text-[#ff6b67] leading-none">100+</div>
+              <div>
+                <div className="text-xs font-semibold text-white leading-tight">Opportunities Generated</div>
+                <div className="text-[10px] text-white/50">This Month</div>
+              </div>
+            </div>
+
+            {/* Premium video frame */}
+            <div className="relative rounded-2xl overflow-hidden border border-white/10 bg-[#0a0a10] shadow-[0_24px_80px_-12px_rgba(0,0,0,0.8)] group">
+              {/* Glow ring */}
+              <div
+                className="absolute -inset-px rounded-2xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background:
+                    "conic-gradient(from 0deg, transparent 0deg, rgba(177,19,15,0.6) 90deg, transparent 180deg, rgba(177,19,15,0.6) 270deg, transparent 360deg)",
+                  filter: "blur(8px)",
+                  zIndex: -1,
+                }}
+              />
+
+              {/* Top corner pill */}
+              <div className="absolute top-3 left-3 z-10 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10">
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-white/90">
+                  ▶ 2-min Playbook
+                </span>
+              </div>
+
+              {/* Video / thumbnail */}
+              <div
+                onClick={() => setPlaying(true)}
+                className="relative aspect-video cursor-pointer overflow-hidden"
+              >
+                {playing ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=1&rel=0`}
+                    title="Bleed AI playbook video"
+                    className="absolute inset-0 w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`}
+                      alt="Watch the Bleed AI playbook video"
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    {/* Overlay gradient */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    {/* Center play */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="w-20 h-20 rounded-full bg-[#B1130F] flex items-center justify-center shadow-[0_0_60px_rgba(177,19,15,0.6)] group-hover:scale-110 transition-transform duration-300">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="white" className="ml-1">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              {/* Video bottom bar */}
+              <div className="flex items-center justify-between px-4 py-3 bg-[#0a0a10] border-t border-white/10">
+                <div className="flex items-center gap-2.5">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/taha-profile-2.png"
+                    alt="Taha Anwar"
+                    className="w-8 h-8 rounded-full object-cover border border-white/15"
+                  />
+                  <div>
+                    <div className="text-xs font-semibold text-white leading-tight">Taha Anwar</div>
+                    <div className="text-[10px] text-white/50">Founder, BleedAI</div>
+                  </div>
+                </div>
+                <div className="text-[10px] uppercase tracking-wider text-white/40">
+                  Full walkthrough
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Keyframes for floating + headline shine animations */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+        @keyframes textShine {
+          0% {
+            background-position: 200% 0;
+          }
+          100% {
+            background-position: -100% 0;
+          }
+        }
+      `}</style>
+    </section>
+  );
+}
