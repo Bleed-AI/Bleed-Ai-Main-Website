@@ -170,7 +170,7 @@ export default function HeroV2() {
 
           {/* RIGHT: Video column */}
           <div id="hero-video" className="relative">
-            {/* Floating press credit — sits ABOVE the video, right-aligned */}
+            {/* Floating press credit, sits ABOVE the video, right-aligned */}
             <a
               href="https://usawire.com/cold-to-sold-how-bleed-ai-creates-predictable-b2b-pipeline-in-2025/"
               target="_blank"
@@ -201,7 +201,7 @@ export default function HeroV2() {
               </svg>
             </a>
 
-            {/* Floating real stat — sits BELOW the video, left-aligned */}
+            {/* Floating real stat, sits BELOW the video, left-aligned */}
             <div className="hidden lg:flex absolute top-full mt-3 left-4 z-20 items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-[#B1130F]/30 bg-[#0a0a10]/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] animate-[float_7s_ease-in-out_infinite_-2s]">
               <div className="font-display text-xl font-bold text-[#ff6b67] leading-none">100+</div>
               <div>

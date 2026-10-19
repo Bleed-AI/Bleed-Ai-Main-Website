@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
 import HeroV2 from "@/components/HeroV2";
+import NotATool from "@/components/NotATool";
+import PassSystem from "@/components/PassSystem";
 import ChannelStack from "@/components/ChannelStack";
-import ProcessFlow from "@/components/ProcessFlow";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
 import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
-import FrameworkTest from "@/components/FrameworkTest";
 import Testimonials from "@/components/Testimonials";
 import FounderTest from "@/components/FounderTest";
 import FaqTest from "@/components/FaqTest";
@@ -32,12 +32,12 @@ export default function HomeV2() {
     <main className="bai relative overflow-x-clip">
       <Navigation />
       <HeroV2 />
-      <ChannelStack />
-      <ProcessFlow />
       <StatsStrip />
+      <NotATool />
+      <PassSystem />
+      <ChannelStack />
       <RepliesMarquee />
       <Testimonials />
-      <FrameworkTest />
       <ResultsMarqueeTest />
       <FounderTest />
       <FaqTest />
