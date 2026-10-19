@@ -3,6 +3,7 @@ import { generateMetadata as buildMeta } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
 import HeroV2 from "@/components/HeroV2";
 import NotATool from "@/components/NotATool";
+import SignalSheet from "@/components/SignalSheet";
 import PassSystem from "@/components/PassSystem";
 import ChannelStack from "@/components/ChannelStack";
 import StatsStrip from "@/components/StatsStrip";
@@ -34,6 +35,7 @@ export default function HomeV2() {
       <HeroV2 />
       <StatsStrip />
       <NotATool />
+      <SignalSheet />
       <PassSystem />
       <ChannelStack />
       <RepliesMarquee />
