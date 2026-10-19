@@ -1,0 +1,39 @@
+{
+  "title": "Outbound for healthcare",
+  "buyers": "Clinics, practices and medtech teams that already have paying patients or customers and want more of the right ones.",
+  "segments": [
+    {
+      "name": "Healthcare practices",
+      "signal": "Opening a new location or hiring front office staff",
+      "who_signs": "Practice Owner or Operations Lead",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Lakeside Family Care", "signal": "Opening 2 locations", "who": "Practice Owner" },
+        { "company": "Summit Pediatrics", "signal": "Hiring front desk", "who": "Operations Lead" },
+        { "company": "Harbor Health Group", "signal": "New service line", "who": "Clinic Director" }
+      ]
+    },
+    {
+      "name": "Dental front office",
+      "signal": "Adding chairs, hiring, or switching practice software",
+      "who_signs": "Owner Dentist or Office Manager",
+      "doors": ["Email", "LinkedIn", "Phone"],
+      "sample_rows": [
+        { "company": "Bright Smile Dental", "signal": "Adding 3 chairs", "who": "Owner Dentist" },
+        { "company": "Cedar Dental Co", "signal": "New office manager", "who": "Office Manager" },
+        { "company": "Maple Orthodontics", "signal": "Switching software", "who": "Owner Dentist" }
+      ]
+    },
+    {
+      "name": "Medtech regulatory",
+      "signal": "A submission, a new RA or QA hire, or fresh funding",
+      "who_signs": "Head of Regulatory or VP Quality",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Nuvia Devices", "signal": "510(k) submission", "who": "Head of Regulatory" },
+        { "company": "Corval Medical", "signal": "Hiring RA lead", "who": "VP Quality" },
+        { "company": "Aria Diagnostics", "signal": "Series B raise", "who": "Head of Regulatory" }
+      ]
+    }
+  ]
+}
