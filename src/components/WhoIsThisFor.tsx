@@ -2,87 +2,175 @@
 
 import Reveal from "@/components/Reveal";
 
-const BOOK_URL = "/book-call/";
-
-const pains = [
-  { icon: "🔄", title: "Relying on Referrals", desc: "Unpredictable pipeline that dries up at random." },
-  { icon: "💸", title: "Expensive Ads", desc: "Rising CAC quietly eating into your margins." },
-  { icon: "👥", title: "Underperforming SDRs", desc: "An in-house team that isn't hitting targets." },
-  { icon: "📉", title: "Agencies That Don't Deliver", desc: "Empty promises and zero pipeline to show." },
+const fit = [
+  "Paying customers you can name",
+  "A sales conversation before the deal",
+  "Thousands of possible buyers",
+  "A small sales team that already believes in outbound",
 ];
 
-const industries = [
-  { icon: "🏢", title: "B2B Agencies", desc: "Marketing, creative, dev, ops - you have retainer clients but your pipeline dries up when one leaves. We keep it full.", tag: "Marketing · Creative · Development" },
-  { icon: "💻", title: "SaaS Companies", desc: "Your product sells itself on a demo. The problem is getting the right people on that demo. We solve that exact problem.", tag: "SMB · Mid-Market · B2B SaaS" },
-  { icon: "🎯", title: "Consultants & Coaches", desc: "High-ticket offer, proven methodology, but referrals aren't scaling. We build you a cold outbound machine that runs without you.", tag: "Consulting · Coaching · Advisory" },
-  { icon: "📋", title: "Recruitment Agencies", desc: "Client acquisition is a volume game. Our systems reach thousands of qualified companies per month with precision targeting.", tag: "Staffing · Executive Search · HR" },
-  { icon: "🎬", title: "Media & Production", desc: "Video, podcast, content - your work speaks for itself but clients don't find you. We put you in front of companies actively spending on content.", tag: "Video · Podcast · Content" },
+const notYet = [
+  "Pre-revenue, still finding the product",
+  "Self-serve tools at a few dollars a seat",
+  "You want ads or SEO",
+  "You sell outbound or lead generation yourself",
 ];
 
 export default function WhoIsThisFor() {
   return (
-    <section id="for-section">
-      <div className="sec">
-        <div className="sec-inner">
-          <Reveal className="sec-label">Who Is This For</Reveal>
-          <Reveal as="h2" className="sec-h2">
-            Your offer works.
-            <br />
-            <em>You just need the right people to see it.</em>
-          </Reveal>
-          <Reveal as="p" className="sec-sub" delay={80}>
-            We work with B2B companies that have a proven offer and need a predictable pipeline - not another agency promising results in &ldquo;3–6 months.&rdquo;
+    <section id="who-is-this-for">
+      <div className="wf-inner">
+        <Reveal className="sec-label" style={{ textAlign: "center" }}>
+          Honest fit
+        </Reveal>
+        <Reveal as="h2" className="wf-title">
+          Who this is <em>for.</em>
+        </Reveal>
+
+        <div className="wf-grid">
+          <Reveal className="wf-col fit">
+            <div className="wf-col-head">
+              <span className="wf-col-ico good">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7" />
+                </svg>
+              </span>
+              Great fit
+            </div>
+            <ul>
+              {fit.map((f) => (
+                <li key={f}>
+                  <span className="wf-dot good" />
+                  {f}
+                </li>
+              ))}
+            </ul>
           </Reveal>
 
-          <Reveal className="pain-intro">Stuck with one of these?</Reveal>
-          <div className="pain-row">
-            {pains.map((p, i) => (
-              <Reveal className="pain-card" key={i} delay={i * 80}>
-                <div className="pain-icon">{p.icon}</div>
-                <div className="pain-ptitle">{p.title}</div>
-                <div className="pain-desc">{p.desc}</div>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal className="pain-bridge">
-            If any of these sound familiar, here&apos;s exactly who we fix it for -
+          <Reveal className="wf-col no" delay={90}>
+            <div className="wf-col-head">
+              <span className="wf-col-ico bad">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M6 6l12 12M18 6L6 18" />
+                </svg>
+              </span>
+              Not yet
+            </div>
+            <ul>
+              {notYet.map((f) => (
+                <li key={f}>
+                  <span className="wf-dot bad" />
+                  {f}
+                </li>
+              ))}
+            </ul>
           </Reveal>
-
-          <div className="for-grid">
-            {industries.map((c, i) => (
-              <Reveal className="for-card" key={i} delay={(i % 3) * 80}>
-                <div className="for-icon">{c.icon}</div>
-                <div className="for-title">{c.title}</div>
-                <div className="for-desc">{c.desc}</div>
-                <div className="for-tag">{c.tag}</div>
-              </Reveal>
-            ))}
-            <Reveal
-              className="for-card"
-              delay={160}
-              style={{
-                borderStyle: "dashed",
-                background: "transparent",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                textAlign: "center",
-                padding: 28,
-              }}
-            >
-              <div style={{ fontSize: 22, marginBottom: 10, opacity: 0.4 }}>?</div>
-              <div className="for-title" style={{ fontSize: 13 }}>Not sure if your niche works?</div>
-              <div className="for-desc" style={{ fontSize: 12, margin: "8px 0 14px" }}>
-                We&apos;ll tell you honestly. Takes 5 minutes.
-              </div>
-              <a href={BOOK_URL} className="btn-red" style={{ fontSize: 12, padding: "9px 18px" }}>
-                Check Niche Availability →
-              </a>
-            </Reveal>
-          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        #who-is-this-for {
+          position: relative;
+          padding: 90px 22px;
+        }
+        .wf-inner {
+          max-width: 920px;
+          margin: 0 auto;
+        }
+        .wf-title {
+          font-family: "Instrument Serif", Georgia, serif;
+          font-size: clamp(28px, 4.2vw, 48px);
+          font-weight: 400;
+          text-align: center;
+          color: #eaeef8;
+          margin: 6px auto 46px;
+        }
+        .wf-title em {
+          font-style: italic;
+          background: linear-gradient(90deg, #ff3d38, #ff8a86);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: transparent;
+        }
+        .wf-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 18px;
+        }
+        .wf-col {
+          padding: 28px 26px;
+          border-radius: 18px;
+          border: 1px solid rgba(255, 255, 255, 0.09);
+          background: linear-gradient(160deg, #12121b 0%, #0b0b12 100%);
+        }
+        .wf-col.fit {
+          border-color: rgba(62, 207, 142, 0.25);
+        }
+        .wf-col-head {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-family: "Inter", system-ui, sans-serif;
+          font-size: 16px;
+          font-weight: 800;
+          color: #eaeef8;
+          margin-bottom: 20px;
+        }
+        .wf-col-ico {
+          width: 30px;
+          height: 30px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 9px;
+        }
+        .wf-col-ico.good {
+          color: #3ecf8e;
+          background: rgba(62, 207, 142, 0.1);
+          border: 1px solid rgba(62, 207, 142, 0.3);
+        }
+        .wf-col-ico.bad {
+          color: #6a7192;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .wf-col ul {
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+        .wf-col li {
+          display: flex;
+          align-items: flex-start;
+          gap: 11px;
+          font-size: 14.5px;
+          line-height: 1.5;
+          color: #c7cbe0;
+        }
+        .wf-col.no li {
+          color: #8089a6;
+        }
+        .wf-dot {
+          width: 7px;
+          height: 7px;
+          border-radius: 50%;
+          flex-shrink: 0;
+          margin-top: 7px;
+        }
+        .wf-dot.good {
+          background: #3ecf8e;
+          box-shadow: 0 0 8px #3ecf8e;
+        }
+        .wf-dot.bad {
+          background: #4a4f68;
+        }
+
+        @media (max-width: 680px) {
+          #who-is-this-for { padding: 64px 18px; }
+          .wf-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
     </section>
   );
 }

@@ -12,8 +12,10 @@ import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
 import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
 import Testimonials from "@/components/Testimonials";
+import WhoIsThisFor from "@/components/WhoIsThisFor";
+import PricingTeaser from "@/components/PricingTeaser";
 import FounderTest from "@/components/FounderTest";
-import FaqTest from "@/components/FaqTest";
+import FaqV2 from "@/components/FaqV2";
 import FinalCta from "@/components/FinalCta";
 import Footer from "@/components/Footer";
 import BookWidget from "@/components/BookWidget";
@@ -28,8 +30,7 @@ export const metadata: Metadata = buildMeta({
 });
 
 // Staging build of the new homepage rebuild (2026-10 brief).
-// Built here first (noindex), then swapped into /. Sections get replaced
-// step by step; for now the hero is new and the rest mirror live.
+// Built here first (noindex), then swapped into /.
 export default function HomeV2() {
   return (
     <main className="bai relative overflow-x-clip">
@@ -45,8 +46,10 @@ export default function HomeV2() {
       <RepliesMarquee />
       <Testimonials />
       <ResultsMarqueeTest />
+      <WhoIsThisFor />
+      <PricingTeaser />
       <FounderTest />
-      <FaqTest />
+      <FaqV2 />
       <FinalCta />
       <Footer />
       <BookWidget />
