@@ -71,38 +71,38 @@ export default function HeroV2() {
             </div>
 
             {/* Headline */}
-            <h1 className="font-display font-bold tracking-tight text-3xl sm:text-4xl lg:text-[2.9rem] xl:text-[3.25rem] leading-[1.14] mb-6">
+            <h1 className="font-display font-bold tracking-tight text-4xl sm:text-5xl lg:text-[3rem] xl:text-[3.5rem] leading-[1.1] mb-4">
               You&apos;ve automated the obvious.
-              <br />
-              We run the{" "}
-              <span className="relative inline-block">
-                <span
-                  className="bg-clip-text"
-                  style={{
-                    fontFamily: "'Instrument Serif', Georgia, serif",
-                    fontStyle: "italic",
-                    fontWeight: 400,
-                    backgroundImage:
-                      "linear-gradient(90deg, #ff3d38 0%, #B1130F 25%, #ffd4d1 50%, #B1130F 75%, #ff6b67 100%)",
-                    backgroundSize: "200% 100%",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    color: "transparent",
-                    animation: "textShine 8s linear infinite",
-                  }}
-                >
-                  outbound experiments
-                </span>
-                <span className="absolute -bottom-1 left-0 right-0 h-1 bg-gradient-to-r from-[#ff3d38] via-[#B1130F] to-[#ff6b67] rounded-full opacity-60" />
-              </span>{" "}
-              your team doesn&apos;t have the hands for.
             </h1>
 
+            {/* Secondary headline line */}
+            <p className="text-xl lg:text-2xl font-semibold text-white/90 leading-snug max-w-xl mb-4">
+              We run the{" "}
+              <span
+                className="bg-clip-text"
+                style={{
+                  fontFamily: "'Instrument Serif', Georgia, serif",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  backgroundImage:
+                    "linear-gradient(90deg, #ff3d38 0%, #B1130F 25%, #ffd4d1 50%, #B1130F 75%, #ff6b67 100%)",
+                  backgroundSize: "200% 100%",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  color: "transparent",
+                  animation: "textShine 8s linear infinite",
+                }}
+              >
+                outbound experiments
+              </span>{" "}
+              your team doesn&apos;t have the hands for.
+            </p>
+
             {/* Subheadline */}
-            <p className="text-lg lg:text-xl text-white/65 leading-relaxed max-w-xl mb-5">
+            <p className="text-base lg:text-lg text-white/60 leading-relaxed max-w-xl mb-5">
               Give us the goal and a budget. We find the buyers who need you right now,
               reach them on email, LinkedIn and mail, and{" "}
-              <span className="text-white/90 font-medium">you see the replies before you pay us</span>.
+              <span className="text-white/85 font-medium">you see the replies before you pay us</span>.
             </p>
 
             {/* Channel badges */}
