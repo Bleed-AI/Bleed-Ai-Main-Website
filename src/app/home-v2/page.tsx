@@ -5,7 +5,8 @@ import HeroV2 from "@/components/HeroV2";
 import NotATool from "@/components/NotATool";
 import SignalSheet from "@/components/SignalSheet";
 import PassSystem from "@/components/PassSystem";
-import ChannelStack from "@/components/ChannelStack";
+import EveryDoor from "@/components/EveryDoor";
+import AiFollowUp from "@/components/AiFollowUp";
 import TrialFlow from "@/components/TrialFlow";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
@@ -38,7 +39,8 @@ export default function HomeV2() {
       <NotATool />
       <SignalSheet />
       <PassSystem />
-      <ChannelStack />
+      <EveryDoor />
+      <AiFollowUp />
       <TrialFlow />
       <RepliesMarquee />
       <Testimonials />
