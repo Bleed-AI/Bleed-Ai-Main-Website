@@ -6,6 +6,7 @@ import NotATool from "@/components/NotATool";
 import SignalSheet from "@/components/SignalSheet";
 import PassSystem from "@/components/PassSystem";
 import ChannelStack from "@/components/ChannelStack";
+import TrialFlow from "@/components/TrialFlow";
 import StatsStrip from "@/components/StatsStrip";
 import RepliesMarquee from "@/components/RepliesMarquee";
 import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
@@ -38,6 +39,7 @@ export default function HomeV2() {
       <SignalSheet />
       <PassSystem />
       <ChannelStack />
+      <TrialFlow />
       <RepliesMarquee />
       <Testimonials />
       <ResultsMarqueeTest />
