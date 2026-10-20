@@ -1,12 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TRIAL_URL = "/trial";
 const VIDEO_ID = "S0Oeg0sbB6k";
 
+const SIGNALS = [
+  "VP Sales, just raised a Series B",
+  "Head of Growth, hiring three reps",
+  "Founder, switched off a competitor",
+  "RevOps lead, new tool in the stack",
+];
+
 export default function HeroV2() {
   const [playing, setPlaying] = useState(false);
+  const [typed, setTyped] = useState("");
+  const [sigIdx, setSigIdx] = useState(0);
+
+  // A buyer row that types itself in under the headline.
+  useEffect(() => {
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setTyped(SIGNALS[0]);
+      return;
+    }
+    const full = SIGNALS[sigIdx];
+    let i = 0;
+    let deleting = false;
+    let t: ReturnType<typeof setTimeout>;
+    const tick = () => {
+      if (!deleting) {
+        i++;
+        setTyped(full.slice(0, i));
+        if (i >= full.length) {
+          deleting = true;
+          t = setTimeout(tick, 1700);
+          return;
+        }
+        t = setTimeout(tick, 42);
+      } else {
+        i--;
+        setTyped(full.slice(0, i));
+        if (i <= 0) {
+          setSigIdx((s) => (s + 1) % SIGNALS.length);
+          return;
+        }
+        t = setTimeout(tick, 22);
+      }
+    };
+    t = setTimeout(tick, 320);
+    return () => clearTimeout(t);
+  }, [sigIdx]);
 
   return (
     <section className="relative overflow-hidden pt-10 sm:pt-12 lg:pt-14 pb-16 sm:pb-20 lg:pb-24">
@@ -60,6 +104,16 @@ export default function HeroV2() {
               reach them on email, LinkedIn and mail, and{" "}
               <span className="text-white/85 font-medium">you see the replies before you pay us</span>.
             </p>
+
+            {/* Live "finding your buyers" row that types itself in */}
+            <div className="hero-signal mb-7" aria-hidden="true">
+              <span className="hero-signal-dot" />
+              <span className="hero-signal-label">Finding your buyers</span>
+              <span className="hero-signal-text">
+                {typed}
+                <span className="hero-signal-caret" />
+              </span>
+            </div>
 
             {/* Stat triplet temporarily hidden */}
             {false && (
@@ -290,6 +344,60 @@ export default function HeroV2() {
 
       {/* Keyframes for floating + headline shine animations */}
       <style jsx>{`
+        .hero-signal {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          max-width: 100%;
+          padding: 9px 15px;
+          border-radius: 12px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.03);
+        }
+        .hero-signal-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #22c98a;
+          box-shadow: 0 0 0 4px rgba(34, 201, 138, 0.14);
+          flex-shrink: 0;
+          animation: heroPulse 1.6s ease-in-out infinite;
+        }
+        .hero-signal-label {
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          color: #22c98a;
+          flex-shrink: 0;
+        }
+        .hero-signal-text {
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 13px;
+          color: #cfd4e8;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          min-height: 18px;
+        }
+        .hero-signal-caret {
+          display: inline-block;
+          width: 2px;
+          height: 13px;
+          margin-left: 1px;
+          vertical-align: middle;
+          background: #ff6b67;
+          animation: heroCaret 1s step-end infinite;
+        }
+        @keyframes heroPulse {
+          0%, 100% { box-shadow: 0 0 0 4px rgba(34, 201, 138, 0.14); }
+          50% { box-shadow: 0 0 0 7px rgba(34, 201, 138, 0.04); }
+        }
+        @keyframes heroCaret {
+          0%, 50% { opacity: 1; }
+          50.01%, 100% { opacity: 0; }
+        }
         @keyframes float {
           0%, 100% {
             transform: translateY(0px);

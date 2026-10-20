@@ -6,6 +6,7 @@ import NotATool from "@/components/NotATool";
 import SignalSheet from "@/components/SignalSheet";
 import PassSystem from "@/components/PassSystem";
 import EveryDoor from "@/components/EveryDoor";
+import InfraLine from "@/components/InfraLine";
 import AiFollowUp from "@/components/AiFollowUp";
 import TrialFlow from "@/components/TrialFlow";
 import StatsStrip from "@/components/StatsStrip";
@@ -41,6 +42,7 @@ export default function HomeV2() {
       <SignalSheet />
       <PassSystem />
       <EveryDoor />
+      <InfraLine />
       <AiFollowUp />
       <TrialFlow />
       <RepliesMarquee />
