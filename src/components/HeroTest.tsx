@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import CountUp from "@/components/CountUp";
 
 const SPRINT_URL = "https://calculator.bleedai.com/sprint";
 const VIDEO_ID = "S0Oeg0sbB6k";
@@ -262,7 +263,7 @@ export default function HeroTest() {
 
             {/* Floating real stat — sits BELOW the video, left-aligned */}
             <div className="hidden lg:flex absolute top-full mt-3 left-4 z-20 items-center gap-2.5 px-3.5 py-2.5 rounded-xl border border-[#B1130F]/30 bg-[#0a0a10]/95 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] animate-[float_7s_ease-in-out_infinite_-2s]">
-              <div className="font-display text-xl font-bold text-[#ff6b67] leading-none">100+</div>
+              <div className="font-display text-xl font-bold text-[#ff6b67] leading-none"><CountUp end={100} suffix="+" /></div>
               <div>
                 <div className="text-xs font-semibold text-white leading-tight">Opportunities Generated</div>
                 <div className="text-[10px] text-white/50">This Month</div>
