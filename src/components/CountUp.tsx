@@ -10,7 +10,7 @@ type Props = {
 };
 
 // Counts up from 0 to `end` the first time it scrolls into view.
-export default function CountUp({ end, suffix = "", duration = 1400, className }: Props) {
+export default function CountUp({ end, suffix = "", duration = 2600, className }: Props) {
   const [val, setVal] = useState(0);
   const ref = useRef<HTMLSpanElement | null>(null);
   const ran = useRef(false);
