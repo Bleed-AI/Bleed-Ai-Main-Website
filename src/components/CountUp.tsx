@@ -6,11 +6,13 @@ type Props = {
   end: number;
   suffix?: string;
   duration?: number;
+  delay?: number;
   className?: string;
 };
 
 // Counts up from 0 to `end` the first time it scrolls into view.
-export default function CountUp({ end, suffix = "", duration = 2600, className }: Props) {
+// `delay` waits before starting (e.g. until the preloader clears).
+export default function CountUp({ end, suffix = "", duration = 3000, delay = 1100, className }: Props) {
   const [val, setVal] = useState(0);
   const ref = useRef<HTMLSpanElement | null>(null);
   const ran = useRef(false);
@@ -25,6 +27,7 @@ export default function CountUp({ end, suffix = "", duration = 2600, className }
       return;
     }
 
+    let startTimer: ReturnType<typeof setTimeout>;
     const run = () => {
       if (ran.current) return;
       ran.current = true;
@@ -42,7 +45,7 @@ export default function CountUp({ end, suffix = "", duration = 2600, className }
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) {
-            run();
+            startTimer = setTimeout(run, delay);
             io.disconnect();
           }
         });
@@ -50,8 +53,11 @@ export default function CountUp({ end, suffix = "", duration = 2600, className }
       { threshold: 0.4 }
     );
     io.observe(el);
-    return () => io.disconnect();
-  }, [end, duration]);
+    return () => {
+      io.disconnect();
+      clearTimeout(startTimer);
+    };
+  }, [end, duration, delay]);
 
   return (
     <span ref={ref} className={className}>
