@@ -129,6 +129,46 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
+      {/* How we work (shared) */}
+      <section className="px-6 lg:px-8 pb-12">
+        <div className="max-w-5xl mx-auto rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] p-7 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div>
+            <h3 className="text-white font-semibold text-lg mb-1.5">How we work these accounts</h3>
+            <p className="text-white/60 text-[14px] leading-relaxed max-w-xl">
+              We run each account in passes across email, LinkedIn and direct mail over about 30 days,
+              and an AI agent answers every reply. Follow-up is our job, not yours.
+            </p>
+          </div>
+          <a
+            href="/pass-system"
+            className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 text-white font-semibold text-[14px] hover:border-[#ff6b67] hover:text-[#ff6b67] transition-colors"
+          >
+            See the Pass System
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </a>
+        </div>
+      </section>
+
+      {/* Bottom CTA (shared) */}
+      <section className="px-6 lg:px-8 py-20 text-center">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mb-4 leading-tight">
+            Ready to reach your buyers?
+          </h2>
+          <p className="text-white/60 text-[15px] leading-relaxed mb-8 max-w-lg mx-auto">
+            See the replies before you pay us. Apply for a trial, or book a call to talk it through.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="/trial" className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#B1130F] text-white font-semibold text-[15px] hover:scale-105 transition-transform">
+              Apply for a trial
+            </a>
+            <a href="/book-call" className="inline-flex items-center justify-center px-7 py-3.5 rounded-full border border-white/15 text-white font-semibold text-[15px] hover:border-white/40 transition-colors">
+              Book a call
+            </a>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );
