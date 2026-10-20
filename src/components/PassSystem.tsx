@@ -160,13 +160,20 @@ export default function PassSystem() {
         }
         .ps-line {
           position: absolute;
-          top: 17px;
-          left: 11%;
-          right: 11%;
-          height: 2px;
-          background: rgba(255, 255, 255, 0.12);
-          border-radius: 2px;
+          top: 16px;
+          left: 12.5%;
+          right: 12.5%;
+          height: 3px;
+          background: linear-gradient(
+            90deg,
+            rgba(79, 139, 255, 0.4),
+            rgba(255, 91, 86, 0.4),
+            rgba(168, 85, 247, 0.4),
+            rgba(245, 166, 35, 0.4)
+          );
+          border-radius: 3px;
           overflow: hidden;
+          z-index: 0;
         }
         .ps-line-fill {
           position: absolute;
