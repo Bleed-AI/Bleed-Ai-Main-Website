@@ -17,9 +17,10 @@ const lines = [
   },
   {
     k: "Monthly",
+    from: true,
     price: "$3,350",
     unit: "/mo",
-    v: "No lock-in. Keep the domains, lists and every thread.",
+    v: "Growth or Scale. No lock-in, keep your domains, lists and threads.",
   },
 ];
 
@@ -39,6 +40,7 @@ export default function PricingTeaser() {
             <Reveal className={`pt-line${l.featured ? " featured" : ""}`} key={l.k} delay={i * 80}>
               <span className="pt-k">{l.k}</span>
               <span className="pt-price">
+                {l.from && <span className="pt-from">from </span>}
                 {l.price}
                 {l.unit && <span className="pt-unit">{l.unit}</span>}
               </span>
@@ -129,6 +131,11 @@ export default function PricingTeaser() {
           font-weight: 600;
           color: #6a7192;
           margin-left: 4px;
+        }
+        .pt-from {
+          font-size: 14px;
+          font-weight: 600;
+          color: #6a7192;
         }
         .pt-v {
           font-size: 14px;
