@@ -16,6 +16,7 @@ type Segment = {
 type Industry = { title: string; buyers: string; segments: Segment[] };
 
 const DIR = path.join(process.cwd(), "src/content/industries");
+const SEG_COLORS = ["#22c98a", "#4f8bff", "#a855f7", "#f5a623", "#ff5b56"];
 
 function getIndustry(slug: string): Industry | null {
   const file = path.join(DIR, `${slug}.json`);
@@ -64,38 +65,67 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
       <section className="px-6 lg:px-8 pb-24">
         <div className="max-w-5xl mx-auto flex flex-col gap-5">
-          {data.segments.map((seg) => (
-            <div key={seg.name} className="rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] p-7">
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
-                <h2 className="text-white font-semibold text-xl">{seg.name}</h2>
-                <div className="flex flex-wrap gap-2">
-                  {seg.doors.map((d) => (
-                    <span key={d} className="font-mono text-[11px] px-2.5 py-1 rounded-md border border-white/10 bg-white/[0.03] text-white/70">
-                      {d}
+          {data.segments.map((seg, idx) => {
+            const c = SEG_COLORS[idx % SEG_COLORS.length];
+            return (
+              <div
+                key={seg.name}
+                className="rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] p-7"
+                style={{ borderLeft: `3px solid ${c}` }}
+              >
+                <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+                  <div className="flex items-center gap-3">
+                    <span
+                      className="w-8 h-8 rounded-lg flex items-center justify-center font-bold text-[13px] text-white flex-shrink-0"
+                      style={{ background: c }}
+                    >
+                      {idx + 1}
                     </span>
+                    <h2 className="text-white font-semibold text-xl">{seg.name}</h2>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {seg.doors.map((d) => (
+                      <span
+                        key={d}
+                        className="font-mono text-[11px] px-2.5 py-1 rounded-md border text-white/85"
+                        style={{ borderColor: `${c}55`, backgroundColor: `${c}14` }}
+                      >
+                        {d}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+                  <div className="rounded-xl p-4 border" style={{ borderColor: `${c}40`, backgroundColor: `${c}0f` }}>
+                    <div className="font-mono text-[10.5px] uppercase tracking-wide mb-1.5" style={{ color: c }}>
+                      We reach them when
+                    </div>
+                    <div className="text-white text-[15px] font-medium leading-snug">{seg.signal}</div>
+                  </div>
+                  <div className="rounded-xl p-4 border border-white/10 bg-white/[0.02]">
+                    <div className="font-mono text-[10.5px] uppercase tracking-wide text-white/40 mb-1.5">Who signs</div>
+                    <div className="text-white text-[15px] font-medium leading-snug">{seg.who_signs}</div>
+                  </div>
+                </div>
+
+                <div className="rounded-xl border border-white/[0.06] overflow-hidden">
+                  <div className="grid grid-cols-[1.3fr_1.3fr_1fr] gap-2 px-4 py-2 bg-white/[0.02] font-mono text-[10px] uppercase tracking-wide text-white/35">
+                    <span>Company</span>
+                    <span>Signal</span>
+                    <span>Who signs</span>
+                  </div>
+                  {seg.sample_rows.map((r, i) => (
+                    <div key={i} className="grid grid-cols-[1.3fr_1.3fr_1fr] gap-2 px-4 py-2 border-t border-white/[0.04] font-mono text-[11.5px] items-center">
+                      <span className="text-white/60 blur-[3.5px] select-none">{r.company}</span>
+                      <span className="text-white/70">{r.signal}</span>
+                      <span className="text-white/45">{r.who}</span>
+                    </div>
                   ))}
                 </div>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-5 text-[14px]">
-                <div className="flex gap-3"><span className="w-20 flex-shrink-0 text-white/40">Signal</span><span className="text-white/80">{seg.signal}</span></div>
-                <div className="flex gap-3"><span className="w-20 flex-shrink-0 text-white/40">Who signs</span><span className="text-white/80">{seg.who_signs}</span></div>
-              </div>
-
-              <div className="rounded-xl border border-white/[0.07] overflow-hidden">
-                <div className="grid grid-cols-[1.3fr_1.3fr_1fr] gap-2 px-4 py-2.5 bg-white/[0.03] font-mono text-[10.5px] uppercase tracking-wide text-white/40">
-                  <span>Company</span><span>Signal</span><span>Who signs</span>
-                </div>
-                {seg.sample_rows.map((r, i) => (
-                  <div key={i} className="grid grid-cols-[1.3fr_1.3fr_1fr] gap-2 px-4 py-2.5 border-t border-white/[0.05] font-mono text-[12px] items-center">
-                    <span className="text-white/80 blur-[3.5px] select-none">{r.company}</span>
-                    <span className="text-white/80">{r.signal}</span>
-                    <span className="text-white/60">{r.who}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
