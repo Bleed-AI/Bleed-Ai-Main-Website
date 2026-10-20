@@ -43,7 +43,7 @@ export default function AiFollowUp() {
               Approved by a person
             </span>
             <span className="fu-mode auto">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4.5 13.5H11L9.5 22L18.5 9.5H12L13 2z" /></svg>
+              <span className="fu-bot">🤖</span>
               Or sent automatically
             </span>
           </div>
@@ -173,6 +173,7 @@ export default function AiFollowUp() {
           background: rgba(255, 61, 56, 0.07);
         }
         .fu-check { display: inline-flex; }
+        .fu-bot { font-size: 13px; line-height: 1; }
 
         @keyframes fuProspect {
           0%, 4% { opacity: 0; transform: translateY(8px); }
