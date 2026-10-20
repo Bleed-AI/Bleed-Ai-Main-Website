@@ -50,9 +50,23 @@ export default function TrialPage() {
     <main className="bai relative overflow-x-clip">
       <Navigation />
 
-      <TrialFlow />
+      {/* Hero + form first */}
+      <section id="apply" className="px-6 lg:px-8 pt-32 pb-20">
+        <div className="max-w-2xl mx-auto text-center mb-10">
+          <div className="sec-label">The trial</div>
+          <h1 className="font-display text-4xl sm:text-5xl font-bold text-white mt-3 mb-4 leading-tight">
+            See the replies before you pay us.
+          </h1>
+          <p className="text-white/60 text-[15px] leading-relaxed max-w-xl mx-auto">
+            If your product already sells, we build the list, write the campaign with you, send it,
+            and hand you every reply. Three questions to see if you qualify.
+          </p>
+        </div>
+        <TrialApply />
+      </section>
 
-      <section className="px-6 lg:px-8 pb-6">
+      {/* What you get / need / who it is for */}
+      <section className="px-6 lg:px-8 pb-10">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
           <Col title="What you get" items={whatYouGet} tone="good" />
           <Col title="What we need from you" items={whatWeNeed} tone="muted" />
@@ -60,18 +74,8 @@ export default function TrialPage() {
         </div>
       </section>
 
-      <section id="apply" className="px-6 lg:px-8 py-20">
-        <div className="max-w-2xl mx-auto text-center mb-10">
-          <div className="sec-label">Apply</div>
-          <h2 className="font-display text-3xl sm:text-4xl font-bold text-white mt-2 mb-3">
-            Three questions.
-          </h2>
-          <p className="text-white/60 text-[15px]">
-            We will point you to the right next step. No wrong answers.
-          </p>
-        </div>
-        <TrialApply />
-      </section>
+      {/* How the trial runs */}
+      <TrialFlow />
 
       <Footer />
     </main>
