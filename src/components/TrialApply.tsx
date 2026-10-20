@@ -86,8 +86,9 @@ export default function TrialApply() {
     setResult(route);
   };
 
-  if (result) {
-    return (
+  return (
+    <>
+      {result ? (
       <div className="ta-result">
         {result === "fit" && (
           <>
@@ -134,11 +135,8 @@ export default function TrialApply() {
           </>
         )}
       </div>
-    );
-  }
-
-  return (
-    <form className="ta-form" onSubmit={submit}>
+      ) : (
+      <form className="ta-form" onSubmit={submit}>
       {questions.map((q) => (
         <div className="ta-q" key={q.key}>
           <div className="ta-q-label">{q.label}</div>
@@ -178,8 +176,10 @@ export default function TrialApply() {
       <button type="submit" className="ta-submit" disabled={!ready || sending}>
         {sending ? "Sending..." : "See my next step"}
       </button>
+      </form>
+      )}
 
-      <style jsx>{`
+      <style jsx global>{`
         .ta-form, .ta-result {
           max-width: 640px;
           margin: 0 auto;
@@ -300,6 +300,6 @@ export default function TrialApply() {
         .ta-card-v { font-size: 14.5px; color: #c7cbe0; }
         .ta-card-cta { font-size: 13px; font-weight: 600; color: #ff6b67; margin-top: 4px; }
       `}</style>
-    </form>
+    </>
   );
 }
