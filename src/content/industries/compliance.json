@@ -1,0 +1,39 @@
+{
+  "title": "Outbound for compliance",
+  "buyers": "Compliance, risk and audit teams that already serve clients and want more of the right accounts.",
+  "segments": [
+    {
+      "name": "Compliance consultancies",
+      "signal": "A new regulation dropping, winning a client, or hiring consultants",
+      "who_signs": "Managing Partner or Practice Lead",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Clearline Advisory", "signal": "New reg in market", "who": "Managing Partner" },
+        { "company": "Sentinel Risk Group", "signal": "Won a client", "who": "Practice Lead" },
+        { "company": "Axiom Compliance", "signal": "Hiring consultants", "who": "Managing Partner" }
+      ]
+    },
+    {
+      "name": "RegTech and audit tools",
+      "signal": "A product launch, fresh funding, or a new head of sales",
+      "who_signs": "VP of Sales or Founder",
+      "doors": ["Email", "LinkedIn", "Phone"],
+      "sample_rows": [
+        { "company": "Verifly Systems", "signal": "Product launch", "who": "VP Sales" },
+        { "company": "Audit Loop", "signal": "Series A raise", "who": "Founder" },
+        { "company": "Comply Grid", "signal": "New sales lead", "who": "VP Sales" }
+      ]
+    },
+    {
+      "name": "In-house risk teams",
+      "signal": "A new framework to adopt, an audit cycle, or a risk lead hire",
+      "who_signs": "Head of Risk or Chief Compliance Officer",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Meridian Finance", "signal": "New framework", "who": "Head of Risk" },
+        { "company": "Northpeak Bank", "signal": "Audit cycle", "who": "Chief Compliance Officer" },
+        { "company": "Granite Insurance", "signal": "New risk lead", "who": "Head of Risk" }
+      ]
+    }
+  ]
+}

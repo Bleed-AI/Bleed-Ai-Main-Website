@@ -1,0 +1,39 @@
+{
+  "title": "Outbound for construction",
+  "buyers": "Contractors, builders and trades that already win work and want a steady pipeline of the right projects.",
+  "segments": [
+    {
+      "name": "General contractors",
+      "signal": "Winning a new bid, breaking ground, or hiring project managers",
+      "who_signs": "Owner or VP of Operations",
+      "doors": ["Email", "LinkedIn", "Phone"],
+      "sample_rows": [
+        { "company": "Ironclad Builders", "signal": "Won a new bid", "who": "Owner" },
+        { "company": "Summit Construction Co", "signal": "Hiring 2 PMs", "who": "VP Operations" },
+        { "company": "Keystone Contracting", "signal": "Breaking ground", "who": "Project Lead" }
+      ]
+    },
+    {
+      "name": "Specialty trades",
+      "signal": "Expanding crews, buying equipment, or opening a second yard",
+      "who_signs": "Owner or Operations Manager",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Apex Electrical", "signal": "Adding a crew", "who": "Owner" },
+        { "company": "Riverstone HVAC", "signal": "New equipment", "who": "Operations Manager" },
+        { "company": "Granite Plumbing", "signal": "Second yard", "who": "Owner" }
+      ]
+    },
+    {
+      "name": "Developers and GCs",
+      "signal": "A new project announced, fresh funding, or a zoning approval",
+      "who_signs": "Development Director or Principal",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Harbor Point Group", "signal": "New project", "who": "Development Director" },
+        { "company": "Northline Developments", "signal": "Zoning approved", "who": "Principal" },
+        { "company": "Cedar Ridge Partners", "signal": "Raised a fund", "who": "Development Director" }
+      ]
+    }
+  ]
+}

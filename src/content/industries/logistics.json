@@ -1,0 +1,39 @@
+{
+  "title": "Outbound for logistics",
+  "buyers": "Freight, warehousing and supply chain teams that already move volume and want more of the right shippers.",
+  "segments": [
+    {
+      "name": "Freight and brokerage",
+      "signal": "Opening a new lane, adding carriers, or hiring sales reps",
+      "who_signs": "VP of Sales or Owner",
+      "doors": ["Email", "LinkedIn", "Phone"],
+      "sample_rows": [
+        { "company": "Midline Freight", "signal": "New lane added", "who": "VP Sales" },
+        { "company": "Cargo Bridge Co", "signal": "Hiring reps", "who": "Owner" },
+        { "company": "Trailport Logistics", "signal": "Adding carriers", "who": "Operations Lead" }
+      ]
+    },
+    {
+      "name": "Warehousing and 3PL",
+      "signal": "Opening a new facility, winning a big account, or adding dock space",
+      "who_signs": "Operations Director or GM",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Northgate Warehousing", "signal": "New facility", "who": "Operations Director" },
+        { "company": "Pallet Point 3PL", "signal": "Won an account", "who": "GM" },
+        { "company": "Dockside Fulfillment", "signal": "Adding dock space", "who": "Operations Director" }
+      ]
+    },
+    {
+      "name": "Supply chain teams",
+      "signal": "New funding, a plant expansion, or a head of procurement hire",
+      "who_signs": "Head of Procurement or VP Supply Chain",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Vertex Supply", "signal": "Plant expansion", "who": "VP Supply Chain" },
+        { "company": "Orbit Components", "signal": "Raised a round", "who": "Head of Procurement" },
+        { "company": "Lattice Manufacturing", "signal": "New procurement lead", "who": "Head of Procurement" }
+      ]
+    }
+  ]
+}

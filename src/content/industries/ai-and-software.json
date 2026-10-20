@@ -1,0 +1,39 @@
+{
+  "title": "Outbound for AI and software",
+  "buyers": "SaaS and AI products that already have paying customers and want more of the right accounts.",
+  "segments": [
+    {
+      "name": "Early stage SaaS",
+      "signal": "A fresh raise, a product launch, or a first sales hire",
+      "who_signs": "Founder or Head of Growth",
+      "doors": ["Email", "LinkedIn", "Phone"],
+      "sample_rows": [
+        { "company": "Flowstate AI", "signal": "Seed raise", "who": "Founder" },
+        { "company": "Pointer Labs", "signal": "Product launch", "who": "Head of Growth" },
+        { "company": "Cadence HQ", "signal": "First sales hire", "who": "Founder" }
+      ]
+    },
+    {
+      "name": "Scaling B2B platforms",
+      "signal": "Opening a new segment, hiring AEs, or launching a new module",
+      "who_signs": "VP of Sales or Head of Revenue",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Gridwork", "signal": "New segment", "who": "VP Sales" },
+        { "company": "Northbeam Data", "signal": "Hiring AEs", "who": "Head of Revenue" },
+        { "company": "Loophole Inc", "signal": "New module", "who": "VP Sales" }
+      ]
+    },
+    {
+      "name": "AI tooling and infra",
+      "signal": "A model release, a big funding round, or a go-to-market hire",
+      "who_signs": "Founder or Head of GTM",
+      "doors": ["Email", "LinkedIn", "Direct mail"],
+      "sample_rows": [
+        { "company": "Tensor Forge", "signal": "Model release", "who": "Founder" },
+        { "company": "Vectorly", "signal": "Series B raise", "who": "Head of GTM" },
+        { "company": "Prompt Stack", "signal": "New GTM hire", "who": "Founder" }
+      ]
+    }
+  ]
+}
