@@ -44,7 +44,7 @@ export default function AiFollowUp() {
         </Reveal>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         #ai-followup {
           position: relative;
           padding: 90px 22px;

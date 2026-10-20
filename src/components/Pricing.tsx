@@ -113,7 +113,7 @@ export default function Pricing() {
         </Reveal>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         #pricing {
           position: relative;
           padding: 100px 22px 90px;

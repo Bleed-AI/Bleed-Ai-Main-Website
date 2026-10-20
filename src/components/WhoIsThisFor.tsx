@@ -68,7 +68,7 @@ export default function WhoIsThisFor() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         #who-is-this-for {
           position: relative;
           padding: 90px 22px;

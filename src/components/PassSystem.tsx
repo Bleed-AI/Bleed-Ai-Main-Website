@@ -34,7 +34,7 @@ export default function PassSystem() {
       // finished state (no pin), per the reduced-motion / touch rule.
       mm.add("(min-width: 900px) and (prefers-reduced-motion: no-preference)", () => {
         gsap.set(".ps-line-fill", { scaleX: 0, transformOrigin: "left center" });
-        gsap.set(".ps-pass", { opacity: 0.3, y: 10 });
+        gsap.set(".ps-pass", { opacity: 0.3 });
         gsap.set(".ps-branch-line", { scaleY: 0, transformOrigin: "top center" });
         gsap.set(".ps-branch-chip", { opacity: 0, y: 12 });
         gsap.set(".ps-fork-reply", { opacity: 0.3, scale: 0.94 });
@@ -52,7 +52,7 @@ export default function PassSystem() {
 
         tl.to(".ps-line-fill", { scaleX: 1, ease: "none", duration: 4 }, 0);
         passes.forEach((_, i) => {
-          tl.to(`.ps-pass-${i}`, { opacity: 1, y: 0, ease: "power2.out", duration: 0.7 }, i * 0.9);
+          tl.to(`.ps-pass-${i}`, { opacity: 1, ease: "power2.out", duration: 0.7 }, i * 0.9);
         });
         tl.to(".ps-fork-reply", { opacity: 1, scale: 1, ease: "power2.out", duration: 0.5 }, 3.4);
         tl.to(".ps-branch-line", { scaleY: 1, stagger: 0.09, ease: "power2.out", duration: 0.4 }, 3.7);

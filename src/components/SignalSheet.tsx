@@ -56,7 +56,7 @@ export default function SignalSheet() {
         </Reveal>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         #signal-sheet {
           position: relative;
           padding: 90px 22px;

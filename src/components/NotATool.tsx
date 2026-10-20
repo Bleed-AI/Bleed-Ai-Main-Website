@@ -94,7 +94,7 @@ export default function NotATool() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         #not-a-tool {
           position: relative;
           padding: 90px 22px;

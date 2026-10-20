@@ -152,17 +152,14 @@ export default function TrialFlow() {
         }
         .tf-label {
           font-family: "Inter", system-ui, sans-serif;
-          font-size: 14.5px;
+          font-size: 15px;
           font-weight: 700;
           color: #eaeef8;
           white-space: nowrap;
-          writing-mode: vertical-rl;
-          transform: rotate(180deg);
-          transition: writing-mode 0s;
+          display: none;
         }
         .tf-step.on .tf-label {
-          writing-mode: horizontal-tb;
-          transform: none;
+          display: inline;
         }
         .tf-detail {
           font-size: 14px;
@@ -206,8 +203,7 @@ export default function TrialFlow() {
             gap: 14px;
           }
           .tf-label {
-            writing-mode: horizontal-tb;
-            transform: none;
+            display: inline;
             white-space: normal;
           }
           .tf-detail {
@@ -221,7 +217,7 @@ export default function TrialFlow() {
         }
         @media (prefers-reduced-motion: reduce) {
           .tf-step { flex: 1 1 0; }
-          .tf-label { writing-mode: horizontal-tb; transform: none; }
+          .tf-label { display: inline; }
           .tf-detail { opacity: 1; max-width: 340px; }
         }
       `}</style>

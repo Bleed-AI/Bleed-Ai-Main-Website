@@ -97,7 +97,7 @@ export default function EveryDoor() {
         </div>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         #every-door {
           position: relative;
           padding: 90px 22px;

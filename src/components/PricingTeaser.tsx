@@ -5,15 +5,21 @@ import Reveal from "@/components/Reveal";
 const lines = [
   {
     k: "Trial",
-    v: "Start with a trial if you qualify. See the replies before you pay us.",
+    price: "Apply",
+    v: "Start if you qualify. See the replies before you pay us.",
   },
   {
     k: "Sprint",
-    v: "Or run a Sprint: $2,950 once. Your market mapped and tested in six weeks.",
+    price: "$2,950",
+    unit: "once",
+    v: "Your market mapped and tested in six weeks.",
+    featured: true,
   },
   {
     k: "Monthly",
-    v: "Then stay monthly. No lock-in, and you keep the domains, lists and threads.",
+    price: "$3,350",
+    unit: "/mo",
+    v: "No lock-in. Keep the domains, lists and every thread.",
   },
 ];
 
@@ -30,8 +36,12 @@ export default function PricingTeaser() {
 
         <div className="pt-lines">
           {lines.map((l, i) => (
-            <Reveal className="pt-line" key={l.k} delay={i * 80}>
+            <Reveal className={`pt-line${l.featured ? " featured" : ""}`} key={l.k} delay={i * 80}>
               <span className="pt-k">{l.k}</span>
+              <span className="pt-price">
+                {l.price}
+                {l.unit && <span className="pt-unit">{l.unit}</span>}
+              </span>
               <span className="pt-v">{l.v}</span>
             </Reveal>
           ))}
@@ -47,7 +57,7 @@ export default function PricingTeaser() {
         </Reveal>
       </div>
 
-      <style jsx>{`
+      <style jsx global>{`
         #pricing-teaser {
           position: relative;
           padding: 90px 22px;
@@ -74,35 +84,56 @@ export default function PricingTeaser() {
           color: transparent;
         }
         .pt-lines {
-          display: flex;
-          flex-direction: column;
-          gap: 14px;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
           text-align: left;
           margin-bottom: 36px;
         }
         .pt-line {
           display: flex;
-          align-items: center;
-          gap: 16px;
-          padding: 18px 22px;
-          border-radius: 14px;
+          flex-direction: column;
+          gap: 8px;
+          padding: 26px 24px;
+          border-radius: 16px;
           border: 1px solid rgba(255, 255, 255, 0.09);
           background: linear-gradient(160deg, #12121b 0%, #0b0b12 100%);
+          transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+        }
+        .pt-line:hover {
+          transform: translateY(-3px);
+          border-color: rgba(255, 90, 80, 0.4);
+          box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9), 0 0 36px -14px rgba(255, 61, 56, 0.4);
+        }
+        .pt-line.featured {
+          border-color: rgba(255, 90, 80, 0.5);
+          box-shadow: 0 0 44px -16px rgba(255, 61, 56, 0.5);
         }
         .pt-k {
-          flex-shrink: 0;
-          width: 86px;
           font-family: "JetBrains Mono", ui-monospace, monospace;
           font-size: 12px;
           font-weight: 700;
-          letter-spacing: 0.5px;
+          letter-spacing: 1px;
           text-transform: uppercase;
           color: #ff9d99;
         }
+        .pt-price {
+          font-family: "Inter", system-ui, sans-serif;
+          font-size: 30px;
+          font-weight: 800;
+          letter-spacing: -1px;
+          color: #eaeef8;
+        }
+        .pt-unit {
+          font-size: 13px;
+          font-weight: 600;
+          color: #6a7192;
+          margin-left: 4px;
+        }
         .pt-v {
-          font-size: 15px;
+          font-size: 14px;
           line-height: 1.5;
-          color: #c7cbe0;
+          color: #9099b8;
         }
         .pt-cta {
           display: inline-flex;
@@ -121,10 +152,11 @@ export default function PricingTeaser() {
           box-shadow: 0 0 40px rgba(177, 19, 15, 0.5);
         }
 
+        @media (max-width: 760px) {
+          .pt-lines { grid-template-columns: 1fr; }
+        }
         @media (max-width: 560px) {
           #pricing-teaser { padding: 64px 18px; }
-          .pt-line { flex-direction: column; align-items: flex-start; gap: 6px; }
-          .pt-k { width: auto; }
         }
       `}</style>
     </section>
