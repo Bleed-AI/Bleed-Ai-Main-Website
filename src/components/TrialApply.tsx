@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 
-// n8n webhook that records the lead and posts to Slack.
-// Fill this in with the URL from the Automations-Builder-n8n project.
-// Left empty for now: the form still works and shows the right next step;
-// it just skips the post until the URL is set.
-const WEBHOOK_URL = "";
+// n8n webhook that records the lead in Supabase and posts to the
+// #trial-applications Slack channel.
+const WEBHOOK_URL = "https://bleedai.app.n8n.cloud/webhook/bleedai-trial";
 
 const CALENDLY = "https://calendly.com/bleedai/vip-invite-only?hide_gdpr_banner=1";
 const SPRINT_URL = "https://calculator.bleedai.com/sprint";
