@@ -15,13 +15,6 @@ const lines = [
     v: "Your market mapped and tested in six weeks.",
     featured: true,
   },
-  {
-    k: "Monthly",
-    from: true,
-    price: "$3,350",
-    unit: "/mo",
-    v: "Growth or Scale. No lock-in, keep your domains, lists and threads.",
-  },
 ];
 
 export default function PricingTeaser() {
@@ -40,7 +33,6 @@ export default function PricingTeaser() {
             <Reveal className={`pt-line${l.featured ? " featured" : ""}`} key={l.k} delay={i * 80}>
               <span className="pt-k">{l.k}</span>
               <span className="pt-price">
-                {l.from && <span className="pt-from">from </span>}
                 {l.price}
                 {l.unit && <span className="pt-unit">{l.unit}</span>}
               </span>
@@ -87,10 +79,13 @@ export default function PricingTeaser() {
         }
         .pt-lines {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 16px;
           text-align: left;
           margin-bottom: 36px;
+          max-width: 560px;
+          margin-left: auto;
+          margin-right: auto;
         }
         .pt-line {
           display: flex;

@@ -29,22 +29,6 @@ const plans: Plan[] = [
     cta: { label: "Start a Sprint", href: "https://calculator.bleedai.com/sprint", external: true },
     featured: true,
   },
-  {
-    name: "Growth",
-    price: "$3,350",
-    unit: "/month",
-    note: "The core engine",
-    points: ["The Pass System on email and LinkedIn", "The inside pass", "AI follow-up on every reply", "New segments every month", "CRM and Slack support"],
-    cta: { label: "Book a call", href: "/book-call" },
-  },
-  {
-    name: "Scale",
-    price: "$5,300",
-    unit: "/month",
-    note: "Every door",
-    points: ["Everything in Growth, plus every door", "Direct mail, 150 cards a month included", "Warm phone follow-up", "The website form door", "The most strategy time"],
-    cta: { label: "Book a call", href: "/book-call" },
-  },
 ];
 
 export default function Pricing() {
@@ -146,9 +130,11 @@ export default function Pricing() {
         }
         .pr-grid {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 16px;
           text-align: left;
+          max-width: 620px;
+          margin: 0 auto;
         }
         .pr-card {
           position: relative;

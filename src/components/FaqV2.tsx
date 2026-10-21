@@ -40,7 +40,7 @@ const faqs: { q: string; a: ReactNode }[] = [
     q: "How does pricing work?",
     a: (
       <>
-        <strong>Four ways in:</strong> a qualified trial, a one-time Sprint at $2,950, Growth at $3,350 a month, or Scale at $5,300 a month. Smaller budget? Launch a single campaign for under $1K on the calculator.
+        <strong>It starts with a trial.</strong> If your product already sells, you qualify, and you see the replies before you pay us. From there you can run a one-time Sprint at $2,950, or launch a single campaign for under $1K on the calculator.
       </>
     ),
   },
