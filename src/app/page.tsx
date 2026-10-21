@@ -12,7 +12,7 @@ import RepliesMarquee from "@/components/RepliesMarquee";
 import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
 import Testimonials from "@/components/Testimonials";
 import WhoIsThisFor from "@/components/WhoIsThisFor";
-import PricingTeaser from "@/components/PricingTeaser";
+import Pricing from "@/components/Pricing";
 import FounderTest from "@/components/FounderTest";
 import FaqV2 from "@/components/FaqV2";
 import FinalCta from "@/components/FinalCta";
@@ -40,7 +40,7 @@ export default function Home() {
       <Testimonials />
       <ResultsMarqueeTest />
       <WhoIsThisFor />
-      <PricingTeaser />
+      <Pricing />
       <FounderTest />
       <FaqV2 />
       <FinalCta />
