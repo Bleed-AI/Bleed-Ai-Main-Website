@@ -478,24 +478,43 @@ body {
   }
 }
 
-/* Sprint nav button: a continuous breathing glow + border pulse.
+/* Sprint nav button: dark pill with a continuously breathing red glow + border pulse.
    Distinct from .btn-glow (which does a white shine sweep). */
 .sprint-pulse {
+  position: relative;
   animation: sprint-pulse 2.4s ease-in-out infinite;
 }
 .sprint-pulse:hover {
   animation-play-state: paused;
-  box-shadow: 0 0 22px 2px rgba(255, 61, 56, 0.55);
+  box-shadow: 0 0 24px 2px rgba(255, 61, 56, 0.6);
+  border-color: rgba(255, 61, 56, 1);
 }
 @keyframes sprint-pulse {
   0%, 100% {
-    box-shadow: 0 0 0 0 rgba(177, 19, 15, 0);
-    border-color: rgba(177, 19, 15, 0.45);
+    box-shadow: 0 0 8px 0 rgba(177, 19, 15, 0.25);
+    border-color: rgba(177, 19, 15, 0.55);
   }
   50% {
-    box-shadow: 0 0 18px 1px rgba(255, 61, 56, 0.45);
-    border-color: rgba(255, 61, 56, 0.9);
+    box-shadow: 0 0 20px 2px rgba(255, 61, 56, 0.5);
+    border-color: rgba(255, 61, 56, 0.95);
   }
+}
+/* The little red indicator dot centered at the bottom edge. */
+.sprint-dot {
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff3d38;
+  box-shadow: 0 0 8px 1.5px rgba(255, 61, 56, 0.85);
+  animation: sprint-dot 2.4s ease-in-out infinite;
+}
+@keyframes sprint-dot {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
 }
 
 .animate-fade-in {
