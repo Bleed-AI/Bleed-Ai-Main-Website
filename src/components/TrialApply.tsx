@@ -63,7 +63,6 @@ const services = [
   "Direct mail",
   "Warm phone follow-up",
   "AI follow-up on every reply",
-  "Blog posts for SEO",
 ];
 
 function routeFor(a: Answers): "fit" | "sprint" | "calculator" {
