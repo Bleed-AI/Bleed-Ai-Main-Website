@@ -478,43 +478,37 @@ body {
   }
 }
 
-/* Sprint nav button: dark pill with a continuously breathing red glow + border pulse.
-   Distinct from .btn-glow (which does a white shine sweep). */
+/* Sprint nav button: dark pill with a soft red glow, and a maroon dot
+   that travels continuously around the pill border. */
 .sprint-pulse {
   position: relative;
-  animation: sprint-pulse 2.4s ease-in-out infinite;
+  box-shadow: 0 0 14px -3px rgba(177, 19, 15, 0.5);
+  transition: box-shadow 0.3s ease;
 }
 .sprint-pulse:hover {
-  animation-play-state: paused;
-  box-shadow: 0 0 24px 2px rgba(255, 61, 56, 0.6);
-  border-color: rgba(255, 61, 56, 1);
+  box-shadow: 0 0 22px -2px rgba(255, 61, 56, 0.6);
 }
-@keyframes sprint-pulse {
-  0%, 100% {
-    box-shadow: 0 0 8px 0 rgba(177, 19, 15, 0.25);
-    border-color: rgba(177, 19, 15, 0.55);
-  }
-  50% {
-    box-shadow: 0 0 20px 2px rgba(255, 61, 56, 0.5);
-    border-color: rgba(255, 61, 56, 0.95);
-  }
-}
-/* The little red indicator dot centered at the bottom edge. */
 .sprint-dot {
   position: absolute;
-  left: 50%;
-  bottom: -3px;
-  transform: translateX(-50%);
-  width: 6px;
-  height: 6px;
+  top: 0;
+  left: 0;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #ff3d38;
-  box-shadow: 0 0 8px 1.5px rgba(255, 61, 56, 0.85);
-  animation: sprint-dot 2.4s ease-in-out infinite;
+  background: #B1130F;
+  box-shadow: 0 0 9px 2px rgba(255, 61, 56, 0.85);
+  offset-path: inset(0 round 999px);
+  offset-rotate: 0deg;
+  animation: sprint-travel 3s linear infinite;
+  pointer-events: none;
 }
-@keyframes sprint-dot {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+@keyframes sprint-travel {
+  to {
+    offset-distance: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sprint-dot { animation: none; offset-distance: 50%; }
 }
 
 .animate-fade-in {
