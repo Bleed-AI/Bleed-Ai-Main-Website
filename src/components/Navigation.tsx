@@ -60,10 +60,17 @@ export default function Navigation() {
               href="https://calculator.bleedai.com/sprint"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors duration-300"
+            >
+              Sprint
+            </a>
+
+            <a
+              href="/trial"
               className="group relative px-5 py-2.5 bg-[#B1130F] text-white rounded-full text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow"
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span>Outbound Sprint</span>
+                <span>Free Trial</span>
                 <svg
                   className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
@@ -80,12 +87,10 @@ export default function Navigation() {
           {/* Mobile Actions */}
           <div className="flex lg:hidden items-center gap-2 sm:gap-3">
             <a
-              href="https://calculator.bleedai.com/sprint"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/trial"
               className="group relative px-3 sm:px-4 py-1.5 sm:py-2 bg-[#B1130F] text-white rounded-full text-xs sm:text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow whitespace-nowrap"
             >
-              <span className="relative z-10">Outbound Sprint</span>
+              <span className="relative z-10">Free Trial</span>
             </a>
 
             {/* Hamburger Menu */}
@@ -162,15 +167,27 @@ export default function Navigation() {
                     Results
                   </a>
 
-                  {/* CTA Button */}
+                  {/* Sprint Link */}
                   <a
                     href="https://calculator.bleedai.com/sprint"
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-3 text-lg font-bold text-[var(--text-primary)] hover:text-[#B1130F] transition-colors duration-300 py-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Sprint
+                  </a>
+
+                  {/* CTA Button */}
+                  <a
+                    href="/trial"
+                    onClick={() => setMobileMenuOpen(false)}
                     className="group flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#B1130F] text-white text-center rounded-full font-bold text-base hover:shadow-lg hover:shadow-[#B1130F]/30 transition-all duration-300 active:scale-[0.98] btn-glow mt-4"
                   >
-                    <span>Outbound Sprint</span>
+                    <span>Free Trial</span>
                     <svg
                       className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
                       fill="none"
