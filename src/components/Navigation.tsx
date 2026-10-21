@@ -60,7 +60,7 @@ export default function Navigation() {
               href="https://calculator.bleedai.com/sprint"
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-1.5 px-4 py-2.5 rounded-full border border-[#B1130F]/45 bg-[#B1130F]/[0.06] text-sm font-semibold text-[#ff6b67] hover:bg-[#B1130F]/15 hover:border-[#B1130F]/80 transition-all duration-300"
+              className="sprint-pulse group inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg border border-[#B1130F]/45 bg-[#B1130F]/[0.06] text-sm font-semibold text-[#ff6b67] hover:bg-[#B1130F]/15"
             >
               <svg className="w-3.5 h-3.5 transition-transform duration-300 group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M13 10V3L4 14h7v7l9-11h-7z" />

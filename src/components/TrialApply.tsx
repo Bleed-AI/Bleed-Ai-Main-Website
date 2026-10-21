@@ -11,17 +11,20 @@ const SPRINT_URL = "https://calculator.bleedai.com/sprint";
 const CALC_URL = "https://calculator.bleedai.com";
 
 // All routing thresholds live here so they are easy to change.
+// Under $2K a year is too low for outbound to pay back, so it never counts as a fit.
 const ROUTING = {
-  fit: { customers: "repeat", acvOk: ["5to20", "20plus"], budget: "3plus" },
+  fit: { customers: "repeat", acvOk: ["5to10", "10to20", "20to50", "50to100", "100plus"], budget: "3plus" },
   someCustomers: ["few", "repeat"],
   budgetAtLeast1k: ["1to3", "3plus"],
 };
 
 type Answers = { customers: string; acv: string; budget: string; website: string; email: string };
+type QKey = "customers" | "acv" | "budget";
+type Question = { key: QKey; label: string; grid?: boolean; options: { v: string; l: string }[] };
 
-const questions = [
+const questions: Question[] = [
   {
-    key: "customers" as const,
+    key: "customers",
     label: "How many customers pay you today, and do they keep paying?",
     options: [
       { v: "none", l: "None yet" },
@@ -30,16 +33,21 @@ const questions = [
     ],
   },
   {
-    key: "acv" as const,
+    key: "acv",
     label: "What is a typical customer worth to you in a year?",
+    grid: true,
     options: [
-      { v: "u5k", l: "Under $5K" },
-      { v: "5to20", l: "$5K to $20K" },
-      { v: "20plus", l: "$20K+" },
+      { v: "u2k", l: "Under $2K" },
+      { v: "2to5", l: "$2K to $5K" },
+      { v: "5to10", l: "$5K to $10K" },
+      { v: "10to20", l: "$10K to $20K" },
+      { v: "20to50", l: "$20K to $50K" },
+      { v: "50to100", l: "$50K to $100K" },
+      { v: "100plus", l: "$100K+" },
     ],
   },
   {
-    key: "budget" as const,
+    key: "budget",
     label: "Once outbound works, what could you put into it each month?",
     options: [
       { v: "u1k", l: "Under $1K" },
@@ -140,7 +148,7 @@ export default function TrialApply() {
       {questions.map((q) => (
         <div className="ta-q" key={q.key}>
           <div className="ta-q-label">{q.label}</div>
-          <div className="ta-opts">
+          <div className={`ta-opts${q.grid ? " grid" : ""}`}>
             {q.options.map((o) => (
               <button
                 type="button"
@@ -148,7 +156,8 @@ export default function TrialApply() {
                 className={`ta-opt${a[q.key] === o.v ? " on" : ""}`}
                 onClick={() => setA((prev) => ({ ...prev, [q.key]: o.v }))}
               >
-                {o.l}
+                <span className="ta-radio" />
+                <span>{o.l}</span>
               </button>
             ))}
           </div>
@@ -194,7 +203,15 @@ export default function TrialApply() {
           margin-bottom: 12px;
         }
         .ta-opts { display: flex; flex-direction: column; gap: 9px; }
+        .ta-opts.grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 9px;
+        }
         .ta-opt {
+          display: flex;
+          align-items: center;
+          gap: 11px;
           text-align: left;
           padding: 13px 16px;
           border-radius: 11px;
@@ -210,6 +227,26 @@ export default function TrialApply() {
           border-color: #ff3d38;
           background: rgba(255, 61, 56, 0.1);
           color: #fff;
+        }
+        .ta-radio {
+          width: 16px;
+          height: 16px;
+          flex-shrink: 0;
+          border-radius: 50%;
+          border: 2px solid rgba(255, 255, 255, 0.28);
+          position: relative;
+          transition: border-color 0.2s;
+        }
+        .ta-opt.on .ta-radio { border-color: #ff3d38; }
+        .ta-opt.on .ta-radio::after {
+          content: "";
+          position: absolute;
+          inset: 3px;
+          border-radius: 50%;
+          background: #ff3d38;
+        }
+        @media (max-width: 560px) {
+          .ta-opts.grid { grid-template-columns: repeat(2, 1fr); }
         }
         .ta-inputs { display: flex; flex-direction: column; gap: 9px; }
         .ta-inputs input {
