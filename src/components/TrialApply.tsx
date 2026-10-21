@@ -57,6 +57,15 @@ const questions: Question[] = [
   },
 ];
 
+const services = [
+  "Email outreach",
+  "LinkedIn outreach",
+  "Direct mail",
+  "Warm phone follow-up",
+  "AI follow-up on every reply",
+  "Blog posts for SEO",
+];
+
 function routeFor(a: Answers): "fit" | "sprint" | "calculator" {
   const acvOk = ROUTING.fit.acvOk.includes(a.acv);
   const budget3 = a.budget === ROUTING.fit.budget;
@@ -164,6 +173,20 @@ export default function TrialApply() {
         </div>
       ))}
 
+      <div className="ta-services">
+        <div className="ta-services-head">What we help you run</div>
+        <div className="ta-services-grid">
+          {services.map((s) => (
+            <span className="ta-service" key={s}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+                <path d="M5 12.5l4.5 4.5L19 7" />
+              </svg>
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div className="ta-q">
         <div className="ta-q-label">Where can we see your product and reach you?</div>
         <div className="ta-inputs">
@@ -248,6 +271,39 @@ export default function TrialApply() {
         @media (max-width: 560px) {
           .ta-opts.grid { grid-template-columns: repeat(2, 1fr); }
         }
+        .ta-services {
+          margin-bottom: 26px;
+          padding: 18px 20px 20px;
+          border-radius: 14px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background: rgba(255, 255, 255, 0.02);
+        }
+        .ta-services-head {
+          font-family: "JetBrains Mono", ui-monospace, monospace;
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.5px;
+          color: #ff9d99;
+          margin-bottom: 14px;
+        }
+        .ta-services-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px 18px;
+        }
+        .ta-service {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 13.5px;
+          color: #c7cbe0;
+        }
+        .ta-service svg { color: #3ecf8e; flex-shrink: 0; }
+        @media (max-width: 560px) {
+          .ta-services-grid { grid-template-columns: 1fr; }
+        }
+
         .ta-inputs { display: flex; flex-direction: column; gap: 9px; }
         .ta-inputs input {
           padding: 13px 16px;
