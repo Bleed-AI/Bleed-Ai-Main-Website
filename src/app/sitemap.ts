@@ -33,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 0.7,
     },
-    // /privacy-policy/ and /terms/ intentionally excluded — pages are set to noindex.
+    // /privacy-policy/ and /terms/ intentionally excluded, pages are set to noindex.
   ];
 
   const postEntries: MetadataRoute.Sitemap = getAllPosts()
