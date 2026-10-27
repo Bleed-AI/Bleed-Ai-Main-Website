@@ -21,7 +21,7 @@ export default function Navigation() {
   return (
     <>
       <nav
-        className={`sticky top-0 left-0 right-0 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 transition-all duration-500 ${
           mobileMenuOpen ? "z-[9990]" : "z-50"
         }`}
       >
@@ -122,6 +122,8 @@ export default function Navigation() {
           </div>
         </div>
       </nav>
+      {/* Spacer: reserve the fixed nav's height so content starts below it (no load-time gap). */}
+      <div className="h-14 sm:h-[58px]" aria-hidden="true" />
 
       {/* Mobile Menu - Outside nav for proper z-index */}
       {mobileMenuOpen && (
