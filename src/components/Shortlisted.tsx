@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
 
 const CALENDLY = "https://calendly.com/bleedai/shortlisted-start-your-2-week-free-trial";
@@ -95,6 +95,27 @@ const faqs = [
 
 export default function Shortlisted() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const samplesRef = useRef<HTMLElement | null>(null);
+  const [samplesShown, setSamplesShown] = useState(false);
+  const [animate, setAnimate] = useState(true);
+
+  // Grow the chart bars and pop the report ticks when the samples scroll in.
+  useEffect(() => {
+    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      setAnimate(false);
+      setSamplesShown(true);
+      return;
+    }
+    const el = samplesRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) setSamplesShown(true); }),
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   // Load the Calendly inline-embed script once for the final section.
   useEffect(() => {
@@ -280,7 +301,7 @@ export default function Shortlisted() {
       </section>
 
       {/* 5. REAL SAMPLES */}
-      <section className="px-6 py-20 sm:py-24">
+      <section ref={samplesRef} className="px-6 py-20 sm:py-24">
         <div className="max-w-5xl mx-auto">
           <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl text-center leading-tight mb-12">
             Judge the work yourself.
@@ -309,7 +330,16 @@ export default function Shortlisted() {
                 <div className="rounded-lg border border-white/[0.06] bg-[#0b0b12] p-3 mb-3">
                   <div className="flex items-end gap-1.5 h-20">
                     {[30, 45, 35, 60, 50, 80].map((h, i) => (
-                      <div key={i} className="flex-1 rounded-t bg-gradient-to-t from-[#B1130F] to-[#ff6b67]" style={{ height: `${h}%` }} />
+                      <div
+                        key={i}
+                        className="flex-1 rounded-t bg-gradient-to-t from-[#B1130F] to-[#ff6b67] origin-bottom"
+                        style={{
+                          height: `${h}%`,
+                          transform: samplesShown ? "scaleY(1)" : "scaleY(0)",
+                          transition: animate ? "transform 0.7s cubic-bezier(0.22,1,0.36,1)" : "none",
+                          transitionDelay: animate ? `${300 + i * 90}ms` : "0ms",
+                        }}
+                      />
                     ))}
                   </div>
                   <div className="text-[10px] text-white/35 font-mono mt-2 text-center">Cash on hand, weeks 1 to 6</div>
@@ -356,7 +386,18 @@ export default function Shortlisted() {
                   <div key={i} className="grid grid-cols-[1fr_auto_auto_auto] gap-2 px-3 py-2 border-t border-white/[0.04] items-center">
                     <span className="text-white/65 truncate">{r[0] as string}</span>
                     {[r[1], r[2], r[3]].map((v, j) => (
-                      <span key={j} className={`w-4 text-center font-bold ${v ? "text-[#3ecf8e]" : "text-white/25"}`}>{v ? "✓" : "·"}</span>
+                      <span
+                        key={j}
+                        className={`w-4 text-center font-bold inline-block ${v ? "text-[#3ecf8e]" : "text-white/25"}`}
+                        style={{
+                          transform: samplesShown ? "scale(1)" : "scale(0)",
+                          opacity: samplesShown ? 1 : 0,
+                          transition: animate ? "transform 0.45s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease" : "none",
+                          transitionDelay: animate ? `${500 + (i * 3 + j) * 55}ms` : "0ms",
+                        }}
+                      >
+                        {v ? "✓" : "·"}
+                      </span>
                     ))}
                   </div>
                 ))}
