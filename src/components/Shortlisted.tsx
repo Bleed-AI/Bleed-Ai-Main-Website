@@ -213,16 +213,14 @@ export default function Shortlisted() {
           <Reveal as="p" className="text-center text-white/60 text-lg mb-12" delay={60}>
             Every month, four steps.
           </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
             {loopSteps.map((s, i) => (
               <Reveal key={s.n} delay={i * 90} className="relative rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] p-6">
                 <div className="w-10 h-10 rounded-full bg-[#B1130F] flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_20px_-4px_rgba(177,19,15,0.8)]">{s.n}</div>
                 <h3 className="font-semibold text-lg text-white mb-2">{s.title}</h3>
                 <p className="text-[13.5px] text-white/60 leading-relaxed">{s.body}</p>
                 {i < loopSteps.length - 1 && (
-                  <svg className="hidden lg:block absolute top-1/2 -right-3 w-6 h-6 text-white/20 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 6l6 6-6 6" />
-                  </svg>
+                  <span className="loop-connector hidden lg:block" style={{ ["--loop-delay" as string]: `${i * 0.45}s` }} aria-hidden="true" />
                 )}
               </Reveal>
             ))}
