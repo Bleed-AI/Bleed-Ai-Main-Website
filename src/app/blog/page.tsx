@@ -39,7 +39,7 @@ export default function BlogIndexPage() {
             Insights on <span className="gradient-text">AI Outbound</span>
           </h1>
           <p className="text-[var(--text-secondary)] text-lg max-w-2xl mx-auto leading-relaxed">
-            Practical breakdowns of what&apos;s working in B2B prospecting — straight from the campaigns we&apos;re running.
+            Practical breakdowns of what&apos;s working in B2B prospecting, straight from the campaigns we&apos;re running.
           </p>
         </div>
       </section>

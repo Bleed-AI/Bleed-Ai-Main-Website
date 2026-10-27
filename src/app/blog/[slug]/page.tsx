@@ -86,7 +86,7 @@ export default async function BlogPostPage({
     ? post.banner
     : `https://bleedai.com${post.banner}`;
 
-  // Article structured data — tells Google this is a blog post for rich results
+  // Article structured data, tells Google this is a blog post for rich results
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -265,7 +265,7 @@ export default async function BlogPostPage({
         {/* Related Posts */}
         <RelatedPosts posts={relatedPosts} />
 
-        {/* Email Subscribe — before footer */}
+        {/* Email Subscribe, before footer */}
         <EmailSubscribe blogTitle={post.title} />
 
         <Footer />

@@ -5,7 +5,7 @@ import Image from "next/image";
 const footerLinks = {
   company: [
     { label: "Results", href: "/#results-section" },
-    { label: "How It Works", href: "/#framework" },
+    { label: "How It Works", href: "/#pass-system" },
     { label: "Case Studies", href: "/#testimonials" },
     { label: "Blog", href: "/blog/" },
     { label: "Our Infrastructure", href: "https://infra.bleedai.com/", external: true },
@@ -50,7 +50,7 @@ export default function Footer() {
                 className="h-10 w-auto mb-6"
               />
               <p className="text-white/75 leading-relaxed max-w-sm mb-8">
-                Your full-service growth partner with a proven Cold-to-Sold system that turns strangers into customers. We install revenue systems that scale B2B firms in weeks, not months.
+                Multi-channel outbound for B2B products that already sell. We find your buyers, reach them on email, LinkedIn and mail, and answer every reply. You see the replies before you pay us.
               </p>
 
               {/* Social Links */}

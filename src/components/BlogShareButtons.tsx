@@ -50,7 +50,7 @@ export default function BlogShareButtons({ title, slug }: Props) {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // ignore — clipboard not available
+      // ignore, clipboard not available
     }
   };
 

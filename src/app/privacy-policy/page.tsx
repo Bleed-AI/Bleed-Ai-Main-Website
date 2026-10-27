@@ -5,7 +5,7 @@ import { generateMetadata as genMeta } from "@/lib/seo";
 export const metadata = genMeta({
   title: "Privacy Policy | Bleed AI",
   description:
-    "How Bleed AI collects, uses, and protects personal information across bleedai.com — analytics, marketing, contact forms, and your rights under GDPR and CCPA.",
+    "How Bleed AI collects, uses, and protects personal information across bleedai.com: analytics, marketing, contact forms, and your rights under GDPR and CCPA.",
   path: "/privacy-policy",
   keywords: ["privacy policy", "data protection", "GDPR", "CCPA", "cookies"],
   noindex: true,
@@ -94,7 +94,7 @@ export default function PrivacyPolicyPage() {
               </li>
               <li>
                 Payment and billing details you provide when engaging our paid
-                services (processed by our payment processors — we do not store
+                services (processed by our payment processors, we do not store
                 full card numbers on our servers).
               </li>
             </ul>

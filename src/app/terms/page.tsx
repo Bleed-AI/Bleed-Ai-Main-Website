@@ -5,7 +5,7 @@ import { generateMetadata as genMeta } from "@/lib/seo";
 export const metadata = genMeta({
   title: "Terms & Conditions | Bleed AI",
   description:
-    "The terms that govern your use of bleedai.com and Bleed AI's outbound marketing services — eligibility, engagements, payments, IP, disclaimers, and liability.",
+    "The terms that govern your use of bleedai.com and Bleed AI's outbound marketing services: eligibility, engagements, payments, IP, disclaimers, and liability.",
   path: "/terms",
   keywords: [
     "terms and conditions",

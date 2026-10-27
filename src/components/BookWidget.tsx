@@ -23,7 +23,7 @@ export default function BookWidget() {
     setDays(arr);
   }, []);
 
-  // Auto-open once the visitor scrolls ~40% down — but never auto-open again
+  // Auto-open once the visitor scrolls ~40% down, but never auto-open again
   // once the visitor has closed it this session.
   useEffect(() => {
     try {

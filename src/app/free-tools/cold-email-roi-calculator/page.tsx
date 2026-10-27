@@ -6,7 +6,7 @@ import { generateMetadata as genMeta } from "@/lib/seo";
 export const metadata = genMeta({
   title: "Cold Email ROI Calculator | Free Tool",
   description:
-    "Project pipeline, revenue, ROI, and cost per meeting from your cold email campaigns. Set your lead volume, deal size, and funnel rates — live results.",
+    "Project pipeline, revenue, ROI, and cost per meeting from your cold email campaigns. Set your lead volume, deal size, and funnel rates, live results.",
   path: "/free-tools/cold-email-roi-calculator",
   keywords: [
     "cold email ROI calculator",

@@ -1,6 +1,6 @@
 "use client";
 
-const SPRINT_URL = "https://calculator.bleedai.com/sprint";
+const TRIAL_URL = "/trial";
 
 export default function FinalCta() {
   return (
@@ -12,23 +12,21 @@ export default function FinalCta() {
         <h2>
           Your competitors are already
           <br />
-          <em>in someone&apos;s inbox.</em>
+          <em>reaching your buyers.</em>
         </h2>
         <p>
-          We run The Outbound Sprint: up to 8 cold email experiments in 6 weeks, one fixed price, you keep everything.
+          We find the buyers who need you, reach them on email, LinkedIn and mail, and answer every reply. You see the replies before you pay us.
         </p>
         <a
-          href={SPRINT_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href={TRIAL_URL}
           className="btn-red"
           style={{ fontSize: 15.5, padding: "15px 32px", margin: "0 auto" }}
         >
-          Start Your Sprint →
+          Apply for a trial &rarr;
         </a>
         <div className="cta-trust">
           <span>No setup fee</span>
-          <span>48-hour launch</span>
+          <span>See replies first</span>
           <span>98%+ inbox placement</span>
           <span>5.0★ across 3 platforms</span>
         </div>

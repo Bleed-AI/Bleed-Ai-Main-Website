@@ -39,7 +39,7 @@ const campaigns: Camp[] = [
   },
   {
     icon: "🎥",
-    title: "SaaS / Tech — Video Production",
+    title: "SaaS / Tech: Video Production",
     sub: "45 qualified leads from 423 sequences",
     stats: [
       { v: "423", l: "Sequences" },
