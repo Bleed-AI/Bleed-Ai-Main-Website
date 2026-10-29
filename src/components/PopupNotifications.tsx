@@ -63,6 +63,8 @@ export default function PopupNotifications() {
 
   // Main popup sequence
   useEffect(() => {
+    // /shortlisted is a separate service page: never run the outbound popup there.
+    if (window.location.pathname.startsWith("/shortlisted")) return;
     // Already shown or dismissed earlier this session? Never run again.
     try {
       if (sessionStorage.getItem("pnSeen")) return;
@@ -151,7 +153,8 @@ export default function PopupNotifications() {
 
   // Homepage uses the mockup-styled SidePopup instead of this global popup.
   // /home-test is an internal clone of the homepage and should behave identically.
-  if (pathname === "/" || pathname?.startsWith("/home-test")) return null;
+  // /shortlisted is a separate service page (AI search), so the outbound Sprint popup stays off it.
+  if (pathname === "/" || pathname?.startsWith("/home-test") || pathname?.startsWith("/shortlisted")) return null;
 
   return (
     <>

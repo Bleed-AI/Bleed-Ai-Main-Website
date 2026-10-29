@@ -2,9 +2,18 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+const SHORTLISTED_TRIAL_URL = "https://calendly.com/bleedai/shortlisted-start-your-2-week-free-trial";
 
 export default function Navigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+  // /shortlisted sells a different service: its trial CTA books the Shortlisted call and the Sprint link is hidden.
+  const isShortlisted = pathname?.startsWith("/shortlisted") ?? false;
+  const trialHref = isShortlisted ? SHORTLISTED_TRIAL_URL : "/trial";
+  const trialLabel = isShortlisted ? "Start free trial" : "Free Trial";
+  const trialExternal = isShortlisted ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -56,6 +65,7 @@ export default function Navigation() {
               Results
             </a>
 
+            {!isShortlisted && (
             <a
               href="https://calculator.bleedai.com/sprint"
               target="_blank"
@@ -68,13 +78,15 @@ export default function Navigation() {
               Sprint
               <span className="sprint-dot" />
             </a>
+            )}
 
             <a
-              href="/trial"
+              href={trialHref}
+              {...trialExternal}
               className="group relative px-5 py-2.5 bg-[#B1130F] text-white rounded-full text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow"
             >
               <span className="relative z-10 flex items-center gap-2">
-                <span>Free Trial</span>
+                <span>{trialLabel}</span>
                 <svg
                   className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
                   fill="none"
@@ -91,10 +103,11 @@ export default function Navigation() {
           {/* Mobile Actions */}
           <div className="flex lg:hidden items-center gap-2 sm:gap-3">
             <a
-              href="/trial"
+              href={trialHref}
+              {...trialExternal}
               className="group relative px-3 sm:px-4 py-1.5 sm:py-2 bg-[#B1130F] text-white rounded-full text-xs sm:text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow whitespace-nowrap"
             >
-              <span className="relative z-10">Free Trial</span>
+              <span className="relative z-10">{trialLabel}</span>
             </a>
 
             {/* Hamburger Menu */}
@@ -174,6 +187,7 @@ export default function Navigation() {
                   </a>
 
                   {/* Sprint Link */}
+                  {!isShortlisted && (
                   <a
                     href="https://calculator.bleedai.com/sprint"
                     target="_blank"
@@ -186,14 +200,16 @@ export default function Navigation() {
                     </svg>
                     Sprint
                   </a>
+                  )}
 
                   {/* CTA Button */}
                   <a
-                    href="/trial"
+                    href={trialHref}
+                    {...trialExternal}
                     onClick={() => setMobileMenuOpen(false)}
                     className="group flex items-center justify-center gap-2 w-full px-6 py-4 bg-[#B1130F] text-white text-center rounded-full font-bold text-base hover:shadow-lg hover:shadow-[#B1130F]/30 transition-all duration-300 active:scale-[0.98] btn-glow mt-4"
                   >
-                    <span>Free Trial</span>
+                    <span>{trialLabel}</span>
                     <svg
                       className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
                       fill="none"

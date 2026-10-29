@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const footerLinks = {
   company: [
@@ -31,6 +32,8 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isShortlisted = pathname?.startsWith("/shortlisted") ?? false;
   return (
     <footer className="bg-[var(--bg-secondary)] relative overflow-hidden">
       {/* Top Border Accent */}
@@ -50,7 +53,9 @@ export default function Footer() {
                 className="h-10 w-auto mb-6"
               />
               <p className="text-white/75 leading-relaxed max-w-sm mb-8">
-                Multi-channel outbound for B2B products that already sell. We find your buyers, reach them on email, LinkedIn and mail, and answer every reply. You see the replies before you pay us.
+                {isShortlisted
+                  ? "When your buyers ask ChatGPT who to hire, be on the list."
+                  : "Multi-channel outbound for B2B products that already sell. We find your buyers, reach them on email, LinkedIn and mail, and answer every reply. You see the replies before you pay us."}
               </p>
 
               {/* Social Links */}
