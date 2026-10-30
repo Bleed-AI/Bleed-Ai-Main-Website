@@ -9,8 +9,8 @@ import "./globals.css";
 export const viewport: Viewport = defaultViewport;
 
 export const metadata: Metadata = generateMetadata({
-  title: "BleedAI | AI-Powered Outbound Marketing That Drives Revenue",
-  description: "AI-powered outbound campaigns that convert. Get market validation, expert strategy, and proven results. Start in 1 week.",
+  title: "BleedAI | The Last Marketing Team You'll Ever Hire",
+  description: "One team for every channel your buyers use: AI search, LinkedIn, your website and outbound. Pick your slots, swap any slot to what's working. $495 a slot, every 4th slot free.",
   path: "/",
   keywords: [
     "AI outbound marketing",

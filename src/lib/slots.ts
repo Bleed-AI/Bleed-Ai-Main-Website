@@ -468,7 +468,11 @@ export function itemsPassThroughMonthly(items: PackageItem[]): number {
 }
 
 export function packageById(id: string): Package | undefined {
-  return PACKAGES.find((p) => p.id === id);
+  const hit = PACKAGES.find((p) => p.id === id);
+  if (hit) return hit;
+  // The homepage hybrid is not in an outcome grid but must still preload in the builder and /trial.
+  if (id === HYBRID_PACKAGE.id) return { ...HYBRID_PACKAGE, outcome: "outbound" } as Package;
+  return undefined;
 }
 
 export function packagesFor(outcome: OutcomeId): Package[] {
