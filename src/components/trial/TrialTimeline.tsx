@@ -114,7 +114,7 @@ export default function TrialTimeline({ picked }: { picked: string[] }) {
       {/* lanes legend */}
       <div className="mb-4 flex flex-wrap gap-2">
         {picked.length === 0 ? (
-          <span className="text-[12.5px] text-[#9099b8]">Pick a slot to see what it produces in the {TRIAL.length}.</span>
+          <span className="text-[12.5px] text-[#9099b8]">Pick a service to see what it produces in the {TRIAL.length}.</span>
         ) : (
           picked.map((id, i) => (
             <span key={id} className="inline-flex items-center gap-1.5 rounded-full border border-[#2a2a3e] bg-[#0d0d16] px-2.5 py-1 text-[12px] font-semibold text-white/90">
@@ -164,7 +164,7 @@ export default function TrialTimeline({ picked }: { picked: string[] }) {
         className="mt-4 rounded-xl border border-[#10b981]/40 bg-[#10b981]/[0.07] px-4 py-3 text-[13px] leading-snug text-[#c9f2e1] transition-opacity duration-500"
         style={{ opacity: day >= DAYS ? 1 : 0.35 }}
       >
-        <span className="font-semibold text-[#34d399]">After day 14:</span> keep what worked and pick your board at the founding price, swap what did not, or walk away.
+        <span className="font-semibold text-[#34d399]">After day 14:</span> keep what worked and pick your plan at the founding price, swap what did not, or walk away.
       </div>
     </div>
   );

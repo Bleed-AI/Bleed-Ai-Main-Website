@@ -10,7 +10,7 @@ export const viewport: Viewport = defaultViewport;
 
 export const metadata: Metadata = generateMetadata({
   title: "BleedAI | The Last Marketing Team You'll Ever Hire",
-  description: "One team for every channel your buyers use: AI search, LinkedIn, your website and outbound. Pick your slots, swap any slot to what's working. $495 a slot, every 4th slot free.",
+  description: "One team for every channel your buyers use: AI search, LinkedIn, your website and outbound. Pick your services, swap any service to what's working. $495 a service, every 4th service free.",
   path: "/",
   keywords: [
     "AI outbound marketing",

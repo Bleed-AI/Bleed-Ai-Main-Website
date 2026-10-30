@@ -1,18 +1,19 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-// /inbound-engine page body (2026-10-30). Prices, packages and slot copy come from src/lib/slots.ts.
-// Every sample uses an invented company and is labelled Example.
+// /inbound-engine page body (2026-10-30, round 2 the same day: visitor words are package, plan and service, never
+// slot; the tool and the article are real looking pages in a browser frame, the engine diagram is gone).
+// Prices, plans and service copy come from src/lib/slots.ts. Every sample uses an invented company and is labelled Example.
 
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
 import SlotChip from "@/components/slots/SlotChip";
 import OutcomePackages from "@/components/slots/OutcomePackages";
 import SiteTransform from "./SiteTransform";
-import LeadMagnetCalc from "./LeadMagnetCalc";
-import EngineFlow from "./EngineFlow";
-import { Eyebrow, GhostButton, H2, TrialButton } from "@/components/shortlisted/ui";
-import { itemsSlotCount, money, outcomeById, packageById, PRICE_LINE, priceFor, slotById, SWAP_LINE, TRIAL } from "@/lib/slots";
+import CalcApp from "./CalcApp";
+import ArticleSample from "@/components/shortlisted/ArticleSample";
+import { ExampleTag, Eyebrow, GhostButton, H2, TrialButton } from "@/components/shortlisted/ui";
+import { freeSlots, itemsSlotCount, money, outcomeById, packageById, PRICE_LINE, priceFor, slotById, SWAP_LINE, TRIAL, unitLabel } from "@/lib/slots";
 
 const OUTCOME = "inbound-engine";
 const pkg = packageById("inbound")!;
@@ -23,7 +24,7 @@ const RELATED = ["ai-search", "citations", "website-visitors"];
 const faqs = [
   {
     q: "Do I need a whole new website?",
-    a: `No. The ${slotById("page-revamp").name} slot rebuilds your homepage or one landing page and fixes what Google and AI crawlers need. The rest of your site stays as it is. More pages is a Pro option.`,
+    a: `No. The ${slotById("page-revamp").name} service rebuilds your homepage or one landing page and fixes what Google and AI crawlers need. The rest of your site stays as it is. More pages is a Pro option.`,
   },
   {
     q: "What kind of tool would you build?",
@@ -39,7 +40,7 @@ const faqs = [
   },
   {
     q: "What if one part isn't working?",
-    a: `${SWAP_LINE} If the articles pull and the posts don't, move that slot to more articles, or to AI search tracking, next month.`,
+    a: `${SWAP_LINE} If the articles pull and the posts don't, swap the posts for more articles, or for AI search tracking, next month.`,
   },
   {
     q: "How much of my time does it take?",
@@ -55,7 +56,6 @@ const faqs = [
 export default function InboundEngine() {
   const outcome = outcomeById(OUTCOME);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [captured, setCaptured] = useState(0);
 
   return (
     <div className="text-white">
@@ -79,10 +79,10 @@ export default function InboundEngine() {
           </Reveal>
           <Reveal className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4" delay={200}>
             <TrialButton outcome={OUTCOME} />
-            <GhostButton href="#packages">See the package</GhostButton>
+            <GhostButton href="#packages">See the plan</GhostButton>
           </Reveal>
           <Reveal className="mt-6 font-mono text-[12.5px] text-white/50" delay={240}>
-            {PRICE} a month for {SLOT_COUNT} slots, the 4th is free · Month to month · {TRIAL.length} free to start
+            {PRICE} a month for {unitLabel(SLOT_COUNT)}, the 4th is free · Month to month · {TRIAL.length} free to start
           </Reveal>
         </div>
       </section>
@@ -122,58 +122,73 @@ export default function InboundEngine() {
             </Reveal>
             <Reveal delay={140} className="mt-6 rounded-xl border border-white/[0.07] bg-white/[0.02] p-4">
               <div className="mb-2.5 flex items-center gap-2">
-                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">The slot</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">The service</span>
                 <SlotChip id="lead-magnet-app" size="sm" />
               </div>
               <p className="text-[13.5px] leading-snug text-white/75">{slotById("lead-magnet-app").monthly}. {slotById("lead-magnet-app").tooltip}</p>
             </Reveal>
           </div>
-          <Reveal delay={80} className="min-w-0">
-            <LeadMagnetCalc onCapture={() => setCaptured((n) => n + 1)} />
+          <Reveal delay={80} className="flex min-w-0 flex-col gap-3">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[13px] font-semibold text-white">A tool on your site</span>
+              <ExampleTag>Example app, it works</ExampleTag>
+            </div>
+            <CalcApp />
+            <p className="text-[12.5px] leading-snug text-white/50">
+              On a real site, everyone who asks for the report lands in your inbox with the numbers they entered, so you know their size and their problem before the first call. This one is an example: nothing is sent or saved.
+            </p>
           </Reveal>
         </div>
       </section>
 
-      {/* 4. HOW THE SLOTS FEED EACH OTHER */}
+      {/* 4. THE ARTICLES */}
       <section className="px-4 py-14 sm:px-6 sm:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto mb-10 max-w-2xl text-center">
-            <Reveal><Eyebrow>The engine</Eyebrow></Reveal>
+            <Reveal><Eyebrow>The articles</Eyebrow></Reveal>
             <Reveal delay={60}>
               <H2>
-                Four slots. <em className="hd-em">Each one feeds the next.</em>
+                Articles people use, <em className="hd-em">not just read.</em>
               </H2>
             </Reveal>
             <Reveal as="p" delay={100} className="mt-4 text-[16px] leading-relaxed text-[#9099b8]">
-              Any one of these on its own is a nice to have. Together they move a stranger from a LinkedIn feed to your inbox.
+              {slotById("articles").monthly}. Each one answers a question your buyers type into Google and ChatGPT, then points them to your tool. Try the calculator inside.
             </Reveal>
           </div>
-          <Reveal>
-            <EngineFlow extraLeads={captured} />
+          <Reveal className="mx-auto flex max-w-3xl flex-col gap-3">
+            <div className="flex items-center justify-between gap-2">
+              <span className="text-[13px] font-semibold text-white">An article on your site</span>
+              <ExampleTag>Example article</ExampleTag>
+            </div>
+            <ArticleSample />
+            <div className="flex flex-wrap items-center gap-2 text-[12.5px] text-white/55">
+              <span>From your</span> <SlotChip id="articles" size="sm" /> <span>service, with LinkedIn posts sending buyers to every one.</span>
+            </div>
           </Reveal>
         </div>
       </section>
 
       {/* 5. PACKAGE */}
       <section id="packages" className="scroll-mt-24 px-4 py-14 sm:px-6 sm:py-20">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <div className="mx-auto mb-10 max-w-2xl text-center">
-            <Reveal><Eyebrow>The package</Eyebrow></Reveal>
+            <Reveal><Eyebrow>The plan</Eyebrow></Reveal>
             <Reveal delay={60}>
               <H2>
-                {SLOT_COUNT} slots. <em className="hd-em">The 4th one is free.</em>
+                {unitLabel(SLOT_COUNT)}. <em className="hd-em">{freeSlots(SLOT_COUNT) > 0 ? "The 4th one is free." : "Swap any of them."}</em>
               </H2>
             </Reveal>
             <Reveal as="p" delay={100} className="mt-4 text-[16px] leading-relaxed text-[#9099b8]">
               {SWAP_LINE} Month to month. {PRICE_LINE}.
             </Reveal>
           </div>
-          <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-            <Reveal className="min-w-0">
+          <div className="grid grid-cols-1 items-start gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
+            {/* Two plan cards: hold the shared grid at 2 columns here so the cards keep their width. */}
+            <Reveal className="min-w-0 lg:[&>div]:grid-cols-2 xl:[&>div]:grid-cols-2">
               <OutcomePackages outcome="inbound-engine" />
             </Reveal>
-            <Reveal delay={100} className="min-w-0 rounded-2xl border border-[#1f1f30] bg-[linear-gradient(165deg,#141420,#0b0b14)] p-6 sm:p-7">
-              <h3 className="font-display text-xl font-bold text-white">Slots you could swap in</h3>
+            <Reveal delay={100} className="min-w-0 rounded-2xl border border-[#1f1f30] bg-[linear-gradient(165deg,#141420,#0b0b14)] p-6 sm:p-7 lg:mt-3">
+              <h3 className="font-display text-xl font-bold text-white">Services you could swap in</h3>
               <p className="mt-1.5 text-[14px] leading-snug text-[#9099b8]">Add them, or swap one in when it makes more sense for you.</p>
               <ul className="mt-5 space-y-4">
                 {RELATED.map((id) => {
@@ -187,7 +202,7 @@ export default function InboundEngine() {
                 })}
               </ul>
               <a href="/pricing/#builder" className="mt-6 inline-flex text-[13.5px] font-semibold text-white/80 underline underline-offset-4 hover:text-white">
-                Build your own board
+                Build your own from services
               </a>
             </Reveal>
           </div>

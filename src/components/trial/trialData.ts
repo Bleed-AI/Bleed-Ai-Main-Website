@@ -91,8 +91,8 @@ export const GENERIC_BEATS: [number, string][] = [
 
 export const SHARED_BEATS: [number, string][] = [
   [1, "You apply. We check the fit the same day"],
-  [2, "15 minute call: we agree what each slot should do for you"],
-  [14, "Readout: what each slot produced, and what we would keep"],
+  [2, "15 minute call: we agree what each service should do for you"],
+  [14, "Readout: what each service produced, and what we would keep"],
 ];
 
 /** Keep a pick list valid: trialable only, children need their parent, max 2. */
@@ -126,12 +126,12 @@ export interface TrialQuery {
   sourceName: string;
 }
 
-/** Read ?slots=, ?package= and ?outcome= (in that order of priority). */
+/** Read ?services= (or the older ?slots=, still sent by the builder), ?package= and ?outcome=, in that order of priority. */
 export function readTrialQuery(search: string): TrialQuery {
   const q = new URLSearchParams(search);
   const outcome = q.get("outcome") ?? "";
   const pkg = q.get("package") ?? "";
-  const slotsParam = q.get("slots") ?? "";
+  const slotsParam = q.get("services") ?? q.get("slots") ?? "";
   let picks: string[] = [];
   let sourceName = "";
   if (slotsParam) {

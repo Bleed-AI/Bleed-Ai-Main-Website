@@ -57,7 +57,7 @@ export default function Footer() {
               <p className="text-white/75 leading-relaxed max-w-sm mb-8">
                 {isShortlisted
                   ? "When your buyers ask ChatGPT who to hire, be on the list."
-                  : "The last marketing team you'll ever hire. Pick your slots across LinkedIn, your website, AI search and outbound, and swap any slot to what's working."}
+                  : "The last marketing team you'll ever hire. Pick your services across LinkedIn, your website, AI search and outbound, and swap any service to what's working."}
               </p>
 
               {/* Social Links */}

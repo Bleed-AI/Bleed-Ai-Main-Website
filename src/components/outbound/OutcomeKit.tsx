@@ -102,7 +102,7 @@ export function OutcomeHero({
         </Reveal>
         <Reveal delay={140} className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
           <TrialButton outcome={outcome} />
-          <GhostButton href="#packages">See the packages</GhostButton>
+          <GhostButton href="#packages">See the plans</GhostButton>
         </Reveal>
         <Reveal delay={200} className="mt-6 text-[13px] text-[#9099b8]">
           From <span className="font-semibold text-white">{money(priceFor(MIN_SLOTS))} a month</span> · {PRICE_LINE} · {TRIAL.length} free to start
@@ -132,7 +132,7 @@ export function SwapIns({ ids, note }: { ids: string[]; note?: ReactNode }) {
         <span className="text-[13px] text-[#9099b8]">{SWAP_LINE}</span>
       </div>
       <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-[#9099b8]">
-        Every slot on your board can change at the start of a month. If one stops pulling its weight, we move it to one of these, or to anything else on the menu.
+        Each service is a full service on its own. If one isn&apos;t pulling its weight, swap it for one of these, or anything else on the menu, at the start of next month.
       </p>
       <div className="mt-5 flex flex-wrap gap-2.5">
         {ids.map((id) => (

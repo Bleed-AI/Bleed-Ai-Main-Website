@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!s) return {};
   return buildMeta({
     title: `${s.name}: ${s.title}`,
-    description: `${s.monthly}. ${s.tooltip}`,
-    path: `/slots/${s.id}`,
+    description: `${s.monthly.replace(/\.\s*$/, "")}. ${s.tooltip} A full service on its own: add it to any plan, swap it any month.`,
+    path: `/services/${s.id}`,
     noindex: false,
   });
 }

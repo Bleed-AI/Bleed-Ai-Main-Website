@@ -52,7 +52,7 @@ export default function TrialExperience() {
           <p className="mb-5 text-[14px] leading-relaxed text-[#9099b8]">
             {source ? (
               <>
-                You came from <span className="font-semibold text-white">{source}</span>, so we picked {picked.length === 1 ? "its first slot" : `${picked.length} of its slots`}. Change them if you like.
+                You came from <span className="font-semibold text-white">{source}</span>, so we picked {picked.length === 1 ? "its first service" : `${picked.length} of its services`}. Change them if you like.
               </>
             ) : (
               <>Tap to pick. Picking a third swaps out your first pick. Not sure? Leave our suggestion, we will check it with you on the call.</>

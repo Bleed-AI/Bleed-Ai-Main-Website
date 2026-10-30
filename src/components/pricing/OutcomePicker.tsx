@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import PackageCard from "@/components/slots/PackageCard";
+import OutcomePackages from "@/components/slots/OutcomePackages";
 import {
   HYBRID_PACKAGE,
   itemsSlotCount,
@@ -10,9 +11,9 @@ import {
   packageById,
   packagesFor,
   priceFor,
+  unitLabel,
   type OutcomeId,
 } from "@/lib/slots";
-import SpecialistCard from "./SpecialistCard";
 
 const ICONS: Record<OutcomeId, ReactNode> = {
   shortlisted: (
@@ -48,7 +49,7 @@ function fromPrice(o: OutcomeId): number {
   return priceFor(Math.min(...counts));
 }
 
-/** Pick an outcome first (#42): outcome cards, then that outcome's packages, then build your own. */
+/** Pick a package first (#42): package cards, then that package's plans, then build your own. Public words: package, plan, service. */
 export default function OutcomePicker() {
   const [sel, setSel] = useState<OutcomeId | null>("shortlisted");
   const panelRef = useRef<HTMLDivElement | null>(null);
@@ -77,7 +78,6 @@ export default function OutcomePicker() {
     }, 60);
   }
 
-  const pkgs = sel ? packagesFor(sel) : [];
   const outcome = sel ? OUTCOMES.find((o) => o.id === sel)! : null;
   const hybridCount = itemsSlotCount(HYBRID_PACKAGE.items);
 
@@ -88,9 +88,9 @@ export default function OutcomePicker() {
         <h2 className="sec-h2">
           What do you want <em>more of?</em>
         </h2>
-        <p className="sec-sub !mb-10">Pick an outcome. We show you the boards that get it, and you can change any slot before you start.</p>
+        <p className="sec-sub !mb-10">Pick a package. You will see its plans next, and you can change any service in them before you start.</p>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4" role="radiogroup" aria-label="Outcomes">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4" role="radiogroup" aria-label="Packages">
           {OUTCOMES.map((o) => {
             const on = sel === o.id;
             return (
@@ -139,43 +139,19 @@ export default function OutcomePicker() {
               <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
                 <div>
                   <div className="sec-label !mb-1">Step 2</div>
-                  <h3 className="font-display text-2xl font-bold text-white">Boards for {outcome.title.toLowerCase()}</h3>
+                  <h3 className="font-display text-2xl font-bold text-white">
+                    Pick a plan <span className="text-[#9099b8]">in the {outcome.name} package</span>
+                  </h3>
+                  <p className="mt-1.5 text-[13.5px] text-[#9099b8]">Ready made plans, or build your own from services.</p>
                 </div>
                 <a href={outcome.href} className="text-[13.5px] font-semibold text-[#ff6b67] hover:text-white">
                   How {outcome.name} works &rarr;
                 </a>
               </div>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {pkgs.map((p, i) => (
-                  <div key={p.id} className="pr-rise" style={{ animationDelay: `${i * 80}ms` }}>
-                    <PackageCard id={p.id} name={p.name} pitch={p.pitch} items={p.items} featured={p.featured} trialOutcome={outcome.id} />
-                  </div>
-                ))}
-                <a
-                  href="#builder"
-                  className="pr-rise group flex min-h-[220px] flex-col justify-between rounded-2xl border border-dashed border-[#2a2a3e] p-6 transition-colors hover:border-[#B1130F]/60 sm:p-7"
-                  style={{ animationDelay: `${pkgs.length * 80}ms` }}
-                >
-                  <div>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#2a2a3e] text-2xl text-[#ff6b67] transition-transform group-hover:rotate-90">
-                      +
-                    </span>
-                    <h3 className="mt-4 font-display text-xl font-bold text-white">Build your own</h3>
-                    <p className="mt-1.5 text-[14px] leading-snug text-[#9099b8]">
-                      Pick any slots from the full menu. Mix LinkedIn, your website and outbound on one board.
-                    </p>
-                  </div>
-                  <span className="mt-6 text-[14px] font-semibold text-white">Open the builder &darr;</span>
-                </a>
-              </div>
-              {outcome.id === "outbound" && (
-                <div className="pr-rise mt-6" style={{ animationDelay: "240ms" }}>
-                  <SpecialistCard />
-                </div>
-              )}
+              <OutcomePackages outcome={outcome.id} builderHref="#builder" animate />
             </div>
           ) : (
-            <p className="mt-6 text-center text-[13.5px] text-[#505570]">Pick one above to see its boards.</p>
+            <p className="mt-6 text-center text-[13.5px] text-[#505570]">Pick a package above to see its plans.</p>
           )}
         </div>
 
@@ -184,10 +160,10 @@ export default function OutcomePicker() {
             <span className="inline-block rounded-full bg-[#10b981]/12 px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.12em] text-[#34d399]">
               The mix we suggest first
             </span>
-            <h3 className="mt-3 font-display text-2xl font-bold text-white sm:text-[28px]">Want more than one outcome?</h3>
+            <h3 className="mt-3 font-display text-2xl font-bold text-white sm:text-[28px]">Want more than one package?</h3>
             <p className="mt-2 text-[14.5px] leading-relaxed text-[#9099b8]">
-              Most companies need to be found by the buyers already searching and to reach the ones who are not searching yet. This board does both, at{" "}
-              {hybridCount} slots for {money(priceFor(hybridCount))} a month, with the 4th slot free.
+              Most companies need to be found by the buyers already searching and to reach the ones who are not searching yet. This plan does both:{" "}
+              {unitLabel(hybridCount)} for {money(priceFor(hybridCount))} a month, with the 4th service free.
             </p>
           </div>
           <PackageCard id={HYBRID_PACKAGE.id} name={HYBRID_PACKAGE.name} pitch={HYBRID_PACKAGE.pitch} items={HYBRID_PACKAGE.items} />

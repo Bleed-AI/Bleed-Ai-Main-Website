@@ -1,6 +1,6 @@
 "use client";
 
-import { FREE_EVERY } from "@/lib/slots";
+import { FREE_EVERY, unitLabel } from "@/lib/slots";
 
 const SPARKS = [
   [-22, -18],
@@ -12,7 +12,7 @@ const SPARKS = [
 ];
 
 /**
- * The slot board as boxes, in groups of 4. Every 4th box is FREE.
+ * A plan's services as boxes, in groups of 4. Every 4th box is FREE.
  * Filled boxes pop in; a free box flips from red to green with a ring and sparks.
  * Empty boxes up to the next group of 4 show as ghosts, so the free one to aim for is always visible.
  */
@@ -40,7 +40,7 @@ export default function BoardBoxes({
   }
 
   return (
-    <div className={`flex flex-wrap items-center ${size === "xs" ? "gap-x-1.5 gap-y-1" : "gap-x-2.5 gap-y-1.5"}`} aria-label={`${count} slots`}>
+    <div className={`flex flex-wrap items-center ${size === "xs" ? "gap-x-1.5 gap-y-1" : "gap-x-2.5 gap-y-1.5"}`} aria-label={unitLabel(count)}>
       {groups.map((g, gi) => (
         <div key={gi} className={`flex ${size === "xs" ? "gap-0.5" : "gap-1"}`}>
           {g.map((i) => {

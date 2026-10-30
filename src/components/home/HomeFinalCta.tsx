@@ -47,7 +47,7 @@ export default function HomeFinalCta() {
           <em>starts with a free trial.</em>
         </h2>
         <p>
-          {TRIAL.length} on {TRIAL.slots}, made for you to judge. Then pick your board, keep the slots that work and swap the rest.
+          {TRIAL.length} on {TRIAL.slots}, made for you to judge. Then pick your plan, keep the services that work and swap the rest.
         </p>
         <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a href={TRIAL.href} className="btn-red" style={{ fontSize: 15.5, padding: "15px 32px" }}>
@@ -62,8 +62,8 @@ export default function HomeFinalCta() {
         </div>
         <div className="cta-trust">
           <span>Month to month</span>
-          <span>Swap any slot monthly</span>
-          <span>Every {FREE_EVERY}th slot free</span>
+          <span>Swap any service, any month</span>
+          <span>Every {FREE_EVERY}th service free</span>
           <span>5.0★ across 3 platforms</span>
         </div>
       </div>

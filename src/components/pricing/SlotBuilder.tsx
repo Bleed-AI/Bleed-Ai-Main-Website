@@ -20,12 +20,13 @@ import {
   TRIAL,
   type PackageItem,
   type Slot,
+  unitLabel,
   type ThemeId,
 } from "@/lib/slots";
 import BoardBoxes from "./BoardBoxes";
 import { useCountUp } from "./useCountUp";
 
-/** Most units of a volume slot one board can hold. */
+/** Most units of a volume service one plan can hold. */
 const MAX_VOLUME = 4;
 
 type Pick = { qty: number; pro: boolean };
@@ -80,13 +81,101 @@ function loadPackage(id: string): PackageItem[] | null {
 }
 
 function nudge(n: number): { text: string; tone: "warn" | "green" | "plain" } {
-  if (n === 0) return { text: `Pick at least ${MIN_SLOTS} slots to start.`, tone: "plain" };
-  if (n < MIN_SLOTS) return { text: `Minimum is ${MIN_SLOTS} slots. Add ${MIN_SLOTS - n} more.`, tone: "warn" };
+  if (n === 0) return { text: `Pick at least ${unitLabel(MIN_SLOTS)} to start.`, tone: "plain" };
+  if (n < MIN_SLOTS) return { text: `Minimum is ${unitLabel(MIN_SLOTS)}. Add ${MIN_SLOTS - n} more.`, tone: "warn" };
   const r = n % FREE_EVERY;
-  if (r === 0) return { text: `Your ${ORDINAL[n] ?? `${n}th`} slot is free.`, tone: "green" };
+  if (r === 0) return { text: `Your ${ORDINAL[n] ?? `${n}th`} service is free.`, tone: "green" };
   const left = slotsToNextFree(n);
-  if (left === 1) return { text: "Add 1 more slot and it's free.", tone: "green" };
-  return { text: `${left} more slots until your next free one.`, tone: "plain" };
+  if (left === 1) return { text: "Add 1 more service and it's free.", tone: "green" };
+  return { text: `${left} more services until your next free one.`, tone: "plain" };
+}
+
+const num = (x: string) => parseInt(x.replace(/,/g, ""), 10);
+const fmt = (n: number) => n.toLocaleString("en-US");
+
+type EmailFacts = { emails: number; buyers: number; each: number; replies: string };
+
+/**
+ * The email campaign's numbers, read from its monthly line in SLOTS so they have one source.
+ * Returns null if that line changes shape; the row then falls back to the plain sentence.
+ */
+function emailFacts(s: Slot, qty: number): EmailFacts | null {
+  const m = s.monthly.match(/([\d,]+) emails a month to about ([\d,]+) buyers[^,]*, (\d+) emails each, (.+)$/);
+  if (!m) return null;
+  const replies = m[4].charAt(0).toUpperCase() + m[4].slice(1);
+  return { emails: num(m[1]) * qty, buyers: num(m[2]) * qty, each: num(m[3]), replies };
+}
+
+/** The monthly line for qty units: a leading number is multiplied ("2 articles" x 2 = "4 articles"). */
+function monthlyFor(s: Slot, qty: number): string {
+  if (qty <= 1) return s.monthly;
+  const m = s.monthly.match(/^(\d[\d,]*) (?!to\b)/);
+  if (m) return s.monthly.replace(m[1], fmt(num(m[1]) * qty));
+  return `${qty} x ${s.monthly.charAt(0).toLowerCase()}${s.monthly.slice(1)}`;
+}
+
+/** One short line per service for the plan summary. */
+function shortLine(s: Slot, qty: number): string {
+  const f = emailFacts(s, qty);
+  if (f) return `${fmt(f.emails)} emails a month to about ${fmt(f.buyers)} buyers`;
+  return monthlyFor(s, qty);
+}
+
+const CHECK = (
+  <svg className="mt-[3px] h-3.5 w-3.5 flex-none text-[#ff3d38]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+    <path d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 111.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" />
+  </svg>
+);
+
+/** What arrives every month, as line items. Email outbound gets its numbers as tiles. */
+function MonthlyItems({ s, qty, related }: { s: Slot; qty: number; related?: { name: string; onAdd: () => void } }) {
+  const f = emailFacts(s, qty);
+  if (f) {
+    const tiles = [
+      { big: fmt(f.emails), small: "emails a month" },
+      { big: fmt(f.buyers), small: "buyers you pick (about)" },
+      { big: String(f.each), small: "emails to each buyer" },
+      { big: "Every", small: "reply handled for you" },
+    ];
+    return (
+      <div className="mt-2">
+        <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-4">
+          {tiles.map((t) => (
+            <div key={t.small} className="rounded-lg border border-white/[0.06] bg-[#0b0b14]/70 px-2.5 py-2">
+              <div key={t.big} className="pr-bump font-display text-[17px] font-bold leading-none text-white">
+                {t.big}
+              </div>
+              <div className="mt-1 text-[11px] leading-tight text-[#9099b8]">{t.small}</div>
+            </div>
+          ))}
+        </div>
+        <ul className="mt-2 space-y-1">
+          <li className="flex gap-2 text-[12.5px] leading-snug text-[#c3c8dc]">
+            {CHECK}
+            {qty > 1 ? `${qty} targeted campaigns, written with you and sent for you` : "One targeted campaign, written with you and sent for you"}
+          </li>
+          <li className="flex gap-2 text-[12.5px] leading-snug text-[#c3c8dc]">
+            {CHECK}
+            {f.replies}
+          </li>
+        </ul>
+        {related && (
+          <p className="mt-2 text-[11.5px] leading-snug text-[#9099b8]">
+            Want the list built on buying signals too?{" "}
+            <button type="button" onClick={related.onAdd} className="font-semibold text-[#ff6b67] hover:text-white">
+              Add {related.name} +
+            </button>
+          </p>
+        )}
+      </div>
+    );
+  }
+  return (
+    <div className="mt-1.5 flex gap-2 text-[12.5px] leading-snug text-[#c3c8dc]">
+      {CHECK}
+      <span>{monthlyFor(s, qty || 1)}</span>
+    </div>
+  );
 }
 
 /* ---------------- slot row ---------------- */
@@ -100,6 +189,7 @@ function SlotRow({
   onAdd,
   onDec,
   onPro,
+  related,
 }: {
   s: Slot;
   pick?: Pick;
@@ -109,6 +199,7 @@ function SlotRow({
   onAdd: () => void;
   onDec: () => void;
   onPro: () => void;
+  related?: { name: string; onAdd: () => void };
 }) {
   const on = !!pick;
   const qty = pick?.qty ?? 0;
@@ -122,7 +213,7 @@ function SlotRow({
           : "border-[#1f1f30] bg-[#141420]/70 hover:border-[#2a2a3e]"
       }`}
     >
-      <div className="flex items-start gap-3 p-3.5 sm:gap-4 sm:p-4">
+      <div className="flex items-start gap-3 px-3.5 pb-2.5 pt-3.5 sm:gap-4 sm:px-4 sm:pt-4">
         <span
           className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full transition-all duration-300 ${
             on ? "bg-[#ff3d38] shadow-[0_0_10px_#ff3d38]" : "bg-[#2a2a3e]"
@@ -147,12 +238,6 @@ function SlotRow({
             </button>
           </div>
           <div className="mt-0.5 text-[12.5px] font-medium text-[#ff8a86]">{s.title}</div>
-          <p className="mt-1 text-[12.5px] leading-snug text-[#9099b8]">{s.monthly}</p>
-          {s.passThrough && (
-            <p className="mt-1 text-[11.5px] text-[#505570]">
-              + {s.passThrough.label}: {money(s.passThrough.amount)} {s.passThrough.unit === "month" ? "a month" : "per target"}
-            </p>
-          )}
         </div>
         <div className="flex shrink-0 flex-col items-end gap-1.5">
           {on ? (
@@ -187,10 +272,20 @@ function SlotRow({
               <span className="text-[15px] leading-none">+</span> Add
             </button>
           )}
-          <span className={`text-[11px] ${on ? "font-semibold text-white/80" : "text-[#505570]"}`}>
-            {cost} slot{cost > 1 ? "s" : ""}
+          <span className={`whitespace-nowrap text-[11px] ${on ? "font-semibold text-white/80" : "text-[#505570]"}`}>
+            {money(SLOT_PRICE * cost)} a month
           </span>
         </div>
+      </div>
+
+      <div className="pb-3.5 pl-9 pr-3.5 sm:pb-4 sm:pl-[42px] sm:pr-4">
+        <div className="text-[10.5px] font-semibold uppercase tracking-[0.12em] text-[#505570]">Every month</div>
+        <MonthlyItems s={s} qty={qty || 1} related={on ? related : undefined} />
+        {s.passThrough && (
+          <p className="mt-1 text-[11.5px] text-[#505570]">
+            + {s.passThrough.label}: {money(s.passThrough.amount)} {s.passThrough.unit === "month" ? "a month" : "per target"}
+          </p>
+        )}
       </div>
 
       {on && (s.pro || s.volume) && (
@@ -205,7 +300,7 @@ function SlotRow({
                 />
               </span>
               <span className="text-[12px] leading-snug text-[#c3c8dc]">
-                {s.pro} <span className="text-[#505570]">(+1 slot)</span>
+                {s.pro} <span className="text-[#505570]">(+{money(SLOT_PRICE)})</span>
               </span>
             </button>
           )}
@@ -217,7 +312,7 @@ function SlotRow({
         <div className="pr-child-in border-t border-white/5 px-3.5 pb-3.5 pt-3 text-[12.5px] leading-relaxed text-[#c3c8dc] sm:px-4 sm:pl-[42px]">
           {s.tooltip}{" "}
           <a href={slotHref(s.id)} className="whitespace-nowrap font-semibold text-[#ff6b67] hover:text-white">
-            See this slot &rarr;
+            See the full service &rarr;
           </a>
         </div>
       )}
@@ -259,7 +354,7 @@ function Summary({
   return (
     <div className="rounded-2xl border border-[#2a2a3e] bg-[linear-gradient(170deg,#161622,#0b0b14)] p-5 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.9)] sm:p-6">
       <div className="flex items-center justify-between">
-        <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#505570]">Your board</span>
+        <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[#505570]">Your plan</span>
         {ids.length > 0 && (
           <button type="button" onClick={onClear} className="text-[12px] text-[#9099b8] underline-offset-2 hover:text-white hover:underline">
             Start over
@@ -295,7 +390,7 @@ function Summary({
         )}
         </div>
         <p className="mt-1 text-[12.5px] text-[#9099b8]">
-          {count} slot{count === 1 ? "" : "s"} at {money(SLOT_PRICE)}
+          {unitLabel(count)} at {money(SLOT_PRICE)}
           {free > 0 ? `, ${free} free, you pay for ${paidSlots(count)}` : ""}
         </p>
         {passMonthly > 0 && (
@@ -322,27 +417,31 @@ function Summary({
       </div>
 
       {ids.length > 0 && (
-        <ul className="mt-4 max-h-[240px] space-y-1.5 overflow-y-auto pr-1">
+        <div className="mt-5 text-[11px] font-bold uppercase tracking-[0.14em] text-[#505570]">What you get every month</div>
+      )}
+      {ids.length > 0 && (
+        <ul className="mt-2.5 max-h-[330px] space-y-2.5 overflow-y-auto pr-1">
           {ids.map((id) => {
             const s = slotById(id);
             const p = board[id];
             const c = slotCost(s, p);
             return (
-              <li key={id} className="pr-child-in flex items-center gap-2 text-[13px]">
-                <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#ff3d38]" />
-                <span className="min-w-0 flex-1 truncate text-white/90">
-                  {p.qty > 1 ? `${p.qty} x ` : ""}
-                  {s.name}
-                  {p.pro ? " Pro" : ""}
+              <li key={id} className="pr-child-in flex items-start gap-2 text-[13px]">
+                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#ff3d38]" />
+                <span className="min-w-0 flex-1">
+                  <span className="block font-semibold text-white/90">
+                    {p.qty > 1 ? `${p.qty} x ` : ""}
+                    {s.name}
+                    {p.pro ? " Pro" : ""}
+                  </span>
+                  <span className="mt-0.5 line-clamp-2 block text-[11.5px] leading-snug text-[#9099b8]">{shortLine(s, p.qty)}</span>
                 </span>
-                <span className="text-[11.5px] text-[#505570]">
-                  {c} slot{c > 1 ? "s" : ""}
-                </span>
+                <span className="mt-[2px] whitespace-nowrap text-[11.5px] text-[#505570]">{unitLabel(c)}</span>
                 <button
                   type="button"
                   onClick={() => onRemove(id)}
                   aria-label={`Remove ${s.name}`}
-                  className="flex h-6 w-6 items-center justify-center rounded-full text-[#505570] hover:bg-white/5 hover:text-white"
+                  className="-mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[#505570] hover:bg-white/5 hover:text-white"
                 >
                   &times;
                 </button>
@@ -350,6 +449,10 @@ function Summary({
             );
           })}
         </ul>
+      )}
+
+      {ids.length > 0 && (
+        <p className="mt-3 text-[11.5px] leading-snug text-[#9099b8]">Each one is a full service. Swap any of them for another next month.</p>
       )}
 
       {soon.length > 0 && (
@@ -372,7 +475,7 @@ function Summary({
           href={callHref}
           className="rounded-full border border-[#2a2a3e] px-5 py-3 text-center text-[14px] font-semibold text-white/90 transition-colors hover:border-white/30"
         >
-          Book a call about this board
+          Book a call about this plan
         </a>
         <p className="mt-1 text-center text-[11.5px] text-[#505570]">
           Trial: {TRIAL.length} on {TRIAL.slots}, for qualified companies.
@@ -399,7 +502,7 @@ export default function SlotBuilder() {
 
   const count = useMemo(() => boardCount(board), [board]);
 
-  // Price feedback on every change: the free slot moment, and "same price" when a free slot goes.
+  // Price feedback on every change: the free service moment, and "same price" when a free one goes.
   useEffect(() => {
     const prev = prevCount.current;
     prevCount.current = count;
@@ -412,9 +515,9 @@ export default function SlotBuilder() {
     flashKey.current += 1;
     const key = flashKey.current;
     if (count > prev) {
-      setFlash(diff === 0 ? { key, kind: "free", text: `Slot ${count} is free` } : { key, kind: "up", text: `+${money(diff)}` });
+      setFlash(diff === 0 ? { key, kind: "free", text: `Service ${count} is free` } : { key, kind: "up", text: `+${money(diff)}` });
     } else {
-      setFlash(diff === 0 ? { key, kind: "same", text: "Same price, that was your free slot" } : { key, kind: "down", text: `-${money(-diff)}` });
+      setFlash(diff === 0 ? { key, kind: "same", text: "Same price, that was your free service" } : { key, kind: "down", text: `-${money(-diff)}` });
     }
   }, [count]);
 
@@ -477,7 +580,7 @@ export default function SlotBuilder() {
     return () => document.removeEventListener("click", onClick);
   }, [applyItems]);
 
-  // Mobile sticky bar: on while the slot list is on screen and the full summary is not.
+  // Mobile sticky bar: on while the service list is on screen and the full summary is not.
   useEffect(() => {
     const sec = sectionRef.current;
     const sum = summaryRef.current;
@@ -558,8 +661,11 @@ export default function SlotBuilder() {
   const price = useCountUp(priceFor(count));
   const n = nudge(count);
 
+  const listSlot = SLOTS.find((x) => x.id === "buyer-list");
   const rowProps = (s: Slot) => ({
     s,
+    related:
+      s.id === "email-campaign" && listSlot && !board[listSlot.id] ? { name: listSlot.name, onAdd: () => add(listSlot.id) } : undefined,
     pick: board[s.id],
     infoOpen: info === s.id,
     onInfo: () => setInfo((v) => (v === s.id ? null : s.id)),
@@ -574,22 +680,22 @@ export default function SlotBuilder() {
       <div className="sec-inner">
         <div className="sec-label">Build your own</div>
         <h2 className="sec-h2">
-          Pick your slots. <em>Watch the 4th go free.</em>
+          Pick your services. <em>Watch the 4th go free.</em>
         </h2>
         <p className="sec-sub !mb-8">
-          Every slot is {money(SLOT_PRICE)} a month. Some slots open more options once you pick them. You can swap any slot next month.
+          Each service is a full service on its own, {money(SLOT_PRICE)} a month, with a clear monthly output. If one isn&apos;t pulling its weight, swap it for another next month. Some services open more options once you pick them.
         </p>
 
         {loadedName && (
           <div className="pr-rise mb-5 inline-flex items-center gap-2 rounded-full border border-[#10b981]/40 bg-[#10b981]/10 px-3.5 py-1.5 text-[12.5px] text-[#34d399]">
             <span className="h-1.5 w-1.5 rounded-full bg-[#34d399]" />
-            Loaded the {loadedName} board. Change anything you like.
+            Loaded the {loadedName} plan. Change anything you like.
           </div>
         )}
 
         <div className="grid gap-8 lg:grid-cols-[1fr_380px] lg:items-start">
           <div className="min-w-0">
-            <div role="tablist" aria-label="Slot themes" className="grid grid-cols-3 gap-1.5 rounded-2xl border border-[#1f1f30] bg-[#0b0b14] p-1.5">
+            <div role="tablist" aria-label="Service groups" className="grid grid-cols-3 gap-1.5 rounded-2xl border border-[#1f1f30] bg-[#0b0b14] p-1.5">
               {THEMES.map((t) => {
                 const on = t.id === tab;
                 const c = themeCount(t.id);
@@ -675,7 +781,7 @@ export default function SlotBuilder() {
               </span>
               <span className="text-[12px] text-[#9099b8]">/mo</span>
               <span className="ml-1 text-[12px] text-[#505570]">
-                {count} slot{count === 1 ? "" : "s"}
+                {unitLabel(count)}
                 {freeSlots(count) ? `, ${freeSlots(count)} free` : ""}
               </span>
             </div>

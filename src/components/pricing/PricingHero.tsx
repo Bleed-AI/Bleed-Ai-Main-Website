@@ -11,13 +11,14 @@ import {
   SLOT_PRICE,
   SWAP_LINE,
   TRIAL,
+  unitLabel,
 } from "@/lib/slots";
 import BoardBoxes from "./BoardBoxes";
 import { prefersReducedMotion, useCountUp } from "./useCountUp";
 
 const DEMO_TO = FREE_EVERY * 2;
 
-/** Hero: the whole pricing idea in one look. A board fills to 8 slots on load and settles. */
+/** Hero: the whole pricing idea in one look. A plan fills to 8 services on load and settles. */
 export default function PricingHero() {
   const [n, setN] = useState(0);
 
@@ -45,15 +46,15 @@ export default function PricingHero() {
         <div>
           <div className="sec-label">Pricing</div>
           <h1 className="font-display text-[40px] font-bold leading-[1.05] tracking-[-0.02em] text-white sm:text-[58px]">
-            {money(SLOT_PRICE)} a slot.
+            {money(SLOT_PRICE)} a service.
             <br />
-            <em className="hd-em pr-1">Every 4th slot free.</em>
+            <em className="hd-em pr-1">Every 4th one free.</em>
           </h1>
           <p className="mt-5 max-w-[520px] text-[16.5px] leading-relaxed text-[#9099b8]">
-            {SWAP_LINE} Each slot is one marketing job done for you every month. Buy 3 and the 4th is on us.
+            {SWAP_LINE} Each service is a full marketing service on its own, done for you every month. Buy 3 and the 4th is on us.
           </p>
           <ul className="mt-6 flex flex-wrap gap-2 text-[13px]">
-            {[PRICE_LINE, "Month to month", `Minimum ${MIN_SLOTS} slots`, "Swap slots every month"].map((t) => (
+            {[PRICE_LINE, "Month to month", `Minimum ${unitLabel(MIN_SLOTS)}`, "Swap any service, any month"].map((t) => (
               <li key={t} className="flex items-center gap-1.5 rounded-full border border-[#2a2a3e] bg-[#141420]/80 px-3 py-1.5 text-[#c3c8dc]">
                 <span className="text-[#34d399]">&#10003;</span>
                 {t}
@@ -68,14 +69,14 @@ export default function PricingHero() {
               href="#builder"
               className="rounded-full border border-[#2a2a3e] px-7 py-3.5 text-center text-[15px] font-semibold text-white/90 transition-colors hover:border-white/30"
             >
-              Build your board
+              Build your own
             </a>
           </div>
         </div>
 
         <div className="relative rounded-3xl border border-[#1f1f30] bg-[linear-gradient(165deg,#141420,#0b0b14)] p-6 shadow-[0_40px_120px_-40px_rgba(177,19,15,0.45)] sm:p-8">
           <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.14em] text-[#505570]">
-            <span>A board of {n} slots</span>
+            <span>A plan of {unitLabel(n)}</span>
             <span className={free ? "text-[#34d399]" : ""}>{free} free</span>
           </div>
           <div className="mt-5">
@@ -88,15 +89,15 @@ export default function PricingHero() {
             <span className="text-[14px] text-[#9099b8]">a month</span>
           </div>
           <p className="mt-2 text-[13px] text-[#9099b8]">
-            {n} slots, you pay for {n - free}. {PRICE_LINE}.
+            {unitLabel(n)}, you pay for {n - free}. {PRICE_LINE}.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-3 border-t border-white/5 pt-5 text-[12.5px]">
             <div>
-              <div className="text-[#505570]">3 slots</div>
+              <div className="text-[#505570]">{unitLabel(3)}</div>
               <div className="font-semibold text-white">{money(priceFor(3))}</div>
             </div>
             <div>
-              <div className="text-[#505570]">4 slots, 1 free</div>
+              <div className="text-[#505570]">{unitLabel(4)}, 1 free</div>
               <div className="font-semibold text-[#34d399]">{money(priceFor(4))}, same price</div>
             </div>
           </div>

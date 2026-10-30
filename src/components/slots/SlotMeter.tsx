@@ -1,8 +1,8 @@
-import { FREE_EVERY, freeSlots, money, PRICE_LINE, priceFor, SLOT_PRICE } from "@/lib/slots";
+import { FREE_EVERY, freeSlots, money, PRICE_LINE, priceFor, SLOT_PRICE, unitLabel } from "@/lib/slots";
 
 /**
- * Slot boxes with every 4th one marked FREE, plus the monthly price.
- * Shared by package cards, the builder and outcome pages (2026-10-30).
+ * Service boxes with every 4th one marked FREE, plus the monthly price.
+ * Shared by plan cards, the builder and package pages (2026-10-30). Public word: "service", never "slot".
  */
 export default function SlotMeter({
   count,
@@ -17,7 +17,7 @@ export default function SlotMeter({
   const free = freeSlots(count);
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex flex-wrap items-center gap-1.5" aria-label={`${count} slots, ${free} free`}>
+      <div className="flex flex-wrap items-center gap-1.5" aria-label={`${unitLabel(count)}, ${free} free`}>
         {boxes.map((isFree, i) => (
           <span
             key={i}
@@ -38,7 +38,7 @@ export default function SlotMeter({
           <span className="font-display text-2xl font-bold text-white">{money(priceFor(count))}</span>
           <span className="text-[13px] text-[#9099b8]">a month</span>
           <span className="text-[12px] text-[#505570]">
-            {count} slots at {money(SLOT_PRICE)}
+            {unitLabel(count)} at {money(SLOT_PRICE)}
             {free > 0 ? `, ${free} free` : ""}
           </span>
         </div>
