@@ -31,6 +31,17 @@ export default function PassSystemPage() {
     <main className="bai relative overflow-x-clip">
       <Navigation />
 
+      {/* This page describes the retired pass model; outbound now lives at /outbound/ (2026-10-30). */}
+      <div className="px-5 pt-6 sm:px-8">
+        <a
+          href="/outbound/"
+          className="mx-auto flex max-w-3xl flex-col items-start gap-1 rounded-2xl border border-[#B1130F]/40 bg-[#B1130F]/10 px-5 py-3.5 text-[14px] text-[#eaeef8] transition-colors hover:border-[#B1130F]/70 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+        >
+          <span>Our outbound service has a new home, with packages you can pick and swap.</span>
+          <span className="flex-shrink-0 font-semibold text-[#ff8a86]">See Outbound &rarr;</span>
+        </a>
+      </div>
+
       <PassSystem />
 
       {/* Each pass in detail */}

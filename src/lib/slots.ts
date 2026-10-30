@@ -100,7 +100,7 @@ export const SLOTS: Slot[] = [
     theme: "linkedin",
     name: "Buyer network growth",
     title: "Grow a network made only of buyers",
-    monthly: "Connect with 150 to 200 ideal prospects a week from your profile",
+    monthly: "Connection requests to 150 to 200 ideal prospects a week, sent from your profile",
     tooltip: "Your posts only work if buyers see them. We grow your network with the exact people you sell to, so every post lands in front of them.",
     weight: 1,
     status: "live",

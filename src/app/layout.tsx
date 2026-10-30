@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import PopupNotifications from "@/components/PopupNotifications";
 import Preloader from "@/components/Preloader";
 import NavigationProgress from "@/components/NavigationProgress";
 import CursorGlow from "@/components/CursorGlow";
@@ -88,7 +87,7 @@ export default function RootLayout({
           <Preloader />
           <NavigationProgress />
           {children}
-          <PopupNotifications />
+          {/* PopupNotifications retired 2026-10-30: it sold the Sprint with "Limited Spots" (slot model rules). */}
         </ThemeProvider>
       </body>
     </html>

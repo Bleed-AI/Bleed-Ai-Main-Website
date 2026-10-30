@@ -32,7 +32,7 @@ export default function PackageCard({
     >
       {featured && (
         <span className="absolute -top-3 left-6 rounded-full bg-[#B1130F] px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.12em] text-white">
-          Most picked
+          Our pick
         </span>
       )}
       <h3 className="font-display text-xl font-bold text-white">{name}</h3>

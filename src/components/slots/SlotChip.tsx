@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { slotById, slotHref } from "@/lib/slots";
 
 /** A slot as a pill with a hover / tap tooltip. Shared by every slot-model page (2026-10-30). */
@@ -17,6 +17,14 @@ export default function SlotChip({
 }) {
   const s = slotById(id);
   const [open, setOpen] = useState(false);
+  const [alignRight, setAlignRight] = useState(false);
+  const wrap = useRef<HTMLSpanElement | null>(null);
+  const show = () => {
+    // Keep the 260px tooltip on screen: flip it to the chip's right edge when it would overflow.
+    const r = wrap.current?.getBoundingClientRect();
+    if (r) setAlignRight(r.left + 276 > window.innerWidth);
+    setOpen(true);
+  };
   const pad = size === "sm" ? "px-2.5 py-1 text-[12px]" : "px-3 py-1.5 text-[13px]";
   const body = (
     <>
@@ -35,10 +43,11 @@ export default function SlotChip({
   const cls = `relative inline-flex items-center gap-2 rounded-full border border-[#2a2a3e] bg-[#141420] ${pad} transition-colors hover:border-[#B1130F]/60`;
   return (
     <span
+      ref={wrap}
       className="relative inline-block"
-      onMouseEnter={() => setOpen(true)}
+      onMouseEnter={show}
       onMouseLeave={() => setOpen(false)}
-      onFocus={() => setOpen(true)}
+      onFocus={show}
       onBlur={() => setOpen(false)}
     >
       {link ? (
@@ -46,14 +55,14 @@ export default function SlotChip({
           {body}
         </a>
       ) : (
-        <button type="button" className={cls} onClick={() => setOpen((v) => !v)}>
+        <button type="button" className={cls} onClick={() => (open ? setOpen(false) : show())}>
           {body}
         </button>
       )}
       {open && (
         <span
           role="tooltip"
-          className="pointer-events-none absolute left-0 top-full z-40 mt-2 block w-[260px] rounded-xl border border-[#2a2a3e] bg-[#0d0d16] p-3 text-left text-[12.5px] leading-snug text-[#c3c8dc] shadow-[0_18px_40px_rgba(0,0,0,0.5)]"
+          className={`pointer-events-none absolute ${alignRight ? "right-0" : "left-0"} top-full z-40 mt-2 block w-[260px] max-w-[calc(100vw-32px)] rounded-xl border border-[#2a2a3e] bg-[#0d0d16] p-3 text-left text-[12.5px] leading-snug text-[#c3c8dc] shadow-[0_18px_40px_rgba(0,0,0,0.5)]`}
         >
           <span className="mb-1 block font-semibold text-white">{s.title}</span>
           <span className="mb-1.5 block text-[#9099b8]">{s.monthly}</span>
