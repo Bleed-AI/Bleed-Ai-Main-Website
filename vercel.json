@@ -49,6 +49,16 @@
       "source": "/services/pilot-campaign/",
       "destination": "/outbound/",
       "permanent": true
+    },
+    {
+      "source": "/slots/",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/slots/:path*/",
+      "destination": "/services/:path*/",
+      "permanent": true
     }
   ]
 }
