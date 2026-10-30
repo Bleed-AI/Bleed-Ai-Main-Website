@@ -125,7 +125,7 @@ export const SLOTS: Slot[] = [
     monthly: "One 10 to 12 minute video a month: idea, script, editing and screen recording handled. You spend about 10 minutes reading the script.",
     tooltip: "We pick the topic, write the script and do the whole edit. Your part is a short read through and a screen share.",
     weight: 1,
-    status: "soon",
+    status: "live",
     volume: "Each extra video is one more slot",
   },
   {
@@ -136,7 +136,7 @@ export const SLOTS: Slot[] = [
     monthly: "Your video cut for YouTube and other channels, with titles, descriptions and calls to action",
     tooltip: "One recording becomes a YouTube video, short clips and posts, each written for the channel it lives on.",
     weight: 1,
-    status: "soon",
+    status: "live",
     parent: "video",
   },
   {
@@ -181,7 +181,7 @@ export const SLOTS: Slot[] = [
     monthly: "Outreach to the lists, roundups and publications AI assistants quote, up to about 40 outlets a month",
     tooltip: "AI recommends the companies other sites mention. We get you onto the pages it reads.",
     weight: 1,
-    status: "soon",
+    status: "live",
     pro: "Pro: about 80 outlets a month",
   },
   {
@@ -260,7 +260,7 @@ export const SLOTS: Slot[] = [
     monthly: "Companies visiting your site identified and reached",
     tooltip: "Most visitors leave without a word. We find out which companies they are and start a conversation.",
     weight: 1,
-    status: "soon",
+    status: "live",
     passThrough: { label: "Visitor identification software, at cost", amount: 200, unit: "month" },
   },
   {
@@ -271,7 +271,7 @@ export const SLOTS: Slot[] = [
     monthly: "New hires and job posts that signal a need for what you sell, reached every week",
     tooltip: "A new head of sales or a job post for your exact problem is the best timing you will get. We catch it and reach out that week.",
     weight: 1,
-    status: "soon",
+    status: "live",
   },
   {
     id: "reactivation",
@@ -281,7 +281,7 @@ export const SLOTS: Slot[] = [
     monthly: "Your past leads and customers cleaned and re-engaged",
     tooltip: "The people who already know you are the cheapest deals you will close. We clean the list and give them a reason to reply.",
     weight: 1,
-    status: "soon",
+    status: "live",
   },
 ];
 
@@ -370,8 +370,8 @@ export const PACKAGES: Package[] = [
     id: "linkedin-authority",
     outcome: "linkedin-authority",
     name: "LinkedIn Authority",
-    pitch: "Posts that pull leads in, and every person who engages followed up.",
-    items: [{ slot: "linkedin-posts" }, { slot: "network-growth" }, { slot: "lead-magnet-posts" }, { slot: "post-engagers" }],
+    pitch: "Posts and a monthly video your buyers see, and every person who engages followed up.",
+    items: [{ slot: "linkedin-posts" }, { slot: "network-growth" }, { slot: "post-engagers" }, { slot: "video" }],
     featured: true,
   },
   {
@@ -386,7 +386,7 @@ export const PACKAGES: Package[] = [
     outcome: "outbound",
     name: "Steady pipeline",
     pitch: "Email and LinkedIn working the same buyers, every month.",
-    items: [{ slot: "email-campaign", qty: 2 }, { slot: "linkedin-outreach" }, { slot: "buyer-list" }],
+    items: [{ slot: "email-campaign", qty: 2 }, { slot: "linkedin-outreach" }, { slot: "job-signals" }],
     featured: true,
   },
   {

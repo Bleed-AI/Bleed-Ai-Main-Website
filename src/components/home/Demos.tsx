@@ -253,7 +253,7 @@ export default function Demos() {
           Work your buyers <em className="hd-em">actually stop for.</em>
         </Reveal>
         <Reveal as="p" className="mb-12 max-w-2xl text-[16px] leading-relaxed text-[#9099b8]" delay={60}>
-          Not another blog post nobody reads. These are the kinds of things your slots make. The first three are live, so try them.
+          Not another blog post nobody reads. These are the kinds of things your slots make. All four run today, so try them.
         </Reveal>
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           <Reveal className="h-full">

@@ -33,6 +33,7 @@ The owner's words: the 2026-10-29 sketches were not good enough, this must be "m
 - Touch **only** the files on your allowlist (given in your task). New components go in `src/components/<your-prefix>/`.
 - **Do not edit**: `src/lib/slots.ts`, `src/components/slots/*`, `Navigation.tsx`, `Footer.tsx`, `globals.css`, `tailwind.config.ts`, `package.json`, or any other agent's files. If you need a config change (a slot field, a copy fix in slots.ts), write it in your final report as a request; do not make it. You may add page-scoped CSS in your own component via Tailwind classes or a `<style jsx>` block.
 - Do not delete old components (other routes still import them).
+- **Never delete anything** (no rm, rmdir, Remove-Item, not even empty or screenshot folders): deletes stop the session on a permission prompt for the owner. Write to a new subfolder instead.
 - **Do not install packages. Do not run `next build`, `npm run dev`, or `git commit`/`git push`.** The lead agent does builds and commits.
 
 ## Checking your work

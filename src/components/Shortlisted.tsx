@@ -397,7 +397,7 @@ export default function Shortlisted() {
             <OutcomePackages outcome="shortlisted" />
           </Reveal>
           <Reveal as="p" className="mx-auto mt-6 max-w-2xl text-center text-[13.5px] leading-relaxed text-white/55">
-            The {slotById("citations").name} slot is marked Soon: citation outreach starts in month 2, once your first articles are live and there is something worth citing.
+            Swap any slot month to month. More articles, more citation outreach or a LinkedIn slot can come in whenever the report says it will help.
           </Reveal>
 
           {/* Cost comparison */}
