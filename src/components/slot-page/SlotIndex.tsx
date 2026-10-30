@@ -34,7 +34,7 @@ export default function SlotIndex() {
             <span className="rounded-full border border-[#10b981]/40 bg-[#10b981]/10 px-3 py-1.5 text-[#34d399]">Every {FREE_EVERY}th slot free</span>
             <span className="rounded-full border border-[#2a2a3e] bg-[#141420] px-3 py-1.5 text-white/90">From {MIN_SLOTS} slots, {money(priceFor(MIN_SLOTS))} a month</span>
           </div>
-          <p className="mt-3 text-[12px] text-[#9099b8]">{PRICE_LINE}. {live} slots live today, more marked Soon.</p>
+          <p className="mt-3 text-[12px] text-[#9099b8]">{PRICE_LINE}. {live} slots live today.</p>
           <nav className="mt-8 flex flex-wrap justify-center gap-2" aria-label="Themes">
             {THEMES.map((t) => (
               <a key={t.id} href={`#${t.id}`} className="rounded-full border border-[#2a2a3e] px-4 py-2 text-[13.5px] font-semibold text-white/85 transition-colors hover:border-[#B1130F]/70 hover:text-white">
