@@ -3,11 +3,12 @@ import { generateMetadata as buildMeta } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import StatsStrip from "@/components/StatsStrip";
-import AiFollowUp from "@/components/AiFollowUp";
 import InfraLine from "@/components/InfraLine";
 import OutcomePackages from "@/components/slots/OutcomePackages";
-import SignalToMeeting from "@/components/outbound/SignalToMeeting";
-import SpecialistStepUp from "@/components/outbound/SpecialistStepUp";
+import { RoiBand } from "@/components/home/HomeFinalCta";
+import InboxExample from "@/components/outbound/InboxExample";
+import EmailLineItems from "@/components/outbound/EmailLineItems";
+import CostCalcBand from "@/components/outbound/CostCalcBand";
 import OutboundQuotes from "@/components/outbound/OutboundQuotes";
 import OutboundProof from "@/components/outbound/OutboundProof";
 import { OutcomeHero, PageCta, PageFaq, SectionHead, SwapIns } from "@/components/outbound/OutcomeKit";
@@ -39,11 +40,11 @@ const faqs = [
   },
   {
     q: "What if a market does not bite?",
-    a: "We swap the slot. A new market, a new angle, or a different slot altogether, like LinkedIn posts or articles, from the start of the next month. No new contract, no starting over.",
+    a: "We swap the service. A new market, a new angle, or a different service altogether, like LinkedIn posts or articles, from the start of the next month. No new contract, no starting over.",
   },
   {
     q: "Is there a contract?",
-    a: "No. It is month to month on a card subscription. Add, drop or swap slots at the start of any month.",
+    a: "No. It is month to month on a card subscription. Add, drop or swap services at the start of any month.",
   },
 ];
 
@@ -66,46 +67,77 @@ export default function OutboundPage() {
 
       <StatsStrip />
 
-      {/* Signature: signal to meeting */}
+      {/* Signature: a real looking inbox, next to what the service delivers every month */}
       <section className="px-5 py-16 sm:px-8 sm:py-24">
         <SectionHead
-          label="From signal to meeting"
+          label="What a campaign looks like"
           title={
             <>
-              One signal. <em className="hd-em">One meeting.</em>
+              One email. <em className="hd-em">One meeting.</em>
             </>
           }
-          sub="Here is the whole path for a single account. We run it for every company on your list, every week."
+          sub="The email goes out from you to a buyer showing the right signal. When they reply, we answer within minutes and book the call. You just show up."
         />
-        <SignalToMeeting />
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)]">
+          <div className="min-w-0">
+            <InboxExample />
+          </div>
+          <div className="min-w-0 lg:pt-11">
+            <EmailLineItems />
+          </div>
+        </div>
       </section>
 
       {/* Proof */}
       <OutboundProof />
       <OutboundQuotes />
 
-      {/* Replies and sending, kept from today's site */}
-      <AiFollowUp />
       <InfraLine />
 
-      {/* Packages */}
+      {/* Plans */}
       <section id="packages" className="scroll-mt-24 px-5 pb-6 pt-16 sm:px-8 sm:pt-24">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-7xl">
           <SectionHead
-            label="Packages"
+            label="Plans"
             title={
               <>
                 Start with a test. <em className="hd-em">Keep what works.</em>
               </>
             }
-            sub={`Test one market on two slots, or run email and LinkedIn on the same buyers with four, where the fourth is free. ${PRICE_LINE}.`}
+            sub={`Test one market on two services, or run email and LinkedIn on the same buyers with four, where the fourth is free. ${PRICE_LINE}.`}
           />
           <OutcomePackages outcome={OUTCOME} />
-          <SwapIns ids={["direct-mail", "website-visitors", "job-signals", "reactivation"]} />
+          <p className="mx-auto mt-8 max-w-3xl text-center text-[14px] leading-relaxed text-[#9099b8]">
+            Most clients start on a plan, find the market that bites, then step up to the{" "}
+            <a href="#specialist" className="font-semibold text-white underline decoration-[#B1130F] underline-offset-4 hover:text-[#ff5a52]">
+              Outbound Specialist
+            </a>{" "}
+            plan for several markets and constant tests.
+          </p>
+          <div className="mx-auto max-w-5xl">
+            <SwapIns ids={["direct-mail", "website-visitors", "job-signals", "reactivation"]} />
+          </div>
         </div>
       </section>
 
-      <SpecialistStepUp />
+      {/* Calculators: the ROI calculator moved here from the nav, plus the one-off campaign cost calculator */}
+      <section className="pt-16 sm:pt-24">
+        <div className="px-5 sm:px-8">
+          <SectionHead
+            label="Run the numbers"
+            title={
+              <>
+                What could outbound <em className="hd-em">return for you?</em>
+              </>
+            }
+            sub="Put in your deal size and close rate and see what a campaign could bring back. Or price one campaign on its own."
+          />
+        </div>
+        <div className="mx-auto -mt-10 max-w-5xl [&>section]:pb-4">
+          <RoiBand />
+          <CostCalcBand />
+        </div>
+      </section>
 
       <PageFaq items={faqs} />
 

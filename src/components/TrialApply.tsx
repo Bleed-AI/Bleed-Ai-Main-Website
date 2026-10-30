@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MIN_SLOTS, money, priceFor, slotById } from "@/lib/slots";
+import { MIN_SLOTS, money, priceFor, slotById, unitLabel } from "@/lib/slots";
 
 // Webhook that records the lead in our CRM and posts to the
 // #trial-applications Slack channel.
@@ -132,7 +132,7 @@ export default function TrialApply({
             <div className="ta-result-badge good">Looks like a fit</div>
             <h3 className="ta-result-title">Let&apos;s book your 15 minute call.</h3>
             <p className="ta-result-sub">
-              Pick a time that works. On the call we agree what {picked.length ? picked.map((id) => slotById(id).name).join(" and ") : "your trial slots"} should do for you, then we start.
+              Pick a time that works. On the call we agree what {picked.length ? picked.map((id) => slotById(id).name).join(" and ") : "your trial services"} should do for you, then we start.
             </p>
             <div className="ta-cal">
               <iframe
@@ -150,18 +150,18 @@ export default function TrialApply({
           <>
             <h3 className="ta-result-title">Here is the fastest way to start.</h3>
             <p className="ta-result-sub">
-              We keep free trials for B2B companies that already sell to repeat customers. You can still start now, month to month, and swap any slot whenever you like.
+              We keep free trials for B2B companies that already sell to repeat customers. You can still start now, month to month, and swap any service whenever you like.
             </p>
             <div className="ta-cards">
               <a href={PAID_START_URL} className="ta-card primary">
-                <span className="ta-card-k">Start with {MIN_SLOTS} slots</span>
-                <span className="ta-card-v">{money(priceFor(MIN_SLOTS))} a month. Pick any {MIN_SLOTS} slots and swap them as you learn what works.</span>
-                <span className="ta-card-cta">Build your board &rarr;</span>
+                <span className="ta-card-k">Start with {unitLabel(MIN_SLOTS)}</span>
+                <span className="ta-card-v">{money(priceFor(MIN_SLOTS))} a month. Pick any {unitLabel(MIN_SLOTS)} and swap them as you learn what works.</span>
+                <span className="ta-card-cta">Build your own plan &rarr;</span>
               </a>
-              <a href="/slots/" className="ta-card">
-                <span className="ta-card-k">See every slot</span>
-                <span className="ta-card-v">What each slot delivers every month, and what it costs.</span>
-                <span className="ta-card-cta">Browse the slots &rarr;</span>
+              <a href="/services/" className="ta-card">
+                <span className="ta-card-k">See every service</span>
+                <span className="ta-card-v">What each service delivers every month, and what it costs.</span>
+                <span className="ta-card-cta">Browse the services &rarr;</span>
               </a>
             </div>
           </>
@@ -189,7 +189,7 @@ export default function TrialApply({
       ))}
 
       <div className="ta-services">
-        <div className="ta-services-head">Your trial slots</div>
+        <div className="ta-services-head">Your trial services</div>
         {picked.length ? (
           <div className="ta-services-grid">
             {picked.map((id) => (
@@ -204,7 +204,7 @@ export default function TrialApply({
         ) : (
           <p className="ta-services-empty">None picked yet. That is fine, we will suggest two on the call.</p>
         )}
-        <a href="#pick" className="ta-services-change">Change slots</a>
+        <a href="#pick" className="ta-services-change">Change services</a>
       </div>
 
       <div className="ta-q">

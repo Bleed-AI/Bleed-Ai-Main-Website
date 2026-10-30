@@ -1,11 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { OUTBOUND_SPECIALIST, priceFor } from "@/lib/slots";
 
-// Cost follows volume via our real tiers - never a slider the prospect can drag down.
+// Cost follows volume via the live prices in slots.ts (never a slider the prospect can drag down).
+// One email campaign service reaches about 750 buyers a month (2 emails each). Up to 8 services we price
+// them as services; above that the Outbound Specialist level that covers the volume (Taha 2026-10-30).
 function planFor(leads: number): { key: string; price: number } {
-  if (leads <= 45000) return { key: "growth", price: 3350 };
-  return { key: "scale", price: 5300 };
+  const services = Math.max(2, Math.ceil(leads / 750));
+  if (services <= 8) return { key: "services", price: priceFor(services) };
+  const level = leads * 2 <= 12000 ? OUTBOUND_SPECIALIST.monthly[1] : OUTBOUND_SPECIALIST.monthly[2];
+  return { key: level.id, price: level.price };
 }
 
 const money = (n: number): string =>
@@ -62,7 +67,7 @@ function Slider({ label, value, display, min, max, step, onChange }: SliderProps
 }
 
 export default function RoiCalculator() {
-  const [leads, setLeads] = useState(10000);
+  const [leads, setLeads] = useState(3000);
   const [deal, setDeal] = useState(5000);
   const [closeRate, setCloseRate] = useState(25);
   const [pos, setPos] = useState(0.5);
@@ -88,11 +93,6 @@ export default function RoiCalculator() {
   return (
     <div className="roi-calc">
       <div className="roi-hero">
-        <div className="roi-badge">
-          <span className="old">$297 strategy session</span>
-          <span>·</span>
-          <span className="new">FREE TODAY</span>
-        </div>
         <h1>
           Feed it cold emails.<br />
           <span className="hd-em">Watch revenue come out.</span>
@@ -133,7 +133,7 @@ export default function RoiCalculator() {
         <div className="ctrl-head">Tune your numbers</div>
 
         <div className="sliders">
-          <Slider label="Leads contacted / month" value={leads} display={leads.toLocaleString()} min={2000} max={75000} step={1000} onChange={setLeads} />
+          <Slider label="Leads contacted / month" value={leads} display={leads.toLocaleString()} min={750} max={12500} step={250} onChange={setLeads} />
           <Slider label="Customer lifetime value" value={deal} display={"$" + deal.toLocaleString()} min={1000} max={25000} step={500} onChange={setDeal} />
           <Slider label="Your close rate" value={closeRate} display={closeRate + "%"} min={5} max={45} step={1} onChange={setCloseRate} />
           <Slider label="Positive reply rate" value={pos} display={pos + "%"} min={0.2} max={1.5} step={0.1} onChange={setPos} />
@@ -142,8 +142,8 @@ export default function RoiCalculator() {
       </div>
 
       <div className="cta-row">
-        <a className="btn btn-red" href="/book-call/">Book a strategy call →</a>
-        <a className="btn btn-ghost" href="https://calculator.bleedai.com/sprint" target="_blank" rel="noopener noreferrer">Start Your Sprint</a>
+        <a className="btn btn-red" href="/trial/?outcome=outbound">Start a free trial →</a>
+        <a className="btn btn-ghost" href="/outbound/">See the outbound plans</a>
       </div>
 
       <div className="disc">

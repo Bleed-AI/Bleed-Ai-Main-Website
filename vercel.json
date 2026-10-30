@@ -1,7 +1,54 @@
 {
   "redirects": [
-    { "source": "/services/consultation", "destination": "/book-call", "permanent": true },
-    { "source": "/services/consultation/", "destination": "/book-call", "permanent": true },
-    { "source": "/services/:path*", "destination": "/#pricing", "permanent": true }
+    {
+      "source": "/services/consultation",
+      "destination": "/book-call",
+      "permanent": true
+    },
+    {
+      "source": "/services/consultation/",
+      "destination": "/book-call",
+      "permanent": true
+    },
+    {
+      "source": "/slots",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/slots/:path*",
+      "destination": "/services/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/services/evergreen-campaign",
+      "destination": "/outbound/",
+      "permanent": true
+    },
+    {
+      "source": "/services/evergreen-campaign/",
+      "destination": "/outbound/",
+      "permanent": true
+    },
+    {
+      "source": "/services/infrastructure-setup",
+      "destination": "/outbound/",
+      "permanent": true
+    },
+    {
+      "source": "/services/infrastructure-setup/",
+      "destination": "/outbound/",
+      "permanent": true
+    },
+    {
+      "source": "/services/pilot-campaign",
+      "destination": "/outbound/",
+      "permanent": true
+    },
+    {
+      "source": "/services/pilot-campaign/",
+      "destination": "/outbound/",
+      "permanent": true
+    }
   ]
 }

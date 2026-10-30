@@ -36,16 +36,16 @@ export default function HybridPackage() {
               {HYBRID_PACKAGE.name}: <em className="hd-em">both sides</em> of your pipeline.
             </Reveal>
             <Reveal as="p" className="mb-8 max-w-xl text-[16px] leading-relaxed text-[#9099b8]" delay={60}>
-              Content gets you found. Outreach gets you booked. Most agencies sell you one half. This is the board we would pick for most companies on day one, and the {FREE_EVERY}th slot is on us.
+              Content gets you found. Outreach gets you booked. Most agencies sell you one half. These are the services we would pick for most companies on day one, and the {FREE_EVERY}th service is on us.
             </Reveal>
             <Reveal className="grid gap-4 sm:grid-cols-2" delay={100}>
               <Half label="Found" line="Buyers who are already looking find you, on Google, in AI answers and in their feed." ids={FOUND} tone="green" />
               <Half label="Booked" line="Buyers who are not looking yet hear from you first, and anyone who engages gets a follow-up." ids={BOOKED} tone="red" />
             </Reveal>
             <Reveal className="mt-6 flex flex-wrap items-center gap-2" delay={140}>
-              <span className="mr-1 text-[13px] text-[#7d84a3]">Want different slots?</span>
+              <span className="mr-1 text-[13px] text-[#7d84a3]">Want different services?</span>
               <a href="/pricing/#builder" className="text-[13.5px] font-semibold text-white underline decoration-[#B1130F]/70 underline-offset-4 hover:decoration-[#B1130F]">
-                Build your own board
+                Build your own
               </a>
             </Reveal>
           </div>

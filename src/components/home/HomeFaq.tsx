@@ -2,25 +2,25 @@
 
 import { useState, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
-import { FREE_EVERY, freeSlots, MIN_SLOTS, money, PRICE_LINE, priceFor, PROCESSING_FEE_PCT, SLOT_PRICE, slotById, TRIAL } from "@/lib/slots";
+import { FREE_EVERY, freeSlots, MIN_SLOTS, money, PRICE_LINE, priceFor, PROCESSING_FEE_PCT, SLOT_PRICE, slotById, TRIAL, unitLabel } from "@/lib/slots";
 
 /** The first clause of a slot's monthly line, e.g. "8 high quality LinkedIn posts a month". */
 const first = (id: string) => slotById(id).monthly.split(/[,:]/)[0].trim();
 
 const faqs: { q: string; a: ReactNode }[] = [
   {
-    q: "What is a slot?",
+    q: "What counts as one service?",
     a: (
       <>
-        <strong>One marketing service with a fixed amount of work every month.</strong> For example: {first("linkedin-posts")}, {first("articles")}, or {first("email-campaign").toLowerCase()}. You can hover any slot on the site to see exactly what arrives each month.
+        <strong>One full marketing service with a fixed amount of work every month.</strong> For example: {first("linkedin-posts")}, {first("articles")}, or {first("email-campaign").toLowerCase()}. Hover any service on the site to see exactly what arrives each month.
       </>
     ),
   },
   {
-    q: "Can I really swap a slot?",
+    q: "Can I really swap a service?",
     a: (
       <>
-        <strong>Yes, any slot, every month.</strong> Your monthly report shows what each slot produced. If one has gone flat, we move it to something that is working for you, and your price stays the same. That is the whole point: one team, no juggling agencies when a channel stalls.
+        <strong>Yes, any service, any month.</strong> Each service is a full service on its own. Your monthly report shows what each one produced, and if one isn&apos;t pulling its weight, we swap it for another next month. Your price stays the same. That is the whole point: one team, no juggling agencies when a channel stalls.
       </>
     ),
   },
@@ -29,9 +29,9 @@ const faqs: { q: string; a: ReactNode }[] = [
     a: (
       <>
         <strong>
-          {money(SLOT_PRICE)} a slot a month, and every {FREE_EVERY}th slot is free.
+          {money(SLOT_PRICE)} a service a month, and every {FREE_EVERY}th service is free.
         </strong>{" "}
-        The minimum is {MIN_SLOTS} slots ({money(priceFor(MIN_SLOTS))} a month). A board of 4 is {money(priceFor(4))}, a board of 8 is {money(priceFor(8))} with {freeSlots(8)} free. A few slots need software we pass through at cost, and we show it before you start. {PRICE_LINE}.
+        The minimum is {unitLabel(MIN_SLOTS)} ({money(priceFor(MIN_SLOTS))} a month). Four services cost {money(priceFor(4))}, and eight cost {money(priceFor(8))} with {freeSlots(8)} free. A few services need software we pass through at cost, and we show it before you start. {PRICE_LINE}.
       </>
     ),
   },
@@ -50,7 +50,7 @@ const faqs: { q: string; a: ReactNode }[] = [
         <strong>
           {TRIAL.length} on {TRIAL.slots}, free.
         </strong>{" "}
-        We pick the slots most likely to show you something real fast: your first posts, an article, an AI search check or a first campaign. You judge the work, then decide.
+        We pick the services most likely to show you something real fast: your first posts, an article, an AI search check or a first campaign. You judge the work, then decide.
       </>
     ),
   },
@@ -63,10 +63,10 @@ const faqs: { q: string; a: ReactNode }[] = [
     ),
   },
   {
-    q: "Some slots say “Soon”. What does that mean?",
+    q: "Some services say “Soon”. What does that mean?",
     a: (
       <>
-        <strong>We are still finishing them, so you cannot run them yet.</strong> We never sell a Soon slot as live. Tell us which one you want and we will let you know the moment it opens, so you can swap it in.
+        <strong>We are still finishing them, so you cannot run them yet.</strong> We never sell a Soon service as live. Tell us which one you want and we will let you know the moment it opens, so you can swap it in.
       </>
     ),
   },
@@ -74,7 +74,7 @@ const faqs: { q: string; a: ReactNode }[] = [
     q: "Do you still do cold email?",
     a: (
       <>
-        <strong>Yes, it is where our track record comes from.</strong> Outbound is one outcome on the board now, next to LinkedIn, articles and AI search.{" "}
+        <strong>Yes, it is where our track record comes from.</strong> Outbound is one package now, next to LinkedIn, articles and AI search.{" "}
         <a href="/outbound/" className="text-white underline decoration-[#B1130F]/70 underline-offset-2">
           See Outbound
         </a>
@@ -97,7 +97,7 @@ export default function HomeFaq() {
             <em>No small print.</em>
           </Reveal>
           <Reveal as="p" delay={80} style={{ color: "var(--sub)", fontSize: 15, marginBottom: 36, maxWidth: 460, marginLeft: "auto", marginRight: "auto" }}>
-            How slots, swaps, pricing and the free trial actually work.
+            How services, swaps, pricing and the free trial actually work.
           </Reveal>
           <Reveal className="faq-list" style={{ margin: "0 auto" }}>
             {faqs.map((f, i) => (

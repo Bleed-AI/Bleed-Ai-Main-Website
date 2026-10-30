@@ -168,7 +168,7 @@ export default function SlotBoard() {
       <div
         className="relative rounded-3xl border border-[#262638] bg-[linear-gradient(170deg,#12121d,#0a0a12)] p-3.5 shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)] sm:p-5"
         role="img"
-        aria-label={`Example slot board. Four slots running. ${logOut} went flat and was swapped to ${logIn}. Same board, same price.`}
+        aria-label={`Example: four services running. ${logOut} went flat and was swapped for ${logIn} the next month. Same price.`}
       >
         {/* header */}
         <div className="mb-3.5 flex items-center justify-between gap-2 sm:mb-4">
@@ -177,7 +177,7 @@ export default function SlotBoard() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#10b981] opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-[#10b981]" />
             </span>
-            <span className="truncate text-[12px] font-semibold text-white sm:text-[13px]">Your slot board</span>
+            <span className="truncate text-[12px] font-semibold text-white sm:text-[13px]">Your services</span>
             <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.04] px-2 py-[2px] text-[10px] font-semibold uppercase tracking-[0.1em] text-[#9099b8]">
               Example
             </span>
@@ -224,8 +224,8 @@ export default function SlotBoard() {
             </svg>
           </span>
           <p className="text-[11.5px] leading-snug text-[#b4b9cf] sm:text-[12.5px]">
-            <span className="font-semibold text-white">Month {logSc.monthAfter}:</span> {logOut} went flat, so we swapped it to{" "}
-            <span className="font-semibold text-[#34d399]">{logIn}</span>. Same board, same price.
+            <span className="font-semibold text-white">Month {logSc.monthAfter}:</span> {logOut} wasn&apos;t pulling its weight, so we swapped it for{" "}
+            <span className="font-semibold text-[#34d399]">{logIn}</span>. Same price, no new agency.
           </p>
         </div>
 

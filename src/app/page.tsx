@@ -10,16 +10,16 @@ import Testimonials from "@/components/Testimonials";
 import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
 import HomeFounder from "@/components/home/HomeFounder";
 import HomeFaq from "@/components/home/HomeFaq";
-import HomeFinalCta, { RoiBand } from "@/components/home/HomeFinalCta";
+import HomeFinalCta from "@/components/home/HomeFinalCta";
 import Footer from "@/components/Footer";
-import BookWidget from "@/components/BookWidget";
-import ExitPopup from "@/components/ExitPopup";
-import SidePopup from "@/components/SidePopup";
 
 // Homepage, slot model (2026-10-30). Inherits indexed SEO metadata from app/layout.tsx; do not add noindex here.
 // The old outbound sections (NotATool, SignalSheet, PassSystem, EveryDoor, InfraLine, AiFollowUp, TrialFlow,
 // Pricing, WhoIsThisFor) moved off the homepage; their files are kept for the Outbound page and older routes.
 // Proof components (RepliesMarquee, Testimonials, ResultsMarqueeTest with id="results-section") stay unchanged (D12 veto).
+// Round 2 (2026-10-30): visitor word is "service" (code keeps "slot"). The strategy-call popups (ExitPopup,
+// SidePopup, BookWidget) and the ROI band left the homepage; the ROI calculator lives on /outbound.
+// Outcome cards are text only; Demos holds the four realistic examples.
 // Previous homepage is archived at /home-v2 (noindex). Revert: branch pre-home-v2-swap-backup.
 export default function Home() {
   return (
@@ -28,20 +28,16 @@ export default function Home() {
       <HomeHero />
       <StatsStrip />
       <Outcomes />
-      <HowItWorks />
       <Demos />
+      <HowItWorks />
       <HybridPackage />
       <RepliesMarquee />
       <Testimonials />
       <ResultsMarqueeTest />
-      <RoiBand />
       <HomeFounder />
       <HomeFaq />
       <HomeFinalCta />
       <Footer />
-      <BookWidget />
-      <ExitPopup />
-      <SidePopup />
     </main>
   );
 }

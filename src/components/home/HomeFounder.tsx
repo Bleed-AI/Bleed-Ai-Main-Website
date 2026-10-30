@@ -38,7 +38,7 @@ export default function HomeFounder() {
                 I&apos;m <strong>Taha Anwar</strong>. Before BleedAI, I spent years building AI systems and teaching them to more than <strong>1 million students</strong> worldwide.
                 <br />
                 <br />
-                That is why we run marketing like a system. Every slot is measured, every month is reported, and anything that stops working gets swapped for something that does.
+                That is why we run marketing like a system. Every service is measured, every month is reported, and anything that stops working gets swapped for something that does.
                 <br />
                 <br />
                 <strong>Most agencies sell you one channel and then defend it. We would rather move your money to what works.</strong>

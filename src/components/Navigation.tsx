@@ -5,7 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { OUTCOMES, TRIAL } from "@/lib/slots";
 
-// Slot model nav (2026-10-30): outcomes menu, pricing, ROI calculator, free trial CTA.
+// Nav (2026-10-30): packages menu, pricing, results, free trial CTA. The ROI calculator lives on /outbound only (Taha).
 // The Sprint link is retired; its successor (Outbound Specialist) lives on /outbound.
 
 function trialHrefFor(pathname: string | null): string {
@@ -79,7 +79,7 @@ export default function Navigation() {
                           </a>
                         ))}
                         <a href="/pricing/#builder" className="mt-1 flex items-center justify-between rounded-xl px-4 py-3 border-t border-white/5 hover:bg-white/[0.04]">
-                          <span className="text-[13px] font-semibold text-[#ff6b67]">Build your own from slots</span>
+                          <span className="text-[13px] font-semibold text-[#ff6b67]">Build your own from services</span>
                           <span className="text-[#ff6b67]">&rarr;</span>
                         </a>
                       </div>
@@ -88,7 +88,6 @@ export default function Navigation() {
                 </div>
                 <a href="/pricing/" className={linkCls}>Pricing</a>
                 <a href="/#results-section" className={linkCls}>Results</a>
-                <a href="/free-tools/cold-email-roi-calculator/" className={linkCls}>ROI Calculator</a>
                 <a
                   href={trialHref}
                   className="group relative px-5 py-2.5 bg-[#B1130F] text-white rounded-full text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow"
@@ -155,9 +154,8 @@ export default function Navigation() {
                 <div className="my-4 h-px bg-white/5" />
                 {[
                   ["/pricing/", "Pricing"],
-                  ["/pricing/#builder", "Build your own from slots"],
+                  ["/pricing/#builder", "Build your own from services"],
                   ["/#results-section", "Results"],
-                  ["/free-tools/cold-email-roi-calculator/", "ROI Calculator"],
                 ].map(([href, label]) => (
                   <a key={href} href={href} onClick={() => setMobileMenuOpen(false)} className="px-3 py-3 text-[16px] font-semibold text-white hover:text-[#ff6b67]">
                     {label}

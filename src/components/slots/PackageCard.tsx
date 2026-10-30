@@ -1,8 +1,10 @@
-import { customiseHref, itemsPassThroughMonthly, itemsSlotCount, money, slotById, TRIAL, type PackageItem } from "@/lib/slots";
-import SlotChip from "./SlotChip";
+import { customiseHref, itemsPassThroughMonthly, itemsSlotCount, money, monthlyFor, slotById, slotHref, TRIAL, type PackageItem } from "@/lib/slots";
 import SlotMeter from "./SlotMeter";
 
-/** A package (a preset slot board) with its slots, price, trial CTA and a customise link into the builder. */
+/**
+ * A PLAN (a preset set of services inside a package) as a card: what arrives every month as line items,
+ * the price, a trial CTA and a customise link into the builder. Public words: plan, service (2026-10-30).
+ */
 export default function PackageCard({
   id,
   name,
@@ -37,11 +39,35 @@ export default function PackageCard({
       )}
       <h3 className="font-display text-xl font-bold text-white">{name}</h3>
       <p className="mt-1.5 text-[14px] leading-snug text-[#9099b8]">{pitch}</p>
-      <div className="mt-5 flex flex-wrap gap-2">
-        {items.map((it) => (
-          <SlotChip key={it.slot} id={it.slot} qty={it.qty} size="sm" />
-        ))}
-      </div>
+
+      <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#505570]">What you get every month</p>
+      <ul className="mt-3 flex flex-col gap-3">
+        {items.map((it) => {
+          const s = slotById(it.slot);
+          return (
+            <li key={it.slot} className="flex gap-2.5">
+              <svg className="mt-[3px] h-4 w-4 flex-none text-[#ff3d38]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M16.7 5.3a1 1 0 010 1.4l-7.5 7.5a1 1 0 01-1.4 0L3.3 9.7a1 1 0 111.4-1.4l3.8 3.8 6.8-6.8a1 1 0 011.4 0z" />
+              </svg>
+              <span className="text-[13px] leading-snug text-[#c3c8dc]">
+                <a href={slotHref(s.id)} className="font-semibold text-white hover:text-[#ff6b67]">
+                  {(it.qty ?? 1) > 1 ? `${it.qty} x ` : ""}
+                  {s.name}
+                </a>
+                {s.status === "soon" && (
+                  <span className="ml-1.5 rounded-full bg-[#f59e0b]/15 px-1.5 py-[1px] text-[10px] font-semibold uppercase tracking-wide text-[#f5b544]">
+                    Soon
+                  </span>
+                )}
+                <span className="block text-[#9099b8]">
+                  {monthlyFor(s.id, it.qty)}
+                </span>
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+
       <div className="mt-6 border-t border-white/5 pt-5">
         <SlotMeter count={count} />
         {(pass > 0 || perTarget) && (
@@ -51,7 +77,7 @@ export default function PackageCard({
           </p>
         )}
       </div>
-      <div className="mt-auto flex flex-col gap-2 pt-6 sm:flex-row">
+      <div className="mt-auto flex flex-col gap-2 pt-6 sm:flex-row xl:flex-col">
         <a
           href={trialHref}
           className="flex-1 rounded-full bg-[#B1130F] px-5 py-3 text-center text-[14px] font-semibold text-white btn-glow"

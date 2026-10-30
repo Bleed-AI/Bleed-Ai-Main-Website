@@ -3,6 +3,10 @@
 // Rulings and reasons: bleedai-campaign-master clients/bleedai/strategy/shortlisted/DECISIONS.md #34 to #44,
 // build plan: clients/bleedai/strategy/company-model-2026-10/BUILD-PLAN.md.
 //
+// NAMING (Taha 2026-10-30, second pass): the code says "slot", the SITE says "service". A visitor never
+// reads the word slot. One unit = one service ($495). An outcome page = a PACKAGE (Shortlisted, Outbound...).
+// The presets inside a package = PLANS (Starter, Full...). Use unitLabel() for counts in copy.
+//
 // PUBLIC FILE (it ships to the browser). Disclosure rule (#32): slot names, outcomes, monthly units,
 // slot counts, prices and the swap only. Never write a vendor or tool name, our costs, inbox counts,
 // pools, playbooks or prompts here. A pass-through cost is described by what it is, never by brand.
@@ -15,7 +19,13 @@ export const FREE_EVERY = 4;
 export const PROCESSING_FEE_PCT = 5;
 
 export const PRICE_LINE = "Founding price, locked while you stay";
-export const SWAP_LINE = "Pick your slots. Swap any slot to what's working.";
+export const SWAP_LINE = "Pick your services. Swap any service, any month, to what's working.";
+
+/** Public word for one unit. */
+export const UNIT = "service";
+export function unitLabel(n: number): string {
+  return `${n} ${n === 1 ? "service" : "services"}`;
+}
 
 export type ThemeId = "linkedin" | "website" | "outbound";
 export type SlotStatus = "live" | "soon";
@@ -126,7 +136,7 @@ export const SLOTS: Slot[] = [
     tooltip: "We pick the topic, write the script and do the whole edit. Your part is a short read through and a screen share.",
     weight: 1,
     status: "live",
-    volume: "Each extra video is one more slot",
+    volume: "Each extra video is one more service",
   },
   {
     id: "video-repurpose",
@@ -157,11 +167,11 @@ export const SLOTS: Slot[] = [
     theme: "website",
     name: "Articles",
     title: "Rank on Google and get quoted by AI",
-    monthly: "2 high quality articles a month on your site, with keyword research, images and GIFs",
-    tooltip: "Articles written to answer the exact questions your buyers ask Google and ChatGPT, with sources and numbers AI likes to quote.",
+    monthly: "2 in-depth articles a month on your site, with interactive elements, custom images and GIFs, built on keyword research",
+    tooltip: "Articles that answer the exact questions your buyers ask Google, ChatGPT and Claude, with calculators, charts and sources AI likes to quote.",
     weight: 1,
     status: "live",
-    volume: "Each 2 more articles is one more slot",
+    volume: "Each 2 more articles is one more service",
   },
   {
     id: "ai-search",
@@ -213,11 +223,11 @@ export const SLOTS: Slot[] = [
     theme: "outbound",
     name: "Email campaign",
     title: "Put your offer in front of a new market",
-    monthly: "One targeted campaign: 1,500 emails a month, 2 emails a lead, every reply handled and followed up",
+    monthly: "One targeted campaign: 1,500 emails a month to about 750 buyers you pick, 2 emails each, every reply handled and followed up",
     tooltip: "We pick the buyers, write the emails with you, send them and handle every reply. You get the conversations.",
     weight: 1,
     status: "live",
-    volume: "Each 1,500 more emails is one more slot",
+    volume: "Each 1,500 more emails is one more service",
   },
   {
     id: "buyer-list",
@@ -318,7 +328,7 @@ export const OUTCOMES: Outcome[] = [
     title: "Get recommended by ChatGPT",
     name: "Shortlisted",
     href: "/shortlisted/",
-    summary: "When your buyers ask AI who to hire, your name comes up. Articles, citations and LinkedIn, tracked every month.",
+    summary: "When your buyers ask ChatGPT, Claude or Perplexity who to hire, your name comes up. Articles, citations and LinkedIn, tracked every month.",
   },
   {
     id: "linkedin-authority",
@@ -347,7 +357,7 @@ export const PACKAGES: Package[] = [
   {
     id: "shortlisted",
     outcome: "shortlisted",
-    name: "Shortlisted",
+    name: "Shortlisted Full",
     pitch: "The full push to become the name AI recommends in your category.",
     items: [{ slot: "articles", qty: 2 }, { slot: "linkedin-posts" }, { slot: "citations" }, { slot: "ai-search" }],
     featured: true,
@@ -369,7 +379,7 @@ export const PACKAGES: Package[] = [
   {
     id: "linkedin-authority",
     outcome: "linkedin-authority",
-    name: "LinkedIn Authority",
+    name: "LinkedIn Full",
     pitch: "Posts and a monthly video your buyers see, and every person who engages followed up.",
     items: [{ slot: "linkedin-posts" }, { slot: "network-growth" }, { slot: "post-engagers" }, { slot: "video" }],
     featured: true,
@@ -392,7 +402,7 @@ export const PACKAGES: Package[] = [
   {
     id: "inbound",
     outcome: "inbound-engine",
-    name: "Inbound Engine",
+    name: "Inbound Full",
     pitch: "A site that ranks, converts and collects leads, with posts sending people to it.",
     items: [{ slot: "page-revamp" }, { slot: "articles" }, { slot: "lead-magnet-app" }, { slot: "linkedin-posts" }],
     featured: true,
@@ -407,16 +417,38 @@ export const HYBRID_PACKAGE = {
   items: [{ slot: "linkedin-posts" }, { slot: "articles" }, { slot: "email-campaign" }, { slot: "post-engagers" }] as PackageItem[],
 };
 
-/** Complex or high volume outbound. Not a slot board. */
+/** Complex or high volume outbound. Priced as one plan, not built from services. Volumes are Claude's call 2026-10-30, Taha to veto. */
 export const OUTBOUND_SPECIALIST = {
   id: "outbound-specialist",
   name: "Outbound Specialist",
-  pitch: "For outbound that is already working and needs more: several markets, constant experiments, a list built per account.",
-  launch: { price: 2500, label: "Launch month" },
+  pitch: "For outbound that already works and needs more: several markets, constant tests, a list built per account.",
+  launch: {
+    price: 2500,
+    label: "Launch month",
+    items: ["Your buyers researched and lists built per account", "Emails written with you, campaigns live", "Tests set up from day one"],
+  },
   monthly: [
-    { id: "focused", label: "Focused", price: 2000, reach: "One market, worked deep" },
-    { id: "scaled", label: "Scaled", price: 3000, reach: "Two to three markets in parallel" },
-    { id: "full", label: "Full engine", price: 5000, reach: "High volume across several markets" },
+    {
+      id: "focused",
+      label: "Focused",
+      price: 2000,
+      reach: "One market, worked deep",
+      items: ["Up to 6,000 emails a month", "One market, lists built on buying signals", "2 new tests every month", "LinkedIn outreach to the same buyers", "Every reply handled, a report every week"],
+    },
+    {
+      id: "scaled",
+      label: "Scaled",
+      price: 3000,
+      reach: "Two to three markets in parallel",
+      items: ["Up to 12,000 emails a month", "Two to three markets in parallel", "4 tests running every month", "Email and LinkedIn on every market", "Every reply handled, a report every week"],
+    },
+    {
+      id: "full",
+      label: "Full engine",
+      price: 5000,
+      reach: "High volume across several markets",
+      items: ["Up to 25,000 emails a month", "Several markets at once", "A new angle tested every week", "Email, LinkedIn and direct mail to your top accounts", "Every reply handled, a report every week"],
+    },
   ],
 };
 
@@ -424,7 +456,7 @@ export const TRIAL = {
   href: "/trial/",
   label: "Start a free trial",
   length: "2 weeks",
-  slots: "1 to 2 slots",
+  slots: "1 to 2 services",
 };
 
 // ---------- helpers ----------
@@ -453,6 +485,17 @@ export function priceFor(n: number): number {
 export function slotsToNextFree(n: number): number {
   const r = n % FREE_EVERY;
   return r === 0 ? FREE_EVERY : FREE_EVERY - r;
+}
+
+/** The monthly line for qty units of a service, written out (no "times 2"). */
+export function monthlyFor(id: string, qty = 1): string {
+  const s = slotById(id);
+  if (qty <= 1) return s.monthly;
+  const n = (x: number) => (x * qty).toLocaleString("en-US");
+  if (id === "email-campaign") return `${qty} targeted campaigns: ${n(1500)} emails a month to about ${n(750)} buyers you pick, 2 emails each, every reply handled and followed up`;
+  if (id === "articles") return `${n(2)} in-depth articles a month on your site, with interactive elements, custom images and GIFs, built on keyword research`;
+  if (id === "video") return `${qty} videos a month, 10 to 12 minutes each: idea, script, editing and screen recording handled`;
+  return `${s.monthly} (x${qty})`;
 }
 
 export function itemsSlotCount(items: PackageItem[]): number {
@@ -489,7 +532,7 @@ export function customiseHref(packageId: string): string {
 }
 
 export function slotHref(slotId: string): string {
-  return `/slots/${slotId}/`;
+  return `/services/${slotId}/`;
 }
 
 export function money(n: number): string {

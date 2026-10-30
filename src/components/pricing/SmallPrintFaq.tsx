@@ -1,42 +1,42 @@
 /* eslint-disable react/no-unescaped-entities */
-import { FREE_EVERY, MIN_SLOTS, money, OUTBOUND_SPECIALIST, PRICE_LINE, priceFor, PROCESSING_FEE_PCT, SLOT_PRICE, TRIAL } from "@/lib/slots";
+import { FREE_EVERY, MIN_SLOTS, money, OUTBOUND_SPECIALIST, PRICE_LINE, priceFor, PROCESSING_FEE_PCT, SLOT_PRICE, TRIAL, unitLabel } from "@/lib/slots";
 
 const PRINT = [
   { h: "Month to month", b: `Billed monthly on a card subscription. No contract, no minimum term. Paying another way (bank transfer or invoice) adds a ${PROCESSING_FEE_PCT}% processing fee.` },
-  { h: "Pass-through costs at cost", b: "A few slots need outside software or postage, like a LinkedIn automation seat or printed cards. You pay what it costs us, no markup, and you see it before you start." },
-  { h: "Change your board monthly", b: "Swap any slot for another, add slots, drop slots or pause. Changes start with your next month." },
-  { h: "Free trial", b: `${TRIAL.length} on ${TRIAL.slots}, for qualified companies. We pick the slots most likely to work for you, together.` },
-  { h: "Founding price", b: `${money(SLOT_PRICE)} a slot. ${PRICE_LINE}, with every ${FREE_EVERY}th slot free on top.` },
+  { h: "Outside costs at cost", b: "A few services need outside software or postage, like a LinkedIn automation seat or printed cards. You pay what it costs us, no markup, and you see it before you start." },
+  { h: "Change your plan monthly", b: "Swap any service for another, add services, drop services or pause. Changes start with your next month." },
+  { h: "Free trial", b: `${TRIAL.length} on ${TRIAL.slots}, for qualified companies. We pick the services most likely to work for you, together.` },
+  { h: "Founding price", b: `${money(SLOT_PRICE)} a service. ${PRICE_LINE}, with every ${FREE_EVERY}th service free on top.` },
 ];
 
 const FAQ = [
   {
-    q: "What exactly is a slot?",
-    a: "A slot is one marketing job we do for you every month, with a clear monthly output: 8 LinkedIn posts, 2 articles, one email campaign, and so on. Your board is the set of slots you hold.",
+    q: "What exactly is a service?",
+    a: "A full marketing service we run for you every month, with a clear monthly output: 8 LinkedIn posts, 2 articles, one targeted email campaign, and so on. Each one stands on its own. Your plan is the set of services you hold.",
   },
   {
-    q: `Why is every ${FREE_EVERY}th slot free?`,
-    a: `Because the more of your marketing we run, the better each part works together, and we want growing your board to always pay off. 3 slots and 4 slots both cost ${money(priceFor(3))} a month. 8 slots get 2 free.`,
+    q: "What does swapping a service mean?",
+    a: "Each service is a full service on its own. If one isn't pulling its weight, swap it for another next month. Articles not moving yet? Swap one for LinkedIn posts. Outbound working? Add more of it. Same price per service, no new agency to hire.",
   },
   {
-    q: "What does swapping a slot mean?",
-    a: "If a slot stops paying off, we move it to something that will. Articles not moving yet? Swap one for a LinkedIn slot. Outbound working? Add more of it. Same price per slot, no new agency to hire.",
+    q: `Why is every ${FREE_EVERY}th service free?`,
+    a: `Because the more of your marketing we run, the better each part works together, and we want growing your plan to always pay off. ${unitLabel(3)} and ${unitLabel(4)} both cost ${money(priceFor(3))} a month. ${unitLabel(8)} get 2 free.`,
   },
   {
-    q: `Why is the minimum ${MIN_SLOTS} slots?`,
-    a: "One slot on its own is rarely enough to see a result. Two slots that support each other, like posts plus a buyer network, give you something you can judge.",
+    q: `Why is the minimum ${unitLabel(MIN_SLOTS)}?`,
+    a: "One service on its own is rarely enough to see a result. Two services that support each other, like posts plus a buyer network, give you something you can judge.",
   },
   {
-    q: "What happens if I remove the free slot?",
-    a: `Your price stays the same. Dropping from 4 slots to 3 saves nothing, because you only paid for 3. That is on purpose: it rewards keeping a full board.`,
+    q: "What happens if I remove the free service?",
+    a: `Your price stays the same. Dropping from ${unitLabel(4)} to 3 saves nothing, because you only paid for 3. That is on purpose: it rewards keeping your 4th.`,
   },
   {
-    q: "What does \"Soon\" mean on a slot?",
-    a: "It is on the menu but not live yet. You can still put it on your board, and we agree a start date with you on the call.",
+    q: "What does \"Soon\" mean on a service?",
+    a: "It is on the menu but not live yet. You can still add it to your plan, and we agree a start date with you on the call.",
   },
   {
     q: "When is the Outbound Specialist plan a better fit?",
-    a: `When outbound is already working and you want more of it: several markets, constant tests, a list built per account. It is one plan, starting with a ${money(OUTBOUND_SPECIALIST.launch.price)} launch month.`,
+    a: `When outbound is already working and you want more of it: several markets, constant tests, a list built per account. It is one plan with three levels, starting with a ${money(OUTBOUND_SPECIALIST.launch.price)} launch month. You pick the level in the Outbound package above.`,
   },
 ];
 

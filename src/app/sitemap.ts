@@ -39,7 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/outbound/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/inbound-engine/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/trial/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${baseUrl}/slots/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.6 },
+    { url: `${baseUrl}/services/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.6 },
     // /privacy-policy/ and /terms/ intentionally excluded, pages are set to noindex.
   ];
 

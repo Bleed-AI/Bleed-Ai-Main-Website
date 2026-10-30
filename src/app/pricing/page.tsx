@@ -12,7 +12,7 @@ import { money, SLOT_PRICE } from "@/lib/slots";
 
 export const metadata: Metadata = buildMeta({
   title: "Pricing",
-  description: `${money(SLOT_PRICE)} a slot, every 4th slot free. Pick an outcome, start from a ready board or build your own, and swap any slot to what's working. Month to month.`,
+  description: `${money(SLOT_PRICE)} a service, every 4th service free. Pick a package, start from a ready plan or build your own, and swap any service, any month, to what's working. Month to month.`,
   path: "/pricing",
   noindex: false,
 });

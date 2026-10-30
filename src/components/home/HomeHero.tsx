@@ -36,7 +36,7 @@ export default function HomeHero() {
                   {i < CHANNELS.length - 2 ? ", " : i === CHANNELS.length - 2 ? " and " : ""}
                 </span>
               ))}
-              . Every month we move your slots to whatever is working.
+              . Each service is a full service on its own. If one isn't pulling its weight, we swap it for another next month.
             </p>
 
             <div className="mb-8 inline-flex max-w-full items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5">
@@ -60,7 +60,7 @@ export default function HomeHero() {
                 href="/pricing/#builder"
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-[#2a2a3e] px-7 py-3.5 text-base font-semibold text-white/90 transition-colors hover:border-white/30"
               >
-                Build your board
+                Build your own
               </a>
             </div>
             <p className="-mt-4 mb-8 text-[13px] text-[#9099b8]">

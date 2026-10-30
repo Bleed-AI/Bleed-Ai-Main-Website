@@ -12,29 +12,30 @@ import {
   priceFor,
   slotById,
   slotHref,
+  unitLabel,
 } from "@/lib/slots";
-import ThemeArt from "./ThemeArt";
+import ServiceSample from "./ServiceSample";
 
-/** The /slots/ catalogue: every slot, grouped by theme (2026-10-30). */
+/** The /services/ catalogue: every service, grouped by theme (2026-10-30). Public word: service, never slot. */
 export default function SlotIndex() {
   const live = SLOTS.filter((s) => s.status === "live").length;
   return (
     <>
       <section className="px-4 pt-28 pb-10 sm:px-6 sm:pt-32 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
-          <div className="sec-label">Every slot</div>
+          <div className="sec-label">Every service</div>
           <h1 className="font-display text-[36px] font-bold leading-[1.08] text-white sm:text-6xl">
-            Pick your slots. <em className="hd-em">Swap any slot</em> to what&apos;s working.
+            Pick your services. <em className="hd-em">Swap any of them,</em> any month.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-[16px] leading-relaxed text-[#c3c8dc]">
-            Each slot is one piece of marketing work that arrives every month. Put the ones you need on your board, and swap any of them next month if something else is working better.
+            Each service is a full service on its own, with a fixed amount of work that arrives every month. Add any of them to your plan. If one isn't pulling its weight, swap it for another next month.
           </p>
           <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-[13px]">
-            <span className="rounded-full border border-[#2a2a3e] bg-[#141420] px-3 py-1.5 text-white/90">{money(SLOT_PRICE)} a slot</span>
-            <span className="rounded-full border border-[#10b981]/40 bg-[#10b981]/10 px-3 py-1.5 text-[#34d399]">Every {FREE_EVERY}th slot free</span>
-            <span className="rounded-full border border-[#2a2a3e] bg-[#141420] px-3 py-1.5 text-white/90">From {MIN_SLOTS} slots, {money(priceFor(MIN_SLOTS))} a month</span>
+            <span className="rounded-full border border-[#2a2a3e] bg-[#141420] px-3 py-1.5 text-white/90">{money(SLOT_PRICE)} a service</span>
+            <span className="rounded-full border border-[#10b981]/40 bg-[#10b981]/10 px-3 py-1.5 text-[#34d399]">Every {FREE_EVERY}th service free</span>
+            <span className="rounded-full border border-[#2a2a3e] bg-[#141420] px-3 py-1.5 text-white/90">From {unitLabel(MIN_SLOTS)}, {money(priceFor(MIN_SLOTS))} a month</span>
           </div>
-          <p className="mt-3 text-[12px] text-[#9099b8]">{PRICE_LINE}. {live} slots live today.</p>
+          <p className="mt-3 text-[12px] text-[#9099b8]">{PRICE_LINE}. {unitLabel(live)} live today.</p>
           <nav className="mt-8 flex flex-wrap justify-center gap-2" aria-label="Themes">
             {THEMES.map((t) => (
               <a key={t.id} href={`#${t.id}`} className="rounded-full border border-[#2a2a3e] px-4 py-2 text-[13.5px] font-semibold text-white/85 transition-colors hover:border-[#B1130F]/70 hover:text-white">
@@ -50,13 +51,13 @@ export default function SlotIndex() {
         return (
           <section key={t.id} id={t.id} className="scroll-mt-24 px-4 pb-16 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-6xl">
-              <Reveal className="mb-6 grid items-center gap-6 md:grid-cols-[1fr_340px]">
+              <Reveal className="mb-6 grid items-center gap-6 md:grid-cols-[1fr_380px]">
                 <div className="min-w-0">
-                  <div className="sec-label">{slots.length} slots</div>
+                  <div className="sec-label">{unitLabel(slots.length)}</div>
                   <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">{t.name}</h2>
                   <p className="mt-2 text-[15.5px] text-[#9099b8]">{t.blurb}</p>
                 </div>
-                <ThemeArt theme={t.id} className="hidden md:block" />
+                <ServiceSample theme={t.id} still clip={300} className="hidden md:block" />
               </Reveal>
               <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {slots.map((s, i) => (
@@ -72,7 +73,7 @@ export default function SlotIndex() {
                           <span className="rounded-full bg-[#f59e0b]/15 px-1.5 py-[1px] text-[10px] font-semibold uppercase tracking-wide text-[#f5b544]">Soon</span>
                         )}
                         <span className="ml-auto text-[11.5px] text-[#9099b8]">
-                          {s.weight} {s.weight === 1 ? "slot" : "slots"}
+                          {money(SLOT_PRICE * s.weight)}/mo
                         </span>
                       </div>
                       <h3 className="font-display text-[19px] font-bold leading-snug text-white">{s.title}</h3>
@@ -96,7 +97,7 @@ export default function SlotIndex() {
       <section className="px-4 pb-24 sm:px-6 lg:px-8">
         <Reveal className="mx-auto max-w-4xl rounded-3xl border border-[#B1130F]/40 bg-[radial-gradient(120%_120%_at_50%_0%,#2a0d0c_0%,#0d0d16_60%)] px-6 py-10 text-center sm:px-10">
           <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
-            Not sure which slots? <em className="hd-em">Try two free.</em>
+            Not sure which services? <em className="hd-em">Try two free.</em>
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-[15px] leading-relaxed text-[#c3c8dc]">
             Free for {TRIAL.length} on {TRIAL.slots}. {SWAP_LINE}
@@ -106,7 +107,7 @@ export default function SlotIndex() {
               {TRIAL.label}
             </a>
             <a href="/pricing/#builder" className="inline-flex items-center justify-center rounded-full border border-[#2a2a3e] px-7 py-3.5 text-[15px] font-semibold text-white/90 hover:border-white/30">
-              Build your board
+              Build your own
             </a>
           </div>
         </Reveal>

@@ -3,11 +3,14 @@ import { generateMetadata as buildMeta } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import OutcomePackages from "@/components/slots/OutcomePackages";
-import PostEngine from "@/components/linkedin/PostEngine";
-import NetworkGrowth from "@/components/linkedin/NetworkGrowth";
-import MonthlyBoard from "@/components/linkedin/MonthlyBoard";
-import { OutcomeHero, PageCta, PageFaq, SectionHead, SwapIns } from "@/components/outbound/OutcomeKit";
-import { outcomeById, packagesFor, PRICE_LINE } from "@/lib/slots";
+import LinkedInShowcase from "@/components/linkedin/LinkedInShowcase";
+import NetworkInvites from "@/components/linkedin/NetworkInvites";
+import SwapInServices from "@/components/linkedin/SwapInServices";
+import { OutcomeHero, PageCta, PageFaq, SectionHead } from "@/components/outbound/OutcomeKit";
+import { MIN_SLOTS, outcomeById, PRICE_LINE, unitLabel } from "@/lib/slots";
+
+// Round 2 (2026-10-30): visitor words are package, plan and service, never slot. The examples are a real
+// looking LinkedIn feed post, a LinkedIn message thread and the invitations page, not diagrams.
 
 const OUTCOME = "linkedin-authority" as const;
 const outcome = outcomeById(OUTCOME);
@@ -19,8 +22,6 @@ export const metadata: Metadata = buildMeta({
   path: "/linkedin-authority",
   noindex: false,
 });
-
-const featured = packagesFor(OUTCOME).find((p) => p.featured) ?? packagesFor(OUTCOME)[0];
 
 const faqs = [
   {
@@ -45,7 +46,7 @@ const faqs = [
   },
   {
     q: "What if LinkedIn is not working for us?",
-    a: "Then we swap the slot. Any slot on your board can move to something else at the start of a month, like articles, AI search or outbound, without a new contract.",
+    a: "Then we swap it. Each service is a full service on its own, and any of them can change at the start of a month, to articles, AI search or outbound, without a new contract.",
   },
 ];
 
@@ -66,57 +67,41 @@ export default function LinkedinAuthorityPage() {
         points={["Posts in your voice, approved by you", "A network made of buyers", "Every engager who fits, followed up"]}
       />
 
-      {/* Signature: a post that builds itself */}
+      {/* Signature: the post and the follow-up, as they look on LinkedIn */}
       <section className="px-5 py-16 sm:px-8 sm:py-20">
         <SectionHead
-          label="One post, start to finish"
+          label="What it looks like"
           title={
             <>
-              A post that <em className="hd-em">builds itself.</em>
+              Posts your buyers read. <em className="hd-em">Replies you can take.</em>
             </>
           }
-          sub="We research what your market is reacting to, write the post in your voice, design the carousel, then sort everyone who engages. The ones who fit your buyer get a follow-up."
+          sub="We research what your market is reacting to, write the post in your voice and design the carousel. When a buyer comments, they get a follow-up, and the conversation lands with you."
         />
-        <PostEngine />
+        <LinkedInShowcase />
       </section>
 
       {/* Network growth */}
       <section className="px-5 py-16 sm:px-8 sm:py-24">
         <div className="mx-auto max-w-6xl">
-          <NetworkGrowth />
-        </div>
-      </section>
-
-      {/* What arrives each month */}
-      <section className="px-5 py-16 sm:px-8 sm:py-20">
-        <div className="mx-auto max-w-5xl">
-          <SectionHead
-            label={`What arrives with ${featured.name}`}
-            title={
-              <>
-                Four slots, <em className="hd-em">every month.</em>
-              </>
-            }
-            sub="Each slot is a real piece of work that shows up on a schedule. You see all of it in a short monthly report."
-          />
-          <MonthlyBoard items={featured.items} />
+          <NetworkInvites />
         </div>
       </section>
 
       {/* Packages */}
       <section id="packages" className="scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto max-w-5xl">
+        <div className="mx-auto max-w-6xl">
           <SectionHead
-            label="Packages"
+            label="Plans"
             title={
               <>
-                Pick a board. <em className="hd-em">Swap any slot.</em>
+                Pick a plan. <em className="hd-em">Swap any service.</em>
               </>
             }
-            sub={`Start with two slots or go straight to four, where the fourth is free. ${PRICE_LINE}.`}
+            sub={`Start with ${unitLabel(MIN_SLOTS)} or go straight to four, where the fourth is free. ${PRICE_LINE}.`}
           />
           <OutcomePackages outcome={OUTCOME} />
-          <SwapIns
+          <SwapInServices
             ids={["competitor-engagers", "video", "video-repurpose", "smart-engagement"]}
             note={
               <>
