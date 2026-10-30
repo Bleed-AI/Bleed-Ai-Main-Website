@@ -9,6 +9,7 @@ import {
   PRICE_LINE,
   priceFor,
   SLOT_PRICE,
+  BOOK,
   SWAP_LINE,
   TRIAL,
   unitLabel,
@@ -62,8 +63,8 @@ export default function PricingHero() {
             ))}
           </ul>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href={TRIAL.href} className="btn-glow rounded-full bg-[#B1130F] px-7 py-3.5 text-center text-[15px] font-semibold text-white">
-              {TRIAL.label}
+            <a href={BOOK.href} className="btn-glow rounded-full bg-[#B1130F] px-7 py-3.5 text-center text-[15px] font-semibold text-white">
+              {BOOK.label}
             </a>
             <a
               href="#builder"
@@ -72,6 +73,12 @@ export default function PricingHero() {
               Build your own
             </a>
           </div>
+          <p className="mt-4 text-[13px] text-[#9099b8]">
+            Not ready to commit?{" "}
+            <a href={TRIAL.href} className="font-semibold text-[#ff6b67] underline decoration-[#ff6b67]/40 underline-offset-4 hover:text-[#ff9d99]">
+              Start a {TRIAL.length} free trial on {TRIAL.slots}
+            </a>
+          </p>
         </div>
 
         <div className="relative rounded-3xl border border-[#1f1f30] bg-[linear-gradient(165deg,#141420,#0b0b14)] p-6 shadow-[0_40px_120px_-40px_rgba(177,19,15,0.45)] sm:p-8">

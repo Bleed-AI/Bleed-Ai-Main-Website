@@ -452,6 +452,12 @@ export const OUTBOUND_SPECIALIST = {
   ],
 };
 
+/** The main door on plan cards and the pricing page: book a call, we launch within 48 hours (Taha 2026-10-30). */
+export const BOOK = {
+  href: "/book-call/",
+  label: "Book a call to get started",
+};
+
 export const TRIAL = {
   href: "/trial/",
   label: "Start a free trial",

@@ -463,22 +463,22 @@ function Summary({
 
       <div className="mt-5 flex flex-col gap-2">
         <a
-          href={trialHref}
+          href={callHref}
           aria-disabled={!valid}
           className={`rounded-full px-5 py-3.5 text-center text-[14.5px] font-semibold text-white transition-all ${
             valid ? "btn-glow bg-[#B1130F]" : "bg-[#B1130F]/40 text-white/70"
           }`}
         >
-          {TRIAL.label}
+          Get started with this plan
         </a>
         <a
-          href={callHref}
+          href={trialHref}
           className="rounded-full border border-[#2a2a3e] px-5 py-3 text-center text-[14px] font-semibold text-white/90 transition-colors hover:border-white/30"
         >
-          Book a call about this plan
+          Try it free first
         </a>
         <p className="mt-1 text-center text-[11.5px] text-[#505570]">
-          Trial: {TRIAL.length} on {TRIAL.slots}, for qualified companies.
+          We launch within 48 hours of the call. The free trial runs {TRIAL.slots} for {TRIAL.length}, for qualified companies.
         </p>
       </div>
     </div>
@@ -793,8 +793,8 @@ export default function SlotBuilder() {
               {n.text}
             </div>
           </button>
-          <a href={trialHref} tabIndex={barOn ? 0 : -1} className="shrink-0 rounded-full bg-[#B1130F] px-4 py-2.5 text-[13px] font-semibold text-white">
-            Free trial
+          <a href={callHref} tabIndex={barOn ? 0 : -1} className="shrink-0 rounded-full bg-[#B1130F] px-4 py-2.5 text-[13px] font-semibold text-white">
+            Get started
           </a>
         </div>
       </div>

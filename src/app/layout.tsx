@@ -3,6 +3,7 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import Preloader from "@/components/Preloader";
 import NavigationProgress from "@/components/NavigationProgress";
 import CursorGlow from "@/components/CursorGlow";
+import StartModal from "@/components/start/StartModal";
 import { generateMetadata, organizationSchema, viewport as defaultViewport } from "@/lib/seo";
 import "./globals.css";
 
@@ -87,6 +88,7 @@ export default function RootLayout({
           <Preloader />
           <NavigationProgress />
           {children}
+          <StartModal />
           {/* PopupNotifications retired 2026-10-30: it sold the Sprint with "Limited Spots" (slot model rules). */}
         </ThemeProvider>
       </body>

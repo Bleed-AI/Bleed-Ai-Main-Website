@@ -194,7 +194,7 @@ export default function BookCall() {
               <div className="p-1 rounded-2xl border border-[var(--border-color)] bg-[var(--bg-secondary)]">
                 <div className="bg-white rounded-xl overflow-hidden">
                   <iframe
-                    src="https://calendly.com/bleedai/vip-invite-only?embed_domain=bleedai.com&embed_type=Inline&text_color=000000&primary_color=b1130f&hide_gdpr_banner=1"
+                    src="https://calendly.com/bleedai/bleedai-start-your-services-or-a-2-week-free-trial?embed_domain=bleedai.com&embed_type=Inline&text_color=000000&primary_color=b1130f&hide_gdpr_banner=1"
                     width="100%"
                     height="700"
                     frameBorder="0"

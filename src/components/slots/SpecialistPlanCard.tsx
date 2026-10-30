@@ -67,10 +67,10 @@ export default function SpecialistPlanCard() {
       </div>
       <div className="mt-auto pt-6">
         <a
-          href="/book-call/"
+          href={`/book-call/?package=specialist-${level.id}`}
           className="block rounded-full bg-white px-5 py-3 text-center text-[14px] font-semibold text-[#07070d] transition-transform hover:scale-[1.02]"
         >
-          Book a call
+          Book a call to get started
         </a>
       </div>
     </div>
