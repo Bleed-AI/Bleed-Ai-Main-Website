@@ -5,12 +5,14 @@ import { usePathname } from "next/navigation";
 
 const footerLinks = {
   company: [
+    { label: "Get recommended by ChatGPT", href: "/shortlisted/" },
+    { label: "LinkedIn Authority", href: "/linkedin-authority/" },
+    { label: "Outbound", href: "/outbound/" },
+    { label: "Inbound Engine", href: "/inbound-engine/" },
+    { label: "Pricing", href: "/pricing/" },
+    { label: "Free trial", href: "/trial/" },
     { label: "Results", href: "/#results-section" },
-    { label: "How It Works", href: "/#pass-system" },
-    { label: "Case Studies", href: "/#testimonials" },
     { label: "Blog", href: "/blog/" },
-    { label: "Our Infrastructure", href: "https://infra.bleedai.com/", external: true },
-    { label: "The Outbound Sprint", href: "https://calculator.bleedai.com/sprint" },
   ],
   platforms: [
     { label: "Clutch", href: "https://clutch.co/profile/bleed-ai" },
@@ -55,7 +57,7 @@ export default function Footer() {
               <p className="text-white/75 leading-relaxed max-w-sm mb-8">
                 {isShortlisted
                   ? "When your buyers ask ChatGPT who to hire, be on the list."
-                  : "Multi-channel outbound for B2B products that already sell. We find your buyers, reach them on email, LinkedIn and mail, and answer every reply. You see the replies before you pay us."}
+                  : "The last marketing team you'll ever hire. Pick your slots across LinkedIn, your website, AI search and outbound, and swap any slot to what's working."}
               </p>
 
               {/* Social Links */}
