@@ -13,8 +13,7 @@ export const metadata: Metadata = buildMeta({
     priceFor(itemsSlotCount(pkg.items))
   )} a month, month to month.`,
   path: "/inbound-engine",
-  // New service page, hidden from search until go-live.
-  noindex: true,
+  noindex: false,
 });
 
 export default function InboundEnginePage() {

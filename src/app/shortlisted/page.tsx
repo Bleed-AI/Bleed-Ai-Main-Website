@@ -13,8 +13,7 @@ export const metadata: Metadata = buildMeta({
     priceFor(itemsSlotCount(starter.items))
   )} a month, month to month.`,
   path: "/shortlisted",
-  // New service page, hidden from search and kept out of the sitemap until go-live.
-  noindex: true,
+  noindex: false,
 });
 
 export default function ShortlistedPage() {

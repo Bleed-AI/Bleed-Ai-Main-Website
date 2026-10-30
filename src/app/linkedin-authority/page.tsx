@@ -17,8 +17,7 @@ export const metadata: Metadata = buildMeta({
   description:
     "Buyers in your market know your name before you ever pitch them. Posts in your voice, a network made of buyers, and every person who engages followed up.",
   path: "/linkedin-authority",
-  // New service page, hidden from search until go-live.
-  noindex: true,
+  noindex: false,
 });
 
 const featured = packagesFor(OUTCOME).find((p) => p.featured) ?? packagesFor(OUTCOME)[0];

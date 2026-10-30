@@ -8,8 +8,7 @@ export const metadata: Metadata = buildMeta({
   title: "Every slot",
   description: "Every marketing slot BleedAI runs, grouped by LinkedIn, website and AI search, and outbound. Pick your slots. Swap any slot to what's working.",
   path: "/slots",
-  // noindex during the rebuild review; switched on at go-live.
-  noindex: true,
+  noindex: false,
 });
 
 export default function SlotsIndexPage() {

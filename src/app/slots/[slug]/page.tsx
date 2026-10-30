@@ -20,8 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${s.name}: ${s.title}`,
     description: `${s.monthly}. ${s.tooltip}`,
     path: `/slots/${s.id}`,
-    // noindex during the rebuild review; switched on at go-live.
-    noindex: true,
+    noindex: false,
   });
 }
 

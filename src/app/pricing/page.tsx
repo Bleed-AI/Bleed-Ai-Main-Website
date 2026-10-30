@@ -14,8 +14,7 @@ export const metadata: Metadata = buildMeta({
   title: "Pricing",
   description: `${money(SLOT_PRICE)} a slot, every 4th slot free. Pick an outcome, start from a ready board or build your own, and swap any slot to what's working. Month to month.`,
   path: "/pricing",
-  // noindex during the rebuild review; switched on at go-live.
-  noindex: true,
+  noindex: false,
 });
 
 export default function PricingPage() {

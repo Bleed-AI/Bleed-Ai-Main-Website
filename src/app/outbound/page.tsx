@@ -21,8 +21,7 @@ export const metadata: Metadata = buildMeta({
   description:
     "Meetings with buyers you picked. We find the companies showing the right signals, reach the people who decide by email and LinkedIn, and handle every reply.",
   path: "/outbound",
-  // New service page, hidden from search until go-live.
-  noindex: true,
+  noindex: false,
 });
 
 const faqs = [

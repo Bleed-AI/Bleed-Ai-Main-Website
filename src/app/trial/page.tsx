@@ -10,8 +10,7 @@ export const metadata: Metadata = buildMeta({
   title: "Start a free trial",
   description: "A free 2 week trial on 1 to 2 slots for B2B companies that already sell. Pick what you want to try, we run it, and you see the work before you pay.",
   path: "/trial",
-  // noindex during the rebuild review; switched on at go-live.
-  noindex: true,
+  noindex: false,
 });
 
 const steps = [
