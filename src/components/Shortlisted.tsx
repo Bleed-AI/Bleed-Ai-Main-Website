@@ -1,511 +1,494 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+// /shortlisted page body, rebuilt on the slot model 2026-10-30.
+// Prices, packages and slot copy come from src/lib/slots.ts. Sample content uses invented companies, labelled Example.
+
+import { useRef, useState } from "react";
 import Reveal from "@/components/Reveal";
+import SlotChip from "@/components/slots/SlotChip";
+import OutcomePackages from "@/components/slots/OutcomePackages";
+import AiAnswerDemo from "@/components/shortlisted/AiAnswerDemo";
+import ReportDemo from "@/components/shortlisted/ReportDemo";
+import { ExampleTag, Eyebrow, GhostButton, H2, TrialButton, useInView, useReducedMotion } from "@/components/shortlisted/ui";
+import { itemsSlotCount, money, packageById, PRICE_LINE, priceFor, slotById, SWAP_LINE, TRIAL } from "@/lib/slots";
 
-const CALENDLY = "https://calendly.com/bleedai/shortlisted-start-your-2-week-free-trial";
+const OUTCOME = "shortlisted";
 
-function TrialButton({ children = "Start your 2 week free trial", className = "" }: { children?: React.ReactNode; className?: string }) {
-  return (
-    <a
-      href={CALENDLY}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`group inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#B1130F] text-white font-semibold text-[15px] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_40px_rgba(177,19,15,0.5)] ${className}`}
-    >
-      {children}
-      <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-      </svg>
-    </a>
-  );
-}
+const starter = packageById("shortlisted-starter")!;
+const FROM_PRICE = money(priceFor(itemsSlotCount(starter.items)));
 
-const plans = [
+const reasons = [
   {
-    name: "Presence",
-    price: "$1,200",
-    line: "Be findable and recommended",
-    includes: [
-      "4 articles a month (1 interactive flagship, 3 standard)",
-      "8 LinkedIn posts in your voice, with images or carousels",
-      "AI search setup and a monthly check across ChatGPT, Claude, Perplexity and Google's AI",
-      "A one-page monthly report",
-    ],
-    featured: false,
+    n: "1",
+    title: "It repeats what it reads",
+    body: "An assistant searches the web for the question, reads a handful of pages and sums them up. If those pages don't mention you, the answer won't either.",
+    slot: "ai-search",
+    does: "We run your 20 buyer questions every month and see exactly which pages it read.",
   },
   {
-    name: "Presence + Reach",
-    price: "$2,500",
-    line: "Get recommended AND get in front of buyers",
-    includes: [
-      "Everything in Presence",
-      "A LinkedIn connection campaign from your profile to your buyers, every weekday",
-      "Mention and list outreach for every article",
-      "Review requests to your happy customers",
-    ],
-    featured: true,
+    n: "2",
+    title: "It quotes pages with numbers and sources",
+    body: "Research on AI answers found pages with statistics, quotes and named sources get used more, and stuffing keywords makes it worse.",
+    slot: "articles",
+    does: "Every article answers one buyer question, with real numbers and where they came from.",
   },
   {
-    name: "Full Engine",
-    price: "$4,250",
-    line: "Recommended, seen, and booked into calls",
-    includes: [
-      "Everything in Presence + Reach",
-      "Our done-for-you outbound: we find your buyers, email them, and handle the replies",
-    ],
-    featured: false,
+    n: "3",
+    title: "It trusts what other sites say about you",
+    body: "Lists, roundups, comparisons and review pages carry a lot of weight. Being named on them is how you go from missing to on the shortlist.",
+    slot: "citations",
+    does: "We get you onto the lists and roundups AI already quotes for your questions.",
   },
-];
-
-const loopSteps = [
-  { n: "1", title: "Check", body: "We ask ChatGPT, Claude, Perplexity and Google's AI the 20 questions your buyers ask, and record who gets named." },
-  { n: "2", title: "Write", body: "Articles and LinkedIn posts that answer those exact questions, in your voice, with real numbers." },
-  { n: "3", title: "Get mentioned", body: "We get you onto the lists, comparisons and review sites AI assistants read." },
-  { n: "4", title: "Show up", body: "The same buyers see you on LinkedIn that week, from your own profile." },
+  {
+    n: "4",
+    title: "Buyers check the name it gives them",
+    body: "When a buyer sees your name in an answer, they look you up. What they find decides whether they call.",
+    slot: "linkedin-posts",
+    does: "They find you posting something useful every week, and the same buyers keep seeing you.",
+  },
 ];
 
 const timeline = [
-  { when: "Week 1", what: "Your AI search check, the 20 buyer questions agreed with you, your first posts approved." },
-  { when: "Month 1", what: "4 articles and 8 posts live, your site set up so AI assistants can read it, LinkedIn network growing." },
-  { when: "Months 2 to 3", what: "First mentions on your narrow, specific questions, other sites starting to list you." },
-  { when: "Month 3 and on", what: "The guarantee window closes at 90 days, and the monthly report shows the trend." },
+  {
+    when: "Month 1",
+    get: ["Your 20 buyer questions agreed with you, and a baseline report before anything goes live", "Your first articles and 8 LinkedIn posts live", "Your site checked so Google, Bing and AI crawlers can read it"],
+    not: "Any AI mention yet. It is too early, and anyone who promises one is guessing.",
+  },
+  {
+    when: "Months 2 to 3",
+    get: ["Articles indexed and showing up in Google for long, specific questions", "First mentions on your narrow questions become possible", "Outreach to the lists and roundups AI reads"],
+    not: "Being named for broad \"best X\" questions. Those take longer.",
+  },
+  {
+    when: "Month 6",
+    get: ["A measured trend across all 20 questions and 4 assistants", "More sites mentioning you", "A clear read on which slots earn their place, so you can swap the rest"],
+    not: "Being \"the\" recommendation by a set date. Nobody controls that.",
+  },
 ];
 
 const compare = [
   { option: "Content marketing agency", cost: "$5,000 to $15,000 a month", us: false },
   { option: "AI search (GEO) agency retainer", cost: "about $6,850 a month (median)", us: false },
   { option: "LinkedIn ghostwriting agency", cost: "from $2,950 a month, LinkedIn only", us: false },
-  { option: "Shortlisted", cost: "from $1,200 a month, all of it", us: true },
+  { option: "Shortlisted", cost: `from ${FROM_PRICE} a month, all of it`, us: true },
 ];
 
 const faqs = [
   { q: "Will it sound like me?", a: "Yes. We learn your voice from your past posts, emails and a short call, and you approve every post before it goes out." },
-  { q: "How much of my time does it take?", a: "About 10 minutes a week to approve posts. One 15 minute call to start." },
+  { q: "How much of my time does it take?", a: "About 10 minutes a week to approve posts. One short call to start." },
   { q: "Is AI writing it?", a: "Our systems do the research and first drafts, and a person edits and checks everything. Nothing goes live without your approval." },
   { q: "Will Google penalise this content?", a: "No. Google ranks helpful content no matter how it was made, and every article answers a real buyer question with real sources." },
-  { q: "Do I need to change my website?", a: "No rebuild. We make small fixes so AI assistants can read it, and we publish the articles on it (or we set up a blog if you don't have one)." },
-  { q: "Is my LinkedIn account safe?", a: "Yes. We stay well under LinkedIn's limits and ramp up slowly, the same way a careful person would." },
-  { q: "I already have an agency.", a: "Keep them if they get you named by ChatGPT. Run our free check first and see." },
-  { q: "How is this different from a $99 tracking tool?", a: "A tool tells you that you're missing. We do the work that gets you named." },
+  { q: "Do I need a new website?", a: "No. We publish the articles on your site (or set up a blog if you don't have one) and make small fixes so AI crawlers can read it. If you want the homepage rebuilt too, that is a slot you can add." },
+  { q: "How is this different from a $99 tracking tool?", a: "A tool tells you that you're missing. We do the work that gets you named, and the tracking is one slot of five." },
+  { q: "What is a slot, and can I change mine?", a: `Each slot is one piece of work that arrives every month. ${SWAP_LINE} If articles are working and posts are not, move that slot to more articles next month.` },
+  { q: "I already have an agency.", a: "Keep them if they get you named by ChatGPT. Start the free trial and compare." },
+  { q: `What happens in the free ${TRIAL.length}?`, a: `We run your AI search check, agree your 20 buyer questions, and deliver ${TRIAL.slots} of real work for you to judge. No card needed.` },
   { q: "Can I cancel?", a: "Anytime. It's month to month, and you keep everything we made." },
-  { q: "What happens in the free 2 weeks?", a: "Your AI search check, your 20 buyer questions agreed, and your first posts and an article written for you to approve." },
 ];
+
+function ArrowDown() {
+  return (
+    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2} aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m0 0l-6-6m6 6l6-6" />
+    </svg>
+  );
+}
+
+function Explainer({ state }: { state: "before" | "after" }) {
+  return (
+    <div className="relative">
+      <div className={`transition-all duration-500 ${state === "before" ? "opacity-100" : "pointer-events-none absolute inset-0 opacity-0"}`} aria-hidden={state !== "before"}>
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#B1130F]/40 bg-[#B1130F]/10 px-3 py-1 text-[12px] font-semibold text-[#ff9d99]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#ff5b56]" /> Not named
+        </div>
+        <h3 className="mb-3 font-display text-2xl font-bold leading-snug text-white">The assistant read three pages. None of them mentioned Northline.</h3>
+        <p className="text-[15px] leading-relaxed text-[#9099b8]">
+          So Northline doesn't exist in this answer, even though they are good at exactly this. The buyer calls one of the three names and never hears of them.
+        </p>
+      </div>
+      <div className={`transition-all duration-500 ${state === "after" ? "opacity-100" : "pointer-events-none absolute inset-0 opacity-0"}`} aria-hidden={state !== "after"}>
+        <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#10b981]/40 bg-[#10b981]/10 px-3 py-1 text-[12px] font-semibold text-[#7af0bf]">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#34d399]" /> Named
+        </div>
+        <h3 className="mb-3 font-display text-2xl font-bold leading-snug text-white">Two pages changed, so the answer changed.</h3>
+        <p className="mb-5 text-[15px] leading-relaxed text-[#9099b8]">
+          Northline published an article that answers this exact question with real numbers and sources. And a roundup the assistant already trusts now lists them. Same question, new answer.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <SlotChip id="articles" />
+          <SlotChip id="citations" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Samples() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const seen = useInView(ref, 0.2);
+  const reduce = useReducedMotion();
+  const on = seen || reduce;
+  return (
+    <div ref={ref} className="grid grid-cols-1 items-start gap-5 lg:grid-cols-2">
+      {/* LinkedIn post */}
+      <Reveal className="flex min-w-0 flex-col gap-3">
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03]">
+          <div className="p-4 sm:p-5">
+            <div className="mb-3 flex items-center gap-3">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#4f8bff] to-[#a855f7] text-sm font-bold text-white">SB</div>
+              <div className="min-w-0">
+                <div className="text-[13px] font-semibold leading-tight text-white">Sarah Bennett</div>
+                <div className="truncate text-[11px] text-white/45">Founder at Northline Advisory</div>
+              </div>
+              <ExampleTag className="ml-auto">Example post</ExampleTag>
+              <svg className="h-5 w-5 shrink-0 text-[#0a66c2]" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+            </div>
+            <div className="mb-3 space-y-1.5 text-[13px] leading-relaxed text-white/80">
+              <p>Last month a contractor told me he was "profitable but broke."</p>
+              <p>His P&amp;L looked great. His bank account did not.</p>
+              <p>The problem was retainage sitting unbilled for 90 days.</p>
+              <p>We rebuilt his cash flow around draw dates, not invoice dates.</p>
+              <p>Six weeks later he stopped using his credit line.</p>
+              <p>Profit on paper means nothing if the cash shows up too late.</p>
+            </div>
+            <div className="mb-3 rounded-lg border border-white/[0.06] bg-[#0b0b12] p-3">
+              <div className="flex h-24 items-end gap-1.5">
+                {[30, 45, 35, 60, 50, 80].map((h, i) => (
+                  <div
+                    key={i}
+                    className="flex-1 origin-bottom rounded-t bg-gradient-to-t from-[#B1130F] to-[#ff6b67]"
+                    style={{
+                      height: `${h}%`,
+                      transform: on ? "scaleY(1)" : "scaleY(0)",
+                      transition: reduce ? "none" : "transform 0.7s cubic-bezier(0.22,1,0.36,1)",
+                      transitionDelay: reduce ? "0ms" : `${300 + i * 90}ms`,
+                    }}
+                  />
+                ))}
+              </div>
+              <div className="mt-2 text-center font-mono text-[10px] text-white/35">Cash on hand, weeks 1 to 6</div>
+            </div>
+            <div className="flex items-center gap-4 border-t border-white/[0.06] pt-2.5 text-[11px] text-white/45">
+              <span>Like</span>
+              <span>Comment</span>
+              <span>Repost</span>
+              <span className="ml-auto hidden sm:inline">First comment: link to the article</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-2 text-[12.5px] text-white/50">
+          <span>Made by your</span> <SlotChip id="linkedin-posts" size="sm" /> <span>slot, 8 a month</span>
+        </div>
+      </Reveal>
+
+      {/* Article */}
+      <Reveal delay={90} className="flex min-w-0 flex-col gap-3">
+        <div className="overflow-hidden rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)]">
+          <div className="flex items-center gap-1.5 border-b border-white/[0.06] bg-white/[0.02] px-4 py-2.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="ml-3 truncate rounded-md bg-white/[0.05] px-3 py-1 font-mono text-[10.5px] text-white/40">northlineadvisory / insights / texas-retainage-2026</span>
+          </div>
+          <div className="p-5 sm:p-6">
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <span className="inline-flex items-center gap-1.5 rounded-md border border-[#4f8bff]/30 bg-[#4f8bff]/15 px-2.5 py-1 font-mono text-[11px] font-semibold text-[#8fb4ff]">
+                Interactive: retainage calculator
+              </span>
+              <ExampleTag>Example article</ExampleTag>
+            </div>
+            <h3 className="mb-3 font-display text-xl font-bold leading-snug text-white">How Texas contractors should handle retainage in 2026</h3>
+            <p className="mb-4 text-[13.5px] leading-relaxed text-white/60">
+              Short answer first: retainage can hold 5 to 10 percent of a job for months. Here is how the best contractors schedule it, bill it, and keep it from draining their cash, with a calculator you can run on your own numbers.
+            </p>
+            <div className="mb-4 space-y-2 rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+              <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">Built the way AI likes to quote</div>
+              {["Answers one buyer question in the first lines", "Real numbers, each with its source", "Quotes the primary rule word for word", "Links to your other articles and to the calculator"].map((t) => (
+                <div key={t} className="flex gap-2 text-[12.5px] text-white/70">
+                  <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#3ecf8e]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.6} aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12.5l4.5 4.5L19 7" />
+                  </svg>
+                  {t}
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center gap-2 font-mono text-[11px] text-white/40">
+              <span>Article</span><span>·</span><span>7 min read</span><span>·</span><span>4 sources</span>
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-wrap items-center gap-2 text-[12.5px] text-white/50">
+          <span>Made by your</span> <SlotChip id="articles" size="sm" /> <span>slot</span>
+        </div>
+      </Reveal>
+    </div>
+  );
+}
 
 export default function Shortlisted() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const samplesRef = useRef<HTMLElement | null>(null);
-  const [samplesShown, setSamplesShown] = useState(false);
-  const [animate, setAnimate] = useState(true);
-
-  // Grow the chart bars and pop the report ticks when the samples scroll in.
-  useEffect(() => {
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setAnimate(false);
-      setSamplesShown(true);
-      return;
-    }
-    const el = samplesRef.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) setSamplesShown(true); }),
-      { threshold: 0.2 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-
-  // Load the Calendly inline-embed script once for the final section.
-  useEffect(() => {
-    const id = "calendly-widget-js";
-    if (!document.getElementById(id)) {
-      const s = document.createElement("script");
-      s.id = id;
-      s.src = "https://assets.calendly.com/assets/external/widget.js";
-      s.async = true;
-      document.body.appendChild(s);
-    }
-  }, []);
+  const [demoState, setDemoState] = useState<"before" | "after">("before");
+  const tracking = slotById("ai-search");
 
   return (
     <div className="text-white">
       {/* 1. HERO */}
-      <section className="px-6 pt-20 pb-20 sm:pt-28 sm:pb-24">
-        <div className="max-w-3xl mx-auto text-center">
-          <Reveal className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#B1130F]/40 bg-[#B1130F]/10 mb-7">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ff5b56]" />
-            <span className="text-[10.5px] sm:text-xs font-semibold tracking-normal sm:tracking-wide text-white/85 uppercase whitespace-nowrap">For B2B companies that sell on expertise</span>
+      <section className="px-4 pb-14 pt-20 sm:px-6 sm:pb-20 sm:pt-28">
+        <div className="mx-auto max-w-4xl text-center">
+          <Reveal className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#B1130F]/40 bg-[#B1130F]/10 px-3 py-1.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#ff5b56]" />
+            <span className="whitespace-nowrap text-[10.5px] font-semibold uppercase tracking-normal text-white/85 sm:text-xs sm:tracking-wide">Shortlisted · Get recommended by ChatGPT</span>
           </Reveal>
-          <Reveal as="h1" className="font-display font-bold text-4xl sm:text-5xl lg:text-[3.4rem] leading-[1.08] tracking-tight mb-6" delay={60}>
-            When your buyers ask ChatGPT who to hire,{" "}
-            <span style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: "italic", fontWeight: 400 }} className="text-[#ff8a86]">
-              be on the list.
-            </span>
+          <Reveal as="h1" className="mb-6 font-display text-[38px] font-bold leading-[1.06] tracking-tight sm:text-5xl lg:text-[3.6rem]" delay={60}>
+            When your buyers ask ChatGPT who to hire, <em className="hd-em">be on the list.</em>
           </Reveal>
-          <Reveal as="p" className="text-base sm:text-lg text-white/65 leading-relaxed max-w-2xl mx-auto mb-7" delay={120}>
-            Shortlisted gets you recommended by ChatGPT, Google's AI and Perplexity, and puts you in front of the same buyers on LinkedIn. Done for you, in your voice, about 10 minutes a week of your time.
+          <Reveal as="p" className="mx-auto mb-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg" delay={120}>
+            Shortlisted gets you recommended by ChatGPT, Claude, Perplexity and Google's AI, and puts you in front of the same buyers on LinkedIn. Done for you, in your voice, about 10 minutes a week of your time.
           </Reveal>
-          <Reveal className="font-mono text-[13px] text-white/55 mb-8" delay={160}>
-            From $1,200 a month · Month to month · First 2 weeks free
+          <Reveal className="mb-8 flex flex-wrap justify-center gap-2" delay={150}>
+            {packageById("shortlisted")!.items.map((it) => (
+              <SlotChip key={it.slot} id={it.slot} qty={it.qty} size="sm" />
+            ))}
           </Reveal>
-          <Reveal className="flex flex-col sm:flex-row items-center justify-center gap-4" delay={200}>
-            <TrialButton />
-            <a href="#gap" className="text-sm font-medium text-white/70 hover:text-white transition-colors">
-              See what ChatGPT says about you ↓
-            </a>
+          <Reveal className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4" delay={200}>
+            <TrialButton outcome={OUTCOME} />
+            <GhostButton href="#answer">
+              See it change an answer <ArrowDown />
+            </GhostButton>
+          </Reveal>
+          <Reveal className="mt-6 font-mono text-[12.5px] text-white/50" delay={240}>
+            From {FROM_PRICE} a month · Month to month · {TRIAL.length} free to start
           </Reveal>
         </div>
       </section>
 
-      {/* 2. THE GAP */}
-      <section id="gap" className="px-6 py-20 sm:py-24 scroll-mt-24">
-        <div className="max-w-3xl mx-auto">
-          <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl text-center leading-tight mb-10">
-            Your buyers already asked.{" "}
-            <span style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontStyle: "italic", fontWeight: 400 }} className="text-[#ff8a86]">
-              Were you in the answer?
-            </span>
-          </Reveal>
+      {/* 2. SIGNATURE: THE ANSWER */}
+      <section id="answer" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
+            <Reveal><Eyebrow>The answer your buyer gets</Eyebrow></Reveal>
+            <Reveal delay={60}>
+              <H2>
+                Your buyers already asked. <em className="hd-em">Were you in the answer?</em>
+              </H2>
+            </Reveal>
+          </div>
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)] lg:gap-14">
+            <Reveal className="min-w-0">
+              <AiAnswerDemo onStateChange={setDemoState} />
+            </Reveal>
+            <Reveal delay={120} className="min-w-0">
+              <Explainer state={demoState} />
+            </Reveal>
+          </div>
 
-          {/* Mock ChatGPT card */}
-          <Reveal className="rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] overflow-hidden shadow-[0_30px_80px_-30px_rgba(0,0,0,0.9)]">
-            <div className="flex items-center gap-2.5 px-5 py-3 border-b border-white/[0.06] bg-white/[0.02]">
-              <span className="w-6 h-6 flex items-center justify-center text-white">
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
-                  <path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z" />
-                </svg>
-              </span>
-              <span className="text-[13px] font-medium text-white/70">ChatGPT</span>
-            </div>
-            <div className="p-5 sm:p-7 space-y-5">
-              <div className="flex justify-end">
-                <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-[#2a2a38] px-4 py-3 text-[14px] text-white/90 leading-relaxed">
-                  What are the best accounting firms for construction companies in Texas?
-                </div>
-              </div>
-              <div className="flex justify-start">
-                <div className="max-w-[92%] rounded-2xl rounded-bl-sm bg-white/[0.04] border border-white/[0.06] px-4 py-4 text-[14px] text-white/80 leading-relaxed space-y-3">
-                  <p>A few firms come up often for construction accounting in Texas:</p>
-                  <ul className="space-y-2.5">
-                    <li><span className="font-semibold text-white">Northline Advisory</span>, known for construction cash flow and WIP schedules.</li>
-                    <li><span className="font-semibold text-white">Brickwell CPA</span>, specialises in contractor tax and job costing.</li>
-                    <li><span className="font-semibold text-white">Summit Ledger</span>, popular with Texas GCs for retainage and audits.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="px-5 sm:px-7 py-4 border-t border-[#B1130F]/20 bg-[#B1130F]/[0.08] flex items-center gap-2.5">
-              <svg className="w-4 h-4 text-[#ff5b56] flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.4}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-              <span className="text-[14px] font-semibold text-[#ff9d99]">Your company: not mentioned.</span>
-            </div>
-          </Reveal>
-
-          {/* Stat tiles */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+          <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3">
             {[
               { big: "51%", body: "of B2B software buyers now start their research in an AI chatbot more often than Google.", src: "G2, March 2026, 1,076 buyers" },
               { big: "69%", body: "say a chatbot pointed them to a vendor they had not expected.", src: "G2, March 2026" },
               { big: "7% vs 53%", body: "notice a vendor because they know the name, versus one that matches their exact problem.", src: "Semrush, July 2026, 519 buyers" },
             ].map((s, i) => (
               <Reveal key={s.src} delay={i * 80} className="rounded-xl border border-white/10 bg-white/[0.02] p-5">
-                <div className="font-display font-bold text-2xl sm:text-[1.7rem] text-[#ff6b67] mb-2 leading-none">{s.big}</div>
-                <p className="text-[13.5px] text-white/70 leading-snug mb-2">{s.body}</p>
-                <p className="text-[11px] text-white/35 font-mono">{s.src}</p>
+                <div className="mb-2 font-display text-2xl font-bold leading-none text-[#ff6b67] sm:text-[1.7rem]">{s.big}</div>
+                <p className="mb-2 text-[13.5px] leading-snug text-white/70">{s.body}</p>
+                <p className="font-mono text-[11px] text-white/35">{s.src}</p>
               </Reveal>
             ))}
           </div>
-
-          <Reveal as="p" className="text-center text-[15px] text-white/70 leading-relaxed max-w-2xl mx-auto mt-8">
+          <Reveal as="p" className="mx-auto mt-8 max-w-2xl text-center text-[15px] leading-relaxed text-white/70">
             You don't need to be famous to be recommended. You need to be described the way your buyers describe their problem, in the places AI reads.
           </Reveal>
         </div>
       </section>
 
-      {/* 3. SHORTLIST LOOP */}
-      <section className="px-6 py-20 sm:py-24">
-        <div className="max-w-5xl mx-auto">
-          <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl text-center leading-tight mb-3">
-            The Shortlist Loop.
-          </Reveal>
-          <Reveal as="p" className="text-center text-white/60 text-lg mb-12" delay={60}>
-            Every month, four steps.
-          </Reveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8">
-            {loopSteps.map((s, i) => (
-              <Reveal key={s.n} delay={i * 90} className="relative rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] p-6">
-                <div className="w-10 h-10 rounded-full bg-[#B1130F] flex items-center justify-center font-bold text-white mb-4 shadow-[0_0_20px_-4px_rgba(177,19,15,0.8)]">{s.n}</div>
-                <h3 className="font-semibold text-lg text-white mb-2">{s.title}</h3>
-                <p className="text-[13.5px] text-white/60 leading-relaxed">{s.body}</p>
-                {i < loopSteps.length - 1 && (
-                  <span className="loop-connector hidden lg:block" style={{ ["--loop-delay" as string]: `${i * 0.45}s` }} aria-hidden="true" />
-                )}
+      {/* 3. HOW AI PICKS */}
+      <section className="px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-12 max-w-2xl text-center">
+            <Reveal><Eyebrow>How it works</Eyebrow></Reveal>
+            <Reveal delay={60}>
+              <H2>
+                How AI decides <em className="hd-em">who to recommend.</em>
+              </H2>
+            </Reveal>
+            <Reveal as="p" delay={100} className="mt-4 text-[16px] leading-relaxed text-[#9099b8]">
+              There is no secret switch. It searches, reads a handful of pages and repeats what they say. So we work on the pages it reads, one slot for each reason.
+            </Reveal>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
+            {reasons.map((r, i) => (
+              <Reveal
+                key={r.n}
+                delay={i * 80}
+                className="group relative flex flex-col rounded-2xl border border-[#1f1f30] bg-[linear-gradient(165deg,#141420,#0b0b14)] p-6 transition-colors hover:border-[#B1130F]/40 sm:p-7"
+              >
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#B1130F] font-bold text-white shadow-[0_0_20px_-4px_rgba(177,19,15,0.8)]">{r.n}</span>
+                  <h3 className="font-display text-[19px] font-bold leading-snug text-white">{r.title}</h3>
+                </div>
+                <p className="mb-5 text-[14.5px] leading-relaxed text-[#9099b8]">{r.body}</p>
+                <div className="mt-auto rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">
+                  <div className="mb-2.5 flex items-center gap-2">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">The slot</span>
+                    <SlotChip id={r.slot} size="sm" />
+                  </div>
+                  <p className="text-[13.5px] leading-snug text-white/75">{r.does}</p>
+                </div>
               </Reveal>
             ))}
           </div>
-          <Reveal as="p" className="text-center text-[15px] text-white/70 mt-10" delay={120}>
-            Then we check again, and you see the answer change.
+        </div>
+      </section>
+
+      {/* 4. THE MONTHLY REPORT */}
+      <section className="px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
+            <Reveal><Eyebrow>The monthly report</Eyebrow></Reveal>
+            <Reveal delay={60}>
+              <H2>
+                Every month, you see <em className="hd-em">who gets named.</em>
+              </H2>
+            </Reveal>
+            <Reveal as="p" delay={100} className="mt-4 text-[16px] leading-relaxed text-[#9099b8]">
+              {tracking.monthly}. {tracking.tooltip}
+            </Reveal>
+          </div>
+          <Reveal>
+            <ReportDemo />
           </Reveal>
         </div>
       </section>
 
-      {/* 4. PRICING */}
-      <section className="px-6 py-20 sm:py-24">
-        <div className="max-w-5xl mx-auto">
-          <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl text-center leading-tight mb-12">
-            What you get each month
+      {/* 5. SAMPLES */}
+      <section className="px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-5xl">
+          <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
+            <Reveal><Eyebrow>The work</Eyebrow></Reveal>
+            <Reveal delay={60}>
+              <H2>
+                Judge the work <em className="hd-em">yourself.</em>
+              </H2>
+            </Reveal>
+            <Reveal as="p" delay={100} className="mt-4 text-[16px] leading-relaxed text-[#9099b8]">
+              The post and the article behind the answer above. Written in your voice, approved by you before anything goes live.
+            </Reveal>
+          </div>
+          <Samples />
+        </div>
+      </section>
+
+      {/* 6. PACKAGES */}
+      <section id="packages" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-5xl">
+          <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
+            <Reveal><Eyebrow>Packages</Eyebrow></Reveal>
+            <Reveal delay={60}>
+              <H2>
+                Pick your slots. <em className="hd-em">Swap any of them later.</em>
+              </H2>
+            </Reveal>
+            <Reveal as="p" delay={100} className="mt-4 text-[16px] leading-relaxed text-[#9099b8]">
+              {SWAP_LINE} Every 4th slot is free. Month to month. {PRICE_LINE}.
+            </Reveal>
+          </div>
+          <Reveal>
+            <OutcomePackages outcome="shortlisted" />
           </Reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
-            {plans.map((p, i) => (
-              <Reveal
-                key={p.name}
-                delay={i * 90}
-                className={`relative rounded-2xl p-7 flex flex-col h-full border ${
-                  p.featured
-                    ? "border-[#ff5b56]/50 bg-[linear-gradient(160deg,#1a1016,#0b0b12)] shadow-[0_0_50px_-16px_rgba(255,61,56,0.5)] lg:-mt-3"
-                    : "border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)]"
-                }`}
-              >
-                {p.featured && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-[#b1130f] to-[#ff3d38] text-white text-[11px] font-bold font-mono uppercase tracking-wide whitespace-nowrap">
-                    Most popular
-                  </span>
-                )}
-                <div className="font-mono text-[12px] font-bold uppercase tracking-wide text-[#ff9d99] mb-3">{p.name}</div>
-                <div className="font-display font-extrabold text-3xl text-white mb-1">
-                  {p.price}
-                  <span className="text-[15px] font-semibold text-white/45">/mo</span>
+          <Reveal as="p" className="mx-auto mt-6 max-w-2xl text-center text-[13.5px] leading-relaxed text-white/55">
+            The {slotById("citations").name} slot is marked Soon: citation outreach starts in month 2, once your first articles are live and there is something worth citing.
+          </Reveal>
+
+          {/* Cost comparison */}
+          <Reveal className="mx-auto mt-14 max-w-3xl">
+            <h3 className="mb-5 text-center font-display text-xl font-bold text-white sm:text-2xl">What the same work costs elsewhere</h3>
+            <div className="overflow-hidden rounded-2xl border border-white/10">
+              {compare.map((c, i) => (
+                <div
+                  key={c.option}
+                  className={`grid grid-cols-1 gap-1 px-5 py-4 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-4 sm:px-6 ${i > 0 ? "border-t border-white/[0.06]" : ""} ${
+                    c.us ? "bg-[#B1130F]/[0.12]" : "bg-white/[0.02]"
+                  }`}
+                >
+                  <span className={`text-[14px] ${c.us ? "font-bold text-white" : "text-white/75"}`}>{c.option}</span>
+                  <span className={`text-[14px] sm:text-right ${c.us ? "font-bold text-[#ff9d99]" : "text-white/55"}`}>{c.cost}</span>
                 </div>
-                <p className="text-[14px] text-white/65 mb-6 min-h-[42px]">{p.line}</p>
-                <ul className="space-y-3 mb-7 flex-1">
-                  {p.includes.map((it) => (
-                    <li key={it} className="flex gap-2.5 text-[13.5px] text-white/75 leading-snug">
-                      <svg className="w-4 h-4 text-[#3ecf8e] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M5 12.5l4.5 4.5L19 7" />
+              ))}
+            </div>
+            <p className="mt-4 text-center text-[13.5px] leading-relaxed text-white/55">
+              Our own systems do the heavy lifting and a person reviews everything before it goes live. That is why it costs a fraction of a retainer.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* 7. HONEST TIMELINE */}
+      <section className="px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
+            <Reveal><Eyebrow>What changes when</Eyebrow></Reveal>
+            <Reveal delay={60}>
+              <H2>
+                An honest timeline. <em className="hd-em">No made up dates.</em>
+              </H2>
+            </Reveal>
+            <Reveal as="p" delay={100} className="mt-4 text-[16px] leading-relaxed text-[#9099b8]">
+              Getting named by AI is slow, steady work. Here is what you can expect, and what we will not promise.
+            </Reveal>
+          </div>
+          <div className="relative grid gap-4 lg:grid-cols-3 lg:gap-5">
+            {timeline.map((t, i) => (
+              <Reveal key={t.when} delay={i * 90} className="flex flex-col rounded-2xl border border-[#1f1f30] bg-[linear-gradient(165deg,#141420,#0b0b14)] p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="flex h-2.5 w-2.5 rounded-full bg-[#ff5b56] shadow-[0_0_12px_#ff3d38]" />
+                  <span className="font-mono text-[13px] font-bold uppercase tracking-wide text-[#ff9d99]">{t.when}</span>
+                </div>
+                <ul className="mb-5 space-y-2.5">
+                  {t.get.map((g) => (
+                    <li key={g} className="flex gap-2.5 text-[14px] leading-snug text-white/80">
+                      <svg className="mt-0.5 h-4 w-4 shrink-0 text-[#3ecf8e]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.6} aria-hidden="true">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 12.5l4.5 4.5L19 7" />
                       </svg>
-                      {it}
+                      {g}
                     </li>
                   ))}
                 </ul>
-                <TrialButton className="w-full">Start free trial</TrialButton>
+                <div className="mt-auto rounded-xl border border-white/[0.06] bg-white/[0.02] p-3.5">
+                  <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.16em] text-white/40">We won't promise</div>
+                  <p className="text-[13px] leading-snug text-white/60">{t.not}</p>
+                </div>
               </Reveal>
             ))}
           </div>
-          <Reveal as="p" className="text-center text-[14px] text-white/60 leading-relaxed max-w-2xl mx-auto mt-8">
-            Every plan starts with 2 weeks free after a 15 minute call. Swap any item for another of equal size, any month. Cancel anytime.
-          </Reveal>
         </div>
       </section>
 
-      {/* 5. REAL SAMPLES */}
-      <section ref={samplesRef} className="px-6 py-20 sm:py-24">
-        <div className="max-w-5xl mx-auto">
-          <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl text-center leading-tight mb-12">
-            Judge the work yourself.
-          </Reveal>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
-            {/* LinkedIn post */}
-            <Reveal className="rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden">
-              <div className="p-4">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#4f8bff] to-[#a855f7] flex items-center justify-center text-white font-bold text-sm">SB</div>
-                  <div>
-                    <div className="text-[13px] font-semibold text-white leading-tight">Sarah Bennett</div>
-                    <div className="text-[11px] text-white/45">Founder at Northline Advisory</div>
-                  </div>
-                  <span className="ml-auto shrink-0 whitespace-nowrap text-[10px] font-mono uppercase tracking-wide text-white/40 border border-white/15 rounded px-2 py-0.5">Example post</span>
-                  <svg className="w-5 h-5 text-[#0a66c2] shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
-                </div>
-                <div className="text-[12.5px] text-white/80 leading-relaxed space-y-1.5 mb-3">
-                  <p>Last month a contractor told me he was "profitable but broke."</p>
-                  <p>His P&amp;L looked great. His bank account did not.</p>
-                  <p>The problem was retainage sitting unbilled for 90 days.</p>
-                  <p>We rebuilt his cash flow around draw dates, not invoice dates.</p>
-                  <p>Six weeks later he stopped using his credit line.</p>
-                  <p>Profit on paper means nothing if the cash shows up too late.</p>
-                </div>
-                {/* simple chart */}
-                <div className="rounded-lg border border-white/[0.06] bg-[#0b0b12] p-3 mb-3">
-                  <div className="flex items-end gap-1.5 h-20">
-                    {[30, 45, 35, 60, 50, 80].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-t bg-gradient-to-t from-[#B1130F] to-[#ff6b67] origin-bottom"
-                        style={{
-                          height: `${h}%`,
-                          transform: samplesShown ? "scaleY(1)" : "scaleY(0)",
-                          transition: animate ? "transform 0.7s cubic-bezier(0.22,1,0.36,1)" : "none",
-                          transitionDelay: animate ? `${300 + i * 90}ms` : "0ms",
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <div className="text-[10px] text-white/35 font-mono mt-2 text-center">Cash on hand, weeks 1 to 6</div>
-                </div>
-                <div className="flex items-center gap-4 text-[11px] text-white/45 border-t border-white/[0.06] pt-2.5">
-                  <span>👍 184</span>
-                  <span>💬 37 comments</span>
-                  <span>↻ 12 reposts</span>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Article preview */}
-            <Reveal delay={90} className="rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] p-6 flex flex-col">
-              <div className="flex items-start justify-between gap-3 mb-4">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#4f8bff]/15 border border-[#4f8bff]/30 text-[11px] font-mono font-semibold text-[#8fb4ff]">
-                  Interactive: retainage calculator
-                </span>
-                <span className="shrink-0 whitespace-nowrap text-[10px] font-mono uppercase tracking-wide text-white/40 border border-white/15 rounded px-2 py-0.5">Example article</span>
-              </div>
-              <h3 className="font-display font-bold text-xl text-white leading-snug mb-3">How Texas contractors should handle retainage in 2026</h3>
-              <p className="text-[13px] text-white/60 leading-relaxed mb-4">
-                Retainage can quietly hold 5 to 10 percent of a job hostage for months. Here is how the best contractors schedule it, bill it, and keep it from draining their cash. Includes a calculator you can run on your own numbers.
-              </p>
-              <div className="mt-auto flex items-center gap-2 text-[11px] text-white/40 font-mono">
-                <span>Article</span><span>·</span><span>7 min read</span>
-              </div>
-            </Reveal>
-
-            {/* Monthly report */}
-            <Reveal delay={180} className="rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold text-[15px] text-white">AI search check, November</h3>
-                <span className="shrink-0 whitespace-nowrap text-[10px] font-mono uppercase tracking-wide text-white/40 border border-white/15 rounded px-2 py-0.5">Example report</span>
-              </div>
-              <div className="rounded-lg border border-white/[0.06] overflow-hidden text-[11.5px]">
-                <div className="grid grid-cols-[1fr_auto_auto_auto] gap-2 px-3 py-2 bg-white/[0.03] font-mono text-[10px] uppercase tracking-wide text-white/40">
-                  <span>Question</span><span>GPT</span><span>Claude</span><span>Perp</span>
-                </div>
-                {[
-                  ["Construction CPA Texas", true, true, false],
-                  ["WIP schedule help", true, false, true],
-                  ["Retainage accounting", true, true, true],
-                  ["Contractor job costing", false, true, false],
-                  ["Best firm for GCs", false, false, false],
-                ].map((r, i) => (
-                  <div key={i} className="grid grid-cols-[1fr_auto_auto_auto] gap-2 px-3 py-2 border-t border-white/[0.04] items-center">
-                    <span className="text-white/65 truncate">{r[0] as string}</span>
-                    {[r[1], r[2], r[3]].map((v, j) => (
-                      <span
-                        key={j}
-                        className={`w-4 text-center font-bold inline-block ${v ? "text-[#3ecf8e]" : "text-white/25"}`}
-                        style={{
-                          transform: samplesShown ? "scale(1)" : "scale(0)",
-                          opacity: samplesShown ? 1 : 0,
-                          transition: animate ? "transform 0.45s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s ease" : "none",
-                          transitionDelay: animate ? `${500 + (i * 3 + j) * 55}ms` : "0ms",
-                        }}
-                      >
-                        {v ? "✓" : "·"}
-                      </span>
-                    ))}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 rounded-lg bg-[#3ecf8e]/10 border border-[#3ecf8e]/25 px-3 py-2.5 text-[12.5px] font-semibold text-[#6fe3b0]">
-                Named in 7 of 20 questions (up from 2)
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* 6. TIMELINE */}
-      <section className="px-6 py-20 sm:py-24">
-        <div className="max-w-3xl mx-auto">
-          <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl text-center leading-tight mb-12">
-            What happens when
-          </Reveal>
-          <div className="space-y-4">
-            {timeline.map((t, i) => (
-              <Reveal key={t.when} delay={i * 80} className="flex gap-4 rounded-2xl border border-white/10 bg-[linear-gradient(160deg,#12121b,#0b0b12)] p-5">
-                <div className="font-mono text-[12px] font-bold text-[#ff9d99] whitespace-nowrap pt-0.5 w-28 flex-shrink-0">{t.when}</div>
-                <p className="text-[14px] text-white/75 leading-relaxed">{t.what}</p>
-              </Reveal>
-            ))}
-          </div>
-          <Reveal as="p" className="text-center text-[15px] text-white/70 italic mt-8" style={{ fontFamily: "'Instrument Serif', Georgia, serif", fontSize: "19px" }}>
-            We won't promise leads in week one. Anyone who does is guessing.
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 7. COST COMPARISON */}
-      <section className="px-6 py-20 sm:py-24">
-        <div className="max-w-3xl mx-auto">
-          <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl text-center leading-tight mb-12">
-            What it costs compared to the alternatives
-          </Reveal>
-          <Reveal className="rounded-2xl border border-white/10 overflow-hidden">
-            {compare.map((c, i) => (
-              <div
-                key={c.option}
-                className={`grid grid-cols-[1fr_auto] gap-4 px-5 sm:px-6 py-4 items-center ${i > 0 ? "border-t border-white/[0.06]" : ""} ${
-                  c.us ? "bg-[#B1130F]/[0.12]" : "bg-white/[0.02]"
-                }`}
-              >
-                <span className={`text-[14px] ${c.us ? "font-bold text-white" : "text-white/75"}`}>{c.option}</span>
-                <span className={`text-[14px] text-right ${c.us ? "font-bold text-[#ff9d99]" : "text-white/55"}`}>{c.cost}</span>
-              </div>
-            ))}
-          </Reveal>
-          <Reveal as="p" className="text-center text-[14px] text-white/60 leading-relaxed max-w-2xl mx-auto mt-6">
-            We use our own in-house systems for the heavy lifting, and a person reviews everything before it goes live. That's why it costs a fraction of a retainer.
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 8. GUARANTEE */}
-      <section className="px-6 py-20 sm:py-24">
-        <div className="max-w-3xl mx-auto">
-          <Reveal className="rounded-3xl border border-[#B1130F]/40 bg-[linear-gradient(160deg,#1a1016,#0b0b12)] p-8 sm:p-12 text-center shadow-[0_0_60px_-20px_rgba(177,19,15,0.6)]">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#B1130F]/15 border border-[#B1130F]/40 mb-6">
-              <svg className="w-7 h-7 text-[#ff6b67]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-white leading-tight mb-5">
-              Named, or we keep working free.
-            </h2>
-            <p className="text-[15.5px] text-white/75 leading-relaxed max-w-xl mx-auto mb-6">
-              On our first call we agree 20 questions your buyers actually ask. If ChatGPT isn't naming you for at least 3 of them within 90 days, we keep working, free, until it does.
-            </p>
-            <div className="font-mono text-[12.5px] text-white/55">
-              2 weeks free to start · Month to month · You own everything we make.
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* 9. FAQ */}
-      <section className="px-6 py-20 sm:py-24">
-        <div className="max-w-3xl mx-auto">
-          <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl text-center leading-tight mb-12">
-            Questions owners ask
+      {/* 8. FAQ */}
+      <section className="px-4 py-16 sm:px-6 sm:py-24">
+        <div className="mx-auto max-w-3xl">
+          <Reveal className="mb-10 text-center">
+            <H2>Questions owners ask</H2>
           </Reveal>
           <div className="space-y-3">
             {faqs.map((f, i) => {
               const open = openFaq === i;
               return (
-                <Reveal key={f.q} className="rounded-xl border border-white/10 bg-white/[0.02] overflow-hidden">
+                <Reveal key={f.q} className="overflow-hidden rounded-xl border border-white/10 bg-white/[0.02]">
                   <button
                     type="button"
                     onClick={() => setOpenFaq(open ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 px-5 py-4 text-left"
+                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
                     aria-expanded={open}
                   >
                     <span className="text-[14.5px] font-semibold text-white">{f.q}</span>
-                    <svg className={`w-5 h-5 flex-shrink-0 text-white/50 transition-transform duration-300 ${open ? "rotate-45" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className={`h-5 w-5 shrink-0 text-white/50 transition-transform duration-300 ${open ? "rotate-45" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
                   </button>
                   <div className={`grid transition-all duration-300 ${open ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
                     <div className="overflow-hidden">
-                      <p className="px-5 pb-4 text-[14px] text-white/65 leading-relaxed">{f.a}</p>
+                      <p className="px-5 pb-4 text-[14px] leading-relaxed text-white/65">{f.a}</p>
                     </div>
                   </div>
                 </Reveal>
@@ -515,26 +498,21 @@ export default function Shortlisted() {
         </div>
       </section>
 
-      {/* 10. FINAL CTA */}
-      <section className="px-6 py-20 sm:py-24">
-        <div className="max-w-2xl mx-auto text-center">
-          <Reveal as="h2" className="font-display font-bold text-3xl sm:text-4xl leading-tight mb-4">
-            See what ChatGPT says about you, then decide.
-          </Reveal>
-          <Reveal as="p" className="text-[15px] text-white/65 leading-relaxed max-w-lg mx-auto mb-8" delay={60}>
-            15 minutes. We show you your AI search check, agree your buyer questions, and start your 2 weeks free. No card needed.
-          </Reveal>
-          <Reveal delay={120}>
-            <div
-              className="calendly-inline-widget rounded-2xl overflow-hidden border border-white/10 bg-white mx-auto"
-              data-url={CALENDLY}
-              style={{ minWidth: "280px", height: "680px" }}
-            />
-            <div className="mt-6">
-              <TrialButton>Book your 15 minute call</TrialButton>
-            </div>
-          </Reveal>
-        </div>
+      {/* 9. FINAL CTA */}
+      <section className="px-4 pb-24 pt-10 sm:px-6 sm:pb-28">
+        <Reveal className="mx-auto max-w-3xl rounded-3xl border border-[#B1130F]/40 bg-[linear-gradient(160deg,#1a1016,#0b0b12)] p-8 text-center shadow-[0_0_60px_-20px_rgba(177,19,15,0.6)] sm:p-12">
+          <H2 className="mb-4">
+            See what ChatGPT says about you, <em className="hd-em">then decide.</em>
+          </H2>
+          <p className="mx-auto mb-8 max-w-lg text-[15px] leading-relaxed text-white/65">
+            Start with {TRIAL.length} free. We run your AI search check, agree your buyer questions and deliver {TRIAL.slots} of real work. No card needed.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <TrialButton outcome={OUTCOME} />
+            <GhostButton href="/pricing/">See pricing</GhostButton>
+          </div>
+          <p className="mt-6 font-mono text-[12px] text-white/45">From {FROM_PRICE} a month · Month to month · You own everything we make</p>
+        </Reveal>
       </section>
     </div>
   );
