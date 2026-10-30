@@ -1,4 +1,4 @@
-import { customiseHref, itemsPassThroughMonthly, itemsSlotCount, money, monthlyFor, slotById, slotHref, TRIAL, type PackageItem } from "@/lib/slots";
+import { BOOK, customiseHref, itemsPassThroughMonthly, itemsSlotCount, money, monthlyFor, slotById, slotHref, TRIAL, type PackageItem } from "@/lib/slots";
 import SlotMeter from "./SlotMeter";
 
 /**
@@ -23,7 +23,9 @@ export default function PackageCard({
   const count = itemsSlotCount(items);
   const pass = itemsPassThroughMonthly(items);
   const perTarget = items.some((it) => slotById(it.slot).passThrough?.unit === "target");
-  const trialHref = trialOutcome ? `${TRIAL.href}?outcome=${trialOutcome}&package=${id}` : `${TRIAL.href}?package=${id}`;
+  const q = trialOutcome ? `?outcome=${trialOutcome}&package=${id}` : `?package=${id}`;
+  const trialHref = `${TRIAL.href}${q}`;
+  const bookHref = `${BOOK.href}${q}`;
   return (
     <div
       className={`relative flex h-full flex-col rounded-2xl border p-6 sm:p-7 ${
@@ -77,19 +79,24 @@ export default function PackageCard({
           </p>
         )}
       </div>
-      <div className="mt-auto flex flex-col gap-2 pt-6 sm:flex-row xl:flex-col">
+      <div className="mt-auto flex flex-col gap-2 pt-6">
         <a
-          href={trialHref}
-          className="flex-1 rounded-full bg-[#B1130F] px-5 py-3 text-center text-[14px] font-semibold text-white btn-glow"
+          href={bookHref}
+          className="rounded-full bg-[#B1130F] px-5 py-3 text-center text-[14px] font-semibold text-white btn-glow"
         >
-          {TRIAL.label}
+          Get started with this plan
         </a>
-        <a
-          href={customiseHref(id)}
-          className="flex-1 rounded-full border border-[#2a2a3e] px-5 py-3 text-center text-[14px] font-semibold text-white/90 hover:border-white/30"
-        >
-          Customise
-        </a>
+        <div className="flex flex-col gap-2 sm:flex-row xl:flex-col">
+          <a
+            href={trialHref}
+            className="flex-1 rounded-full border border-[#2a2a3e] px-5 py-2.5 text-center text-[13.5px] font-semibold text-white/90 hover:border-white/30"
+          >
+            Try it free first
+          </a>
+          <a href={customiseHref(id)} className="flex-1 py-2 text-center text-[13px] font-semibold text-[#9099b8] hover:text-white">
+            Customise
+          </a>
+        </div>
       </div>
     </div>
   );

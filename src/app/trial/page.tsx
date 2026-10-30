@@ -3,7 +3,7 @@ import { generateMetadata as buildMeta } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import TrialExperience from "@/components/trial/TrialExperience";
+import TrialInline from "@/components/start/TrialInline";
 import { FREE_EVERY, MIN_SLOTS, PRICE_LINE, SLOT_PRICE, SWAP_LINE, TRIAL, money, priceFor, unitLabel } from "@/lib/slots";
 
 export const metadata: Metadata = buildMeta({
@@ -14,7 +14,7 @@ export const metadata: Metadata = buildMeta({
 });
 
 const steps = [
-  { t: "Apply", d: "Pick your services and answer four quick questions. Two minutes." },
+  { t: "Apply", d: "Pick 1 or 2 services and leave your details. One minute." },
   { t: "15 minute call", d: "We agree what each service should do for you, and what good looks like at day 14." },
   { t: "We start your services", d: "Research, drafts for your approval, then the work goes live. You approve, we do the rest." },
   { t: "Readout at 2 weeks", d: "What each service produced, what we would keep and what we would swap." },
@@ -69,7 +69,7 @@ export default function TrialPage() {
         </div>
       </section>
 
-      <TrialExperience />
+      <TrialInline />
 
       {/* What happens */}
       <section className="px-4 pb-16 sm:px-6 lg:px-8">
