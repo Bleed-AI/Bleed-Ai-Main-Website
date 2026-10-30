@@ -2,7 +2,6 @@
 
 import Reveal from "@/components/Reveal";
 
-const SPRINT_URL = "https://calculator.bleedai.com/sprint";
 
 type Camp = {
   icon: string;
@@ -123,7 +122,7 @@ export default function ResultsMarqueeTest() {
           <div className="results-fade" />
 
           <div style={{ textAlign: "center", marginTop: 12 }}>
-            <a href={SPRINT_URL} target="_blank" rel="noopener noreferrer" className="btn-red" style={{ fontSize: 13, padding: "11px 24px" }}>
+            <a href="/outbound/" className="btn-red" style={{ fontSize: 13, padding: "11px 24px" }}>
               Get Results Like These →
             </a>
           </div>

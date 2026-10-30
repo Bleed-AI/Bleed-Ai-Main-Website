@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-
-const SPRINT_URL = "https://calculator.bleedai.com/sprint";
+import { TRIAL, SWAP_LINE } from "@/lib/slots";
 
 type Testi = { quote: string; name: string; role: string; img?: string; initials?: string };
 const testimonials: Testi[] = [
@@ -15,7 +14,7 @@ const testimonials: Testi[] = [
 export default function SidePopup() {
   const [shown, setShown] = useState(false);
   const [closed, setClosed] = useState(false);
-  const [current, setCurrent] = useState(0); // 0 = sprint slide; 1..n = testimonial n
+  const [current, setCurrent] = useState(0); // 0 = free trial slide; 1..n = testimonial n
   const tptr = useRef(1);
 
   // Close + remember for the session (stays closed once dismissed, even across reloads)
@@ -33,7 +32,7 @@ export default function SidePopup() {
     return () => clearTimeout(t);
   }, []);
 
-  // Rotate: sprint -> testimonial -> sprint -> next testimonial ...
+  // Rotate: trial -> testimonial -> trial -> next testimonial ...
   useEffect(() => {
     if (!shown || closed) return;
     const id = setInterval(() => {
@@ -57,14 +56,14 @@ export default function SidePopup() {
 
       <div className={`left-slide${current === 0 ? " active" : ""}`}>
         <div className="lp-badge">
-          <span className="dot" /> Limited Spots Available
+          <span className="dot" /> Free trial
         </div>
-        <div className="lp-title">The Outbound Sprint</div>
+        <div className="lp-title">Try {TRIAL.slots} free for {TRIAL.length}</div>
         <div className="lp-desc">
-          Up to 8 cold email experiments in 6 weeks, one fixed price, you keep everything.
+          Posts, articles, AI search or outbound, picked for you. {SWAP_LINE}
         </div>
-        <a href={SPRINT_URL} target="_blank" rel="noopener noreferrer" className="lp-cta" onClick={close}>
-          Start Your Sprint →
+        <a href={TRIAL.href} className="lp-cta" onClick={close}>
+          {TRIAL.label} →
         </a>
       </div>
 

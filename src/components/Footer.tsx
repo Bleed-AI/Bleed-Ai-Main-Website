@@ -1,16 +1,19 @@
 "use client";
 
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const footerLinks = {
   company: [
+    { label: "Get recommended by ChatGPT", href: "/shortlisted/" },
+    { label: "LinkedIn Authority", href: "/linkedin-authority/" },
+    { label: "Outbound", href: "/outbound/" },
+    { label: "Inbound Engine", href: "/inbound-engine/" },
+    { label: "Pricing", href: "/pricing/" },
+    { label: "Free trial", href: "/trial/" },
     { label: "Results", href: "/#results-section" },
-    { label: "How It Works", href: "/#pass-system" },
-    { label: "Case Studies", href: "/#testimonials" },
     { label: "Blog", href: "/blog/" },
-    { label: "Our Infrastructure", href: "https://infra.bleedai.com/", external: true },
-    { label: "The Outbound Sprint", href: "https://calculator.bleedai.com/sprint" },
-  ],
+  ] as { label: string; href: string; external?: boolean }[],
   platforms: [
     { label: "Clutch", href: "https://clutch.co/profile/bleed-ai" },
     { label: "TechReviewer", href: "https://techreviewer.co/companies/bleed-ai" },
@@ -31,6 +34,8 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const pathname = usePathname();
+  const isShortlisted = pathname?.startsWith("/shortlisted") ?? false;
   return (
     <footer className="bg-[var(--bg-secondary)] relative overflow-hidden">
       {/* Top Border Accent */}
@@ -50,7 +55,9 @@ export default function Footer() {
                 className="h-10 w-auto mb-6"
               />
               <p className="text-white/75 leading-relaxed max-w-sm mb-8">
-                Multi-channel outbound for B2B products that already sell. We find your buyers, reach them on email, LinkedIn and mail, and answer every reply. You see the replies before you pay us.
+                {isShortlisted
+                  ? "When your buyers ask ChatGPT who to hire, be on the list."
+                  : "The last marketing team you'll ever hire. Pick your slots across LinkedIn, your website, AI search and outbound, and swap any slot to what's working."}
               </p>
 
               {/* Social Links */}

@@ -1,49 +1,43 @@
 import Navigation from "@/components/Navigation";
-import HeroV2 from "@/components/HeroV2";
-import NotATool from "@/components/NotATool";
-import SignalSheet from "@/components/SignalSheet";
-import PassSystem from "@/components/PassSystem";
-import EveryDoor from "@/components/EveryDoor";
-import InfraLine from "@/components/InfraLine";
-import AiFollowUp from "@/components/AiFollowUp";
-import TrialFlow from "@/components/TrialFlow";
+import HomeHero from "@/components/home/HomeHero";
 import StatsStrip from "@/components/StatsStrip";
+import Outcomes from "@/components/home/Outcomes";
+import HowItWorks from "@/components/home/HowItWorks";
+import Demos from "@/components/home/Demos";
+import HybridPackage from "@/components/home/HybridPackage";
 import RepliesMarquee from "@/components/RepliesMarquee";
-import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
 import Testimonials from "@/components/Testimonials";
-import WhoIsThisFor from "@/components/WhoIsThisFor";
-import Pricing from "@/components/Pricing";
-import FounderTest from "@/components/FounderTest";
-import FaqV2 from "@/components/FaqV2";
-import FinalCta from "@/components/FinalCta";
+import ResultsMarqueeTest from "@/components/ResultsMarqueeTest";
+import HomeFounder from "@/components/home/HomeFounder";
+import HomeFaq from "@/components/home/HomeFaq";
+import HomeFinalCta, { RoiBand } from "@/components/home/HomeFinalCta";
 import Footer from "@/components/Footer";
 import BookWidget from "@/components/BookWidget";
 import ExitPopup from "@/components/ExitPopup";
 import SidePopup from "@/components/SidePopup";
 
-// New homepage (2026-10 rebuild). Inherits indexed SEO metadata from app/layout.tsx.
+// Homepage, slot model (2026-10-30). Inherits indexed SEO metadata from app/layout.tsx; do not add noindex here.
+// The old outbound sections (NotATool, SignalSheet, PassSystem, EveryDoor, InfraLine, AiFollowUp, TrialFlow,
+// Pricing, WhoIsThisFor) moved off the homepage; their files are kept for the Outbound page and older routes.
+// Proof components (RepliesMarquee, Testimonials, ResultsMarqueeTest with id="results-section") stay unchanged (D12 veto).
 // Previous homepage is archived at /home-v2 (noindex). Revert: branch pre-home-v2-swap-backup.
 export default function Home() {
   return (
     <main className="bai relative overflow-x-clip">
       <Navigation />
-      <HeroV2 />
+      <HomeHero />
       <StatsStrip />
-      <NotATool />
-      <SignalSheet />
-      <PassSystem />
-      <EveryDoor />
-      <InfraLine />
-      <AiFollowUp />
-      <TrialFlow />
+      <Outcomes />
+      <HowItWorks />
+      <Demos />
+      <HybridPackage />
       <RepliesMarquee />
       <Testimonials />
       <ResultsMarqueeTest />
-      <WhoIsThisFor />
-      <Pricing />
-      <FounderTest />
-      <FaqV2 />
-      <FinalCta />
+      <RoiBand />
+      <HomeFounder />
+      <HomeFaq />
+      <HomeFinalCta />
       <Footer />
       <BookWidget />
       <ExitPopup />

@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import PopupNotifications from "@/components/PopupNotifications";
 import Preloader from "@/components/Preloader";
 import NavigationProgress from "@/components/NavigationProgress";
 import CursorGlow from "@/components/CursorGlow";
@@ -10,8 +9,8 @@ import "./globals.css";
 export const viewport: Viewport = defaultViewport;
 
 export const metadata: Metadata = generateMetadata({
-  title: "BleedAI | AI-Powered Outbound Marketing That Drives Revenue",
-  description: "AI-powered outbound campaigns that convert. Get market validation, expert strategy, and proven results. Start in 1 week.",
+  title: "BleedAI | The Last Marketing Team You'll Ever Hire",
+  description: "One team for every channel your buyers use: AI search, LinkedIn, your website and outbound. Pick your slots, swap any slot to what's working. $495 a slot, every 4th slot free.",
   path: "/",
   keywords: [
     "AI outbound marketing",
@@ -88,7 +87,7 @@ export default function RootLayout({
           <Preloader />
           <NavigationProgress />
           {children}
-          <PopupNotifications />
+          {/* PopupNotifications retired 2026-10-30: it sold the Sprint with "Limited Spots" (slot model rules). */}
         </ThemeProvider>
       </body>
     </html>
