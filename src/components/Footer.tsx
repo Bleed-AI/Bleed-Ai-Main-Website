@@ -13,7 +13,7 @@ const footerLinks = {
     { label: "Free trial", href: "/trial/" },
     { label: "Results", href: "/#results-section" },
     { label: "Blog", href: "/blog/" },
-  ],
+  ] as { label: string; href: string; external?: boolean }[],
   platforms: [
     { label: "Clutch", href: "https://clutch.co/profile/bleed-ai" },
     { label: "TechReviewer", href: "https://techreviewer.co/companies/bleed-ai" },
