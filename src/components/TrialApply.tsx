@@ -1,28 +1,42 @@
 "use client";
 
 import { useState } from "react";
+import { MIN_SLOTS, money, priceFor, slotById } from "@/lib/slots";
 
-// n8n webhook that records the lead in Supabase and posts to the
+// Webhook that records the lead in our CRM and posts to the
 // #trial-applications Slack channel.
 const WEBHOOK_URL = "https://bleedai.app.n8n.cloud/webhook/bleedai-trial";
 
 const CALENDLY = "https://calendly.com/bleedai/vip-invite-only?hide_gdpr_banner=1";
-const SPRINT_URL = "https://calculator.bleedai.com/sprint";
-const CALC_URL = "https://calculator.bleedai.com";
+// Not a fit for a free trial yet: a paid start on the smallest board.
+const PAID_START_URL = "/pricing/#builder";
 
-// All routing thresholds live here so they are easy to change.
-// Under $2K a year is too low for outbound to pay back, so it never counts as a fit.
+// All routing thresholds live here so they are easy to change (slot model, 2026-10-30).
+// Free trial = B2B, already selling to real customers, a customer worth $2K+ a year,
+// and room for at least the smallest board. Everyone else is offered a paid start.
+// The route values ("fit" | "sprint" | "calculator") are kept so the webhook branches still match:
+// "sprint" now means "has customers, below the trial bar", "calculator" means "no customers or consumer only".
 const ROUTING = {
-  fit: { customers: "repeat", acvOk: ["5to10", "10to20", "20to50", "50to100", "100plus"], budget: "3plus" },
-  someCustomers: ["few", "repeat"],
-  budgetAtLeast1k: ["1to3", "3plus"],
+  fitCustomers: ["few", "repeat"],
+  acvTooLow: ["u2k"],
+  budgetOk: ["1to3", "3plus"],
+  notB2b: ["b2c"],
 };
 
-type Answers = { customers: string; acv: string; budget: string; website: string; email: string };
-type QKey = "customers" | "acv" | "budget";
+type Answers = { customers: string; acv: string; budget: string; sells_to: string; website: string; email: string };
+type QKey = "customers" | "acv" | "budget" | "sells_to";
 type Question = { key: QKey; label: string; grid?: boolean; options: { v: string; l: string }[] };
 
 const questions: Question[] = [
+  {
+    key: "sells_to",
+    label: "Who do you sell to?",
+    options: [
+      { v: "b2b", l: "Other businesses" },
+      { v: "both", l: "Businesses and consumers" },
+      { v: "b2c", l: "Consumers only" },
+    ],
+  },
   {
     key: "customers",
     label: "How many customers pay you today, and do they keep paying?",
@@ -48,7 +62,7 @@ const questions: Question[] = [
   },
   {
     key: "budget",
-    label: "Once outbound works, what could you put into it each month?",
+    label: "Once it works, what could you put into marketing each month?",
     options: [
       { v: "u1k", l: "Under $1K" },
       { v: "1to3", l: "$1K to $3K" },
@@ -57,30 +71,28 @@ const questions: Question[] = [
   },
 ];
 
-const services = [
-  "Email outreach",
-  "LinkedIn outreach",
-  "Direct mail",
-  "Warm phone follow-up",
-  "AI follow-up on every reply",
-];
-
 function routeFor(a: Answers): "fit" | "sprint" | "calculator" {
-  const acvOk = ROUTING.fit.acvOk.includes(a.acv);
-  const budget3 = a.budget === ROUTING.fit.budget;
-  if (a.customers === ROUTING.fit.customers && acvOk && budget3) return "fit";
-  const someCustomers = ROUTING.someCustomers.includes(a.customers);
-  const budget1 = ROUTING.budgetAtLeast1k.includes(a.budget);
-  if (someCustomers && budget1) return "sprint";
-  return "calculator";
+  const hasCustomers = ROUTING.fitCustomers.includes(a.customers);
+  if (!hasCustomers || ROUTING.notB2b.includes(a.sells_to)) return "calculator";
+  if (!ROUTING.acvTooLow.includes(a.acv) && ROUTING.budgetOk.includes(a.budget)) return "fit";
+  return "sprint";
 }
 
-export default function TrialApply() {
-  const [a, setA] = useState<Answers>({ customers: "", acv: "", budget: "", website: "", email: "" });
+export default function TrialApply({
+  picked = [],
+  outcome = "",
+  pkg = "",
+}: {
+  /** Slot ids picked for the trial (1 to 2). Empty means "help me pick". */
+  picked?: string[];
+  outcome?: string;
+  pkg?: string;
+}) {
+  const [a, setA] = useState<Answers>({ customers: "", acv: "", budget: "", sells_to: "", website: "", email: "" });
   const [result, setResult] = useState<"fit" | "sprint" | "calculator" | null>(null);
   const [sending, setSending] = useState(false);
 
-  const ready = a.customers && a.acv && a.budget && a.website.trim() && a.email.trim();
+  const ready = a.customers && a.acv && a.budget && a.sells_to && a.website.trim() && a.email.trim();
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,7 +104,16 @@ export default function TrialApply() {
         await fetch(WEBHOOK_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ ...a, route, source: "bleedai.com/trial" }),
+          body: JSON.stringify({
+            ...a,
+            route,
+            source: "bleedai.com/trial",
+            // slot model fields (2026-10-30), added alongside the original ones
+            trial_slots: picked,
+            slots: picked.map((id) => `${id}:1`).join(","),
+            outcome,
+            package: pkg,
+          }),
         });
       } catch {
         // never block the visitor on a webhook error
@@ -109,8 +130,10 @@ export default function TrialApply() {
         {result === "fit" && (
           <>
             <div className="ta-result-badge good">Looks like a fit</div>
-            <h3 className="ta-result-title">Let&apos;s book your copy call.</h3>
-            <p className="ta-result-sub">Pick a time that works. We will map the trial on the call.</p>
+            <h3 className="ta-result-title">Let&apos;s book your 15 minute call.</h3>
+            <p className="ta-result-sub">
+              Pick a time that works. On the call we agree what {picked.length ? picked.map((id) => slotById(id).name).join(" and ") : "your trial slots"} should do for you, then we start.
+            </p>
             <div className="ta-cal">
               <iframe
                 src={CALENDLY}
@@ -127,26 +150,19 @@ export default function TrialApply() {
           <>
             <h3 className="ta-result-title">Here is the fastest way to start.</h3>
             <p className="ta-result-sub">
-              We only run a few trials a month and keep them for products with repeat customers.
-              You can start now with one of these.
+              We keep free trials for B2B companies that already sell to repeat customers. You can still start now, month to month, and swap any slot whenever you like.
             </p>
             <div className="ta-cards">
-              {(result === "sprint"
-                ? [
-                    { k: "Sprint", v: "$2,950 once. Your market mapped and tested in six weeks.", href: SPRINT_URL, cta: "Start a Sprint" },
-                    { k: "Single campaign", v: "Launch one campaign for under $1K on the calculator.", href: CALC_URL, cta: "Open the calculator" },
-                  ]
-                : [
-                    { k: "Single campaign", v: "Launch one campaign for under $1K on the calculator.", href: CALC_URL, cta: "Open the calculator" },
-                    { k: "Sprint", v: "$2,950 once. Your market mapped and tested in six weeks.", href: SPRINT_URL, cta: "Start a Sprint" },
-                  ]
-              ).map((c, i) => (
-                <a key={c.k} href={c.href} target="_blank" rel="noopener noreferrer" className={`ta-card${i === 0 ? " primary" : ""}`}>
-                  <span className="ta-card-k">{c.k}</span>
-                  <span className="ta-card-v">{c.v}</span>
-                  <span className="ta-card-cta">{c.cta} &rarr;</span>
-                </a>
-              ))}
+              <a href={PAID_START_URL} className="ta-card primary">
+                <span className="ta-card-k">Start with {MIN_SLOTS} slots</span>
+                <span className="ta-card-v">{money(priceFor(MIN_SLOTS))} a month. Pick any {MIN_SLOTS} slots and swap them as you learn what works.</span>
+                <span className="ta-card-cta">Build your board &rarr;</span>
+              </a>
+              <a href="/slots/" className="ta-card">
+                <span className="ta-card-k">See every slot</span>
+                <span className="ta-card-v">What each slot delivers every month, and what it costs.</span>
+                <span className="ta-card-cta">Browse the slots &rarr;</span>
+              </a>
             </div>
           </>
         )}
@@ -173,17 +189,22 @@ export default function TrialApply() {
       ))}
 
       <div className="ta-services">
-        <div className="ta-services-head">What we help you run</div>
-        <div className="ta-services-grid">
-          {services.map((s) => (
-            <span className="ta-service" key={s}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
-                <path d="M5 12.5l4.5 4.5L19 7" />
-              </svg>
-              {s}
-            </span>
-          ))}
-        </div>
+        <div className="ta-services-head">Your trial slots</div>
+        {picked.length ? (
+          <div className="ta-services-grid">
+            {picked.map((id) => (
+              <span className="ta-service" key={id}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M5 12.5l4.5 4.5L19 7" />
+                </svg>
+                {slotById(id).name}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className="ta-services-empty">None picked yet. That is fine, we will suggest two on the call.</p>
+        )}
+        <a href="#pick" className="ta-services-change">Change slots</a>
       </div>
 
       <div className="ta-q">
@@ -299,6 +320,17 @@ export default function TrialApply() {
           color: #c7cbe0;
         }
         .ta-service svg { color: #3ecf8e; flex-shrink: 0; }
+        .ta-services { position: relative; }
+        .ta-services-empty { font-size: 13.5px; color: #9099b8; }
+        .ta-services-change {
+          position: absolute;
+          top: 16px;
+          right: 18px;
+          font-size: 12px;
+          font-weight: 600;
+          color: #ff6b67;
+        }
+        .ta-services-change:hover { color: #ff9d99; }
         @media (max-width: 560px) {
           .ta-services-grid { grid-template-columns: 1fr; }
         }
