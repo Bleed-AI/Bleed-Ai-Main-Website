@@ -80,17 +80,17 @@ So you need to be findable in Google, in Bing, and by Brave's and Perplexity's c
 
 On 26 October 2026 we asked ChatGPT one buyer question for each of three B2B software companies in different markets. We used the OpenAI API with live web search turned on (model gpt-5.4-mini), one run per question, and asked for a top 3 to 5. These were the questions, in the words a buyer would use:
 
-- "What is the best barcode scanning app for Salesforce? We want to scan assets and inventory straight into Salesforce records."
+- An inventory scanning app for a major CRM, asked the way a buyer would phrase it (top 3 to 5 options).
 - "What is the best compensation management software for a 300-person tech company that still runs comp cycles in spreadsheets?"
 - "What is the best construction accounting and job costing software for a mid-size specialty subcontractor in the US?"
 
 | Company | Named? | What the answer was built from |
 |---|---|---|
-| A Salesforce barcode app | **Yes, #1**, called "best all-around choice" | Salesforce AppExchange listings, including its own, with its rating |
+| An inventory scanning app for a CRM | **Yes, #1**, called the best all-around choice | The CRM's own app marketplace listings, including its own, with its rating |
 | A compensation software company | **No** | Gartner reviews, G2 reviews and G2 category pages |
 | A construction accounting vendor | **No** | G2 category pages, a G2 roundup article, Software Advice |
 
-One named, two missing. Three questions is a tiny sample and we would not generalise from it. But the pattern in the citations is the useful part. The company named first got there through its marketplace listing. ChatGPT read the AppExchange marketplace, found a strong listing with a high rating, and ranked it first. The two missing companies may well be good products. The review and roundup pages ChatGPT happened to read for those questions simply did not put them in front.
+One named, two missing. Three questions is a tiny sample and we would not generalise from it. But the pattern in the citations is the useful part. The company named first got there through its marketplace listing. ChatGPT read the CRM's app marketplace, found a strong listing with a high rating, and ranked it first. The two missing companies may well be good products. The review and roundup pages ChatGPT happened to read for those questions simply did not put them in front.
 
 That is the whole game in one table. The assistant repeats what the pages it reads say.
 
@@ -153,7 +153,7 @@ Some website builders add a "block AI crawlers" switch, so check your settings a
 
 This is the biggest lever, and step 4 of your check tells you exactly where to aim. For B2B, that usually means:
 
-- **Your marketplace listing and its reviews.** If you sell on AppExchange, HubSpot, Shopify or a similar marketplace, that listing is likely one of the most-read pages about you. Keep it complete and ask happy customers for reviews. Our barcode example above is the proof of how much weight it carries.
+- **Your marketplace listing and its reviews.** If you sell on AppExchange, HubSpot, Shopify or a similar marketplace, that listing is likely one of the most-read pages about you. Keep it complete and ask happy customers for reviews. Our first example above is the proof of how much weight it carries.
 - **Review sites** like G2, Capterra and Gartner Peer Insights, for the categories your buyers search.
 - **Roundups and comparison articles.** If the same "best X for Y" article keeps getting cited, contact the author with a reason your product belongs on it.
 - **Community answers.** Genuine answers in the forums and subreddits your buyers use, written for the thread, under your own name. Never mass-posted.
