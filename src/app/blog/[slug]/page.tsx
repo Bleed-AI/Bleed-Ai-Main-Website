@@ -237,12 +237,10 @@ export default async function BlogPostPage({
                     Ready to put this into practice?
                   </p>
                   <a
-                    href="https://calculator.bleedai.com/sprint"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="/trial/"
                     className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#B1130F] text-white font-semibold text-base rounded-full overflow-hidden transition-all duration-500 btn-glow"
                   >
-                    <span className="relative z-10">Start Your Sprint</span>
+                    <span className="relative z-10">Start a free trial</span>
                     <svg
                       className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
                       fill="none"
