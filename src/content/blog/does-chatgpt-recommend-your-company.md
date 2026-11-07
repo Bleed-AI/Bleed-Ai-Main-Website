@@ -155,7 +155,7 @@ This is the biggest lever, and step 4 of your check tells you exactly where to a
 
 - **Your marketplace listing and its reviews.** If you sell on AppExchange, HubSpot, Shopify or a similar marketplace, that listing is likely one of the most-read pages about you. Keep it complete and ask happy customers for reviews. Our first example above is the proof of how much weight it carries.
 - **Review sites** like G2, Capterra and Gartner Peer Insights, for the categories your buyers search.
-- **Roundups and comparison articles.** If the same "best X for Y" article keeps getting cited, contact the author with a reason your product belongs on it.
+- **Roundups and comparison articles.** If the same "best X for Y" article keeps getting cited, contact the author with a reason your product belongs on it. Service businesses get read this way too: OneGTM, a [GTM engineering agency](https://getaob.com/gtm-engineering-agency), keeps a public roundup of the ghostwriting agencies in its space, and pages like that are exactly what an assistant pulls when a buyer asks who to hire.
 - **Community answers.** Genuine answers in the forums and subreddits your buyers use, written for the thread, under your own name. Never mass-posted.
 
 An analyst summary of a University of Toronto paper points the same way: whether a page ranks in the assistant's own search explained most of the difference in citation, while common on-page tweaks showed no reliable benefit. ([Eric Seufert, 2026-10-17](https://www.linkedin.com/posts/ericseufert_how-can-a-company-get-its-website-linked-activity-7517235041278816256-dnPg), a secondhand summary; we have not read the paper itself.)
