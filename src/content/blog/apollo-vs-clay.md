@@ -196,7 +196,7 @@ The real reason to use Clay over Apollo isn't features, it's data quality. Here'
 
 **Apollo's approach:** Single-source. When you request a contact's email or phone, Apollo looks in its own database and returns whatever it has. If the data is stale or missing, you get stale or missing. There's no second opinion.
 
-**Clay's approach:** Waterfall. When you request the same contact's email, Clay tries Apollo first, then Hunter, then Findymail, then Snov, then Dropcontact, until one returns a verified result. You pay per successful lookup, not per attempt.
+**Clay's approach:** Waterfall. When you request the same contact's email, Clay tries Apollo first, then Hunter, then Findymail, then Snov, then Dropcontact, until one returns a verified result. You pay per successful lookup, not per attempt. (If you would rather pick one finder than run a waterfall, Reverse Contact keeps a useful comparison of [Hunter.io alternatives](https://www.reversecontact.com/blog/hunter-alternatives).)
 
 **What this means in practice:**
 
