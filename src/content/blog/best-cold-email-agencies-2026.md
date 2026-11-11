@@ -18,7 +18,7 @@ faqs:
   - question: "What's the average reply rate for cold email in 2026?"
     answer: "Per Instantly's 2026 platform data (1.6M+ accounts), the platform-wide average is 3.43%. Top quartile sits at 5.5%+, and top performers (top 10%) hit 10.7%+. Industry varies: Legal Services is the highest at ~10%, SaaS/Software the lowest at 1.9-3.5%. If an agency promises you 'guaranteed 15% reply rates' without seeing your ICP, they're lying."
   - question: "How much should I actually pay a cold email agency in 2026?"
-    answer: "Three pricing bands: subscription/productized ($1.5K-$3K/mo, e.g. Cleverly), mid-market done-for-you ($3K-$8K/mo, e.g. Martal, CIENCE, BleedAI), and enterprise/per-meeting ($8K+/mo or $300-$700 per qualified meeting, e.g. Belkins). BleedAI prices per service instead ($495 a service a month, every 4th service free, month to month, after a free trial) so you can validate before committing to a monthly retainer."
+    answer: "Three pricing bands: subscription/productized ($1.5K-$3K/mo, e.g. Cleverly), mid-market done-for-you ($3K-$8K/mo, e.g. Martal, CIENCE), and enterprise/per-meeting ($8K+/mo or $300-$700 per qualified meeting, e.g. Belkins). BleedAI prices per service instead ($495 a service a month, every 4th service free, month to month, after a free trial) so you can validate before committing to a monthly retainer."
   - question: "Will sending cold email burn my main domain?"
     answer: "Yes, if the agency sends from your primary domain. Don't do this. Reputable agencies own a pool of warmed-up secondary domains (yourcompany.io, getyourcompany.com, etc.) and send from those. MailDeck's 2026 audit of 1,000+ domains found 67% had at least one critical authentication error, most of those got there from running cold outbound on a primary domain."
   - question: "How long until I see results?"
@@ -263,7 +263,7 @@ Agency pricing pages don't tell you the full story. Here's what each tier really
 | Tier | Base agency fee | + Infrastructure (domains, inboxes, warming) | Realistic monthly total |
 |---|---|---|---|
 | **Subscription / low-touch** (Cleverly) | $1.5K-$2.8K | $0-$500 (sometimes included) | ~$2K-$3.3K |
-| **Mid-market DFY** (Martal, CIENCE, BleedAI) | $3K-$8K | $500-$1,500 (usually included by good agencies) | ~$4K-$9K |
+| **Mid-market DFY** (Martal, CIENCE) | $3K-$8K | $500-$1,500 (usually included by good agencies) | ~$4K-$9K |
 | **Enterprise / per-meeting** (Belkins) | $5K-$15K+ or $300-$700/meeting | $1K-$2K (sometimes invisible) | ~$6K-$17K |
 | **Per-service monthly** (BleedAI) | $495 a service, min 2, every 4th free | Included | From $990/mo |
 
