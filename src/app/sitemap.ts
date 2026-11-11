@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllPosts } from '@/lib/blog';
+import { SLOTS } from '@/lib/slots';
 
 export const dynamic = 'force-static';
 
@@ -40,6 +41,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/inbound-engine/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.9 },
     { url: `${baseUrl}/trial/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/services/`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.6 },
+    { url: `${baseUrl}/about/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.7 },
+    // The service pages were missing from the sitemap (found 2026-11-11, AI search content plan); AI crawlers read it.
+    ...SLOTS.map((s) => ({ url: `${baseUrl}/services/${s.id}/`, lastModified: new Date(), changeFrequency: 'monthly' as const, priority: 0.7 })),
     // /privacy-policy/ and /terms/ intentionally excluded, pages are set to noindex.
   ];
 

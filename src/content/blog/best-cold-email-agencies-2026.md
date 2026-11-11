@@ -1,5 +1,5 @@
 ---
-title: "Best Cold Email Agencies in 2026 [Updated June 2026]"
+title: "Best Cold Email Agencies in 2026 [Updated November 2026]"
 excerpt: "Honest comparison of the top 7 cold email agencies in 2026, with real pricing, real data, and zero affiliate fluff. We rank ourselves and tell you when not to pick us."
 metaTitle: "Best Cold Email Agencies 2026 (No-BS Comparison)"
 metaDescription: "Honest 2026 comparison of the top 7 cold email agencies, Belkins, BleedAI, CIENCE, Cleverly, Martal, OneAway, SalesRoads. Real pricing, real data."
@@ -18,7 +18,7 @@ faqs:
   - question: "What's the average reply rate for cold email in 2026?"
     answer: "Per Instantly's 2026 platform data (1.6M+ accounts), the platform-wide average is 3.43%. Top quartile sits at 5.5%+, and top performers (top 10%) hit 10.7%+. Industry varies: Legal Services is the highest at ~10%, SaaS/Software the lowest at 1.9-3.5%. If an agency promises you 'guaranteed 15% reply rates' without seeing your ICP, they're lying."
   - question: "How much should I actually pay a cold email agency in 2026?"
-    answer: "Three pricing bands: subscription/productized ($1.5K-$3K/mo, e.g. Cleverly), mid-market done-for-you ($3K-$8K/mo, e.g. Martal, CIENCE, BleedAI), and enterprise/per-meeting ($8K+/mo or $300-$700 per qualified meeting, e.g. Belkins). BleedAI runs a fixed-price proof engagement (The Outbound Sprint, $2,950 one-time: up to 8 experiments over 6 weeks, and you keep the whole system) so you can validate before committing to a monthly retainer."
+    answer: "Three pricing bands: subscription/productized ($1.5K-$3K/mo, e.g. Cleverly), mid-market done-for-you ($3K-$8K/mo, e.g. Martal, CIENCE, BleedAI), and enterprise/per-meeting ($8K+/mo or $300-$700 per qualified meeting, e.g. Belkins). BleedAI prices per service instead ($495 a service a month, every 4th service free, month to month, after a free trial) so you can validate before committing to a monthly retainer."
   - question: "Will sending cold email burn my main domain?"
     answer: "Yes, if the agency sends from your primary domain. Don't do this. Reputable agencies own a pool of warmed-up secondary domains (yourcompany.io, getyourcompany.com, etc.) and send from those. MailDeck's 2026 audit of 1,000+ domains found 67% had at least one critical authentication error, most of those got there from running cold outbound on a primary domain."
   - question: "How long until I see results?"
@@ -153,9 +153,7 @@ Alphabetical. There's no "best", different agencies fit different businesses. We
 
 **Approach:** AI-first signal-based outbound. We source prospects against buying triggers (hiring intent, tech adoption, growth indicators), not static firmographic lists. Campaigns launch from our pre-warmed infrastructure. We test 2-3 offer angles per pilot to find what resonates before scaling.
 
-**Pricing:** Genuinely transparent and rare in this space, - **Free Pilot:** $0, eligibility-based ($3-5K LTV, 20K+ TAM, existing customers required)
-- **Discounted Pilot:** $683, full DFY, 2 weeks, multiple offer angles
-- **Scale Package:** Custom, public [cost calculator](https://calculator.bleedai.com/)
+**Pricing:** Public at [bleedai.com/pricing](https://bleedai.com/pricing): $495 a service a month, every 4th service free, month to month, minimum 2 services. A free trial comes first (bleedai.com/trial).
 
 **Owns warm infrastructure:** Yes.
 
@@ -163,7 +161,7 @@ Alphabetical. There's no "best", different agencies fit different businesses. We
 
 <div class="not-prose" style="margin:1rem 0;padding:0.95rem 1.25rem;border-radius:12px;border-left:3px solid #3b82f6;background:rgba(59,130,246,0.05)">
   <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#3b82f6;margin-bottom:0.35rem">💡 Good to know</div>
-  <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem">Our $683 Discounted Pilot is cheaper than a single hour of strategy consulting at most enterprise agencies. <em>That's not an accident, it's a filter</em> for who we want to work with.</p>
+  <p style="margin:0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem">Every service is priced the same and can be swapped month to month, so you move budget to whatever is producing conversations. <em>No 12-month lock-in, and no contract to escape when something is not working.</em></p>
 </div>
 
 <div class="not-prose" style="margin-top:3rem;margin-bottom:0.75rem">
@@ -251,7 +249,7 @@ Alphabetical. There's no "best", different agencies fit different businesses. We
 | Agency | Best for | Pricing band | Owns warm domains | Pilot available | Channels |
 |---|---|---|---|---|---|
 | **Belkins** | Enterprise appointment-setting | $5K-$15K/mo | ✅ | ❌ | Email + LinkedIn |
-| **BleedAI** | B2B with $5K+ LTV | $2,950 Sprint · $3,350-$5,300/mo | ✅ | ✅ $2,950 Sprint | Email + LinkedIn + SMS |
+| **BleedAI** | B2B with $5K+ LTV | $495/service/mo, min 2 ($990/mo) | ✅ | ✅ Free trial | Email + LinkedIn + SMS |
 | **CIENCE** | Mid-market multi-channel | $6K-$15K/mo+ | ✅ | ❌ | Email + LinkedIn + Phone + Display |
 | **Cleverly** | Subscription / low-touch | $1.5K-$2.8K/mo | ⚠️ Varies | ❌ | Email + LinkedIn |
 | **Martal Group** | Full-funnel SaaS partner | $4K-$10K/mo | ✅ | ❌ | Email + LinkedIn + Phone |
@@ -267,7 +265,7 @@ Agency pricing pages don't tell you the full story. Here's what each tier really
 | **Subscription / low-touch** (Cleverly) | $1.5K-$2.8K | $0-$500 (sometimes included) | ~$2K-$3.3K |
 | **Mid-market DFY** (Martal, CIENCE, BleedAI) | $3K-$8K | $500-$1,500 (usually included by good agencies) | ~$4K-$9K |
 | **Enterprise / per-meeting** (Belkins) | $5K-$15K+ or $300-$700/meeting | $1K-$2K (sometimes invisible) | ~$6K-$17K |
-| **Proof engagement** (BleedAI) | $2,950 (The Outbound Sprint) | Included | $2,950 (one-time) |
+| **Per-service monthly** (BleedAI) | $495 a service, min 2, every 4th free | Included | From $990/mo |
 
 <div class="not-prose" style="margin:1.75rem 0;padding:1.25rem 1.5rem;border-radius:14px;border:1px solid rgba(245,158,11,0.35);background:rgba(245,158,11,0.06)">
   <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.5rem;font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#f59e0b">
@@ -319,7 +317,7 @@ Since this is our blog, here's the honest version:
   </div>
 </div>
 
-Translation: **we're not the right fit for everyone**, and saying so up front is the cheapest filter both of us have. If we sound like a match, check out [The Outbound Sprint](https://calculator.bleedai.com/sprint): a fixed-price way to test cold email for your business before committing to more.
+Translation: **we're not the right fit for everyone**, and saying so up front is the cheapest filter both of us have. If we sound like a match, start with [the free trial](https://bleedai.com/trial), then it is $495 a service a month, month to month.
 
 ## Recommendations by your situation
 
@@ -327,7 +325,7 @@ If you're trying to skip ahead, here's the punchline based on your business shap
 
 | Your situation | Pick | Why |
 |---|---|---|
-| **B2B SaaS, $5K+ LTV, want to validate offer first** | BleedAI | The Outbound Sprint (fixed-price proof) + signal-based targeting + we test offer angles |
+| **B2B SaaS, $5K+ LTV, want to validate offer first** | BleedAI | Free trial, then month-to-month services + signal-based targeting + we test offer angles |
 | **Enterprise, need a steady meeting flow** | Belkins | Boring is good when you need consistent appointment delivery |
 | **Smaller team, clear offer, tight budget** | Cleverly | Cheapest credible productized option |
 | **Want a full-funnel SDR extension, not just outbound** | Martal Group | Multi-channel partner that integrates with your sales team |
@@ -375,6 +373,6 @@ If you take **one thing** from this guide, take this:
   <p style="margin:0.85rem 0 0 0;color:var(--text-secondary);line-height:1.6;font-size:0.95rem">Their answers will tell you more in 30 seconds than any sales deck will in an hour.</p>
 </div>
 
-When you're ready to test what an AI-first, signal-based campaign looks like for your business, the lowest-friction starting point is The Outbound Sprint: a fixed-price way to run up to eight cold email experiments in six weeks, launching within a week of sign-off. *No 12-month lock-in, no domain risk, no vibes-based pricing.*
+When you're ready to test what an AI-first, signal-based campaign looks like for your business, the lowest-friction starting point is the free trial, then $495 a service a month, month to month. *No 12-month lock-in, no domain risk, no vibes-based pricing.*
 
 Touch grass, look at the data, pick the agency that fits **your** business, not the one that ranked itself #1.

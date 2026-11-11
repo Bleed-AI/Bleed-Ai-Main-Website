@@ -136,6 +136,12 @@ export default function Footer() {
             </div>
             <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-white/70">
               <a
+                href="/about/"
+                className="hover:text-[#B1130F] transition-colors duration-300"
+              >
+                About
+              </a>
+              <a
                 href="/privacy-policy/"
                 className="hover:text-[#B1130F] transition-colors duration-300"
               >
