@@ -43,7 +43,8 @@ export default function PricingHero() {
   const free = freeSlots(n);
 
   return (
-    <section className="sec relative overflow-hidden !pt-28 sm:!pt-36">
+    <section className="sec relative -mt-14 overflow-hidden !pt-28 sm:-mt-[58px] sm:!pt-36">
+      <div aria-hidden="true" className="relative h-14 sm:h-[58px]" />
       <div aria-hidden="true" className="ink-gradient" />
       <div aria-hidden="true" className="grain-layer" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#07070d]" />

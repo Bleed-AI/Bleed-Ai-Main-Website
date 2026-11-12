@@ -88,7 +88,8 @@ export function OutcomeHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-28">
+    <section className="relative -mt-14 overflow-hidden px-5 pb-16 pt-16 sm:-mt-[58px] sm:px-8 sm:pb-20 sm:pt-28">
+      <div aria-hidden="true" className="relative h-14 sm:h-[58px]" />
       <div aria-hidden="true" className="ink-gradient center" />
       <div aria-hidden="true" className="grain-layer" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#07070d]" />

@@ -194,7 +194,8 @@ export default function Shortlisted() {
   return (
     <div className="text-white">
       {/* 1. HERO (2026-11-12: print proof slug line, one primary door, the price said plainly) */}
-      <section className="relative overflow-hidden px-4 pb-14 pt-20 sm:px-6 sm:pb-20 sm:pt-28">
+      <section className="relative -mt-14 overflow-hidden px-4 pb-14 pt-20 sm:-mt-[58px] sm:px-6 sm:pb-20 sm:pt-28">
+        <div aria-hidden="true" className="relative h-14 sm:h-[58px]" />
         <div aria-hidden="true" className="ink-gradient center" />
         <div aria-hidden="true" className="grain-layer" />
         <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#07070d]" />

@@ -18,7 +18,8 @@ const BADGES = [
  */
 export default function HomeHero() {
   return (
-    <section className="relative overflow-hidden pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
+    <section className="relative -mt-14 overflow-hidden pb-16 pt-10 sm:-mt-[58px] sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
+      <div aria-hidden="true" className="relative h-14 sm:h-[58px]" />
       <div aria-hidden="true" className="ink-gradient" />
       <HeroShader />
       <div aria-hidden="true" className="grain-layer" />
@@ -34,10 +35,10 @@ export default function HomeHero() {
             </h1>
 
             <p className="mb-7 max-w-xl text-[17px] leading-relaxed text-[#c3c6d4] lg:text-[18px]">
-              We do your marketing for you: get <span className="font-semibold text-white">recommended by ChatGPT</span>, show up on{" "}
-              <span className="font-semibold text-white">LinkedIn</span> every week, publish <span className="font-semibold text-white">articles</span> that
-              get found, and book meetings through <span className="font-semibold text-white">email outreach</span>. Pick from {SLOTS.length} services. We
-              do the work every month, you approve it.
+              The done-for-you marketing team for B2B companies. We get you <span className="font-semibold text-white">recommended by ChatGPT</span>,
+              post on <span className="font-semibold text-white">LinkedIn</span> every week, publish <span className="font-semibold text-white">articles</span>{" "}
+              that get found, rebuild your <span className="font-semibold text-white">website</span> and book meetings through{" "}
+              <span className="font-semibold text-white">email outreach</span>. Pick from {SLOTS.length} services. We do the work every month, you approve it.
             </p>
 
             {/* the price, said plainly */}

@@ -10,7 +10,7 @@ const footerLinks = {
     { label: "Outbound", href: "/outbound/" },
     { label: "Inbound Engine", href: "/inbound-engine/" },
     { label: "Pricing", href: "/pricing/" },
-    { label: "Free trial", href: "/trial/" },
+    { label: "2 free weeks", href: "/trial/" },
     { label: "Results", href: "/#results-section" },
     { label: "Blog", href: "/blog/" },
   ] as { label: string; href: string; external?: boolean }[],
