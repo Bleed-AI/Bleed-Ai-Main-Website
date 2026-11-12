@@ -458,9 +458,14 @@ export const BOOK = {
   label: "Book a call to get started",
 };
 
+// Never the word "trial" on a button (Taha, DECISIONS #110): a call, then we do the work. The href keeps /trial/,
+// which opens the start popup in trial mode.
 export const TRIAL = {
   href: "/trial/",
-  label: "Start a free trial",
+  label: "Get 2 free weeks, done for you",
+  /** Nav button, where the full label does not fit. */
+  short: "Get 2 free weeks",
+  sub: "One 15 min call. Then we do the work, you just approve.",
   length: "2 weeks",
   slots: "1 to 2 services",
 };

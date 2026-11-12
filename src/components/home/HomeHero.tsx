@@ -1,108 +1,92 @@
-import { TRIAL, SWAP_LINE } from "@/lib/slots";
-import SlotBoard from "./SlotBoard";
-
-const CHANNELS = ["ChatGPT's answers", "LinkedIn", "their inbox", "your website"];
+import { FREE_EVERY, MIN_SLOTS, money, priceFor, SLOT_PRICE, SLOTS } from "@/lib/slots";
+import { BookButton, FreeWeeksLink, SlugLine } from "@/components/print/Print";
+import HeroShader from "./HeroShader";
+import ProofSheet from "./ProofSheet";
 
 const BADGES = [
-  { icon: "/images/upwork-icon.svg", name: "Upwork", href: null },
   { icon: "/images/clutch-icon.svg", name: "Clutch", href: "https://clutch.co/profile/bleed-ai" },
+  { icon: "/images/upwork-icon.svg", name: "Upwork", href: null },
   { icon: "/images/techr-icon.svg", name: "TechReviewer", href: "https://techreviewer.co/companies/bleed-ai" },
 ];
 
-/** Homepage hero for the slot model (2026-10-30). The old cold email hero is HeroV2 (untouched). */
+/**
+ * Homepage hero (rebuilt 2026-11-12, print proof direction + the five second test). A first-time visitor must get,
+ * in order: what this is (a done-for-you marketing team), who it is for (B2B companies), what they get (named
+ * services in buyer words), how it is priced ($495 a service, every 4th free, from 2 services, month to month) and
+ * what to do next (one primary button: book a call). The right side SHOWS an example month instead of describing it.
+ * Previous version (the SlotBoard sparkline board) is in git history before this date.
+ */
 export default function HomeHero() {
   return (
-    <section className="relative overflow-hidden pb-16 pt-10 sm:pb-20 sm:pt-12 lg:pb-24 lg:pt-16">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.08fr_1fr] lg:gap-14 xl:gap-20">
-          <div className="text-white">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#B1130F]/40 bg-[#B1130F]/10 px-3 py-1.5">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#B1130F] opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-[#B1130F]" />
-              </span>
-              <span className="text-xs font-semibold tracking-wide text-white/90">For B2B companies that already sell</span>
-            </div>
+    <section className="relative overflow-hidden pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-16">
+      <div aria-hidden="true" className="ink-gradient" />
+      <HeroShader />
+      <div aria-hidden="true" className="grain-layer" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-[#07070d]" />
 
-            <h1 className="font-display mb-5 text-[2.6rem] font-bold leading-[1.04] tracking-tight sm:text-6xl lg:text-[4.1rem] xl:text-[4.5rem]">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-[1.05fr_1fr] lg:gap-14 xl:gap-20">
+          <div className="text-white">
+            <SlugLine parts={["01", "Done-for-you marketing", "For B2B companies"]} className="mb-6" />
+
+            <h1 className="font-display mb-5 text-[2.55rem] font-semibold leading-[1.02] tracking-[-0.012em] sm:text-6xl lg:text-[4.1rem] xl:text-[4.45rem]">
               The last marketing team <em className="hd-em pr-1">you&apos;ll ever hire.</em>
             </h1>
 
-            <p className="mb-5 max-w-xl text-[17px] leading-relaxed text-white/70 lg:text-lg">
-              One team running every channel your buyers use:{" "}
-              {CHANNELS.map((c, i) => (
-                <span key={c}>
-                  <span className="font-medium text-white">{c}</span>
-                  {i < CHANNELS.length - 2 ? ", " : i === CHANNELS.length - 2 ? " and " : ""}
-                </span>
-              ))}
-              . Each service is a full service on its own. If one isn't pulling its weight, we swap it for another next month.
+            <p className="mb-7 max-w-xl text-[17px] leading-relaxed text-[#c3c6d4] lg:text-[18px]">
+              We do your marketing for you: get <span className="font-semibold text-white">recommended by ChatGPT</span>, show up on{" "}
+              <span className="font-semibold text-white">LinkedIn</span> every week, publish <span className="font-semibold text-white">articles</span> that
+              get found, and book meetings through <span className="font-semibold text-white">email outreach</span>. Pick from {SLOTS.length} services. We
+              do the work every month, you approve it.
             </p>
 
-            <div className="mb-8 inline-flex max-w-full items-center gap-2.5 rounded-xl border border-white/10 bg-white/[0.03] px-3.5 py-2.5">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.6" className="shrink-0" aria-hidden="true">
-                <path d="M4 7h13l-3-3M20 17H7l3 3" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              <span className="text-[13.5px] font-medium text-[#cfd4e8]">{SWAP_LINE}</span>
+            {/* the price, said plainly */}
+            <div className="mb-8 flex max-w-xl flex-wrap items-baseline gap-x-4 gap-y-2 border-y border-white/10 py-4">
+              <span className="whitespace-nowrap">
+                <span className="font-display text-[34px] font-semibold leading-none tracking-[-0.02em] text-white">{money(SLOT_PRICE)}</span>{" "}
+                <span className="font-serif-it text-[19px] text-[#ff5a52]">a month, per service</span>
+              </span>
+              <span className="font-mono-bai text-[12px] uppercase leading-relaxed tracking-[0.08em] text-[#9a9fb8]">
+                Every {FREE_EVERY}th free &middot; From {MIN_SLOTS} services ({money(priceFor(MIN_SLOTS))}) &middot; No contract
+              </span>
             </div>
 
-            <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-              <a
-                href={TRIAL.href}
-                className="group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[#B1130F] px-7 py-3.5 text-base font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_0_40px_rgba(177,19,15,0.5)]"
-              >
-                <span className="relative z-10">{TRIAL.label}</span>
-                <svg className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-              <a
-                href="/pricing/#builder"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-[#2a2a3e] px-7 py-3.5 text-base font-semibold text-white/90 transition-colors hover:border-white/30"
-              >
-                Build your own
+            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
+              <BookButton className="text-base sm:px-8" />
+              <a href="/pricing/" className="text-center text-[14.5px] font-semibold text-white/85 underline decoration-white/25 underline-offset-4 hover:text-white sm:text-left">
+                See all {SLOTS.length} services and prices
               </a>
             </div>
-            <p className="-mt-4 mb-8 text-[13px] text-[#9099b8]">
-              {TRIAL.length} free on {TRIAL.slots}, picked to fit you.{" "}
-              <a href="/pricing/" className="font-medium text-white/80 underline decoration-white/25 underline-offset-4 hover:text-white">
-                See pricing
-              </a>
-            </p>
+            <FreeWeeksLink className="mb-8 max-w-xl" />
 
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5">
+              <span className="font-mono-bai text-[11px] uppercase tracking-[0.14em] text-[#6f7590]">Rated 5.0 on</span>
               {BADGES.map((p) => {
                 const inner = (
                   <>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={p.icon} alt={`${p.name} logo`} className="h-5 w-5 shrink-0" />
-                    <span className="text-xs font-medium text-white/80">
-                      {p.name} / <span className="text-white">5.0</span>
+                    <img src={p.icon} alt="" className="h-[18px] w-[18px] shrink-0" />
+                    <span className="text-[13px] font-medium text-white/85">{p.name}</span>
+                    <span className="text-[12px] leading-none text-[#ffb800]" aria-label="5 stars">
+                      ★★★★★
                     </span>
-                    <span className="text-sm leading-none text-[#ffb800]">★</span>
                   </>
                 );
                 return p.href ? (
-                  <a
-                    key={p.name}
-                    href={p.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 transition-colors hover:border-white/20 hover:bg-white/[0.06]"
-                  >
+                  <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80">
                     {inner}
                   </a>
                 ) : (
-                  <div key={p.name} className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5">
+                  <span key={p.name} className="inline-flex items-center gap-2">
                     {inner}
-                  </div>
+                  </span>
                 );
               })}
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-[560px] lg:max-w-none">
-            <SlotBoard />
+          <div className="relative mx-auto w-full max-w-[540px] px-3 sm:px-4 lg:max-w-none lg:px-0">
+            <ProofSheet />
           </div>
         </div>
       </div>

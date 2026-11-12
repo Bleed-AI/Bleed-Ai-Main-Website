@@ -71,6 +71,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
 
+        {/* Clash Display (display face) from the Fontshare API, the delivery the ITF Free Font License names. */}
+        <link rel="preconnect" href="https://api.fontshare.com" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap" />
+
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
         <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png?v=2" />
         <link rel="shortcut icon" href="/favicon.png?v=2" />

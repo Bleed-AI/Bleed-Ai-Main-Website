@@ -3,7 +3,8 @@
 import { useState, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import SlotChip from "@/components/slots/SlotChip";
-import { MIN_SLOTS, money, priceFor, PRICE_LINE, SWAP_LINE, TRIAL } from "@/lib/slots";
+import { MIN_SLOTS, money, priceFor, SLOT_PRICE, SWAP_LINE, TRIAL } from "@/lib/slots";
+import { BookButton, FreeWeeksLink, SlugLine } from "@/components/print/Print";
 
 /**
  * Shared building blocks for the outcome pages /outbound/ and /linkedin-authority/ (2026-10-30).
@@ -87,30 +88,36 @@ export function OutcomeHero({
   aside?: ReactNode;
 }) {
   return (
-    <section className="relative px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-28">
-      <div className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[720px] max-w-full -translate-x-1/2 rounded-full bg-[#B1130F]/10 blur-[120px]" />
+    <section className="relative overflow-hidden px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-28">
+      <div aria-hidden="true" className="ink-gradient center" />
+      <div aria-hidden="true" className="grain-layer" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#07070d]" />
       <div className="relative mx-auto max-w-4xl text-center">
-        <Reveal className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#2a2a3e] bg-[#141420]/80 px-4 py-1.5 text-[12px] font-semibold uppercase tracking-[0.16em] text-[#c3c8dc]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#ff3d38] shadow-[0_0_8px_#ff3d38]" />
-          {name}
+        <Reveal className="mb-6">
+          <SlugLine parts={["Package", name, "For B2B companies"]} bleed={false} center />
         </Reveal>
-        <Reveal as="h1" className="font-display text-[40px] font-bold leading-[1.04] tracking-tight text-white sm:text-[64px]">
+        <Reveal as="h1" className="font-display text-[40px] font-semibold leading-[1.04] tracking-[-0.012em] text-white sm:text-[64px]">
           {title}
         </Reveal>
-        <Reveal as="p" delay={80} className="mx-auto mt-6 max-w-2xl text-[16.5px] leading-relaxed text-[#9099b8] sm:text-[19px]">
+        <Reveal as="p" delay={80} className="mx-auto mt-6 max-w-2xl text-[16.5px] leading-relaxed text-[#c3c6d4] sm:text-[19px]">
           {sub}
         </Reveal>
-        <Reveal delay={140} className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <TrialButton outcome={outcome} />
-          <GhostButton href="#packages">See the plans</GhostButton>
+        <Reveal delay={120} className="mx-auto mt-6 max-w-2xl font-mono-bai text-[12px] uppercase leading-relaxed tracking-[0.08em] text-[#9a9fb8]">
+          From <span className="text-white">{money(priceFor(MIN_SLOTS))} a month</span> ({MIN_SLOTS} services at {money(SLOT_PRICE)}) &middot; Every 4th free &middot; Month to month
         </Reveal>
-        <Reveal delay={200} className="mt-6 text-[13px] text-[#9099b8]">
-          From <span className="font-semibold text-white">{money(priceFor(MIN_SLOTS))} a month</span> · {PRICE_LINE} · {TRIAL.length} free to start
+        <Reveal delay={160} className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-5">
+          <BookButton outcome={outcome} />
+          <a href="#packages" className="text-[14.5px] font-semibold text-white/85 underline decoration-white/25 underline-offset-4 hover:text-white">
+            See the plans
+          </a>
+        </Reveal>
+        <Reveal delay={200}>
+          <FreeWeeksLink outcome={outcome} className="mx-auto mt-4 max-w-xl" />
         </Reveal>
         <Reveal delay={240} className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2.5">
           {points.map((p) => (
             <span key={p} className="inline-flex items-center gap-2 text-[13.5px] text-[#c3c8dc]">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ff5a52" strokeWidth={2.6} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                 <path d="M5 12.5l4.5 4.5L19 7" />
               </svg>
               {p}

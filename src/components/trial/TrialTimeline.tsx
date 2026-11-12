@@ -13,7 +13,7 @@ interface Beat {
   lane: number; // -1 = shared, 0/1 = slot index
 }
 
-const LANE_COLORS = ["#ff3d38", "#a78bfa"];
+const LANE_COLORS = ["#ff3d38", "#e8e6e1"];
 
 /**
  * The signature piece of /trial: the 14 days played out, day by day, with the

@@ -9,13 +9,9 @@ html {
   scroll-behavior: smooth;
 }
 
-@font-face {
-  font-family: 'Clash Display';
-  src: url('https://fonts.cdnfonts.com/css/clash-display') format('woff2');
-  font-weight: 200 700;
-  font-style: normal;
-  font-display: swap;
-}
+/* Clash Display is loaded in app/layout.tsx from the Fontshare API (ITF Free Font License). The old @font-face here
+   pointed at a stylesheet URL as if it were a font file, so every display heading fell back to Instrument Sans.
+   It is not committed as a file because this repo is public and the licence bars redistribution (2026-11-12). */
 
 /* Light theme (default) */
 :root {
@@ -91,11 +87,10 @@ html {
   font-family: 'Instrument Serif', Georgia, serif;
   font-style: italic;
   font-weight: 400;
-  background: linear-gradient(100deg, #b1130f 0%, #e8302c 45%, #ff5a3c 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 14px rgba(177, 19, 15, 0.45));
+  letter-spacing: 0;
+  /* Solid ink red, no gradient text, no glow (print proof direction, 2026-11-12). */
+  color: #ff5a52;
+  -webkit-text-fill-color: #ff5a52;
 }
 
 /* Mono for tickers, status bars, code-style bits */
@@ -1132,7 +1127,7 @@ body {
 .bai .popup-right { padding: 34px 26px; position: relative; }
 .bai .popup-close { position: absolute; top: 12px; right: 14px; font-size: 22px; color: var(--muted); cursor: pointer; background: none; border: none; line-height: 1; }
 .bai .popup-right h3 { font-family: 'Inter', system-ui, sans-serif; font-size: 25px; font-weight: 800; letter-spacing: -.5px; margin-bottom: 12px; line-height: 1.2; color: var(--text); }
-.bai .popup-right h3 em { font-style: italic; font-family: 'Instrument Serif', serif; font-weight: 400; background: linear-gradient(100deg, #b1130f, #e8302c 45%, #ff5a3c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 12px rgba(177,19,15,.4)); }
+.bai .popup-right h3 em { font-style: italic; font-family: 'Instrument Serif', serif; font-weight: 400; color: #ff5a52; }
 .bai .popup-right p { font-size: 13px; color: var(--sub); margin-bottom: 20px; line-height: 1.6; }
 .bai .popup-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-bottom: 9px; }
 .bai .popup-dealsize { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0 0 18px; }
@@ -1200,3 +1195,81 @@ body {
   .bai .infra-card.wide { grid-column: span 1; }
   .bai .infra-card.tall { grid-row: auto; }
 }
+
+/* ===== Print proof (2026-11-12): slug line, bleed rule, crop marks, grain. Components: src/components/print/Print.tsx ===== */
+.slug {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 22px;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9a9fb8;
+}
+.slug .slug-n { color: #ff5a52; }
+/* the bleed rule: a red bar that runs off the left edge of the page into the slug */
+.slug-bleed::before {
+  content: '';
+  position: absolute;
+  right: calc(100% + 16px);
+  top: 50%;
+  width: 100vw;
+  height: 3px;
+  margin-top: -1.5px;
+  background: #b1130f;
+  transform-origin: right;
+  animation: bleedIn 0.7s cubic-bezier(0.2, 0.7, 0.1, 1) 0.1s both;
+}
+@keyframes bleedIn { from { transform: scaleX(0); } to { transform: none; } }
+
+.crop { position: relative; }
+.crop > .cm {
+  position: absolute;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  border: 0 solid rgba(234, 238, 248, 0.5);
+  pointer-events: none;
+  animation: cropIn 0.6s cubic-bezier(0.2, 0.7, 0.1, 1) 0.25s both;
+}
+.crop > .cm-tl { top: -14px; left: -14px; border-right-width: 1px; border-bottom-width: 1px; }
+.crop > .cm-tr { top: -14px; right: -14px; border-left-width: 1px; border-bottom-width: 1px; }
+.crop > .cm-bl { bottom: -14px; left: -14px; border-right-width: 1px; border-top-width: 1px; }
+.crop > .cm-br { bottom: -14px; right: -14px; border-left-width: 1px; border-top-width: 1px; }
+@keyframes cropIn { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+
+/* paper grain, CSS only */
+.grain-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* the static ink gradient every hero shares (the home hero adds the shader on top of it) */
+.ink-gradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 60% at 82% 18%, rgba(177, 19, 15, 0.34), transparent 70%),
+    radial-gradient(35% 40% at 96% 4%, rgba(255, 90, 60, 0.18), transparent 70%),
+    linear-gradient(180deg, #0b0b14 0%, #0b0b14 70%, #07070d 100%);
+}
+.ink-gradient.center {
+  background:
+    radial-gradient(50% 55% at 50% 0%, rgba(177, 19, 15, 0.28), transparent 72%),
+    radial-gradient(25% 30% at 62% 0%, rgba(255, 90, 60, 0.12), transparent 70%),
+    linear-gradient(180deg, #0b0b14 0%, #0b0b14 70%, #07070d 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slug-bleed::before, .crop > .cm { animation: none; }
+}
+.font-serif-it { font-family: 'Instrument Serif', Georgia, serif; font-style: italic; font-weight: 400; letter-spacing: 0; }

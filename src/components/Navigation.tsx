@@ -93,7 +93,7 @@ export default function Navigation() {
                   className="group relative px-5 py-2.5 bg-[#B1130F] text-white rounded-full text-sm font-semibold overflow-hidden transition-all duration-300 btn-glow"
                 >
                   <span className="relative z-10 flex items-center gap-2">
-                    <span>{TRIAL.label}</span>
+                    <span>{TRIAL.short}</span>
                     <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
@@ -107,7 +107,7 @@ export default function Navigation() {
                   href={trialHref}
                   className="px-3 sm:px-4 py-1.5 sm:py-2 bg-[#B1130F] text-white rounded-full text-xs sm:text-sm font-semibold btn-glow whitespace-nowrap"
                 >
-                  Free trial
+                  2 free weeks
                 </a>
                 <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

@@ -14,12 +14,14 @@ import ArticleSample from "@/components/shortlisted/ArticleSample";
 import LinkedInFeedPost, { DocCarousel } from "@/components/shortlisted/LinkedInFeedPost";
 import ReportDemo from "@/components/shortlisted/ReportDemo";
 import { ExampleTag, Eyebrow, GhostButton, H2, TrialButton } from "@/components/shortlisted/ui";
-import { itemsSlotCount, money, packageById, PRICE_LINE, priceFor, slotById, SWAP_LINE, TRIAL } from "@/lib/slots";
+import { itemsSlotCount, money, packageById, PRICE_LINE, priceFor, SLOT_PRICE, slotById, SWAP_LINE, TRIAL, unitLabel } from "@/lib/slots";
+import { BookButton, FreeWeeksLink, SlugLine } from "@/components/print/Print";
 
 const OUTCOME = "shortlisted";
 
 const starter = packageById("shortlisted-starter")!;
-const FROM_PRICE = money(priceFor(itemsSlotCount(starter.items)));
+const STARTER_COUNT = itemsSlotCount(starter.items);
+const FROM_PRICE = money(priceFor(STARTER_COUNT));
 
 const reasons = [
   {
@@ -191,32 +193,37 @@ export default function Shortlisted() {
 
   return (
     <div className="text-white">
-      {/* 1. HERO */}
-      <section className="px-4 pb-14 pt-20 sm:px-6 sm:pb-20 sm:pt-28">
-        <div className="mx-auto max-w-4xl text-center">
-          <Reveal className="mb-7 inline-flex items-center gap-2 rounded-full border border-[#B1130F]/40 bg-[#B1130F]/10 px-3 py-1.5">
-            <span className="h-1.5 w-1.5 rounded-full bg-[#ff5b56]" />
-            <span className="whitespace-nowrap text-[10.5px] font-semibold uppercase tracking-normal text-white/85 sm:text-xs sm:tracking-wide">Shortlisted · Get recommended by ChatGPT</span>
+      {/* 1. HERO (2026-11-12: print proof slug line, one primary door, the price said plainly) */}
+      <section className="relative overflow-hidden px-4 pb-14 pt-20 sm:px-6 sm:pb-20 sm:pt-28">
+        <div aria-hidden="true" className="ink-gradient center" />
+        <div aria-hidden="true" className="grain-layer" />
+        <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-[#07070d]" />
+        <div className="relative mx-auto max-w-4xl text-center">
+          <Reveal className="mb-7">
+            <SlugLine parts={["Package", "Shortlisted", "Get recommended by ChatGPT"]} bleed={false} center />
           </Reveal>
-          <Reveal as="h1" className="mb-6 font-display text-[38px] font-bold leading-[1.06] tracking-tight sm:text-5xl lg:text-[3.6rem]" delay={60}>
+          <Reveal as="h1" className="mb-6 font-display text-[38px] font-semibold leading-[1.05] tracking-[-0.012em] sm:text-5xl lg:text-[3.6rem]" delay={60}>
             When your buyers ask ChatGPT who to hire, <em className="hd-em">be on the list.</em>
           </Reveal>
-          <Reveal as="p" className="mx-auto mb-7 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg" delay={120}>
+          <Reveal as="p" className="mx-auto mb-7 max-w-2xl text-base leading-relaxed text-[#c3c6d4] sm:text-lg" delay={120}>
             Shortlisted gets you recommended by ChatGPT, Claude, Perplexity and Google's AI, and puts you in front of the same buyers on LinkedIn. Done for you, in your voice, about 10 minutes a week of your time.
           </Reveal>
-          <Reveal className="mb-8 flex flex-wrap justify-center gap-2" delay={150}>
+          <Reveal className="mb-6 flex flex-wrap justify-center gap-2" delay={150}>
             {packageById("shortlisted")!.items.map((it) => (
               <SlotChip key={it.slot} id={it.slot} qty={it.qty} size="sm" />
             ))}
           </Reveal>
-          <Reveal className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4" delay={200}>
-            <TrialButton outcome={OUTCOME} />
-            <GhostButton href="#answer">
-              See it change an answer <ArrowDown />
-            </GhostButton>
+          <Reveal className="mx-auto mb-8 max-w-2xl font-mono-bai text-[12px] uppercase leading-relaxed tracking-[0.08em] text-[#9a9fb8]" delay={170}>
+            From <span className="text-white">{FROM_PRICE} a month</span> for {unitLabel(STARTER_COUNT)} at {money(SLOT_PRICE)}, the 4th free &middot; Month to month
           </Reveal>
-          <Reveal className="mt-6 font-mono text-[12.5px] text-white/50" delay={240}>
-            From {FROM_PRICE} a month · Month to month · {TRIAL.length} free to start
+          <Reveal className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5" delay={200}>
+            <BookButton outcome={OUTCOME} />
+            <a href="#answer" className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold text-white/85 underline decoration-white/25 underline-offset-4 hover:text-white">
+              See it change an answer <ArrowDown />
+            </a>
+          </Reveal>
+          <Reveal delay={240}>
+            <FreeWeeksLink outcome={OUTCOME} className="mx-auto mt-4 max-w-xl" />
           </Reveal>
         </div>
       </section>
