@@ -75,6 +75,25 @@ export default function Footer() {
                   </a>
                 ))}
               </div>
+
+              {/* AI Agency Radar listing badge (Taha OK 2026-11-16). Their condition: the badge stays on the site,
+                  linked to our profile, or the listing is taken down. Their SVG updates itself when the ranking changes. */}
+              <a
+                href="https://aiagencyradar.com/agency/bleedai/"
+                target="_blank"
+                rel="noopener"
+                className="inline-block mt-8 hover:opacity-90 transition-opacity duration-300"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="https://aiagencyradar.com/badge/v/wide-dark/bleedai.svg"
+                  alt="Ranked AI Sales Agencies on AI Agency Radar 2026"
+                  width={340}
+                  height={102}
+                  className="w-72 sm:w-[340px] h-auto"
+                  loading="lazy"
+                />
+              </a>
             </div>
 
             {/* Links Columns */}
