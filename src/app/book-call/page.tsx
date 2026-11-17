@@ -2,14 +2,15 @@ import type { Metadata } from 'next';
 import { generateMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = generateMetadata({
-  title: "Book a Strategy Call for B2B Outbound Campaigns",
-  description: "Free strategy session for your outbound goals. Get expert analysis, ICP recommendations, and a clear roadmap to 100+ qualified opportunities.",
+  title: "Book a Free Strategy Call",
+  description: "Book a free call to plan your marketing: AI search, LinkedIn, your website and outbound. Start with the services you need, or try 2 free weeks.",
   path: "/book-call",
   keywords: [
     "book call",
     "free strategy call",
+    "marketing team",
+    "2 free weeks",
     "outbound consultation",
-    "campaign strategy",
     "schedule meeting",
     "free consultation"
   ],
@@ -24,27 +25,27 @@ import Featured from "@/components/Featured";
 
 const benefits = [
   {
-    text: "B2B companies looking to scale their pipeline predictably",
+    text: "Small B2B companies that want more of the right buyers to find them",
     icon: <RocketIcon />,
   },
   {
-    text: "Founders tired of inconsistent lead flow and unpredictable revenue",
+    text: "Founders tired of marketing that depends on referrals and luck",
     icon: <ChartIcon />,
   },
   {
-    text: "Sales teams ready to book more qualified meetings every month",
+    text: "Teams that want a steady flow of conversations with the right buyers",
     icon: <CalendarIcon />,
   },
   {
-    text: "Businesses wanting a proven Cold-to-Sold system, not generic tactics",
+    text: "Companies that want one team across AI search, LinkedIn, their website and outbound",
     icon: <TargetIcon />,
   },
   {
-    text: "Companies serious about turning cold outreach into closed deals",
+    text: "Businesses that want to see results before committing, with 2 free weeks",
     icon: <EmailIcon />,
   },
   {
-    text: "Leaders who want results-driven growth without the guesswork",
+    text: "Leaders who want to swap any service that isn't working, month to month",
     icon: <TrendingIcon />,
   },
 ];
@@ -135,7 +136,7 @@ export default function BookCall() {
               <span className="gradient-text">Free Strategy Call</span>
             </h1>
             <p className="text-lg text-[var(--text-secondary)] leading-relaxed max-w-2xl mx-auto">
-              Let&apos;s discuss your growth challenges and explore how our Cold-to-Sold system can transform your pipeline
+              Let&apos;s look at where your buyers find you, and pick the services that will get you in front of them: AI search, LinkedIn, your website and outbound.
             </p>
           </div>
 
@@ -170,7 +171,7 @@ export default function BookCall() {
                   <ul className="space-y-3">
                     <li className="flex items-center gap-3">
                       <CheckIcon />
-                      <span className="text-[var(--text-secondary)]">Assessment of your pipeline opportunities</span>
+                      <span className="text-[var(--text-secondary)]">A look at where your buyers search, and whether they find you</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckIcon />
@@ -178,11 +179,11 @@ export default function BookCall() {
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckIcon />
-                      <span className="text-[var(--text-secondary)]">Outreach strategy tailored to your business</span>
+                      <span className="text-[var(--text-secondary)]">The services that fit your goals, and what each one delivers monthly</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <CheckIcon />
-                      <span className="text-[var(--text-secondary)]">Clear roadmap to your first 100+ opportunities</span>
+                      <span className="text-[var(--text-secondary)]">A clear plan for your first month, or your 2 free weeks</span>
                     </li>
                   </ul>
                 </div>
@@ -219,7 +220,6 @@ export default function BookCall() {
                     <span className="text-[var(--text-primary)] font-medium">5.0</span>
                     <span className="text-yellow-500">★</span>
                   </div>
-                  <div className="text-sm text-[var(--text-muted)]">85+ Reviews</div>
                 </div>
               </div>
 
@@ -233,7 +233,6 @@ export default function BookCall() {
                     <span className="text-[var(--text-primary)] font-medium">5.0</span>
                     <span className="text-yellow-500">★</span>
                   </div>
-                  <div className="text-sm text-[var(--text-muted)]">3+ Reviews</div>
                 </div>
               </a>
 
@@ -247,7 +246,6 @@ export default function BookCall() {
                     <span className="text-[var(--text-primary)] font-medium">5.0</span>
                     <span className="text-yellow-500">★</span>
                   </div>
-                  <div className="text-sm text-[var(--text-muted)]">7+ Reviews</div>
                 </div>
               </a>
             </div>
