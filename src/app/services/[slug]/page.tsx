@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { generateMetadata as buildMeta } from "@/lib/seo";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import SlotPage from "@/components/slot-page/SlotPage";
+import SlotPage, { servicePriceSentence } from "@/components/slot-page/SlotPage";
 import { SLOTS } from "@/lib/slots";
 
 export function generateStaticParams() {
@@ -18,7 +18,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!s) return {};
   return buildMeta({
     title: `${s.name}: ${s.title}`,
-    description: `${s.monthly.replace(/\.\s*$/, "")}. ${s.tooltip} A full service on its own: add it to any plan, swap it any month.`,
+    // Price first, as text, so a snippet or an AI answer carries it (campaign-master Notion 41addcc6-efa6-812c).
+    description: `${servicePriceSentence(s)} Every month: ${s.monthly.replace(/\.\s*$/, "")}. ${s.tooltip}`,
     path: `/services/${s.id}`,
     noindex: false,
   });

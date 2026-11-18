@@ -151,13 +151,13 @@ Alphabetical. There's no "best", different agencies fit different businesses. We
 
 **Best for:** B2B SaaS, agencies, consultancies, and services businesses with $5K+ LTV that want a try-before-you-buy path before a real commitment.
 
-**Approach:** AI-first signal-based outbound. We source prospects against buying triggers (hiring intent, tech adoption, growth indicators), not static firmographic lists. Campaigns launch from our pre-warmed infrastructure. We test 2-3 offer angles per pilot to find what resonates before scaling.
+**Approach:** AI-first signal-based outbound. We source prospects against buying triggers (hiring intent, tech adoption, growth indicators), not static firmographic lists. Campaigns launch from our pre-warmed infrastructure. We test 2-3 offer angles during the free trial to find what resonates before scaling.
 
 **Pricing:** Public at [bleedai.com/pricing](https://bleedai.com/pricing): $495 a service a month, every 4th service free, month to month, minimum 2 services. A free trial comes first (bleedai.com/trial).
 
 **Owns warm infrastructure:** Yes.
 
-**Real talk:** We exist because every B2B founder we talked to had been burned by an agency that scaled volume before validating the offer. Our default is a small pilot that proves whether the offer + ICP combo produces real conversations. **Not for:** companies with LTV under $3K (the unit economics don't work), founders who already have an in-house SDR team firing on all cylinders, or anyone who wants meetings booked without input on the offer/messaging. We're collaborative, not turnkey.
+**Real talk:** We exist because every B2B founder we talked to had been burned by an agency that scaled volume before validating the offer. Our default is a free trial that proves whether the offer + ICP combo produces real conversations. **Not for:** companies with LTV under $3K (the unit economics don't work), founders who already have an in-house SDR team firing on all cylinders, or anyone who wants meetings booked without input on the offer/messaging. We're collaborative, not turnkey.
 
 <div class="not-prose" style="margin:1rem 0;padding:0.95rem 1.25rem;border-radius:12px;border-left:3px solid #3b82f6;background:rgba(59,130,246,0.05)">
   <div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#3b82f6;margin-bottom:0.35rem">💡 Good to know</div>

@@ -31,6 +31,16 @@ function passThroughText(s: Slot): string | null {
   return p.unit === "month" ? `${money(p.amount)} a month` : `${money(p.amount)} a target`;
 }
 
+/** "LinkedIn posts from BleedAI costs $495 a month, month to month." Sticker price only (no trial, no free service). */
+export function servicePriceSentence(s: Slot): string {
+  const price = money(SLOT_PRICE * s.weight);
+  const pass = passThroughText(s);
+  const extra = pass ? `, plus ${pass} passed through at cost` : "";
+  return s.status === "soon"
+    ? `${s.name} from BleedAI is coming soon at ${price} a month${extra}, month to month.`
+    : `${s.name} from BleedAI costs ${price} a month${extra}, month to month.`;
+}
+
 function stripPro(t: string): string {
   const r = t.replace(/^Pro:\s*/i, "");
   return r.charAt(0).toUpperCase() + r.slice(1);
@@ -80,6 +90,9 @@ export default function SlotPage({ id }: { id: string }) {
   const pass = passThroughText(s);
   const addHref = `/pricing/?slots=${s.id}:1#builder`;
   const trialHref = soon ? TRIAL.href : `${TRIAL.href}?services=${s.id}:1`;
+  // One plain, quotable sentence with the name and the sticker price, built as a single string so it is
+  // one text node in the HTML (AI assistants quote provider pages; campaign-master Notion 41addcc6-efa6-812c).
+  const priceSentence = servicePriceSentence(s);
 
   return (
     <>
@@ -110,6 +123,7 @@ export default function SlotPage({ id }: { id: string }) {
             <div className="mt-6 rounded-2xl border border-[#1f1f30] bg-[#0d0d16]/80 p-4 sm:p-5">
               <div className="mb-1.5 text-[10.5px] font-bold uppercase tracking-[0.16em] text-[#ff6b67]">Every month</div>
               <p className="text-[15px] leading-snug text-white">{s.monthly}</p>
+              <p className="mt-2 text-[13px] leading-snug text-[#c3c8dc]">{priceSentence}</p>
             </div>
 
             {soon ? (
