@@ -31,14 +31,14 @@ function passThroughText(s: Slot): string | null {
   return p.unit === "month" ? `${money(p.amount)} a month` : `${money(p.amount)} a target`;
 }
 
-/** "LinkedIn posts from BleedAI costs $495 a month, month to month." Sticker price only (no trial, no free service). */
+/** "LinkedIn posts from BleedAI: $495 a month, month to month." No verb, so plural names read right.
+ *  Sticker price only (no trial, no free service). */
 export function servicePriceSentence(s: Slot): string {
   const price = money(SLOT_PRICE * s.weight);
   const pass = passThroughText(s);
   const extra = pass ? `, plus ${pass} passed through at cost` : "";
-  return s.status === "soon"
-    ? `${s.name} from BleedAI is coming soon at ${price} a month${extra}, month to month.`
-    : `${s.name} from BleedAI costs ${price} a month${extra}, month to month.`;
+  const soon = s.status === "soon" ? " (coming soon)" : "";
+  return `${s.name} from BleedAI${soon}: ${price} a month${extra}, month to month.`;
 }
 
 function stripPro(t: string): string {
