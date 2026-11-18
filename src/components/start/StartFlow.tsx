@@ -214,9 +214,9 @@ export default function StartFlow({
         ) : (
           <>
             Not ready to commit?{" "}
-            <button type="button" onClick={() => setMode("trial")} className="font-semibold text-[#ff6b67] underline decoration-[#ff6b67]/40 underline-offset-4">
+            <a href="https://app.bleedai.com/start" className="font-semibold text-[#ff6b67] underline decoration-[#ff6b67]/40 underline-offset-4">
               Start a 2 week free trial first
-            </button>
+            </a>
           </>
         )}
       </p>
