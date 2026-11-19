@@ -48,6 +48,35 @@ export function BookButton({ outcome, label = BOOK.label, className = "" }: { ou
   );
 }
 
+/** The homepage hero's primary door (2026-11-20): the 2 free weeks, which start self-serve in the client app
+ *  (/trial/ links are sent to app.bleedai.com/start by StartModal). Label never says "trial" (DECISIONS #110). */
+export function FreeWeeksButton({ className = "" }: { className?: string }) {
+  return (
+    <a
+      href={TRIAL.href}
+      className={`group inline-flex items-center justify-center gap-2 rounded-full bg-[#B1130F] px-7 py-3.5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-[#c8170f] ${className}`}
+    >
+      {TRIAL.label}
+      <svg className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5} aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </a>
+  );
+}
+
+/** Under the free weeks button: what starting takes, then the quiet second door (a call, as a text link). */
+export function CallLink({ lead = "Prefer to talk first?", className = "" }: { lead?: string; className?: string }) {
+  return (
+    <p className={`text-[13.5px] leading-relaxed text-[#9a9fb8] ${className}`}>
+      {TRIAL.sub} {lead}{" "}
+      <a href={BOOK.href} className="font-semibold text-white underline decoration-[#ff5a52]/60 underline-offset-4 hover:decoration-[#ff5a52]">
+        Book a 15 min call with Taha
+      </a>
+      .
+    </p>
+  );
+}
+
 /** The quiet second door under a hero button: 2 free weeks, as a text link, never a button. */
 export function FreeWeeksLink({ outcome, lead = "Not ready to commit?", className = "" }: { outcome?: string; lead?: string; className?: string }) {
   return (

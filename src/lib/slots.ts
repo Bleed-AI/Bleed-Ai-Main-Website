@@ -458,14 +458,14 @@ export const BOOK = {
   label: "Book a call to get started",
 };
 
-// Never the word "trial" on a button (Taha, DECISIONS #110): a call, then we do the work. The href keeps /trial/,
-// which opens the start popup in trial mode.
+// Never the word "trial" on a button (Taha, DECISIONS #110). The href keeps /trial/: since 2026-11-18 a click on it is
+// sent to the self-serve start form at app.bleedai.com/start (StartModal); no call is needed to start.
 export const TRIAL = {
   href: "/trial/",
   label: "Get 2 free weeks, done for you",
   /** Nav button, where the full label does not fit. */
   short: "Get 2 free weeks",
-  sub: "One 15 min call. Then we do the work, you just approve.",
+  sub: "Start with your website and work email. Your first pieces are waiting when you sign in. No card.",
   length: "2 weeks",
   slots: "1 to 2 services",
 };

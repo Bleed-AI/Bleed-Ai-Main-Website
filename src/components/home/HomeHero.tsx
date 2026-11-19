@@ -1,5 +1,5 @@
 import { FREE_EVERY, MIN_SLOTS, money, priceFor, SLOT_PRICE, SLOTS } from "@/lib/slots";
-import { BookButton, FreeWeeksLink, SlugLine } from "@/components/print/Print";
+import { CallLink, FreeWeeksButton, SlugLine } from "@/components/print/Print";
 import HeroShader from "./HeroShader";
 import ProofSheet from "./ProofSheet";
 
@@ -13,8 +13,11 @@ const BADGES = [
  * Homepage hero (rebuilt 2026-11-12, print proof direction + the five second test). A first-time visitor must get,
  * in order: what this is (a done-for-you marketing team), who it is for (B2B companies), what they get (named
  * services in buyer words), how it is priced ($495 a service, every 4th free, from 2 services, month to month) and
- * what to do next (one primary button: book a call). The right side SHOWS an example month instead of describing it.
+ * what to do next. The right side SHOWS an example month instead of describing it.
  * Previous version (the SlotBoard sparkline board) is in git history before this date.
+ * Primary door since 2026-11-20: the 2 free weeks (self-serve start in the client app), with a call as the quiet second
+ * door. Homepage and nav keep the free weeks first; only the pricing page leads with the call. Do not flip this back
+ * to book-first without the owner's word.
  */
 export default function HomeHero() {
   return (
@@ -53,12 +56,12 @@ export default function HomeHero() {
             </div>
 
             <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-5">
-              <BookButton className="text-base sm:px-8" />
+              <FreeWeeksButton className="text-base sm:px-8" />
               <a href="/pricing/" className="text-center text-[14.5px] font-semibold text-white/85 underline decoration-white/25 underline-offset-4 hover:text-white sm:text-left">
                 See all {SLOTS.length} services and prices
               </a>
             </div>
-            <FreeWeeksLink className="mb-8 max-w-xl" />
+            <CallLink className="mb-8 max-w-xl" />
 
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2.5">
               <span className="font-mono-bai text-[11px] uppercase tracking-[0.14em] text-[#6f7590]">Rated 5.0 on</span>
