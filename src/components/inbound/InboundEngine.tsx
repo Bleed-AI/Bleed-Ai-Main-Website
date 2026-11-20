@@ -14,7 +14,7 @@ import CalcApp from "./CalcApp";
 import ArticleSample from "@/components/shortlisted/ArticleSample";
 import { ExampleTag, Eyebrow, GhostButton, H2, TrialButton } from "@/components/shortlisted/ui";
 import { freeSlots, itemsSlotCount, money, outcomeById, packageById, PRICE_LINE, priceFor, SLOT_PRICE, slotById, SWAP_LINE, TRIAL, unitLabel } from "@/lib/slots";
-import { BookButton, FreeWeeksLink, SlugLine } from "@/components/print/Print";
+import { CallLink, FreeWeeksButton, SlugLine } from "@/components/print/Print";
 
 const OUTCOME = "inbound-engine";
 const pkg = packageById("inbound")!;
@@ -85,13 +85,13 @@ export default function InboundEngine() {
             <span className="text-white">{PRICE} a month</span> for {unitLabel(SLOT_COUNT)} at {money(SLOT_PRICE)}, the 4th free &middot; Month to month
           </Reveal>
           <Reveal className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5" delay={200}>
-            <BookButton outcome={OUTCOME} />
+            <FreeWeeksButton outcome={OUTCOME} />
             <a href="#packages" className="text-[14.5px] font-semibold text-white/85 underline decoration-white/25 underline-offset-4 hover:text-white">
               See the plan
             </a>
           </Reveal>
           <Reveal delay={240}>
-            <FreeWeeksLink outcome={OUTCOME} className="mx-auto mt-4 max-w-xl" />
+            <CallLink outcome={OUTCOME} className="mx-auto mt-4 max-w-xl" />
           </Reveal>
         </div>
       </section>

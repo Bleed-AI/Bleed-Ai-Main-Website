@@ -48,12 +48,14 @@ export function BookButton({ outcome, label = BOOK.label, className = "" }: { ou
   );
 }
 
-/** The homepage hero's primary door (2026-11-20): the 2 free weeks, which start self-serve in the client app
- *  (/trial/ links are sent to app.bleedai.com/start by StartModal). Label never says "trial" (DECISIONS #110). */
-export function FreeWeeksButton({ className = "" }: { className?: string }) {
+/** The primary door on the homepage hero and the four package page heroes (2026-11-20, Taha: package pages flipped
+ *  the same way as home): the 2 free weeks, which start self-serve in the client app (/trial/ links are sent to
+ *  app.bleedai.com/start by StartModal). Label never says "trial" (DECISIONS #110). The outcome rides on the link for
+ *  analytics and the no-JS /trial/ page; the client app start form does not preselect from it yet. */
+export function FreeWeeksButton({ outcome, className = "" }: { outcome?: string; className?: string }) {
   return (
     <a
-      href={TRIAL.href}
+      href={outcome ? `${TRIAL.href}?outcome=${outcome}` : TRIAL.href}
       className={`group inline-flex items-center justify-center gap-2 rounded-full bg-[#B1130F] px-7 py-3.5 text-[15px] font-semibold text-white transition-colors duration-200 hover:bg-[#c8170f] ${className}`}
     >
       {TRIAL.label}
@@ -65,11 +67,11 @@ export function FreeWeeksButton({ className = "" }: { className?: string }) {
 }
 
 /** Under the free weeks button: what starting takes, then the quiet second door (a call, as a text link). */
-export function CallLink({ lead = "Prefer to talk first?", className = "" }: { lead?: string; className?: string }) {
+export function CallLink({ outcome, lead = "Prefer to talk first?", className = "" }: { outcome?: string; lead?: string; className?: string }) {
   return (
     <p className={`text-[13.5px] leading-relaxed text-[#9a9fb8] ${className}`}>
       {TRIAL.sub} {lead}{" "}
-      <a href={BOOK.href} className="font-semibold text-white underline decoration-[#ff5a52]/60 underline-offset-4 hover:decoration-[#ff5a52]">
+      <a href={outcome ? `${BOOK.href}?outcome=${outcome}` : BOOK.href} className="font-semibold text-white underline decoration-[#ff5a52]/60 underline-offset-4 hover:decoration-[#ff5a52]">
         Book a 15 min call with Taha
       </a>
       .

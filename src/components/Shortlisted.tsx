@@ -15,7 +15,7 @@ import LinkedInFeedPost, { DocCarousel } from "@/components/shortlisted/LinkedIn
 import ReportDemo from "@/components/shortlisted/ReportDemo";
 import { ExampleTag, Eyebrow, GhostButton, H2, TrialButton } from "@/components/shortlisted/ui";
 import { itemsSlotCount, money, packageById, PRICE_LINE, priceFor, SLOT_PRICE, slotById, SWAP_LINE, TRIAL, unitLabel } from "@/lib/slots";
-import { BookButton, FreeWeeksLink, SlugLine } from "@/components/print/Print";
+import { CallLink, FreeWeeksButton, SlugLine } from "@/components/print/Print";
 
 const OUTCOME = "shortlisted";
 
@@ -218,13 +218,13 @@ export default function Shortlisted() {
             From <span className="text-white">{FROM_PRICE} a month</span> for {unitLabel(STARTER_COUNT)} at {money(SLOT_PRICE)}, the 4th free &middot; Month to month
           </Reveal>
           <Reveal className="flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5" delay={200}>
-            <BookButton outcome={OUTCOME} />
+            <FreeWeeksButton outcome={OUTCOME} />
             <a href="#answer" className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold text-white/85 underline decoration-white/25 underline-offset-4 hover:text-white">
               See it change an answer <ArrowDown />
             </a>
           </Reveal>
           <Reveal delay={240}>
-            <FreeWeeksLink outcome={OUTCOME} className="mx-auto mt-4 max-w-xl" />
+            <CallLink outcome={OUTCOME} className="mx-auto mt-4 max-w-xl" />
           </Reveal>
         </div>
       </section>

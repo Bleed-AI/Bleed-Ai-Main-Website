@@ -4,7 +4,7 @@ import { useState, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
 import SlotChip from "@/components/slots/SlotChip";
 import { MIN_SLOTS, money, priceFor, SLOT_PRICE, SWAP_LINE, TRIAL } from "@/lib/slots";
-import { BookButton, FreeWeeksLink, SlugLine } from "@/components/print/Print";
+import { CallLink, FreeWeeksButton, SlugLine } from "@/components/print/Print";
 
 /**
  * Shared building blocks for the outcome pages /outbound/ and /linkedin-authority/ (2026-10-30).
@@ -107,13 +107,13 @@ export function OutcomeHero({
           From <span className="text-white">{money(priceFor(MIN_SLOTS))} a month</span> ({MIN_SLOTS} services at {money(SLOT_PRICE)}) &middot; Every 4th free &middot; Month to month
         </Reveal>
         <Reveal delay={160} className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center sm:gap-5">
-          <BookButton outcome={outcome} />
+          <FreeWeeksButton outcome={outcome} />
           <a href="#packages" className="text-[14.5px] font-semibold text-white/85 underline decoration-white/25 underline-offset-4 hover:text-white">
             See the plans
           </a>
         </Reveal>
         <Reveal delay={200}>
-          <FreeWeeksLink outcome={outcome} className="mx-auto mt-4 max-w-xl" />
+          <CallLink outcome={outcome} className="mx-auto mt-4 max-w-xl" />
         </Reveal>
         <Reveal delay={240} className="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2.5">
           {points.map((p) => (
