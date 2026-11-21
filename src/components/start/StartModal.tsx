@@ -24,7 +24,7 @@ export default function StartModal() {
       e.preventDefault();
       // Every free trial now starts in the client app (Taha 2026-11-18, campaign-master services-2026-11 DECISIONS #17):
       // the company gives its website, we read it, and its first pieces are waiting at first sign-in.
-      if (mode === "trial") { window.location.href = "https://app.bleedai.com/start"; return; }
+      if (mode === "trial") { window.location.href = "https://app.bleedai.com/start" + url.search; return; } // the package rides along as ?outcome= (campaign-master services DECISIONS #59)
       setOpen({ mode, selection: readStartSelection(url.search), key: Date.now() });
     };
     document.addEventListener("click", onClick);
