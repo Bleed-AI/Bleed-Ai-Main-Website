@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { BRAND_DESCRIPTION } from '@/lib/brand';
 
 interface SEOProps {
   title: string;
@@ -84,7 +85,8 @@ export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'BleedAI',
-  description: 'AI-powered outbound marketing and lead generation that drives measurable results',
+  // Same two sentences as everywhere else we describe ourselves (lib/brand.ts).
+  description: BRAND_DESCRIPTION,
   url: 'https://bleedai.com',
   logo: 'https://bleedai.com/images/bleed-ai-logo.svg',
   sameAs: [

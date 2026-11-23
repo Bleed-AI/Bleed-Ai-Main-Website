@@ -5,13 +5,16 @@ import NavigationProgress from "@/components/NavigationProgress";
 import CursorGlow from "@/components/CursorGlow";
 import StartModal from "@/components/start/StartModal";
 import { generateMetadata, organizationSchema, viewport as defaultViewport } from "@/lib/seo";
+import { BRAND_DESCRIPTION } from "@/lib/brand";
 import "./globals.css";
 
 export const viewport: Viewport = defaultViewport;
 
+// The homepage description is the defining sentence plus the fact sentence (lib/brand.ts), defining sentence first
+// so a cut-off snippet still keeps it. Pages with their own generateMetadata override this.
 export const metadata: Metadata = generateMetadata({
   title: "BleedAI | The Last Marketing Team You'll Ever Hire",
-  description: "One team for every channel your buyers use: AI search, LinkedIn, your website and outbound. Pick your services, swap any service to what's working. $495 a service, every 4th service free.",
+  description: BRAND_DESCRIPTION,
   path: "/",
   keywords: [
     "AI outbound marketing",

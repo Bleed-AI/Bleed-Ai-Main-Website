@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { DEFINING_SENTENCE, FACT_SENTENCE } from "@/lib/brand";
 
 const footerLinks = {
   company: [
@@ -54,11 +55,16 @@ export default function Footer() {
                 height={40}
                 className="h-10 w-auto mb-6"
               />
-              <p className="text-white/75 leading-relaxed max-w-sm mb-8">
-                {isShortlisted
-                  ? "When your buyers ask ChatGPT who to hire, be on the list."
-                  : "The last marketing team you'll ever hire. Pick your services across LinkedIn, your website, AI search and outbound, and swap any service to what's working."}
-              </p>
+              {/* What BleedAI is, in the same two sentences on every page (lib/brand.ts). Each sentence is the only
+                  child of its <p> so it sits in the HTML as one unbroken piece of text. */}
+              {isShortlisted ? (
+                <p className="text-white/75 leading-relaxed max-w-sm mb-8">When your buyers ask ChatGPT who to hire, be on the list.</p>
+              ) : (
+                <div className="max-w-md mb-8">
+                  <p className="text-white/75 leading-relaxed">{DEFINING_SENTENCE}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-white/55">{FACT_SENTENCE}</p>
+                </div>
+              )}
 
               {/* Social Links */}
               <div className="flex items-center gap-4">

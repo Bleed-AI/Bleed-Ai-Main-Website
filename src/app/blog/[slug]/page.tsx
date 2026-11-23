@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { generateMetadata as buildMeta } from '@/lib/seo';
 import { getAllPostSlugs, getPost, getRelatedPosts } from '@/lib/blog';
+import { DEFINING_SENTENCE, FACT_SENTENCE } from '@/lib/brand';
 import Navigation from '@/components/Navigation';
 import BackgroundOrbs from '@/components/BackgroundOrbs';
 import Footer from '@/components/Footer';
@@ -230,6 +231,32 @@ export default async function BlogPostPage({
                     </div>
                   );
                 })}
+
+                {/* Author box: who wrote it and what BleedAI is, in the same two sentences as the rest of the site
+                    (lib/brand.ts). Each sentence is the only child of its <p>. */}
+                <aside
+                  aria-label="About the author"
+                  className="mt-14 rounded-2xl border border-[var(--border-color)] bg-[var(--surface-elevated)] p-6 sm:p-7"
+                >
+                  <div className="flex items-center gap-4">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/images/taha-headshot.jpg"
+                      alt={post.author}
+                      width={56}
+                      height={56}
+                      loading="lazy"
+                      className="h-14 w-14 shrink-0 rounded-full border border-[var(--border-strong)] object-cover"
+                    />
+                    <div>
+                      <div className="text-xs font-semibold uppercase tracking-wider text-[#B1130F]">Written by</div>
+                      <div className="font-display text-lg font-semibold leading-snug text-[var(--text-primary)]">{post.author}</div>
+                      <div className="text-sm text-[var(--text-muted)]">Founder of BleedAI</div>
+                    </div>
+                  </div>
+                  <p className="mt-5 text-[15px] leading-relaxed text-[var(--text-primary)]">{DEFINING_SENTENCE}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{FACT_SENTENCE}</p>
+                </aside>
 
                 {/* End-of-article CTA */}
                 <div className="mt-16 pt-12 border-t border-[var(--border-color)] text-center">

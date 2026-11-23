@@ -2,12 +2,22 @@
 
 import { useState, type ReactNode } from "react";
 import Reveal from "@/components/Reveal";
+import { DEFINING_SENTENCE, FACT_SENTENCE } from "@/lib/brand";
 import { FREE_EVERY, freeSlots, MIN_SLOTS, money, PRICE_LINE, priceFor, PROCESSING_FEE_PCT, SLOT_PRICE, slotById, TRIAL, unitLabel } from "@/lib/slots";
 
 /** The first clause of a slot's monthly line, e.g. "8 high quality LinkedIn posts a month". */
 const first = (id: string) => slotById(id).monthly.split(/[,:]/)[0].trim();
 
 const faqs: { q: string; a: ReactNode }[] = [
+  {
+    // The defining sentence and its fact sentence (lib/brand.ts), each alone in its element. Keep this first.
+    q: "What is BleedAI?",
+    a: (
+      <>
+        <strong>{DEFINING_SENTENCE}</strong> <span>{FACT_SENTENCE}</span>
+      </>
+    ),
+  },
   {
     q: "What counts as one service?",
     a: (
