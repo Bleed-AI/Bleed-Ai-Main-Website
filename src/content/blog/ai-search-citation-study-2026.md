@@ -48,6 +48,8 @@ The full set covers cold email, LinkedIn, content and SEO, AI search, lead magne
 
 How many of the 80 answers recommended each provider. This is a count of answers, not a ranking: an answer that lists six agencies counts each of them once.
 
+<div style="overflow-x:auto">
+
 | Provider | Answers that recommended it, 2026-11-03 (of 80) | Answers that recommended it, 2026-11-11 (of 80) |
 |---|---|---|
 | Cleverly | 14 | 11 |
@@ -61,6 +63,8 @@ How many of the 80 answers recommended each provider. This is a count of answers
 | Apollo.io | 6 | 6 |
 | Instantly | 6 | 7 |
 
+</div>
+
 Three things stand out.
 
 **Nobody is the default.** Even the most frequent name was missing from more than four out of five answers. A buyer who asks the same assistant two slightly different questions will usually see two different shortlists.
@@ -73,6 +77,8 @@ Three things stand out.
 
 Same 20 questions, same four assistants, eight days apart.
 
+<div style="overflow-x:auto">
+
 | | 2026-11-03 | 2026-11-11 |
 |---|---|---|
 | Answers | 80 | 80 |
@@ -83,11 +89,15 @@ Same 20 questions, same four assistants, eight days apart.
 | Answers that recommended no provider at all | 13 | 15 |
 | Different pages cited | 1,501 | 1,403 |
 
+</div>
+
 The handful of names at the top held. Below them, the list reshuffled: of the 341 providers named on 2026-11-03, 146 were named again on 2026-11-11. One reading is a snapshot. If you check your own name, ask each question more than once before you trust the result.
 
 ## Each assistant reads a different internet
 
 What each assistant cited on 2026-11-03, by type of page (share of that assistant's citations).
+
+<div style="overflow-x:auto">
 
 | Type of page | ChatGPT | Claude | Perplexity | Google AI |
 |---|---|---|---|---|
@@ -98,6 +108,8 @@ What each assistant cited on 2026-11-03, by type of page (share of that assistan
 | A list by a publisher that is not a provider | 3% | 22% | 16% | 12% |
 | Wikipedia | 6% | 0% | 0% | 0% |
 | Citations in total | 908 | 206 | 383 | 161 |
+
+</div>
 
 ChatGPT leans on Reddit and Wikipedia. Claude and Google lean on roundup lists, including the ones providers publish about their own category. Perplexity sits in between. A provider's own service and pricing pages are a large share for three of the four.
 
