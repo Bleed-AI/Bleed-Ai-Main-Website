@@ -24,9 +24,9 @@ export const metadata: Metadata = generateMetadata({
     "email campaigns",
     "sales automation",
     "AI marketing",
-    "outbound infrastructure",
-    "signal campaigns",
-    "pilot campaign"
+    "done-for-you marketing team",
+    "AI search visibility",
+    "LinkedIn posts"
   ],
 });
 

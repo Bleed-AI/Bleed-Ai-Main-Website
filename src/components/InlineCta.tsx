@@ -1,3 +1,6 @@
+import { TRIAL } from '@/lib/slots';
+
+// Sold the retired Outbound Sprint until 2026-11-25; now offers the free trial, same words as the end-of-article button.
 export default function InlineCta() {
   return (
     <div className="my-12 not-prose">
@@ -9,16 +12,15 @@ export default function InlineCta() {
               Want this for your business?
             </div>
             <h3 className="font-display text-xl sm:text-2xl font-semibold text-[var(--text-primary)] leading-snug">
-              We run The Outbound Sprint: up to 8 cold email experiments in 6 weeks, one fixed price.
+              {TRIAL.label}.
             </h3>
+            <p className="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">{TRIAL.sub}</p>
           </div>
           <a
-            href="https://calculator.bleedai.com/sprint"
-            target="_blank"
-            rel="noopener noreferrer"
+            href={TRIAL.href}
             className="group relative inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#B1130F] text-white font-semibold text-sm rounded-full overflow-hidden transition-all duration-300 btn-glow whitespace-nowrap"
           >
-            <span className="relative z-10">Start Your Sprint</span>
+            <span className="relative z-10">Start a free trial</span>
             <svg
               className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
               fill="none"
